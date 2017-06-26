@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyhousing.dao.UserDao">
+	<insert id="insertUser" parameterType="com.easyhousing.model.User">
+		INSERT INTO User(username, name, userPassword, userSex, userEmail, userPhoneNumber, userPhoto) VALUES(#{username}, #{name}, #{userPassword}, #{userSex}, #{userEmail}, #{userPhoneNumber}, #{userPhoto})
+	</insert>
+	
+	<delete id="deleteUser" parameterType="com.easyhousing.model.User">
+		DELETE FROM `User` WHERE userId=#{userId}
+	</delete>
+	
+	<update id="updateUser" parameterType="com.easyhousing.model.User">
+		UPDATE `User` SET `username`=#{username},`name`=#{name},`userPassword`=#{userPassword},`userSex`=#{userSex},`userEmail`=#{userEmail},`userPhoneNumber`=#{userPhoneNumber},`userPhoto`=#{userPhoto} WHERE userId=#{userId}
+	</update>
+	
+	<select id="selectUser" parameterType="com.easyhousing.model.User" resultType="com.easyhousing.model.User">
+		SELECT * FROM User WHERE userId=#{userId}
+	</select>
+	
+</mapper>

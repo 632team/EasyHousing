@@ -6,6 +6,7 @@ public class RentHousePic {
 	private Date insertTime;
 	private String picUrl;
 	private int rentHouseId;
+	private int rentHousePicId;
 	
 	public Date getInsertTime() {
 		return insertTime;
@@ -24,6 +25,12 @@ public class RentHousePic {
 	}
 	public void setRentHouseId(int rentHouseId) {
 		this.rentHouseId = rentHouseId;
+	}
+	public int getRentHousePicId() {
+		return rentHousePicId;
+	}
+	public void setRentHousePicId(int rentHousePicId) {
+		this.rentHousePicId = rentHousePicId;
 	}
 	
 }

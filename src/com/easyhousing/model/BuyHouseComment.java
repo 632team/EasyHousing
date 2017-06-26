@@ -1,10 +1,13 @@
 package com.easyhousing.model;
 
+import java.util.Date;
+
 public class BuyHouseComment {
 	private int buildingId;
 	private int userId;
 	private int buyHouseId;
 	private String userComment;
+	private Date userCommentDate;
 	public int getBuildingId() {
 		return buildingId;
 	}
@@ -28,5 +31,11 @@ public class BuyHouseComment {
 	}
 	public void setUserComment(String userComment) {
 		this.userComment = userComment;
+	}
+	public Date getUserCommentDate() {
+		return userCommentDate;
+	}
+	public void setUserCommentDate(Date userCommentDate) {
+		this.userCommentDate = userCommentDate;
 	}
 }
