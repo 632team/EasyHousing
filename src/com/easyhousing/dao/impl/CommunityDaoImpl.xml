@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyhousing.dao.CommunityDao">
+	<insert id="insertCommunity" parameterType="com.easyhousing.model.Community">
+		INSERT INTO `Community`(`communityBuildingNum`, `communityBuildTime`, `communityDeveloper`, `communityHouseNum`, `communityPrice`, `communityPropertyCompany`, `communityPropertyFee`, `communityName`, `communityAddress`) VALUES (#{communityBuildingNum}, #{communityBuildTime}, #{communityDeveloper}, #{communityHouseNum}, #{communityPrice}, #{communityPropertyCompany}, #{communityPropertyFee}, #{communityName}, #{communityAddress})
+	</insert>
+	
+	<delete id="deleteCommunity" parameterType="com.easyhousing.model.Community">
+		DELETE FROM `Community` WHERE communityId=#{communityId}
+	</delete>
+	
+	<update id="updateCommunity" parameterType="com.easyhousing.model.Community">
+		UPDATE `Community` SET `communityBuildingNum`=#{communityBuildingNum},`communityBuildTime`=#{communityBuildTime},`communityDeveloper`=#{communityDeveloper},`communityHouseNum`=#{communityHouseNum},`communityPrice`=#{communityPrice},`communityPropertyCompany`=#{communityPropertyCompany},`communityPropertyFee`=#{communityPropertyFee},`communityName`=#{communityName},`communityAddress`=#{communityAddress} WHERE communityId=#{communityId}
+	</update>
+	
+	<select id="selectCommunity" parameterType="com.easyhousing.model.Community" resultType="com.easyhousing.model.Community">
+		SELECT * FROM Community WHERE communityId=#{communityId}
+	</select>
+	
+</mapper>

@@ -4,67 +4,75 @@ import java.util.Date;
 
 public class Community {
 	private int communityId;
-	private int rentHouseId;
-	private int comminutyBuildingNum;
-	private Date comminutyBuildTime;
-	private String comminutyDeveloper;
-	private int comminutyHouseNum;
-	private double comminutyPrice;
-	private String comminutyPropertyCompany;
-	private double comminutyPropertyFee;
+	private int communityBuildingNum;
+	private Date communityBuildTime;
+	private String communityDeveloper;
+	private int communityHouseNum;
+	private double communityPrice;
+	private String communityPropertyCompany;
+	private double communityPropertyFee;
+	private String communityName;
+	private String communityAddress;
 	public int getCommunityId() {
 		return communityId;
 	}
 	public void setCommunityId(int communityId) {
 		this.communityId = communityId;
 	}
-	public int getRentHouseId() {
-		return rentHouseId;
+	public int getcommunityBuildingNum() {
+		return communityBuildingNum;
 	}
-	public void setRentHouseId(int rentHouseId) {
-		this.rentHouseId = rentHouseId;
+	public void setcommunityBuildingNum(int communityBuildingNum) {
+		this.communityBuildingNum = communityBuildingNum;
 	}
-	public int getComminutyBuildingNum() {
-		return comminutyBuildingNum;
+	public Date getcommunityBuildTime() {
+		return communityBuildTime;
 	}
-	public void setComminutyBuildingNum(int comminutyBuildingNum) {
-		this.comminutyBuildingNum = comminutyBuildingNum;
+	public void setcommunityBuildTime(Date communityBuildTime) {
+		this.communityBuildTime = communityBuildTime;
 	}
-	public Date getComminutyBuildTime() {
-		return comminutyBuildTime;
+	public String getcommunityDeveloper() {
+		return communityDeveloper;
 	}
-	public void setComminutyBuildTime(Date comminutyBuildTime) {
-		this.comminutyBuildTime = comminutyBuildTime;
+	public void setcommunityDeveloper(String communityDeveloper) {
+		this.communityDeveloper = communityDeveloper;
 	}
-	public String getComminutyDeveloper() {
-		return comminutyDeveloper;
+	public int getcommunityHouseNum() {
+		return communityHouseNum;
 	}
-	public void setComminutyDeveloper(String comminutyDeveloper) {
-		this.comminutyDeveloper = comminutyDeveloper;
+	public void setcommunityHouseNum(int communityHouseNum) {
+		this.communityHouseNum = communityHouseNum;
 	}
-	public int getComminutyHouseNum() {
-		return comminutyHouseNum;
+	public double getcommunityPrice() {
+		return communityPrice;
 	}
-	public void setComminutyHouseNum(int comminutyHouseNum) {
-		this.comminutyHouseNum = comminutyHouseNum;
+	public void setcommunityPrice(double communityPrice) {
+		this.communityPrice = communityPrice;
 	}
-	public double getComminutyPrice() {
-		return comminutyPrice;
+	public String getcommunityPropertyCompany() {
+		return communityPropertyCompany;
 	}
-	public void setComminutyPrice(double comminutyPrice) {
-		this.comminutyPrice = comminutyPrice;
+	public void setcommunityPropertyCompany(String communityPropertyCompany) {
+		this.communityPropertyCompany = communityPropertyCompany;
 	}
-	public String getComminutyPropertyCompany() {
-		return comminutyPropertyCompany;
+	public double getcommunityPropertyFee() {
+		return communityPropertyFee;
 	}
-	public void setComminutyPropertyCompany(String comminutyPropertyCompany) {
-		this.comminutyPropertyCompany = comminutyPropertyCompany;
+	public void setcommunityPropertyFee(double communityPropertyFee) {
+		this.communityPropertyFee = communityPropertyFee;
 	}
-	public double getComminutyPropertyFee() {
-		return comminutyPropertyFee;
+	public String getCommunityName() {
+		return communityName;
 	}
-	public void setComminutyPropertyFee(double comminutyPropertyFee) {
-		this.comminutyPropertyFee = comminutyPropertyFee;
+	public void setCommunityName(String communityName) {
+		this.communityName = communityName;
 	}
+	public String getCommunityAddress() {
+		return communityAddress;
+	}
+	public void setCommunityAddress(String communityAddress) {
+		this.communityAddress = communityAddress;
+	}
+	
 	
 }
