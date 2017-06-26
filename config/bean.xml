@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+		
+	<!-- 扫描service -->
+	<context:component-scan base-package="com.easyhousing.service.impl"/>
+
+	<!-- 配置数据库信息，以及连接池 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+          <property name="user" value="root"/>
+		  <property name="password" value="team632"/>
+		  <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		  <property name="jdbcUrl" value="jdbc:mysql://123.207.4.209/easyHousing?useUnicode=true&amp;characterEncoding=utf-8"/>
+          <property name="initialPoolSize" value="10"/>
+          <property name="acquireIncrement" value="2"/>
+          <property name="maxPoolSize" value="20"/>
+          <property name="minPoolSize" value="3"/>
+	</bean>
+     
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:com/easyhousing/dao/impl/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.easyhousing.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    
+    
+    <!-- 事务管理器 -->
+	<bean id="transactionManager"  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 通知 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+	    	<!-- 传播行为 -->
+	    	<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+	    	<tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+	    	<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+	    	<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+	    	<tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+	    	<tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+	  	</tx:attributes>
+	</tx:advice>
+	
+	<!-- 切面 -->
+	<aop:config proxy-target-class="true">
+		<!-- pointcut解释：任意返回值     该包下 任意类 任意方法 任意参数 -->
+		<!-- 整个就是：除了find*和get*之外，其它都带事务管理 -->
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.easyhousing.service.impl.*.*(..))"/>
+	</aop:config>
+     
+     
+</beans>
