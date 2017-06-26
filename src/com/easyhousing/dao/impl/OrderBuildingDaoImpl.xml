@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyhousing.dao.OrderBuildingDao">
+	<insert id="insertOrderBuilding" parameterType="com.easyhousing.model.OrderBuilding">
+		INSERT INTO `OrderBuilding`(`buildingId`, `userId`, `orderTime`, `agentId`, `orderStatus`, `userPhoneNumber`) VALUES (#{buildingId}, #{userId}, #{orderTime}, #{agentId}, #{orderStatus}, #{userPhoneNumber})
+	</insert>
+	
+	<delete id="deleteOrderBuilding" parameterType="com.easyhousing.model.OrderBuilding">
+		DELETE FROM `OrderBuilding` WHERE orderId=#{orderId}
+	</delete>
+	
+	<update id="updateOrderBuilding" parameterType="com.easyhousing.model.OrderBuilding">
+		UPDATE `OrderBuilding` SET `buildingId`=#{buildingId},`userId`=#{userId},`orderTime`=#{orderTime},`agentId`=#{agentId},`orderStatus`=#{orderStatus},`userPhoneNumber`=#{userPhoneNumber} WHERE orderId=#{orderId}
+	</update>
+	
+	<select id="selectOrderBuilding" parameterType="com.easyhousing.model.OrderBuilding" resultType="com.easyhousing.model.OrderBuilding">
+		SELECT * FROM OrderBuilding WHERE  orderId=#{orderId}
+	</select>
+	
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyhousing.dao.OrderRentHouseDao">
+	<insert id="insertOrderRentHouse" parameterType="com.easyhousing.model.OrderRentHouse">
+		INSERT INTO `OrderRentHouse`(`agentId`, `orderTime`, `rentHouseId`, `userId`, `orderStatus`, `userPhoneNumber`) VALUES (#{agentId}, #{orderTime}, #{rentHouseId}, #{userId}, #{orderStatus}, #{userPhoneNumber})
+	</insert>
+	
+	<delete id="deleteOrderRentHouse" parameterType="com.easyhousing.model.OrderRentHouse">
+		DELETE FROM `OrderRentHouse` WHERE orderId=#{orderId}
+	</delete>
+	
+	<update id="updateOrderRentHouse" parameterType="com.easyhousing.model.OrderRentHouse">
+		UPDATE `OrderRentHouse` SET `agentId`=#{agentId},`orderTime`=#{orderTime},`rentHouseId`=#{rentHouseId},`userId`=#{userId},`orderStatus`=#{orderStatus},`userPhoneNumber`=#{userPhoneNumber} WHERE orderId=#{orderId}
+	</update>
+	
+	<select id="selectOrderRentHouse" parameterType="com.easyhousing.model.OrderRentHouse" resultType="com.easyhousing.model.OrderRentHouse">
+		SELECT * FROM OrderRentHouse WHERE  orderId=#{orderId}
+	</select>
+	
+</mapper>

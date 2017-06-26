@@ -1,5 +1,7 @@
 package com.easyhousing.model;
 
+import java.util.Date;
+
 public class BuildingDeal {
 	
 	private int agentId;
@@ -8,7 +10,7 @@ public class BuildingDeal {
 	private int buildingDealPerPrice;
 	private int buildingDealTotalPrice;
 	private int buildingDealId;
-	private int buildingDealTime;
+	private Date buildingDealTime;
 	private String buildingLayout;
 	
 	public int getAgentId() {
@@ -59,11 +61,11 @@ public class BuildingDeal {
 		this.buildingDealId = buildingDealId;
 	}
 	
-	public int getBuildingDealTime() {
+	public Date getBuildingDealTime() {
 		return buildingDealTime;
 	}
 	
-	public void setBuildingDealTime(int buildingDealTime) {
+	public void setBuildingDealTime(Date buildingDealTime) {
 		this.buildingDealTime = buildingDealTime;
 	}
 	
