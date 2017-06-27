@@ -1,5 +1,7 @@
 package com.easyhousing.service;
 
-public interface UserService {
+import com.easyhousing.model.User;
 
+public interface UserService {
+	public User login(User u);
 }

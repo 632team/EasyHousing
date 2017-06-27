@@ -50,6 +50,6 @@ public class UserTest {
 		UserDao dao = (UserDao) ac.getBean("userDao");
 		User c = new User();
 		c.setUserId(2);
-		System.out.println(dao.selectUser(c).getUsername());
+		System.out.println(dao.selectUserById(c).getUsername());
 	}
 }

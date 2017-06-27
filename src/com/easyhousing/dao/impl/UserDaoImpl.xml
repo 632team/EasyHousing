@@ -13,8 +13,11 @@
 		UPDATE `User` SET `username`=#{username},`name`=#{name},`userPassword`=#{userPassword},`userSex`=#{userSex},`userEmail`=#{userEmail},`userPhoneNumber`=#{userPhoneNumber},`userPhoto`=#{userPhoto} WHERE userId=#{userId}
 	</update>
 	
-	<select id="selectUser" parameterType="com.easyhousing.model.User" resultType="com.easyhousing.model.User">
+	<select id="selectUserById" parameterType="com.easyhousing.model.User" resultType="com.easyhousing.model.User">
 		SELECT * FROM User WHERE userId=#{userId}
 	</select>
 	
+	<select id="selectUserByName" parameterType="com.easyhousing.model.User" resultType="com.easyhousing.model.User">
+		SELECT * FROM User WHERE username=#{username} AND userPassword=#{userPassword}
+	</select>
 </mapper>

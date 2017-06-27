@@ -16,7 +16,7 @@
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 将jstl的jar包加入工程，默认支持jstl -->
 		<!-- 前缀和后缀可以去掉的，为了方便开发才加的 -->
-		<property name="prefix" value="WEB-INF/jsp/" />
+		<property name="prefix" value="jsp/html/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 </beans>
