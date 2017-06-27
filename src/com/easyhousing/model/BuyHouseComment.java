@@ -5,9 +5,10 @@ import java.util.Date;
 public class BuyHouseComment {
 	private int buildingId;
 	private int userId;
-	private int buyHouseId;
+	private int buyHouseCommentId;
 	private String userComment;
 	private Date userCommentDate;
+	
 	public int getBuildingId() {
 		return buildingId;
 	}
@@ -20,11 +21,11 @@ public class BuyHouseComment {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getBuyHouseId() {
-		return buyHouseId;
+	public int getBuyHouseCommentId() {
+		return buyHouseCommentId;
 	}
-	public void setBuyHouseId(int buyHouseId) {
-		this.buyHouseId = buyHouseId;
+	public void setBuyHouseCommentId(int buyHouseCommentId) {
+		this.buyHouseCommentId = buyHouseCommentId;
 	}
 	public String getUserComment() {
 		return userComment;

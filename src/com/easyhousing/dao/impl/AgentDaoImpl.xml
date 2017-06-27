@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.easyhousing.dao.AgentDao">
+
+	<insert id="insertAgent" parameterType="com.easyhousing.model.Agent">
+		INSERT INTO Agent(picUrl, agentName, agentEmail, agentPhoneNumber, agentSex) VALUES(#{picUrl}, #{agentName}, #{agentEmail}, #{agentPhoneNumber}, #{agentSex})
+	</insert>
+	
+	<delete id="deleteAgent" parameterType="com.easyhousing.model.Agent">
+		DELETE FROM Agent WHERE agentId=#{agentId}
+	</delete>
+	
+	<update id="updateAgent" parameterType="com.easyhousing.model.Agent">
+		UPDATE Agent SET picUrl=#{picUrl},agentName=#{agentName},agentEmail=#{agentEmail},agentPhoneNumber=#{agentPhoneNumber},agentSex=#{agentSex} WHERE agentId=#{agentId}
+	</update>
+	
+	<select id="selectAgent" parameterType="com.easyhousing.model.Agent" resultType="com.easyhousing.model.Agent">
+		select * from Agent where agentId=#{agentId}
+	</select>
+	
+</mapper>

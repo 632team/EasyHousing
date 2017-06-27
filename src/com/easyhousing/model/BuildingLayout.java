@@ -3,9 +3,9 @@ package com.easyhousing.model;
 public class BuildingLayout {
 	
 	private int buildingId;
-	private int buildingLayoutPicUrl;
+	private String buildingLayoutPicUrl;
 	private int buildingLayoutReferencePrice;
-	private int buildingLayout;
+	private String buildingLayout;
 	private int buildingLayoutSoldOut;
 	private int buildingLayoutPerPrice;
 	
@@ -15,10 +15,10 @@ public class BuildingLayout {
 	public void setBuildingId(int buildingId) {
 		this.buildingId = buildingId;
 	}
-	public int getBuildingLayoutPicUrl() {
+	public String getBuildingLayoutPicUrl() {
 		return buildingLayoutPicUrl;
 	}
-	public void setBuildingLayoutPicUrl(int buildingLayoutPicUrl) {
+	public void setBuildingLayoutPicUrl(String buildingLayoutPicUrl) {
 		this.buildingLayoutPicUrl = buildingLayoutPicUrl;
 	}
 	public int getBuildingLayoutReferencePrice() {
@@ -27,10 +27,10 @@ public class BuildingLayout {
 	public void setBuildingLayoutReferencePrice(int buildingLayoutReferencePrice) {
 		this.buildingLayoutReferencePrice = buildingLayoutReferencePrice;
 	}
-	public int getBuildingLayout() {
+	public String getBuildingLayout() {
 		return buildingLayout;
 	}
-	public void setBuildingLayout(int buildingLayout) {
+	public void setBuildingLayout(String buildingLayout) {
 		this.buildingLayout = buildingLayout;
 	}
 	public int getBuildingLayoutSoldOut() {

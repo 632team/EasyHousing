@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.easyhousing.dao.AdministratorDao">
+
+	<insert id="insertAdministrator" parameterType="com.easyhousing.model.Administrator">
+		INSERT INTO Administrator(administratorDepartment, administratorId, administratorName, administratorPassword, administratorSex) VALUES(#{administratorDepartment}, #{administratorId}, #{administratorName}, #{administratorPassword}, #{administratorSex})
+	</insert>
+	
+	<delete id="deleteAdministrator" parameterType="com.easyhousing.model.Administrator">
+		DELETE FROM Administrator WHERE administratorId=#{administratorId}
+	</delete>
+	
+	<update id="updateAdministrator" parameterType="com.easyhousing.model.Administrator">
+		UPDATE Administrator SET administratorDepartment=#{administratorDepartment},administratorName=#{administratorName},administratorPassword=#{administratorPassword},administratorSex=#{administratorSex} WHERE administratorId=#{administratorId}
+	</update>
+	
+	<select id="selectAdministrator" parameterType="com.easyhousing.model.Administrator" resultType="com.easyhousing.model.Administrator">
+		select * from Administrator where administratorId=#{administratorId}
+	</select>
+	
+</mapper>

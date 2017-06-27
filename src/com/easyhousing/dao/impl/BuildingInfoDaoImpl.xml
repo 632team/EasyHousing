@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.easyhousing.dao.BuildingInfoDao">
+
+	<insert id="insertBuildingInfo" parameterType="com.easyhousing.model.BuildingInfo">
+		INSERT INTO BuildingInfo(buildingAddress, buildingName, buildingDecoration, buildingMaxArea, buildingMinArea, 
+		buildingNeighbourhood, buildingReferencePrice, buildingSaleState, buildingTimeHanded) 
+		VALUES(#{buildingAddress}, #{buildingName}, #{buildingDecoration}, #{buildingMaxArea}, #{buildingMinArea}, 
+		#{buildingNeighbourhood}, #{buildingReferencePrice}, #{buildingSaleState}, #{buildingTimeHanded})
+	</insert>
+	
+	<delete id="deleteBuildingInfo" parameterType="com.easyhousing.model.BuildingInfo">
+		DELETE FROM BuildingInfo WHERE buildingId=#{buildingId}
+	</delete>
+	
+	<update id="updateBuildingInfo" parameterType="com.easyhousing.model.BuildingInfo">
+		UPDATE BuildingInfo SET buildingAddress=#{buildingAddress},buildingName=#{buildingName},buildingDecoration=#{buildingDecoration},buildingMaxArea=#{buildingMaxArea},
+		buildingMinArea=#{buildingMinArea},buildingNeighbourhood=#{buildingNeighbourhood},buildingReferencePrice=#{buildingReferencePrice},buildingSaleState=#{buildingSaleState},
+		buildingTimeHanded=#{buildingTimeHanded}
+		WHERE buildingId=#{buildingId}
+	</update>
+	
+	<select id="selectBuildingInfo" parameterType="com.easyhousing.model.BuildingInfo" resultType="com.easyhousing.model.BuildingInfo">
+		select * from BuildingInfo where buildingId=#{buildingId}
+	</select>
+	
+</mapper>
