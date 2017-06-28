@@ -6,6 +6,6 @@ public interface UserDao {
 	public void insertUser(User u);
 	public int deleteUser(User u);
 	public int updateUser(User u);
-	public User selectUserById(User u);
-	public User selectUserByName(User u);
+	public User selectUserByUserId(User u);
+	public User selectUserByUserNameAndPassword(User u);
 }

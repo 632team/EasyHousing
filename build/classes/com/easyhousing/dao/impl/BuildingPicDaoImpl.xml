@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.easyhousing.dao.BuildingPicDao">
+
+	<insert id="insertBuildingPic" parameterType="com.easyhousing.model.BuildingPic">
+		INSERT INTO BuildingPic(buildingId, buildingPicInsertTime, buildingPicUrl, buildingPicType) 
+		VALUES(#{buildingId}, #{buildingPicInsertTime}, #{buildingPicUrl}, #{buildingPicType})
+	</insert>
+	
+	<delete id="deleteBuildingPic" parameterType="com.easyhousing.model.BuildingPic">
+		DELETE FROM BuildingPic WHERE buildingPicUrl=#{buildingPicUrl}
+	</delete>
+	
+	<update id="updateBuildingPic" parameterType="com.easyhousing.model.BuildingPic">
+		UPDATE BuildingPic SET buildingId=#{buildingId},buildingPicInsertTime=#{buildingPicInsertTime},
+		buildingPicType=#{buildingPicType}
+		WHERE buildingPicUrl=#{buildingPicUrl}
+	</update>
+	
+	<select id="selectBuildingPic" parameterType="com.easyhousing.model.BuildingPic" resultType="com.easyhousing.model.BuildingPic">
+		select * from BuildingPic where buildingPicUrl=#{buildingPicUrl}
+	</select>
+	
+</mapper>

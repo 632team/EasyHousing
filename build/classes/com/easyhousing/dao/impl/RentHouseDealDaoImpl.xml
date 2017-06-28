@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyhousing.dao.RentHouseDealDao">
+	<insert id="insertRentHouseDeal" parameterType="com.easyhousing.model.RentHouseDeal">
+		INSERT INTO RentHouseDeal(agentId, rentHouseId, userId, rentTime, rentPrice) VALUES(#{agentId}, #{rentHouseId}, #{userId}, #{rentTime}, #{rentPrice})
+	</insert>
+	
+	<delete id="deleteRentHouseDeal" parameterType="com.easyhousing.model.RentHouseDeal">
+		DELETE FROM `RentHouseDeal` WHERE rentId=#{rentId}
+	</delete>
+	
+	<update id="updateRentHouseDeal" parameterType="com.easyhousing.model.RentHouseDeal">
+		UPDATE `RentHouseDeal` SET `agentId`=#{agentId},`rentHouseId`=#{rentHouseId},`userId`=#{userId},`rentTime`=#{rentTime},`rentPrice`=#{rentPrice} WHERE rentId=#{rentId}
+	</update>
+	
+	<select id="selectRentHouseDeal" parameterType="com.easyhousing.model.RentHouseDeal" resultType="com.easyhousing.model.RentHouseDeal">
+		SELECT * FROM RentHouseDeal WHERE  rentId=#{rentId}
+	</select>
+	
+</mapper>

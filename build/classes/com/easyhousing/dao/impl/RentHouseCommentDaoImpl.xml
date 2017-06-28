@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyhousing.dao.RentHouseCommentDao">
+	<insert id="insertRentHouseComment" parameterType="com.easyhousing.model.RentHouseComment">
+		INSERT INTO RentHouseComment(rentHouseId, userComment, userId, userCommentDate) VALUES(#{rentHouseId}, #{userComment}, #{userId}, #{userCommentDate})
+	</insert>
+	
+	<delete id="deleteRentHouseComment" parameterType="com.easyhousing.model.RentHouseComment">
+		DELETE FROM `RentHouseComment` WHERE rentHouseCommentId=#{rentHouseCommentId}
+	</delete>
+	
+	<update id="updateRentHouseComment" parameterType="com.easyhousing.model.RentHouseComment">
+		UPDATE `RentHouseComment` SET `userComment`=#{userComment},`userCommentDate`=#{userCommentDate} WHERE rentHouseCommentId=#{rentHouseCommentId}
+	</update>
+	
+	<select id="selectRentHouseComment" parameterType="com.easyhousing.model.RentHouseComment" resultType="com.easyhousing.model.RentHouseComment">
+		SELECT * FROM RentHouseComment WHERE  rentHouseCommentId=#{rentHouseCommentId}
+	</select>
+	
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.easyhousing.dao.BuildingDealDao">
+
+	<insert id="insertBuildingDeal" parameterType="com.easyhousing.model.BuildingDeal">
+		INSERT INTO BuildingDeal(agentId, buildingId, userId, buildingDealPerPrice, buildingDealTotalPrice, buildingDealTime, buildingLayout) VALUES(#{agentId}, #{buildingId}, #{userId}, #{buildingDealPerPrice}, #{buildingDealTotalPrice}, #{buildingDealTime}, #{buildingLayout})
+	</insert>
+	
+	<delete id="deleteBuildingDeal" parameterType="com.easyhousing.model.BuildingDeal">
+		DELETE FROM BuildingDeal WHERE buildingDealId=#{buildingDealId}
+	</delete>
+	
+	<update id="updateBuildingDeal" parameterType="com.easyhousing.model.BuildingDeal">
+		UPDATE BuildingDeal SET agentId=#{agentId},buildingId=#{buildingId},userId=#{userId},buildingDealPerPrice=#{buildingDealPerPrice},buildingDealTotalPrice=#{buildingDealTotalPrice},buildingDealTime=#{buildingDealTime},buildingLayout=#{buildingLayout} WHERE buildingDealId=#{buildingDealId}
+	</update>
+	
+	<select id="selectBuildingDeal" parameterType="com.easyhousing.model.BuildingDeal" resultType="com.easyhousing.model.BuildingDeal">
+		select * from BuildingDeal where buildingDealId=#{buildingDealId}
+	</select>
+	
+</mapper>

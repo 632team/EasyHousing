@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.easyhousing.dao.BuildingLayoutDao">
+
+	<insert id="insertBuildingLayout" parameterType="com.easyhousing.model.BuildingLayout">
+		INSERT INTO BuildingLayout(buildingId, buildingLayout, buildingLayoutPicUrl, buildingLayoutReferencePrice, buildingLayoutSoldOut, buildingLayoutPerPrice) 
+		VALUES(#{buildingId}, #{buildingLayout}, #{buildingLayoutPicUrl}, #{buildingLayoutReferencePrice}, #{buildingLayoutSoldOut}, #{buildingLayoutPerPrice})
+	</insert>
+	
+	<delete id="deleteBuildingLayout" parameterType="com.easyhousing.model.BuildingLayout">
+		DELETE FROM BuildingLayout WHERE buildingId=#{buildingId} AND buildingLayout=#{buildingLayout}
+	</delete>
+	
+	<update id="updateBuildingLayout" parameterType="com.easyhousing.model.BuildingLayout">
+		UPDATE BuildingLayout SET buildingLayoutPicUrl=#{buildingLayoutPicUrl},buildingLayoutReferencePrice=#{buildingLayoutReferencePrice},
+		buildingLayoutSoldOut=#{buildingLayoutSoldOut},buildingLayoutPerPrice=#{buildingLayoutPerPrice}
+		WHERE buildingId=#{buildingId} AND buildingLayout=#{buildingLayout}
+	</update>
+	
+	<select id="selectBuildingLayout" parameterType="com.easyhousing.model.BuildingLayout" resultType="com.easyhousing.model.BuildingLayout">
+		select * from BuildingLayout where buildingId=#{buildingId} AND buildingLayout=#{buildingLayout}
+	</select>
+	
+</mapper>
