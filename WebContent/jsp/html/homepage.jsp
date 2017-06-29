@@ -393,37 +393,37 @@
     <div class="headbox">
       <div class="headerbg">
         <div class="header">
-          <a href="https://www.baidu.com">
-            <img src="${pageContext.request.contextPath}/jsp/images/homepage/logo1.png" class="logo">
+          <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp>
+            <img src=${pageContext.request.contextPath}/jsp/images/homepage/logo1.png class="logo">
           </a>
           <div class="city">
             <!--重庆-->
           </div>
           <div class="nav navml">
             <span>
-              <a href="https://www.baidu.com" class="href">首页</a>
+              <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">首页</a>
             </span>
             <span>
-              <a href="https://www.baidu.com" class="href">二手房</a>
+              <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">二手房</a>
             </span>
             <span>
-              <a href="https://www.baidu.com" class="href">新房</a>
+              <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">新房</a>
             </span>
             <span>
-              <a href="rentHouse.do" class="href">租房</a>
+              <a href=${pageContext.request.contextPath}/jsp/html/rentWindow.jsp class="href">租房</a>
             </span>
             <span>
-              <a href="login.do" class="href">登录</a>
+              <a href=${pageContext.request.contextPath}/jsp/html/logIn.jsp class="href">登录</a>
             </span>
             <span>
-              <a href="https://www.baidu.com" class="href">注册</a>
+              <a href=${pageContext.request.contextPath}/jsp/html/register.jsp class="href">注册</a>
             </span>
           </div>
         </div>
       </div>
       <div class="search_box searchtp">
         <div class="shtop">
-          <img src="${pageContext.request.contextPath}/jsp/images/homepage/djimg01.png">
+          <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg01.png>
         </div>
         <div class="search">
           <div class="sh_l fl">
@@ -462,7 +462,7 @@
       <strong>
         <div>
           <span></span>
-          <img src="${pageContext.request.contextPath}/jsp/images/homepage/djimg30.png" alt="找出租房" title="找出租房">
+          <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg30.png alt="找出租房" title="找出租房">
         </div>
         <h3>找出租房</h3>
         <p>舒适出租房，易购承诺真实
@@ -473,14 +473,14 @@
       <strong>
       <div>
         <span></span>
-        <img src="${pageContext.request.contextPath}/jsp/images/homepage/djimg31.png" alt="找新房" title="找新房">
+        <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg31.png alt="找新房" title="找新房">
       </div>
       <h3>找新房</h3>
     </strong>
       <strong>
         <div>
           <span></span>
-          <img src="${pageContext.request.contextPath}/jsp/images/homepage/djimg32.png" alt="地图找房" title="地图找房">
+          <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg32.png alt="地图找房" title="地图找房">
         </div>
         <h3>地图找房</h3>
       </strong>
@@ -498,7 +498,7 @@
         <ul>
           <li style="margin-left:0px;">
             <a>
-            <img src = "${pageContext.request.contextPath}/jsp/images/homepage/1.jpg">
+            <img src = ${pageContext.request.contextPath}/jsp/images/homepage/1.jpg>
             <strong>
               <i></i>
               <span>
@@ -510,7 +510,7 @@
           </li>
           <li>
             <a>
-              <img src = "${pageContext.request.contextPath}/jsp/images/homepage/2.jpg">
+              <img src = ${pageContext.request.contextPath}/jsp/images/homepage/2.jpg>
               <strong>
                 <i></i>
                 <span>
@@ -522,7 +522,7 @@
           </li>
           <li>
             <a>
-              <img src = "${pageContext.request.contextPath}/jsp/images/homepage/3.jpg">
+              <img src = ${pageContext.request.contextPath}/jsp/images/homepage/3.jpg>
               <strong>
                 <i></i>
                 <span>

@@ -46,6 +46,26 @@
   input[type="text"],input[type="password"]{padding-left:26px;}
   .checkbox{padding-left:21px;}
 </style>
+ <script type="text/javascript">
+    function  pressCheckBox() {
+      var elem = document.getElementById("submitButton");
+      if(!elem.disabled) {
+    	  elem.style.backgroundColor= "red";
+    	  elem.disabled = true;
+      }
+      else {
+    	  elem.style.backgroundColor= "blue";
+    	  elem.disabled = false;
+      }
+    }
+    function genTimestamp() {    
+        var time = new Date();    
+        return time.getTime();    
+    }    
+    function reloadValidateCode(){
+        $("#captcha_img").attr("src", "${pageContext.request.contextPath}/validateCode.do?t=" + genTimestamp());
+    }
+</script>
 </head>
 <body class = "register">
 <div class="login-wrap">
@@ -58,7 +78,7 @@
       </div>
 
       <div class="col-md-2 col-md-offset-8 column">
-        <a href="http://www.lianjia.com" class="gotoIndex">
+        <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="gotoIndex">
           <font color="white">返回EasyHousing首页  <span class="glyphicon glyphicon-arrow-right"></span> </font>
         </a>
       </div>
@@ -70,7 +90,7 @@
     <div class="col-md-12 column">
       <br>
       <div class="col-md-4 column col-md-offset-7">
-        <a href="./logIn.jsp" >
+        <a href=${pageContext.request.contextPath}/jsp/html/logIn.jsp >
           <font color="white">已有账号？ </font>
         </a>
       </div>
@@ -90,13 +110,13 @@
 
 
 
-              <form action="register.do" class="form-horizontal col-md-12 " id="register_form" method="post">
+              <form action=${pageContext.request.contextPath}/register.do class="form-horizontal col-md-12 " id="register_form" method="post">
                 <br><br>
                 <div class="form-group">
 
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control input-lg" name="username" placeholder="请输入用户名">
+                      <input type="text" class="form-control input-lg" name="username" placeholder="请输入用户名" value=${requestScope.username}>
                       <div class="input-group-addon">
                         <span class="glyphicon glyphicon-user"></span>
                       </div>
@@ -107,7 +127,7 @@
                 <div class="form-group">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="password" class="form-control input-lg" name="userPassword" placeholder="请输入密码（六位以上）">
+                      <input type="password" class="form-control input-lg" name="userPassword" placeholder="请输入密码（六位以上）" value=${requestScope.userPassword}>
                       <div class="input-group-addon">
                         <span class="glyphicon glyphicon-lock"></span>
                       </div>
@@ -118,7 +138,7 @@
                 <div class="form-group">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="password" class="form-control input-lg" name="password" placeholder="确认密码">
+                      <input type="password" class="form-control input-lg" name="confirmPassword" placeholder="确认密码" value="">
                       <div class="input-group-addon">
                         <span class="glyphicon glyphicon-lock"></span>
                       </div>
@@ -131,19 +151,21 @@
 
                   <div class="col-md-8">
                     <div class="input-group">
-                      <input type="text" class="form-control input-lg" name="authcode" placeholder="请输入验证码">
+                      <input type="text" class="form-control input-lg" name="registerValidateCode" placeholder="请输入验证码" value=${requestScope.registerValidateCode}>
                       <div class="input-group-addon">
                         <span class="glyphicon glyphicon-ok"></span>
                       </div>
                     </div>
                   </div>
                   <label id="x" class="control-label col-md-2" style="padding-top: 0px;">
-                    <a class="btn btn-default" href="javascript:void(0)" onclick="document.getElementById('captcha_img').src='authcode.php?r'+Math.random()" title="换一个" ><img id="captcha_img" src="authcode.php?r=<?php echo rand();?>" alt="验证码"></a>
+                    <a class="btn btn-default" title="换一个" onclick="javascript:reloadValidateCode();">
+                    	<img id="captcha_img" src=${pageContext.request.contextPath}/validateCode.do alt="验证码">
+                    </a>
                   </label>
                 </div>
 
                 <label>
-                  <input type="checkbox" class="check-agreed alwayCheck" validate="isChecked" validatename="协议">
+                  <input type="checkbox" class="check-agreed alwayCheck" validate="isChecked" validatename="协议" checked="checked" onclick="pressCheckBox()" id="checkBoxId" >
                   <span>我已阅读并同意</span>
                   <a href="https://github.com/632team/Course-Selection-Guidance-in-CQU/blob/master/README.md" target="_blank">《EasyHousing使用协议》</a>
                 </label><br>
@@ -154,7 +176,7 @@
 
                 <div class="row clearfix">
                   <div class="col-md-12 column">
-                  <button class="btn btn-primary btn-block" type="submit">注册</button>
+                  <button type="submit" id="submitButton" class="btn btn-primary btn-block" type="submit">注册</button>
                   </div>
 
 

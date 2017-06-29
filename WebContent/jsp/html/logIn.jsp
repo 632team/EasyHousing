@@ -98,12 +98,12 @@
     <div class="swiper-container swiper-container-horizontal">
       <div class="swiper-wrapper" >
         <div class="swiper-slide">
-          <img src="${pageContext.request.contextPath}/jsp/images/login/login-swiper01.jpg">
+          <img src=${pageContext.request.contextPath}/jsp/images/login/login-swiper01.jpg>
         </div>
       </div>
     </div>
     <div class="login-body">
-      <form action="login.do" class="cmxform" id="signupForm" method="post">
+      <form action=${pageContext.request.contextPath}/login.do class="cmxform" id="signupForm" method="post">
         <h1>快来这里看房吧</h1>
         <div class="form-group">
           <input id="mobile" class="form-control input-lg"  name="username" type="text"  placeholder="请输入用户名或邮箱或手机号" value="">
@@ -116,7 +116,7 @@
         </div>
         <div class="form-group" style="margin-top:24px;">
           <button class="btn form-btn login-btn" type="submit">登 录</button>
-          <a id="login-join-a" target="_blank" class="btn form-btn">加入EasyHousing</a>
+          <a id="login-join-a" class="btn form-btn" href=${pageContext.request.contextPath}/jsp/html/register.jsp>加入EasyHousing</a>
         </div>
         <font color="#FF0000">${requestScope.message}</font> 
       </form>

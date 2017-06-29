@@ -648,27 +648,27 @@
     </div>
     <div class="headerbg listhead">
       <div class="header">
-        <a href="#">
-          <img src="${pageContext.request.contextPath}/jsp/images/rentWindow/logo1.png" class="logo" >
+        <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp>
+          <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/logo1.png class="logo" >
         </a>
         <div class="nav navml">
           <span>
-            <a href="homepage.html" class="hrf">首页</a>
+            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">首页</a>
           </span>
           <span>
-            <a href="homepage.html" class="hrf">二手房</a>
+            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">二手房</a>
           </span>
           <span>
-            <a href="homepage.html" class="hrf">新房</a>
+            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">新房</a>
           </span>
           <span>
-            <a href="rentHouse.do" class="hrf">租房</a>
+            <a href=${pageContext.request.contextPath}/jsp/html/rentHouse.jsp class="href">租房</a>
           </span>
           <span>
-            <a href="login.do" class="hrf">登录</a>
+            <a href=${pageContext.request.contextPath}/jsp/html/logIn.jsp class="href">登录</a>
           </span>
           <span>
-            <a href="homepage.html" class="hrf">注册</a>
+            <a href=${pageContext.request.contextPath}/jsp/html/register.jsp class="href">注册</a>
           </span>
         </div>
       </div>
@@ -799,7 +799,7 @@
           <a href="#" class="data_link" target="_blank"></a>
           <div class="mor_img">
             <a href="#" target="_blank" onerror="this.src='#'" alt="沙坪坝区沙正街 电力小区 3房130平米3000元/月" title="沙坪坝区沙正街 电力小区 3房130平米3000元/月">
-              <img src="${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg">
+              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
             </a>
           </div>
           <div class="mor_txt">
@@ -827,7 +827,7 @@
           <a href="#" class="data_link" target="_blank"></a>
           <div class="mor_img">
             <a href="#" target="_blank">
-              <img src="${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg">
+              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
             </a>
           </div>
           <div class="mor_txt">
@@ -856,7 +856,7 @@
           <a href="#" class="data_link" target="_blank"></a>
           <div class="mor_img">
             <a href="#" target="_blank">
-              <img src="${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg">
+              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
             </a>
           </div>
           <div class="mor_txt">
@@ -885,7 +885,7 @@
           <a href="#" class="data_link" target="_blank"></a>
           <div class="mor_img">
             <a href="#" target="_blank">
-              <img src="${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg">
+              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
             </a>
           </div>
           <div class="mor_txt">
@@ -915,7 +915,7 @@
           <a href="#" class="data_link" target="_blank"></a>
           <div class="mor_img">
             <a href="#" target="_blank">
-              <img src="${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg">
+              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
             </a>
           </div>
           <div class="mor_txt">
