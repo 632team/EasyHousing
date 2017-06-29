@@ -51,7 +51,7 @@ public class RentHouseTest {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
 		RentHouseDao dao = (RentHouseDao) ac.getBean("rentHouseDao");
 		List<RentHouse> list;
-		list = dao.selectRentHouse("重庆市渝北区", 0, 9999, 0, 9999);
+		list = dao.selectRentHouse("渝北区", 0, 9999, 0, 9999);
 		for(RentHouse i :list) {
 			System.out.println(i.getRentHouseAddress());
 		}

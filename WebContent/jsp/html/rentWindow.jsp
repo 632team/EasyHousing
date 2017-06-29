@@ -1,3 +1,5 @@
+<%@page import="com.easyhousing.model.RentHouse"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -640,19 +642,11 @@
   </style>
   
 <script type="text/javascript">
-    function  pressCheckBox() {
-      var elem = document.getElementById("submitButton");
-      if(!elem.disabled) {
-    	  elem.style.backgroundColor= "red";
-    	  elem.disabled = true;
-      }
-      else {
-    	  elem.style.backgroundColor= "blue";
-    	  elem.disabled = false;
-      }
-    }
+  function  clickArea(id) {
+    var elem = document.getElementById(id);
+    elem.style.color = "red";
+  }
 </script>
-
 </head>
 <body>
   <div class="fotpof">
@@ -748,8 +742,8 @@
               <a class="mt on" tvalue="bx">
                 不限
               </a>
-              <a class="qy" tvalue="jiulongpo">九龙坡</a>
-              <a class="qy" tvalue="yuzhong">渝中区</a>
+              <a class="qy" id="jiulongpo" onclick="clickArea(this.id)">九龙坡</a>
+              <a class="qy" id="yuzhong">渝中区</a>
               <a class="qy" tvalue="jiangbei">江北区</a>
               <a class="qy" tvalue="nanan">南岸区</a>
               <a class="qy" tvalue="shapingba">沙坪坝区</a>
@@ -799,7 +793,14 @@
       <div class="list_tit">
         <div class="cenl fl">
         共找到
-          <strong id="resultNum">42765</strong>
+          <strong id="resultNum">
+          <% 
+            HttpSession s = request.getSession();
+      		List<RentHouse>list = (List<RentHouse>)s.getAttribute("list");
+      		System.err.print(list.size());
+      		out.print(list.size());
+      	  %>
+          </strong>
           <em>套符合您的要求</em>
         </div>
         <div class="cenr fr">
@@ -810,7 +811,10 @@
         </div>
       </div>
       <ul class="mor_list">
-        <li>
+      	<%
+      	for(RentHouse i : list) {
+      	%>
+      	<li>
           <a href="#" class="data_link" target="_blank"></a>
           <div class="mor_img">
             <a href="#" target="_blank" onerror="this.src='#'" alt="沙坪坝区沙正街 电力小区 3房130平米3000元/月" title="沙坪坝区沙正街 电力小区 3房130平米3000元/月">
@@ -818,13 +822,40 @@
             </a>
           </div>
           <div class="mor_txt">
-            <h3>沙坪坝区沙正街 电力小区 3房130平米3000元/月</h3>
+            <h3>
+            	<%
+            		out.print(i.getRentHouseAddress()+" ");
+            		out.print(i.getRentHouseRoom()+"房");
+            		out.print(i.getRentHouseArea()+"平米");
+            		out.print(i.getRentHousePrice()+"元/月");
+            	%>
+            	<!--沙坪坝区沙正街 电力小区 3房130平米3000元/月-->
+            </h3>
             <p class="dot">
-              电力小区｜1997年建｜中装<br>
-              商圈：沙正街｜
-              <em>底层</em>/<abbr>共9层</abbr>
+            	<%
+            		out.print(i.getCommunityId()+"小区|");
+            		out.print(i.getRentHouseBuildTime()+"年建");
+            	%>
+              <!--  电力小区｜1997年建｜中装<br>
+              		商圈：沙正街｜-->
+              <em>
+              	<%
+              		out.print(i.getRentHouseFloorAttribute()+" ");
+              	%>
+              </em>
+              /
+              <abbr>
+              	<%
+              		out.print("共" + i.getRentHouseFloor()+ "层");
+              	%>
+              </abbr>
             </p>
-            <p class="dor">沙坪坝区沙南街60号</p>
+            <p class="dor">
+            <%
+            	out.print(i.getRentHouseAddress());
+            %>
+            	<!--  沙坪坝区沙南街60号-->
+            </p>
             <p>
               <a href="#" class="bq_cor_1">南北通透</a>
               <a href="#" class="bq_cor_2">品质小区</a>
@@ -833,128 +864,16 @@
           </div>
           <div class="mor_tip mor_w">
             <p>
-              <strong>3000</strong>元/月
+              <strong>
+              <%
+              out.print(i.getRentHousePrice());
+              %>
+              </strong>元/月
             </p>
             3室2厅
           </div>
         </li>
-        <li>
-          <a href="#" class="data_link" target="_blank"></a>
-          <div class="mor_img">
-            <a href="#" target="_blank">
-              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
-            </a>
-          </div>
-          <div class="mor_txt">
-            <h3>沙坪坝区沙正街 电力小区 3房130平米3000元/月</h3>
-            <p class="dot">
-              电力小区｜1997年建｜中装<br>
-              商圈：沙正街｜
-              <em>底层</em>/<abbr>共9层</abbr>
-            </p>
-            <p class="dor">沙坪坝区沙南街60号</p>
-
-            <p>
-              <a href="javascript" class="bq_cor_1">南北通透</a>
-              <a href="javascript" class="bq_cor_2">品质小区</a>
-              <a href="javascript" class="bq_cor_3">拎包入住</a>
-            </p>
-          </div>
-          <div class="mor_tip mor_w">
-            <p>
-              <strong>3000</strong>元/月
-            </p>
-            3室2厅
-          </div>
-        </li>
-        <li>
-          <a href="#" class="data_link" target="_blank"></a>
-          <div class="mor_img">
-            <a href="#" target="_blank">
-              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
-            </a>
-          </div>
-          <div class="mor_txt">
-            <h3>沙坪坝区沙正街 电力小区 3房130平米3000元/月</h3>
-            <p class="dot">
-              电力小区｜1997年建｜中装<br>
-              商圈：沙正街｜
-              <em>底层</em>/<abbr>共9层</abbr>
-            </p>
-            <p class="dor">沙坪坝区沙南街60号</p>
-
-            <p>
-              <a href="javascript" class="bq_cor_1">南北通透</a>
-              <a href="javascript" class="bq_cor_2">品质小区</a>
-              <a href="javascript" class="bq_cor_3">拎包入住</a>
-            </p>
-          </div>
-          <div class="mor_tip mor_w">
-            <p>
-              <strong>3000</strong>元/月
-            </p>
-            3室2厅
-          </div>
-        </li>
-        <li>
-          <a href="#" class="data_link" target="_blank"></a>
-          <div class="mor_img">
-            <a href="#" target="_blank">
-              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
-            </a>
-          </div>
-          <div class="mor_txt">
-            <h3>沙坪坝区沙正街 电力小区 3房130平米3000元/月</h3>
-            <p class="dot">
-              电力小区｜1997年建｜中装<br>
-              商圈：沙正街｜
-              <em>底层</em>/<abbr>共9层</abbr>
-            </p>
-            <p class="dor">沙坪坝区沙南街60号</p>
-
-            <p>
-
-              <a href="javascript" class="bq_cor_1">南北通透</a>
-              <a href="javascript" class="bq_cor_2">品质小区</a>
-              <a href="javascript" class="bq_cor_3">拎包入住</a>
-            </p>
-          </div>
-          <div class="mor_tip mor_w">
-            <p>
-              <strong>3000</strong>元/月
-            </p>
-            3室2厅
-          </div>
-        </li>
-        <li>
-          <a href="#" class="data_link" target="_blank"></a>
-          <div class="mor_img">
-            <a href="#" target="_blank">
-              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
-            </a>
-          </div>
-          <div class="mor_txt">
-            <h3>沙坪坝区沙正街 电力小区 3房130平米3000元/月</h3>
-            <p class="dot">
-              电力小区｜1997年建｜中装<br>
-              商圈：沙正街｜
-              <em>底层</em>/<abbr>共9层</abbr>
-            </p>
-            <p class="dor">沙坪坝区沙南街60号</p>
-
-            <p>
-              <a href="javascript" class="bq_cor_1">南北通透</a>
-              <a href="javascript" class="bq_cor_2">品质小区</a>
-              <a href="javascript" class="bq_cor_3">拎包入住</a>
-            </p>
-          </div>
-          <div class="mor_tip mor_w">
-            <p>
-              <strong>3000</strong>元/月
-            </p>
-            3室2厅
-          </div>
-        </li>
+        <%}%>
       </ul>
       <div id="pagination" class="pagination simple-pagination">
         <div class="lightbox">

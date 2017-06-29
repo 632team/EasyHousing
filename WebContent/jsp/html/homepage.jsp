@@ -410,7 +410,7 @@
               <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">新房</a>
             </span>
             <span>
-              <a href=${pageContext.request.contextPath}/jsp/html/rentWindow.jsp class="href">租房</a>
+              <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="href">租房</a>
             </span>
             <span>
               <a href=${pageContext.request.contextPath}/jsp/html/logIn.jsp class="href">登录</a>
