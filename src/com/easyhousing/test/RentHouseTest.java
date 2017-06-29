@@ -1,6 +1,7 @@
 package com.easyhousing.test;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -15,11 +16,12 @@ public class RentHouseTest {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
 		RentHouseDao dao = (RentHouseDao) ac.getBean("rentHouseDao");
 		RentHouse c = new RentHouse();
-		c.setRentHouseAddress("632");
-		c.setRentHousePrice(123);
-		c.setRentHouseRoom(12);
-		dao.insertRentHouse(c);
-		c.setRentHouseRoom(6);
+		c.setRentHouseAddress("重庆市渝北区北城国际中心");
+		c.setRentHousePrice(2500);
+		c.setRentHouseArea(83);
+		c.setRentHouseRoom(2);
+		c.setRentHouseHall(1);
+		c.setRentHouseToilet(1);
 		dao.insertRentHouse(c);
 	}
 	
@@ -38,7 +40,7 @@ public class RentHouseTest {
 		RentHouseDao dao = (RentHouseDao) ac.getBean("rentHouseDao");
 		RentHouse c = new RentHouse();
 		c.setRentHouseId(2);
-		c.setRentHouseAddress("632����С��");
+		c.setRentHouseAddress("632����С��");
 		c.setRentHousePrice(123);
 		c.setRentHouseRoom(12);
 		System.out.println(dao.updateRentHouse(c));
@@ -48,8 +50,10 @@ public class RentHouseTest {
 	public void select() {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
 		RentHouseDao dao = (RentHouseDao) ac.getBean("rentHouseDao");
-		RentHouse c = new RentHouse();
-		c.setRentHouseId(2);
-		System.out.println(dao.selectRentHouse(c).getRentHouseAddress());
+		List<RentHouse> list;
+		list = dao.selectRentHouse("重庆市渝北区", 0, 9999, 0, 9999);
+		for(RentHouse i :list) {
+			System.out.println(i.getRentHouseAddress());
+		}
 	}
 }

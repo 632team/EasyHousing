@@ -13,8 +13,10 @@
 		UPDATE `RentHouse` SET `communityId`=#{communityId},`rentHouseAddress`=#{rentHouseAddress},`rentHouseArea`=#{rentHouseArea},`rentHouseFloor`=#{rentHouseFloor},`rentHouseFloorAttribute`=#{rentHouseFloorAttribute},`rentHouseHall`=#{rentHouseHall}, `rentHouseRoom`=#{rentHouseRoom}, `rentHouseSubway`=#{rentHouseSubway}, `rentHouseToilet`=#{rentHouseToilet}, `rentHouseToward`=#{rentHouseToward}, `rentHousePrice`=#{rentHousePrice} WHERE rentHouseId=#{rentHouseId}
 	</update>
 	
-	<select id="selectRentHouse" parameterType="com.easyhousing.model.RentHouse" resultType="com.easyhousing.model.RentHouse">
-		SELECT * FROM RentHouse WHERE  rentHouseId=#{rentHouseId}
+	<select id="selectRentHouse" resultType="com.easyhousing.model.RentHouse">
+		SELECT * FROM RentHouse WHERE rentHouseAddress like "%"#{0}"%"
+			AND rentHousePrice>=#{1} AND #{2}>=rentHousePrice
+			AND rentHouseRoom>=#{3} AND #{4}>=rentHouseRoom
 	</select>
 	
 </mapper>

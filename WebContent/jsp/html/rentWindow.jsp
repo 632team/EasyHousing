@@ -638,6 +638,21 @@
       word-break: break-all;
     }
   </style>
+  
+<script type="text/javascript">
+    function  pressCheckBox() {
+      var elem = document.getElementById("submitButton");
+      if(!elem.disabled) {
+    	  elem.style.backgroundColor= "red";
+    	  elem.disabled = true;
+      }
+      else {
+    	  elem.style.backgroundColor= "blue";
+    	  elem.disabled = false;
+      }
+    }
+</script>
+
 </head>
 <body>
   <div class="fotpof">

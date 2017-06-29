@@ -46,7 +46,7 @@
   input[type="text"],input[type="password"]{padding-left:26px;}
   .checkbox{padding-left:21px;}
 </style>
- <script type="text/javascript">
+<script type="text/javascript">
     function  pressCheckBox() {
       var elem = document.getElementById("submitButton");
       if(!elem.disabled) {
