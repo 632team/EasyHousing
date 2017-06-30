@@ -413,7 +413,15 @@
               <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="href">租房</a>
             </span>
             <span>
-              <a href=${pageContext.request.contextPath}/jsp/html/logIn.jsp class="href">登录</a>
+              <% 
+              HttpSession s = request.getSession(); 
+              if (s.getAttribute("user") == null) {
+            	  out.println("<a href=/EasyHousing/jsp/html/logIn.jsp class=\"href\">登录</a>");
+              }
+              else {
+            	  out.println("<a href=/EasyHousing/jsp/html/logIn.jsp class=\"href\">个人中心</a>");
+              }
+              %>
             </span>
             <span>
               <a href=${pageContext.request.contextPath}/jsp/html/register.jsp class="href">注册</a>

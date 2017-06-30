@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
+import javax.servlet.http.HttpSession;
 
 import com.easyhousing.model.Register;
 import com.easyhousing.model.User;
@@ -21,7 +21,7 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value="login.do", method={RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView login(User u) {
+	public ModelAndView login(User u, HttpSession httpSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		if (u.getUsername() == null && u.getUserPassword() == null) {
 			modelAndView.setViewName("logIn");
@@ -34,7 +34,8 @@ public class UserController {
 		}
 		else {
 			//modelAndView.addObject("message", ");
-			modelAndView.setViewName("logIn");
+			httpSession.setAttribute("user", user);
+			modelAndView.setViewName("homepage");
 		}
 		return modelAndView;
 	}
@@ -98,8 +99,8 @@ public class UserController {
 		User user = userService.login(nowu);
 		if (user == null) {
 			userService.insertUser(nowu);
-			//modelAndView.addObject("successmessage", "注册成功！");
-			modelAndView.setViewName("register");
+			modelAndView.addObject("message", "注册成功！");
+			modelAndView.setViewName("logIn");
 			return modelAndView;
 		}
 		else {
