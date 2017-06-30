@@ -1,5 +1,6 @@
 <%@page import="com.easyhousing.model.RentHouse"%>
 <%@page import="java.util.*"%>
+<%@page import="java.lang.Math"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -642,6 +643,12 @@
   </style>
   
 <script type="text/javascript">
+  function sendemail() {
+   $.ajax({  
+    type:"GET",  
+    dataType: "json", 
+	url:"${pageContext.request.contextPath}/rentHouseSelect.do"
+  });
   function  clickArea(id) {
     var elem = document.getElementById(id);
     elem.style.color = "red";
@@ -739,53 +746,47 @@
           <ul id="qybox">
             <li class="Switch">
               <strong>区域:</strong>
-              <a class="mt on" tvalue="bx">
-                不限
-              </a>
-              <a class="qy" id="jiulongpo" onclick="clickArea(this.id)">九龙坡</a>
-              <a class="qy" id="yuzhong">渝中区</a>
-              <a class="qy" tvalue="jiangbei">江北区</a>
-              <a class="qy" tvalue="nanan">南岸区</a>
-              <a class="qy" tvalue="shapingba">沙坪坝区</a>
-              <a class="qy" tvalue="yubei">渝北区</a>
-              <a class="qy" tvalue="dadukou">大渡口区</a>
-              <a class="qy" tvalue="banan">巴南区</a>
-              <a class="qy" tvalue="beibei">北碚区</a>
-              <a class="qy" tvalue="jiangjin">江津区</a>
+              <a class="mt on " id="bx"> 不限 </a>
+              <a class="qy" id="1" onclick="clickArea(this.id)">九龙坡</a>
+              <a class="qy" id="2">渝中区</a>
+              <a class="qy" id="3">江北区</a>
+              <a class="qy" id="4">南岸区</a>
+              <a class="qy" id="5">沙坪坝区</a>
+              <a class="qy" id="6">渝北区</a>
+              <a class="qy" id="7">大渡口区</a>
+              <a class="qy" id="8">巴南区</a>
+              <a class="qy" id="9">北碚区</a>
+              <a class="qy" id="10">江津区</a>
             </li>
             <li class="Switch">
               <strong>地铁:</strong>
-              <a class="mt on" tvalue="bx">
+              <a class="mt on" id="bx">
                 不限
               </a>
-              <a class="qy" tvalue="yihaoxian">1号线</a>
-              <a class="qy" tvalue="erhaoxian">2号线</a>
-              <a class="qy" tvalue="sanhaoxian">3号线</a>
-              <a class="qy" tvalue="liuhaoxian">6号线</a>
-              <a class="qy" tvalue="guoboxian">国博线</a>
+              <a class="qy" id="11">1号线</a>
+              <a class="qy" id="12">2号线</a>
+              <a class="qy" id="13">3号线</a>
+              <a class="qy" id="14">6号线</a>
+              <a class="qy" id="15">国博线</a>
             </li>
             <li class="Switch">
               <strong>租金:</strong>
-              <a class="mt on" tvalue="bx">不限</a>
-              <a class="qy" tvalue="yihaoxian">1000元以下</a>
-              <a class="qy" tvalue="erhaoxian">1000-2000元</a>
-              <a class="qy" tvalue="sanhaoxian">2000-3000元</a>
-              <a class="qy" tvalue="liuhaoxian">3000-4000元</a>
-              <a class="qy" tvalue="guoboxian">4000-5000元</a>
-              <a class="qy" tvalue="guoboxian">5000元及以上</a>
-              <input type="text" class="ipt1" id="saleTotalLow" maxlength="6" value>
-              <cite>-</cite>
-              <input type="text" class="ipt1" id="saleTotalHigh" maxlength="6" value>
-              元
+              <a class="mt on" id="bx">不限</a>
+              <a class="qy" id="yihaoxian">1000元以下</a>
+              <a class="qy" id="erhaoxian">1000-2000元</a>
+              <a class="qy" id="sanhaoxian">2000-3000元</a>
+              <a class="qy" id="liuhaoxian">3000-4000元</a>
+              <a class="qy" id="guoboxian">4000-5000元</a>
+              <a class="qy" id="guoboxian">5000元及以上</a>
             </li>
             <li class="Switch">
               <strong>户型:</strong>
-              <a class="mt on" tvalue="bx">不限</a>
-              <a class="qy" tvalue="yihaoxian">单配</a>
-              <a class="qy" tvalue="erhaoxian">一室</a>
-              <a class="qy" tvalue="sanhaoxian">两室</a>
-              <a class="qy" tvalue="liuhaoxian">三室</a>
-              <a class="qy" tvalue="guoboxian">四室及以上</a>
+              <a class="mt on" id="bx">不限</a>
+              <a class="qy" id="yihaoxian">单配</a>
+              <a class="qy" id="erhaoxian">一室</a>
+              <a class="qy" id="sanhaoxian">两室</a>
+              <a class="qy" id="liuhaoxian">三室</a>
+              <a class="qy" id="guoboxian">四室及以上</a>
             </li>
           </ul>
         </div>
@@ -812,7 +813,10 @@
       </div>
       <ul class="mor_list">
       	<%
-      	for(RentHouse i : list) {
+      	int st = (Integer)s.getAttribute("st");
+      	int ed = Math.min(st + 5, list.size());
+      	for(int iter = st; iter < ed; iter++) {
+      		RentHouse i = list.get(iter);
       	%>
       	<li>
           <a href="#" class="data_link" target="_blank"></a>
@@ -878,10 +882,14 @@
       <div id="pagination" class="pagination simple-pagination">
         <div class="lightbox">
           <strong class="active">
+             <a href=${pageContext.request.contextPath}/prePage.do style="border: 0px;">
             <span class="sel prev">上一页</span>
+            </a>
           </strong>
           <strong class="active">
+            <a href=${pageContext.request.contextPath}/nextPage.do style="border: 0px;">
             <span class="sel prev">下一页</span>
+            </a>
           </strong>
         </div>
       </div>

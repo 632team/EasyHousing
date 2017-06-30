@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.easyhousing.model.RentHouse;
 import com.easyhousing.service.RentHouseSearch;
 
+import jdk.internal.dynalink.linker.LinkerServices;
+
 
 @Controller
 public class RentHouseSelectController {
@@ -53,9 +55,37 @@ public class RentHouseSelectController {
 		int highRoomNum = Integer.parseInt((String)session.getAttribute("highRoomNum"));
 		List<RentHouse>list = rentHouseSearch.searchRentHouse(address, lowPrice, highPrice, lowRoomNum, highRoomNum);
 		session.setAttribute("list", list);
+		session.setAttribute("st", 0);
+		session.setAttribute("listSize", list.size());
 		for(RentHouse i : list) {
 			System.err.println(i.getRentHouseAddress());
+			System.err.println(list.size());
 		}
+		modelAndView.setViewName("rentWindow");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="prePage.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView prePage(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession();
+		int st = (Integer)session.getAttribute("st");
+		st = st - 5;
+		if(st < 0) st = 0;
+		session.setAttribute("st", st);
+		modelAndView.setViewName("rentWindow");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="nextPage.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView nextPage(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession();
+		int st = (Integer)session.getAttribute("st");
+		int listSize = (Integer)session.getAttribute("listSize");
+		st = st + 5;
+		if(st > listSize) st = st - 5;
+		session.setAttribute("st", st);
 		modelAndView.setViewName("rentWindow");
 		return modelAndView;
 	}
