@@ -1,10 +1,19 @@
 package com.easyhousing.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import com.easyhousing.model.Register;
 import com.easyhousing.model.User;
 import com.easyhousing.service.UserService;
+import com.easyhousing.util.Tool;
 
 @Controller
 public class UserController {
@@ -94,7 +104,7 @@ public class UserController {
 		User nowu = new User();
 		nowu.setUsername(u.getUsername());
 		nowu.setUserPassword(u.getUserPassword());
-		nowu.setUserPhoto("www.baidu.com");
+		nowu.setUserPhoto("http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png");
 		
 		User user = userService.login(nowu);
 		if (user == null) {
@@ -110,4 +120,98 @@ public class UserController {
 		}
     }
 	
+	@RequestMapping(value="userCenter.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String userCenter(HttpSession s) {
+		User user = (User) s.getAttribute("user");
+		return "/MyHome/userCenter";
+	}
+	
+	@RequestMapping(value="changeInfo.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView changeInfo(HttpSession s, User u) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/MyHome/userCenter");
+		User user = (User) s.getAttribute("user");
+		
+		u.setUserPassword(user.getUserPassword());
+		u.setUserPhoto(user.getUserPhoto());
+		u.setUserId(user.getUserId());
+		
+		try {
+			userService.updateUser(u);
+		} catch (Exception e) {
+			modelAndView.addObject("infoMessage", "修改失败，昵称或邮箱或手机号已被使用。");
+			return modelAndView;
+		}
+		
+		s.setAttribute("user", u);
+		modelAndView.addObject("infoMessage", "修改个人成功！");
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="changePwd.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView changePwd(HttpSession s, User u) { // 使用User u的name作为密码，username作为新密码，useremail作为确认新密码
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/MyHome/userCenter");
+		User user = (User) s.getAttribute("user");
+		String password = u.getName();
+		String newPwd = u.getUsername();
+		String confim = u.getUserEmail();
+		if (!user.getUserPassword().equals(password)) {
+			modelAndView.addObject("infoMessage", "修改失败，原密码错误。");
+		}
+		else if (!newPwd.equals(confim)) {
+			modelAndView.addObject("infoMessage", "修改失败，两次密码不一致。");
+		}
+		else {
+			modelAndView.addObject("infoMessage", "修改密码成功。");
+			user.setUserPassword(newPwd);
+			userService.updateUser(user);
+			s.setAttribute("user", user);
+		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="changePhoto.do", method={RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+	public ModelAndView changePhoto(HttpServletRequest request) throws IllegalStateException, IOException {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/MyHome/userCenter");
+		HttpSession s = request.getSession();
+		User user = (User) s.getAttribute("user");
+		
+		// 得到文件
+		String path = request.getSession().getServletContext().getRealPath("upload");  
+		MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
+		Iterator iter=multiRequest.getFileNames(); 
+		MultipartFile file=multiRequest.getFile(iter.next().toString()); 
+        String fileName = file.getOriginalFilename();    
+        File dir = new File(path,fileName);          
+        if(!dir.exists()){  
+        	dir.mkdirs();  
+        }  
+        //MultipartFile自带的解析方法  
+        file.transferTo(dir); 
+		
+        try {
+        	String filePath = path + "\\" + fileName;
+        	System.err.println(filePath);
+        	String name = new Date().toInstant().toString();
+        	new Tool().upload(filePath, name);
+        	user.setUserPhoto(String.valueOf("http://os8z6i0zb.bkt.clouddn.com/" + name));
+        	userService.updateUser(user);
+        } catch (Exception e) {
+        	modelAndView.addObject("infoMessage", "上传头像失败TAT");
+        	return modelAndView;
+        }
+        modelAndView.addObject("infoMessage", "上传头像成功！");
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="logout.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String logout(HttpSession s) {
+		s.removeAttribute("user");
+		return "homepage";
+	}
 }

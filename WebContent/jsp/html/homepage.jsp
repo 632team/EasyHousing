@@ -419,7 +419,7 @@
             	  out.println("<a href=/EasyHousing/jsp/html/logIn.jsp class=\"href\">登录</a>");
               }
               else {
-            	  out.println("<a href=/EasyHousing/jsp/html/logIn.jsp class=\"href\">个人中心</a>");
+            	  out.println("<a href=/EasyHousing/userCenter.do class=\"href\">个人中心</a>");
               }
               %>
             </span>
@@ -470,7 +470,9 @@
       <strong>
         <div>
           <span></span>
+          <a href=${pageContext.request.contextPath}/rentHouseSelect.do>
           <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg30.png alt="找出租房" title="找出租房">
+          </a>
         </div>
         <h3>找出租房</h3>
         <p>舒适出租房，易购承诺真实

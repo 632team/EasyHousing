@@ -22,6 +22,10 @@ public class UserServiceImpl implements UserService {
 	public void insertUser(User u) {
 		userDao.insertUser(u);
 	}
-
+	
+	@Override
+	public void updateUser(User u) {
+		userDao.updateUser(u);
+	}
 
 }

@@ -5,7 +5,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.qiniu.common.QiniuException;
+import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
+import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 
@@ -86,8 +89,12 @@ public class Tool {
     String bucketname = "easyhousing"; //存储名字
 
     Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);  
+    
+    Configuration cfg = new Configuration(Zone.zone2());
 
-    UploadManager uploadManager = new UploadManager();  
+    UploadManager uploadManager = new UploadManager(cfg);  
+    
+    
     
 
     public String getUpToken(){  
@@ -96,6 +103,8 @@ public class Tool {
 
     public void upload(String FilePath, String newPhotoName) throws IOException{
     	try {  
+    		//BucketManager bucketMgr = new BucketManager(auth, cfg);
+    		//bucketMgr.delete(bucketname, newPhotoName);
 	        Response res = uploadManager.put(FilePath, newPhotoName, getUpToken());  
 	        System.out.println(res.isOK());
 	        System.out.println(res.bodyString());
@@ -111,6 +120,6 @@ public class Tool {
     }
     
     public static void main(String[] args) throws Exception {
-    	new Tool().sendPassword("751744014@qq.com", "632");
+    	new Tool().upload("C:\\Users\\apple\\Desktop\\GameData\\ReadingList\\1.jpg", "helloworld2");
     }
 }
