@@ -6,6 +6,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+  <%
+  HttpSession s = request.getSession(); 
+  String strtemp;
+  %>
   <title>租房</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -641,17 +645,34 @@
       word-break: break-all;
     }
   </style>
-  
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js "></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js "></script>
 <script type="text/javascript">
-  function sendemail() {
+  function transp() {
    $.ajax({  
     type:"GET",  
-    dataType: "json", 
-	url:"${pageContext.request.contextPath}/rentHouseSelect.do"
-  });
-  function  clickArea(id) {
-    var elem = document.getElementById(id);
-    elem.style.color = "red";
+    async: false,
+	url:"${pageContext.request.contextPath}/rentHouseSelectAjax.do"
+  })
+  }
+  
+  function setCookie(c_name,value,expiredays)
+  {
+  	var exdate=new Date()
+  	exdate.setDate(exdate.getDate()+expiredays)
+  	document.cookie=c_name+ "=" +escape(value)+
+  	((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+  }
+  
+  
+  function  clickArea1(id, address) {
+	
+	//document.cookie="address="+address;
+	//document.cookie="="+id;
+	setCookie("address",address,365);
+	setCookie("class1",id,365);
+    transp();
+    window.location.reload(false);
   }
 </script>
 </head>
@@ -745,18 +766,88 @@
         <div class="nv_menu nv_menut" style="display: block;">
           <ul id="qybox">
             <li class="Switch">
+            <%
+            strtemp = (String)s.getAttribute("class1");
+            System.err.print("id" + strtemp);
+            %>
               <strong>区域:</strong>
-              <a class="mt on " id="bx"> 不限 </a>
-              <a class="qy" id="1" onclick="clickArea(this.id)">九龙坡</a>
-              <a class="qy" id="2">渝中区</a>
-              <a class="qy" id="3">江北区</a>
-              <a class="qy" id="4">南岸区</a>
-              <a class="qy" id="5">沙坪坝区</a>
-              <a class="qy" id="6">渝北区</a>
-              <a class="qy" id="7">大渡口区</a>
-              <a class="qy" id="8">巴南区</a>
-              <a class="qy" id="9">北碚区</a>
-              <a class="qy" id="10">江津区</a>
+              <a class= "
+              <%
+              if(strtemp.equals("0"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="0" onclick="clickArea1(this.id, '重庆');"> 不限 </a>
+              <a class="
+              <%
+              if(strtemp.equals("1"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="1" onclick="clickArea1(this.id, '九龙坡');">九龙坡</a>
+              <a class="
+              <%
+              if(strtemp.equals("2"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="2" onclick="clickArea1(this.id, '渝中');">渝中区</a>
+              <a class="
+              <%
+              if(strtemp.equals("3"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="3" onclick="clickArea1(this.id, '江北');">江北区</a>
+              <a class="
+              <%
+              if(strtemp.equals("4"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="4" onclick="clickArea1(this.id, '南岸');">南岸区</a>
+              <a class="
+              <%
+              if(strtemp.equals("5"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="5" onclick="clickArea1(this.id, '沙坪坝');">沙坪坝区</a>
+              <a class="
+              <%
+              if(strtemp.equals("6"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="6" onclick="clickArea1(this.id, '渝北');">渝北区</a>
+              <a class="
+              <%
+              if(strtemp.equals("7"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="7" onclick="clickArea1(this.id, '大渡口');">大渡口区</a>
+              <a class="
+              <%
+              if(strtemp.equals("8"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="8" onclick="clickArea1(this.id, '巴南');">巴南区</a>
+              <a class="
+              <%
+              if(strtemp.equals("9"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="9" onclick="clickArea1(this.id, '北碚');">北碚区</a>
+              <a class="
+              <%
+              if(strtemp.equals("10"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="10" onclick="clickArea1(this.id, '江津');">江津区</a>
             </li>
             <li class="Switch">
               <strong>地铁:</strong>
@@ -796,7 +887,7 @@
         共找到
           <strong id="resultNum">
           <% 
-            HttpSession s = request.getSession();
+            
       		List<RentHouse>list = (List<RentHouse>)s.getAttribute("list");
       		System.err.print(list.size());
       		out.print(list.size());
