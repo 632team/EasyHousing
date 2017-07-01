@@ -2,6 +2,7 @@ package com.easyhousing.model;
 
 import java.util.Date;
 
+
 public class RentHouse {
 	private int rentHouseId;
 	private int communityId;
@@ -16,6 +17,13 @@ public class RentHouse {
 	private int rentHouseToilet;
 	private String rentHouseToward;
 	private int rentHousePrice;
+	private String rentHouseProvince;
+	private String rentHouseRegion;
+	private int rentHouseAllFloor;
+	private String rentHouseUnitNumber;
+	private String rentHousePublishTime;
+	private Date communityName;
+	
 	public int getRentHouseId() {
 		return rentHouseId;
 	}
@@ -93,6 +101,42 @@ public class RentHouse {
 	}
 	public void setRentHousePrice(int rentHousePrice) {
 		this.rentHousePrice = rentHousePrice;
+	}
+	public String getRentHouseProvince() {
+		return rentHouseProvince;
+	}
+	public void setRentHouseProvince(String rentHouseProvince) {
+		this.rentHouseProvince = rentHouseProvince;
+	}
+	public String getRentHouseRegion() {
+		return rentHouseRegion;
+	}
+	public void setRentHouseRegion(String rentHouseRegion) {
+		this.rentHouseRegion = rentHouseRegion;
+	}
+	public int getRentHouseAllFloor() {
+		return rentHouseAllFloor;
+	}
+	public void setRentHouseAllFloor(int rentHouseAllFloor) {
+		this.rentHouseAllFloor = rentHouseAllFloor;
+	}
+	public String getRentHouseUnitNumber() {
+		return rentHouseUnitNumber;
+	}
+	public void setRentHouseUnitNumber(String rentHouseUnitNumber) {
+		this.rentHouseUnitNumber = rentHouseUnitNumber;
+	}
+	public String getRentHousePublishTime() {
+		return rentHousePublishTime;
+	}
+	public void setRentHousePublishTime(String rentHousePublishTime) {
+		this.rentHousePublishTime = rentHousePublishTime;
+	}
+	public Date getCommunityName() {
+		return communityName;
+	}
+	public void setCommunityName(Date communityName) {
+		this.communityName = communityName;
 	}
 	
 }
