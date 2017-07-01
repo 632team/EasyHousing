@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  
   <style>
     .name {
       width: 100px;
@@ -416,6 +418,174 @@
       right: 170px;
       z-index: 1;
     }
+        .colorFillLabel {display:inline-block; float:left; height:25px; line-height:25px; padding:0 5px; color:#fff; text-align:center; font-size:12px; margin-right:5px}
+    .colorFillLabel.yangtai {background:#00ae66}
+    .colorFillLabel.weishengjian {background:#F1B541}
+    .xinfangTag {
+      height:22px;
+      line-height:22px;
+      text-align:center;
+      border:1px solid #fff;
+      padding: 0 8px;
+      font-size: 12px;
+      margin-right: 8px;
+      line-height: 22px;
+      display: inline-block;
+    }
+    .xinfangTag.tag1 {
+      border-color:#e2d197;
+      color:#e2d197
+    }
+    .xinfangTag.tag2 {
+      border-color:#C5A9DD;
+      color:#C5A9DD
+    }
+    .xinfangTag.tag3 {
+      border-color:#E0A0A0;
+      color:#E0A0A0
+    }
+    .xinfangTag.tag4 {
+      border-color:#85c6dc;
+      color:#85c6dc
+    }
+    .user-main .main-right li .info-panel .col-3 {
+      width: 200px;
+      text-align: right;
+      float: left;
+      position: absolute;
+      top: 30px;
+      right: 80px;
+    }
+    .user-main .main-right li .info-panel .col-3 .price {
+      color: #e4393c;
+      margin-top: 6px;
+      width: 100%;
+      position: relative;
+      font-size: 16px;
+    }
+    .user-main .main-right li .info-panel .col-3 .price_xiajia,
+    .user-main .main-right li .info-panel .col-3 .price_shixiao,
+    .user-main .main-right li .info-panel .col-3 .price_chengjiao {
+      color: #808080;
+      margin-top: 6px;
+      width: 100%;
+      position: relative;
+      font-size: 16px;
+    }
+    .user-main .main-right li .info-panel .col-3 .price .num,
+    .user-main .main-right li .info-panel .col-3 .price_shixiao .num,
+    .user-main .main-right li .info-panel .col-3 .price_xiajia .num,
+    .user-main .main-right li .info-panel .col-3 .price_chengjiao .num {
+      font-size: 30px;
+      font-weight: 700;
+      margin-right: 3px;
+      font-family: tahoma;
+    }
+    .user-main .main-right li .info-panel .col-3 .price-pre {
+      font-size: 12px;
+      color: #999;
+      font-family: Arial;
+      margin-top: 5px;
+    }
+    .user-main .main-right li .pic-panel img.lj-lazy {
+      width: 173px;
+      height: 130px;
+    }
+    .user-main .main-right li .info-panel h2 {
+      font-size: 19px;
+      white-space: nowrap;
+      width: 100%;
+      height: 32px;
+      line-height: 20px;
+      vertical-align: middle;
+      font-family: "Hiragino Sans GB","微软雅黑","Microsoft YaHei",SimHei,Tahoma,"宋体b8b\4f53",SimSun,sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+      font-size: 100%;
+      font-weight: normal;
+    }
+    user agent stylesheet
+    h2 {
+      display: block;
+      font-size: 1.5em;
+      -webkit-margin-before: 0.83em;
+      -webkit-margin-after: 0.83em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      font-weight: bold;
+    }
+    .user-main .main-right li .info-panel h2 a, .user-main .main-right li .info-panel h2 span {
+      font-family: "Hiragino Sans GB","微软雅黑","Microsoft YaHei",SimHei,Tahoma,"宋体b8b\4f53",SimSun,sans-serif;
+      color: #009de8;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .user-main .main-right .all-list .list-bot li {
+      border-bottom: 1px dashed #e9e9e9;
+      height: 170px;
+      position: relative;
+    }
+    .user-main .main-right li {
+      clear: both;
+      padding-top: 30px;
+    }
+    dl, dt, dd, ul, ol, li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    li {
+      display: list-item;
+      text-align: -webkit-match-parent;
+    }
+    .user-main .main-right li .other .con {
+      width: 410px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      color: #888;
+    }
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    div {
+      display: block;
+    }
+    .main-right li .info-panel {
+      color: #565a5c;
+      padding-left: 14px;
+      width: 505px;
+      position: relative;
+      float: right;
+      height: 130px;
+    }
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    div {
+      display: block;
+    }
+    .main-right li .pic-panel {
+      width: 175px;
+      float: left;
+      position: relative;
+    }
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    div {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -492,6 +662,37 @@
           </div>
           <div class="all-list selected fav-list" style="display:block;" id="ershoufang">
             <ul class="list-bot">
+              <li style="width: 750px">
+                <div class="list" style="display: inline">
+                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+                    <img
+                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                      class="lj-lazy"
+                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
+                      style="display: inline;"> </a></div>
+                  <div class="info-panel">
+                    <h2><a target="_blank"
+                                                 href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> 上海villa </a>
+                  </h2>
+                    <div class="col-1">
+                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank">嘉定</a>- 恒荣路589弄
+                      </div>
+                      <div class="other">
+                        <div class="con"> 3居</div>
+                      </div>
+                      <div class="chanquan">
+                        <div class="left agency"><span
+                          class="xinfangTag tag1">                                    <span>车位充足</span>                                </span>
+                          <span class="xinfangTag tag2">                                    <span>外环外</span>                                </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-3"><span class="price-pre">总价：</span> <span class="price">	                            <span
+                      class="num">450</span>	                        </span> <span class="price-pre"> 万元起</span></div>
+                  </div>
+                </div>
+                <a class="del-fav actDelFollow" index="349" style="display: none;">取消关注</a></li>
             </ul>
           </div>
           <div class="page">

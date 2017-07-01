@@ -533,14 +533,13 @@
 
 			
 			<form  method="post" id="updatePortrait" class="js_module" action=${pageContext.request.contextPath}/changePhoto.do enctype="multipart/form-data">
-			<ul>
-				<li>
-                <span style="text-align:right">选择图像：</span>
-             	<input type="file" name="userPhoto"></input>
-             	 </li>
-             	 </br>
-				<span></span><button type="submit" class="actSubmit lj-btn" id="nameSubmit">提交</button>
-			</ul>
+				<ul>
+					<li>
+	                	<span style="text-align:right">选择图像：</span>
+	             		<input type="file" name="userPhoto"></input>
+	             	</li></br>
+					<span></span><button type="submit" class="actSubmit lj-btn" id="nameSubmit">提交</button>
+				</ul>
             </form>
            
             

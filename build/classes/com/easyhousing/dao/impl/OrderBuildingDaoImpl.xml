@@ -17,4 +17,8 @@
 		SELECT * FROM OrderBuilding WHERE  orderId=#{orderId}
 	</select>
 	
+	<select id="selectAllByUserId" parameterType="com.easyhousing.model.OrderBuilding" resultType="com.easyhousing.model.OrderBuilding">
+		SELECT * FROM OrderBuilding WHERE  userId=#{userId}
+	</select>
+	
 </mapper>
