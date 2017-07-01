@@ -7,5 +7,7 @@ public class Collect {
 	public String region;
 	public String name;
 	public String decoration;
+	public String picUrl;
 	public int price;
+	public int room;
 }

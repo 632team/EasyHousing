@@ -14,13 +14,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.easyhousing.model.Collect;
 import com.easyhousing.model.Register;
 import com.easyhousing.model.User;
+import com.easyhousing.service.UserCollectService;
 import com.easyhousing.service.UserService;
 import com.easyhousing.util.Tool;
 
@@ -29,6 +32,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserCollectService userCollectService;
 	
 	@RequestMapping(value="login.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView login(User u, HttpSession httpSession) {
@@ -125,7 +131,10 @@ public class UserController {
 		User user = (User) s.getAttribute("user");
 		
 		// 我的收藏
-		
+		List<Collect> userCollectBuilding = userCollectService.selectUserCollectBuilding(user);
+		List<Collect> userCollectRentHouse = userCollectService.selectUserCollectRentHouse(user);
+		s.setAttribute("userCollectBuilding", userCollectBuilding);
+		s.setAttribute("userCollectRentHouse", userCollectRentHouse);
 		
 		// 我的房子
 		// 我的评论

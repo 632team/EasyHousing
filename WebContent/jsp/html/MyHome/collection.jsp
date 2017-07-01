@@ -1,4 +1,5 @@
 <%@page import="com.easyhousing.model.*"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -658,81 +659,110 @@
           <div class="tab">
             <span class="actTap actSetArgs hover">楼盘</span>
             <span class="actTap actSetArgs ">租房</span>
-
           </div>
+          
           <div class="all-list selected fav-list" style="display:block;" id="building">
             <ul class="list-bot">
-              <li style="width: 750px">
-                <div class="list" style="display: inline">
-                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
-                    <img
-                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-                      class="lj-lazy"
-                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
-                      style="display: inline;"> </a></div>
-                  <div class="info-panel" style="float: left">
-                    <h2><a target="_blank"
-                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> 上海villa </a>
-                          <button type="button" class="btn btn-danger" style="float: right">取消关注</button>
-                    </h2>
+            	<%
+            	List<Collect> lb = (List<Collect>)s.getAttribute("userCollectBuilding");
+            	if (lb.size() == 0) {
+            		out.println("您还未收藏楼盘哦。");
+            	}
+            	else {
+            		for (int i = 0; i < lb.size(); ++i) {
+            			Collect tmp = lb.get(i);
+            			%>
+            			<li style="width: 750px">
+                        <div class="list" style="display: inline">
+                          <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+                            <img
+                              data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                              src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                              class="lj-lazy"
+                              onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
+                              style="display: inline;"> </a>
+                          </div>
+                          <div class="info-panel" style="float: left">
+                            <h2><a target="_blank"
+                                   href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> <%=tmp.name %> </a>
+                                  <button type="button" class="btn btn-danger" style="float: right">取消关注</button>
+                            </h2>
 
-                    <div class="col-1">
-                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank">嘉定</a>- 恒荣路589弄
-                      </div>
-                      <div class="other">
-                        <div class="con"> 3居</div>
-                      </div>
-                      <div class="chanquan">
-                        <div class="left agency"><span
-                          class="xinfangTag tag1">                                    <span>车位充足</span>                                </span>
-                          <span class="xinfangTag tag2">                                    <span>外环外</span>                                </span>
+                            <div class="col-1">
+                              <div class="con"><%=tmp.houseAddress %>
+                              </div>
+                              <div class="other">
+                                <div class="con"><%=tmp.decoration %></div>
+                              </div>
+                              <div class="chanquan">
+                                <div class="left agency"><span
+                                  class="xinfangTag tag1"><span>环境优雅</span></span>
+                                  <span class="xinfangTag tag2"><span>商业区</span></span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-3"><span class="price-pre">总价：</span> <span class="price">	                            <span
+                              class="num"><%=tmp.price %></span></span> <span class="price-pre"> 万元起</span></div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="col-3"><span class="price-pre">总价：</span> <span class="price">	                            <span
-                      class="num">450</span>	                        </span> <span class="price-pre"> 万元起</span></div>
-                  </div>
-                </div>
-                <a class="del-fav actDelFollow" index="349" style="display: none;">取消关注</a></li>
+                        <a class="del-fav actDelFollow" index="349" style="display: none;">取消关注</a>
+                        </li>
+                    <%
+            		}
+            	}
+                %>
             </ul>
           </div>
+          
           <div class="all-list selected fav-list" style="display:none;" id="rent">
             <ul class="list-bot">
-              <li style="width: 750px">
-                <div class="list" style="display: inline">
-                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
-                    <img
-                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-                      class="lj-lazy"
-                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
-                      style="display: inline;"> </a></div>
-                   <div class="info-panel" style="float: left">
-                    <h2><a target="_blank"
-                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> 重庆租房 </a>
-                           <button type="button" class="btn btn-danger" style="float: right">取消关注</button>
-                    </h2>
-                    <div class="col-1">
-                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank">沙坪坝</a>- 大学城
-                      </div>
-                      <div class="other">
-                        <div class="con"> 1居</div>
-                      </div>
-                      <div class="chanquan">
-                        <div class="left agency"><span
-                          class="xinfangTag tag1">                                    <span>车位充足</span>                                </span>
-                          <span class="xinfangTag tag2">                                    <span>外环外</span>                                </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-3"><span class="price-pre">租金：</span> <span class="price">	                            <span
-                      class="num">1450</span>	                        </span> <span class="price-pre"> 元/月</span></div>
-                  </div>
-                </div>
-                <a class="del-fav actDelFollow" index="349" style="display: none;">取消关注</a></li>
+            	<%
+            	List<Collect> lr = (List<Collect>)s.getAttribute("userCollectRentHouse");
+            	if (lr.size() == 0) {
+            		out.println("您还未收藏任何出租屋哦。");
+            	}
+            	else {
+            		for (Collect i: lr) {
+            			%>
+            			 <li style="width: 750px">
+		                <div class="list" style="display: inline">
+		                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+		                    <img
+		                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+		                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+		                      class="lj-lazy"
+		                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
+		                      style="display: inline;"> </a></div>
+		                   <div class="info-panel" style="float: left">
+		                    <h2><a target="_blank"
+		                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"><%=i.name %> </a>
+		                           <button type="button" class="btn btn-danger" style="float: right">取消关注</button>
+		                    </h2>
+		                    <div class="col-1">
+		                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank"><%=i.province %></a>- <%=i.region %>
+		                      </div>
+		                      <div class="other">
+		                        <div class="con"> <%=i.room %>居</div>
+		                      </div>
+		                      <div class="chanquan">
+		                        <div class="left agency"><span
+                                  class="xinfangTag tag1"><span>环境优雅</span></span>
+                                  <span class="xinfangTag tag2"><span>商业区</span></span>
+                                </div>
+		                      </div>
+		                    </div>
+		                    <div class="col-3"><span class="price-pre">租金：</span> <span class="price">	                            <span
+		                      class="num"><%=i.price %></span>	                        </span> <span class="price-pre"> 元/月</span></div>
+		                  </div>
+		                </div>
+		                <a class="del-fav actDelFollow" index="349" style="display: none;">取消关注</a></li>
+            			<%
+            		}
+            	}
+             	%>
             </ul>
           </div>
+          
           <div class="page">
             <div id="paginageBox" class="page-box"></div>
           </div>
