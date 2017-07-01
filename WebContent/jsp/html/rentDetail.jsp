@@ -813,7 +813,7 @@
             <%out.print(irentHouse.getRentHouseRoom()); %>室
             <%out.print(irentHouse.getRentHouseHall()); %>厅
             <%out.print(irentHouse.getRentHouseToilet());%>卫  </p>
-            <p class="lf"><i>楼层：</i><%out.print(irentHouse.getRentHouseFloorAttribute()); %> (共16层)</p>
+            <p class="lf"><i>楼层：</i><%out.print(irentHouse.getRentHouseFloorAttribute()); %> (共<%out.print(irentHouse.getRentHouseAllFloor()); %>层)</p>
             <p class="lf"><i>房屋朝向：</i><%out.print(irentHouse.getRentHouseToward()); %></p>
             <div class="clear"></div>
             <p><i>地铁：</i><%out.print(irentHouse.getRentHouseSubway()); %></p>
