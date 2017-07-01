@@ -21,8 +21,8 @@ public class RentHouse {
 	private String rentHouseRegion;
 	private int rentHouseAllFloor;
 	private String rentHouseUnitNumber;
-	private String rentHousePublishTime;
-	private Date communityName;
+	private String communityName;
+	private Date rentHousePublishTime;
 	
 	public int getRentHouseId() {
 		return rentHouseId;
@@ -126,17 +126,16 @@ public class RentHouse {
 	public void setRentHouseUnitNumber(String rentHouseUnitNumber) {
 		this.rentHouseUnitNumber = rentHouseUnitNumber;
 	}
-	public String getRentHousePublishTime() {
+	public Date getRentHousePublishTime() {
 		return rentHousePublishTime;
 	}
-	public void setRentHousePublishTime(String rentHousePublishTime) {
+	public void setRentHousePublishTime(Date rentHousePublishTime) {
 		this.rentHousePublishTime = rentHousePublishTime;
 	}
-	public Date getCommunityName() {
+	public String getCommunityName() {
 		return communityName;
 	}
-	public void setCommunityName(Date communityName) {
+	public void setCommunityName(String communityName) {
 		this.communityName = communityName;
 	}
-	
 }
