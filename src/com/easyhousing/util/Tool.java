@@ -120,6 +120,9 @@ public class Tool {
     }
     
     public static void main(String[] args) throws Exception {
-    	new Tool().upload("C:\\Users\\apple\\Desktop\\GameData\\ReadingList\\1.jpg", "helloworld2");
+    	new Tool().upload("C:\\Users\\王辰辰\\Desktop\\Pic1.jpg", "Pic1");
+    	new Tool().upload("C:\\Users\\王辰辰\\Desktop\\Pic2.jpg", "Pic2");
+    	new Tool().upload("C:\\Users\\王辰辰\\Desktop\\Pic3.jpg", "Pic3");
+    	new Tool().upload("C:\\Users\\王辰辰\\Desktop\\Pic4.jpg", "Pic4");
     }
 }

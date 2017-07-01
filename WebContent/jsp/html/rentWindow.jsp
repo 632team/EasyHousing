@@ -691,7 +691,7 @@
 	}
 	
 	function clickArea4(id) {
-		setCookie("rentHouseListId", id, 365);
+		setCookie("rentHouseId", id, 365);
 	}
 </script>
 </head>
@@ -1014,7 +1014,7 @@
       		RentHouse i = list.get(iter);
       	%>
       	<li>
-          <a onclick="clickArea4('<% out.print(iter); %>');" href=${pageContext.request.contextPath}/rentHouseDetail.do class="data_link" target="_blank"></a>
+          <a onclick="clickArea4('<% out.print(list.get(iter).getRentHouseId()); %>');" href=${pageContext.request.contextPath}/rentHouseDetail.do class="data_link" target="_blank"></a>
           <div class="mor_img">
             <a href="#" target="_blank" onerror="this.src='#'" alt="沙坪坝区沙正街 电力小区 3房130平米3000元/月" title="沙坪坝区沙正街 电力小区 3房130平米3000元/月">
               <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>

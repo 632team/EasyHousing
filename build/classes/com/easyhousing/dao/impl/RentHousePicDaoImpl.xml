@@ -13,8 +13,8 @@
 		UPDATE `RentHousePic` SET `insertTime`=#{insertTime},`picUrl`=#{picUrl},`rentHouseId`=#{rentHouseId} WHERE rentHousePicId=#{rentHousePicId}
 	</update>
 	
-	<select id="selectRentHousePic" parameterType="com.easyhousing.model.RentHousePic" resultType="com.easyhousing.model.RentHousePic">
-		SELECT * FROM RentHousePic WHERE rentHousePicId=#{rentHousePicId}
+	<select id="selectRentHousePicByRentHouseId" resultType="java.lang.String">
+		SELECT picUrl FROM RentHousePic WHERE rentHouseId=#{0}
 	</select>
 	
 </mapper>

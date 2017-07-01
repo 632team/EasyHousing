@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.easyhousing.model.RentHouse"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,7 +7,7 @@
 <head>
 <%
   HttpSession s = request.getSession(); 
-  String strtemp;
+  List<String> rentHousePicList = (List<String>)s.getAttribute("rentHousePicList");
   RentHouse irentHouse = (RentHouse)s.getAttribute("rentHouse");
 %>
     <meta charset="UTF-8">
@@ -659,6 +660,11 @@
     }
 
   </style>
+  <script type="text/javascript">
+  function collect() {
+	  
+  }
+  </script>
 </head>
 <body>
   <div class="fotpof">
@@ -770,29 +776,37 @@
             <div class="sub">这个经纪人很懒，没写核心卖点</div>
           </div>
           <div class="btnContainer ">
-            <button id="follow">关注房源</button>
+            <button id="follow"
+            <%
+             if (s.getAttribute("user") == null) {
+            	 out.print("href=/EasyHousing/jsp/html/logIn.jsp");
+             }
+             else {
+            	 out.print("href='${pageContext.request.contextPath}/collect.do'");
+             }
+             %>>关注房源</button>
           </div>
         </div>
       </div>
       <div class="overview">
         <div class="img" id="topImg">
           <div class="imgContainer">
-            <img src="../images/rentDetail/1.jpg" alt="">
+            <img src="<%out.print(rentHousePicList.get(0)); %>" alt="">
             <span>卧室B</span>
             <div class="loading" style="display: none;"></div>
           </div>
           <div class="thumbnail">
             <ul>
-              <li data-src="https://image1.ljcdn.com/500000-inspection/efb6363c-bf03-46e9-b940-736ec3aade3f.jpg.600x450.jpg" data-desc="厅" class=""><img src="./巴教村社区 3室1厅 2300元租房_房屋出租(重庆链家网)_files/efb6363c-bf03-46e9-b940-736ec3aade3f.jpg.600x450.jpg" alt=""></li>
-              <li data-src="https://image1.ljcdn.com/500000-inspection/c3803642-5558-41a8-8ca6-f2ae8ca47249.jpg.600x450.jpg" data-desc="卧室A" class=""><img src="./巴教村社区 3室1厅 2300元租房_房屋出租(重庆链家网)_files/c3803642-5558-41a8-8ca6-f2ae8ca47249.jpg.600x450.jpg" alt=""></li>
-              <li data-src="https://image1.ljcdn.com/500000-inspection/12d1ef02-38c4-49fc-aec7-62ba477a3924.jpg.600x450.jpg" data-desc="卧室B" class="selected"><img src="./巴教村社区 3室1厅 2300元租房_房屋出租(重庆链家网)_files/12d1ef02-38c4-49fc-aec7-62ba477a3924.jpg.600x450.jpg" alt=""></li>
-              <li data-src="https://image1.ljcdn.com/x-se//hdic-frame/1a1b49ba-7fae-4156-906a-440faf47bac0.png.600x450.jpg" data-desc="户型图" class=""><img src="./巴教村社区 3室1厅 2300元租房_房屋出租(重庆链家网)_files/1a1b49ba-7fae-4156-906a-440faf47bac0.png.600x450.jpg" alt=""></li>
-              <li data-src="https://image1.ljcdn.com/500000-inspection/466a4291-b5b3-404e-b78a-76bf90683be1.jpg.600x450.jpg" data-desc="卧室C" class=""><img src="./巴教村社区 3室1厅 2300元租房_房屋出租(重庆链家网)_files/466a4291-b5b3-404e-b78a-76bf90683be1.jpg.600x450.jpg" alt=""></li>
-              <li data-src="https://image1.ljcdn.com/500000-inspection/054520d1-3d18-452d-b9fa-405560d235a4.jpg.600x450.jpg" data-desc="厨房"><img src="./巴教村社区 3室1厅 2300元租房_房屋出租(重庆链家网)_files/054520d1-3d18-452d-b9fa-405560d235a4.jpg.600x450.jpg" alt=""></li>
-              <li data-src="https://image1.ljcdn.com/500000-inspection/f951150e-5f5d-4154-9c2a-22c08a361378.jpg.600x450.jpg" data-desc="卫生间"><img src="./巴教村社区 3室1厅 2300元租房_房屋出租(重庆链家网)_files/f951150e-5f5d-4154-9c2a-22c08a361378.jpg.600x450.jpg" alt=""></li>
+            <% 
+            for(int i = 0; i < rentHousePicList.size(); i++) {
+            %>
+              <li class=""><img src="<%out.print(rentHousePicList.get(i));%>" style="width:100%; height:100%" alt=""></li>
+            <%
+            }
+            %>
             </ul>
-            <div class="pre">&lt;</div>
-            <div class="next">&gt;</div>
+            <!-- <div class="pre">&lt;</div>
+            <div class="next">&gt;</div> -->
           </div>
         </div>
         <div class="content zf-content">

@@ -14,7 +14,7 @@ public class RentHouseSearchImpl implements RentHouseSearch{
 
 	@Autowired
 	private RentHouseDao rentHouseDao;
-	
+
 	@Override
 	public List<RentHouse> searchRentHouse(String Address, int lowPrice, int highPrice, int lowRoomNum, int highRoomNum) {
 		
