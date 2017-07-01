@@ -123,6 +123,15 @@ public class UserController {
 	@RequestMapping(value="userCenter.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String userCenter(HttpSession s) {
 		User user = (User) s.getAttribute("user");
+		
+		// 我的收藏
+		
+		
+		// 我的房子
+		// 我的评论
+		// 我的申请
+		// 成交记录
+		
 		return "/MyHome/userCenter";
 	}
 	

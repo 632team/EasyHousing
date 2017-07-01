@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyhousing.dao.UserCollectBuildingDao">
+	<insert id="insertUserCollectBuilding" parameterType="com.easyhousing.model.UserCollectBuilding">
+		INSERT INTO `UserCollectBuilding`(`userId`, `buildingId`, `collectTime`) VALUES (#{userId}, #{buildingId}, #{collectTime})
+	</insert>
+	
+	<delete id="deleteUserCollectBuilding" parameterType="com.easyhousing.model.UserCollectBuilding">
+		DELETE FROM `UserCollectBuilding` WHERE userId=#{userId} AND buildingId=#{buildingId}
+	</delete>
+	
+	<select id="selectAllByUserId" parameterType="com.easyhousing.model.UserCollectBuilding" resultType="com.easyhousing.model.UserCollectBuilding">
+		SELECT * FROM UserCollectBuilding WHERE userId=#{userId}
+	</select>
+
+</mapper>

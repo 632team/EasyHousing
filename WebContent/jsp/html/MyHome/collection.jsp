@@ -660,7 +660,7 @@
             <span class="actTap actSetArgs ">租房</span>
 
           </div>
-          <div class="all-list selected fav-list" style="display:block;" id="ershoufang">
+          <div class="all-list selected fav-list" style="display:block;" id="building">
             <ul class="list-bot">
               <li style="width: 750px">
                 <div class="list" style="display: inline">
@@ -671,10 +671,12 @@
                       class="lj-lazy"
                       onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
                       style="display: inline;"> </a></div>
-                  <div class="info-panel">
+                  <div class="info-panel" style="float: left">
                     <h2><a target="_blank"
-                                                 href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> 上海villa </a>
-                  </h2>
+                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> 上海villa </a>
+                          <button type="button" class="btn btn-danger" style="float: right">取消关注</button>
+                    </h2>
+
                     <div class="col-1">
                       <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank">嘉定</a>- 恒荣路589弄
                       </div>
@@ -695,6 +697,42 @@
                 <a class="del-fav actDelFollow" index="349" style="display: none;">取消关注</a></li>
             </ul>
           </div>
+          <div class="all-list selected fav-list" style="display:none;" id="rent">
+            <ul class="list-bot">
+              <li style="width: 750px">
+                <div class="list" style="display: inline">
+                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+                    <img
+                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                      class="lj-lazy"
+                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
+                      style="display: inline;"> </a></div>
+                   <div class="info-panel" style="float: left">
+                    <h2><a target="_blank"
+                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> 重庆租房 </a>
+                           <button type="button" class="btn btn-danger" style="float: right">取消关注</button>
+                    </h2>
+                    <div class="col-1">
+                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank">沙坪坝</a>- 大学城
+                      </div>
+                      <div class="other">
+                        <div class="con"> 1居</div>
+                      </div>
+                      <div class="chanquan">
+                        <div class="left agency"><span
+                          class="xinfangTag tag1">                                    <span>车位充足</span>                                </span>
+                          <span class="xinfangTag tag2">                                    <span>外环外</span>                                </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-3"><span class="price-pre">租金：</span> <span class="price">	                            <span
+                      class="num">1450</span>	                        </span> <span class="price-pre"> 元/月</span></div>
+                  </div>
+                </div>
+                <a class="del-fav actDelFollow" index="349" style="display: none;">取消关注</a></li>
+            </ul>
+          </div>
           <div class="page">
             <div id="paginageBox" class="page-box"></div>
           </div>
@@ -706,28 +744,21 @@
 </div>
 </body>
 <script>
-  $('.user-main .tab span').click(function () {
-    $('.js_ajaxError').hide();
-    if ($(this).text() == '新房') {
-      $(this).addClass('hover').siblings().removeClass('hover');
-      $('#updatePwd').css('display', 'block');
-      $('#updateName').css('display', 'none');
-      $('#updatePortrait ').css('display', 'none');
-    }
-    if ($(this).text() == '租房') {
-      $(this).addClass('hover').siblings().removeClass('hover');
-      $('#updatePwd').css('display', 'none');
-      $('#updateName').css('display', 'none');
-      $('#updatePortrait ').css('display', 'block');
-    }
-    if ($(this).text() == '个人信息') {
-      $(this).addClass('hover').siblings().removeClass('hover');
-      $('#updatePwd').css('display', 'none');
-      $('#updateName').css('display', 'block');
-      $('#updatePortrait ').css('display', 'none');
-    }
+$('.user-main .main-right .tab span').click(function () {
+  $('.js_ajaxError').hide();
+  if ($(this).text() == '楼盘') {
+    $(this).addClass('hover').siblings().removeClass('hover');
+    $('#building').css('display', 'block');
+    $('#rent').css('display', 'none');
+  }
+  if ($(this).text() == '租房') {
+    $(this).addClass('hover').siblings().removeClass('hover');
+    $('#building').css('display', 'none');
+    $('#rent ').css('display', 'block');
+  }
 
-  });
+
+});
 
 </script>
 </html>
