@@ -21,4 +21,9 @@ public class RentHouseSearchImpl implements RentHouseSearch{
 		return rentHouseDao.selectRentHouse(Address, lowPrice, highPrice, lowRoomNum, highRoomNum);
 	}
 
+	@Override
+	public RentHouse searchRentHouseById(int id) {
+		return rentHouseDao.selectRentHouseById(id);
+	}
+
 }

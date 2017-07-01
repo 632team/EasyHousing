@@ -1,8 +1,14 @@
+<%@page import="com.easyhousing.model.RentHouse"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
+<%
+  HttpSession s = request.getSession(); 
+  String strtemp;
+  RentHouse irentHouse = (RentHouse)s.getAttribute("rentHouse");
+%>
     <meta charset="UTF-8">
     <title>房屋详情</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -680,8 +686,7 @@
               <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="hrf">租房</a>
             </span>
           <span>
-             <% 
-              HttpSession s = request.getSession(); 
+             <%
               if (s.getAttribute("user") == null) {
             	  out.println("<a href=/EasyHousing/jsp/html/logIn.jsp class=\"href\">登录</a>");
               }
@@ -754,7 +759,14 @@
       <div class="title-wrapper">
         <div class="content">
           <div class="title">
-            <h1 class="main">巴教村社区 3室1厅 2300元</h1>
+            <h1 class="main">
+            <% 
+            out.print(irentHouse.getRentHouseAddress()+" ");
+            out.print(irentHouse.getRentHouseRoom()+"室"+irentHouse.getRentHouseHall()+"厅 ");
+            out.print(irentHouse.getRentHousePrice()+"元");
+            %>
+                     <!--  巴教村社区 3室1厅 2300元-->
+            </h1>
             <div class="sub">这个经纪人很懒，没写核心卖点</div>
           </div>
           <div class="btnContainer ">
@@ -785,17 +797,26 @@
         </div>
         <div class="content zf-content">
           <div class="price ">
-            <span class="total">2300</span>
+            <span class="total">
+            <% 
+            out.print(irentHouse.getRentHousePrice());
+            %></span>
             <span class="unit">
         <span>元/月</span>
       </span>
             <div class="removeIcon"></div>
           </div>
           <div class="zf-room">
-            <p class="lf"><i>面积：</i>84平米</p><p class="lf"><i>房屋户型：</i>3室1厅1卫  </p>
-            <p class="lf"><i>楼层：</i>高楼层 (共16层)</p><p class="lf"><i>房屋朝向：</i>东南</p>
+            <p class="lf"><i>面积：</i>
+            <%out.print(irentHouse.getRentHouseArea()); %>平米</p>
+            <p class="lf"><i>房屋户型：</i>
+            <%out.print(irentHouse.getRentHouseRoom()); %>室
+            <%out.print(irentHouse.getRentHouseHall()); %>厅
+            <%out.print(irentHouse.getRentHouseToilet());%>卫  </p>
+            <p class="lf"><i>楼层：</i><%out.print(irentHouse.getRentHouseFloorAttribute()); %> (共16层)</p>
+            <p class="lf"><i>房屋朝向：</i><%out.print(irentHouse.getRentHouseToward()); %></p>
             <div class="clear"></div>
-            <p><i>地铁：</i>距地铁1号线七星岗1095米</p>
+            <p><i>地铁：</i><%out.print(irentHouse.getRentHouseSubway()); %></p>
             <p><i>小区：</i><a href="https://cq.lianjia.com/xiaoqu/3611060655470/">巴教村社区</a>
               - <a href="https://cq.lianjia.com/zufang/c3611060655470/">1套出租中</a></p>
             <p><i>位置：</i><a href="https://cq.lianjia.com/zufang/yuzhong/">渝中</a> <a href="https://cq.lianjia.com/zufang/lianglukou/">两路口</a></p>
@@ -844,22 +865,22 @@
         
       </div>
     </div>
-    
-  <script type="text/javascript">
 
-        //提示内容：（默认值）
-        var c = '您可以在这里输入您的评论：';
-        
-        function on_focus(obj){
-            obj.value = obj.value==(!!arguments[1]?arguments[1]:c)?'':obj.value;
-        } 
-        
-        function on_blur(obj)
-        {
-            obj.value = obj.value==''?(!!arguments[1]?arguments[1]:c):obj.value;
-        }
-    </script>
+		<script type="text/javascript">
+			//提示内容：（默认值）
+			var c = '您可以在这里输入您的评论：';
 
-  </div>
+			function on_focus(obj) {
+				obj.value = obj.value == (!!arguments[1] ? arguments[1] : c) ? ''
+						: obj.value;
+			}
+
+			function on_blur(obj) {
+				obj.value = obj.value == '' ? (!!arguments[1] ? arguments[1]
+						: c) : obj.value;
+			}
+		</script>
+
+	</div>
   </body>
 </html>

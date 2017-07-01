@@ -19,4 +19,8 @@
 			AND rentHouseRoom>=#{3} AND #{4}>=rentHouseRoom
 	</select>
 	
+	<select id="selectRentHouseById" resultType="com.easyhousing.model.RentHouse">
+		SELECT * FROM RentHouse WHERE rentHouseId=#{0}
+	</select>
+	
 </mapper>
