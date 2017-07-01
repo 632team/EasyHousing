@@ -144,6 +144,8 @@ public class RentHouseSelectController {
 		String strlowRoomNum = (String)session.getAttribute("lowRoomNum");
 		String strhighRoomNum = (String)session.getAttribute("highRoomNum");
 		String strclass1 = (String)session.getAttribute("class1");
+		String strclass2 = (String)session.getAttribute("class2");
+		String strclass3 = (String)session.getAttribute("class3");
 		if(strAddress == null) {
 			session.setAttribute("address", "");
 		}
@@ -161,6 +163,12 @@ public class RentHouseSelectController {
 		}
 		if(strclass1 == null) {
 			session.setAttribute("class1", "0");
+		}
+		if(strclass2 == null) {
+			session.setAttribute("class2", "11");
+		}
+		if(strclass3 == null) {
+			session.setAttribute("class3", "21");
 		}
 		String address = (String)session.getAttribute("address");
 		int lowPrice = Integer.parseInt((String)session.getAttribute("lowPrice"));
@@ -197,9 +205,33 @@ public class RentHouseSelectController {
 						session.setAttribute("address", value);
 						System.err.println(value);
 					}
+					else if(strtemp.equals("lowPrice")) {
+						value = unescape(iCookie.getValue());
+						session.setAttribute("lowPrice", value);
+					}
+					else if(strtemp.equals("highPrice")) {
+						value = unescape(iCookie.getValue());
+						session.setAttribute("highPrice", value);
+					}
+					else if(strtemp.equals("highRoomNum")) {
+						value = unescape(iCookie.getValue());
+						session.setAttribute("highRoomNum", value);
+					}
+					else if(strtemp.equals("lowRoomNum")) {
+						value = unescape(iCookie.getValue());
+						session.setAttribute("lowRoomNum", value);
+					}
 					else if(strtemp.equals("class1")) {
 						value = unescape(iCookie.getValue());
 						session.setAttribute("class1", value);
+					}
+					else if(strtemp.equals("class2")) {
+						value = unescape(iCookie.getValue());
+						session.setAttribute("class2", value);
+					}
+					else if(strtemp.equals("class3")) {
+						value = unescape(iCookie.getValue());
+						session.setAttribute("class3", value);
 					}
 					System.err.println(iCookie.getName());
 			}

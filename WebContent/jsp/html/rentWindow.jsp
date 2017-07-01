@@ -648,32 +648,47 @@
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js "></script>
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js "></script>
 <script type="text/javascript">
-  function transp() {
-   $.ajax({  
-    type:"GET",  
-    async: false,
-	url:"${pageContext.request.contextPath}/rentHouseSelectAjax.do"
-  })
-  }
   
-  function setCookie(c_name,value,expiredays)
-  {
-  	var exdate=new Date()
-  	exdate.setDate(exdate.getDate()+expiredays)
-  	document.cookie=c_name+ "=" +escape(value)+
-  	((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
-  }
-  
-  
-  function  clickArea1(id, address) {
+	function transp() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/rentHouseSelectAjax.do"
+		})
+	}
+
+	function setCookie(c_name, value, expiredays) {
+		var exdate = new Date()
+		exdate.setDate(exdate.getDate() + expiredays)
+		document.cookie = c_name
+				+ "="
+				+ escape(value)
+				+ ((expiredays == null) ? "" : ";expires="
+						+ exdate.toGMTString())
+	}
+
+	function clickArea1(id, address) {
+		setCookie("address", address, 365);
+		setCookie("class1", id, 365);
+		transp();
+		window.location.reload(false);
+	}
+
+	function clickArea2(id, lowPrice, highPrice) {
+		setCookie("class2", id, 365);
+		setCookie("lowPrice", lowPrice, 365);
+		setCookie("highPrice", highPrice, 365);
+		transp();
+		window.location.reload(false);
+	}
 	
-	//document.cookie="address="+address;
-	//document.cookie="="+id;
-	setCookie("address",address,365);
-	setCookie("class1",id,365);
-    transp();
-    window.location.reload(false);
-  }
+	function clickArea3(id, lowRoomNum, highRoomNum) {
+		setCookie("class3", id, 365);
+		setCookie("lowRoomNum", lowRoomNum, 365);
+		setCookie("highRoomNum", highRoomNum, 365);
+		transp();
+		window.location.reload(false);
+	}
 </script>
 </head>
 <body>
@@ -858,9 +873,7 @@
             </li>
             <li class="Switch">
               <strong>地铁:</strong>
-              <a class="mt on" id="bx">
-                不限
-              </a>
+              <a class="mt on" id="bx">不限</a>
               <a class="qy" id="11">1号线</a>
               <a class="qy" id="12">2号线</a>
               <a class="qy" id="13">3号线</a>
@@ -869,22 +882,101 @@
             </li>
             <li class="Switch">
               <strong>租金:</strong>
-              <a class="mt on" id="bx">不限</a>
-              <a class="qy" id="yihaoxian">1000元以下</a>
-              <a class="qy" id="erhaoxian">1000-2000元</a>
-              <a class="qy" id="sanhaoxian">2000-3000元</a>
-              <a class="qy" id="liuhaoxian">3000-4000元</a>
-              <a class="qy" id="guoboxian">4000-5000元</a>
-              <a class="qy" id="guoboxian">5000元及以上</a>
+              <%
+              strtemp = (String)s.getAttribute("class2");
+           	  System.err.print("id" + strtemp);
+              %>
+              <a class="
+              <%
+              if(strtemp.equals("11"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="11" onclick="clickArea2(this.id, '0', '1000000000');">不限</a>
+              <a class="
+              <%
+              if(strtemp.equals("12"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="12" onclick="clickArea2(this.id, '0', '999');">1000元以下</a>
+              <a class="
+              <%
+              if(strtemp.equals("13"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="13" onclick="clickArea2(this.id, '1000', '1999');">1000-2000元</a>
+              <a class="
+              <%
+              if(strtemp.equals("14"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="14" onclick="clickArea2(this.id, '2000','2999');">2000-3000元</a>
+              <a class="
+              <%
+              if(strtemp.equals("15"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="15" onclick="clickArea2(this.id, '3000', '3999');">3000-4000元</a>
+              <a class="
+              <%
+              if(strtemp.equals("16"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="16" onclick="clickArea2(this.id, '4000', '4999');">4000-5000元</a>
+              <a class="
+              <%
+              if(strtemp.equals("17"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="17" onclick="clickArea2(this.id, '5000', '1000000000');">5000元及以上</a>
             </li>
             <li class="Switch">
               <strong>户型:</strong>
-              <a class="mt on" id="bx">不限</a>
-              <a class="qy" id="yihaoxian">单配</a>
-              <a class="qy" id="erhaoxian">一室</a>
-              <a class="qy" id="sanhaoxian">两室</a>
-              <a class="qy" id="liuhaoxian">三室</a>
-              <a class="qy" id="guoboxian">四室及以上</a>
+              <%
+              strtemp = (String)s.getAttribute("class3");
+           	  System.err.print("id" + strtemp);
+              %>
+              <a class="
+              <%
+              if(strtemp.equals("21"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="21" onclick="clickArea3(this.id, '0', '1000000000');">不限</a>
+              <a class="
+              <%
+              if(strtemp.equals("23"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="23" onclick="clickArea3(this.id, '1', '1');">一室</a>
+              <a class="
+              <%
+              if(strtemp.equals("24"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="24" onclick="clickArea3(this.id, '2', '2');">两室</a>
+              <a class="
+              <%
+              if(strtemp.equals("25"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="25" onclick="clickArea3(this.id, '3', '3');">三室</a>
+              <a class="
+              <%
+              if(strtemp.equals("26"))
+            	  out.print("mt on");
+              else
+            	  out.print("qy");
+              %>" id="26" onclick="clickArea3(this.id, '4', '1000000000');">四室及以上</a>
             </li>
           </ul>
         </div>
