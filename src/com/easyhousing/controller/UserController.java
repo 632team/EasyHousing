@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -20,9 +21,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.easyhousing.dao.RentHouseDao;
+import com.easyhousing.dao.RentHousePicDao;
+import com.easyhousing.dao.RentHouse_CharacteristicsDao;
+import com.easyhousing.model.Application;
 import com.easyhousing.model.Collect;
 import com.easyhousing.model.Order;
 import com.easyhousing.model.Register;
+import com.easyhousing.model.RentHouse;
+import com.easyhousing.model.RentHousePic;
+import com.easyhousing.model.RentHouse_Characteristics;
 import com.easyhousing.model.User;
 import com.easyhousing.service.OrderService;
 import com.easyhousing.service.UserCollectService;
@@ -40,6 +48,15 @@ public class UserController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private RentHouseDao rentHouseDao;
+	
+	@Autowired
+	private RentHouse_CharacteristicsDao rentHouse_CharacteristicsDao;
+	
+	@Autowired
+	private RentHousePicDao rentHousePicDao;
 	
 	@RequestMapping(value="login.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView login(User u, HttpSession httpSession) {
@@ -142,6 +159,23 @@ public class UserController {
 		s.setAttribute("userCollectRentHouse", userCollectRentHouse);
 		
 		// 我的房子
+		List<RentHouse_Characteristics> rentHouse_Characteristics = rentHouse_CharacteristicsDao.selectAllByUserId(user.getUserId());
+		List<Application> rentHouseApplication = new ArrayList<>();
+		for (RentHouse_Characteristics i: rentHouse_Characteristics) {
+			RentHouse tmp = rentHouseDao.selectRentHouseById(i.getRentHouseId());
+			Application in = new Application();
+			in.date = tmp.getRentHousePublishTime();
+			in.address = tmp.getRentHouseAddress();
+			in.houseId = tmp.getRentHouseId();
+			in.phone = user.getUserPhoneNumber();
+			in.hall = tmp.getRentHouseHall();
+			in.room = tmp.getRentHouseRoom();
+			in.toilet = tmp.getRentHouseToilet();
+			in.price = tmp.getRentHousePrice();
+			rentHouseApplication.add(in);
+		}
+		s.setAttribute("rentHouseApplication", rentHouseApplication);
+		
 		// 我的评论
 		// 我的申请
 		List<Order> orderBuilding = orderService.selectAllBuildingByUserId(user);
@@ -152,6 +186,64 @@ public class UserController {
 		// 成交记录
 		
 		return "/MyHome/userCenter";
+	}
+	
+	@RequestMapping(value="sendRentHouse.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView sendRentHouse(HttpServletRequest request, RentHouse u) throws IllegalStateException, IOException {
+		HttpSession s = request.getSession();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/MyHome/myHouse");
+		modelAndView.addObject("rentMessage", "委托成功。");
+		try {
+			u.setRentHousePublishTime(new Date());
+			rentHouseDao.insertRentHouse(u);
+			RentHouse_Characteristics tmp = new RentHouse_Characteristics();
+			tmp.setCharacteristicsId(((User)s.getAttribute("user")).getUserId());
+			tmp.setRentHouseId(u.getRentHouseId());
+			rentHouse_CharacteristicsDao.insertRentHouse_Characteristics(tmp);
+			
+			Application in = new Application();
+			List<Application> lap = (List<Application>)s.getAttribute("rentHouseApplication");
+			in.date = u.getRentHousePublishTime();
+			in.address = u.getRentHouseAddress();
+			in.houseId = tmp.getRentHouseId();
+			in.phone = ((User)s.getAttribute("user")).getUserPhoneNumber();
+			in.hall = u.getRentHouseHall();
+			in.room = u.getRentHouseRoom();
+			in.toilet = u.getRentHouseToilet();
+			in.price = u.getRentHousePrice();
+			lap.add(in);
+			s.setAttribute("rentHouseApplication", lap);
+			
+			//得到文件
+			String path = request.getSession().getServletContext().getRealPath("upload");  
+			MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
+			Iterator iter=multiRequest.getFileNames(); 
+			while (iter.hasNext()) {
+				MultipartFile file=multiRequest.getFile(iter.next().toString()); 
+				String fileName = file.getOriginalFilename();    
+				File dir = new File(path,fileName);          
+				if(!dir.exists()){  
+					dir.mkdirs();  
+				}  
+				//MultipartFile自带的解析方法  
+				file.transferTo(dir); 
+	        
+		        String filePath = path + "\\" + fileName;
+	        	System.err.println(filePath);
+	        	String name = new Date().toInstant().toString();
+	        	new Tool().upload(filePath, name);
+	        	
+	        	RentHousePic rhp = new RentHousePic();
+	        	rhp.setPicUrl(String.valueOf("http://os8z6i0zb.bkt.clouddn.com/" + name));
+	        	rhp.setInsertTime(new Date());
+	        	rhp.setRentHouseId(u.getRentHouseId());
+	        	rentHousePicDao.insertRentHousePic(rhp);
+			}
+		} catch (Exception e) {
+			modelAndView.addObject("rentMessage", "委托失败。");
+		}
+		return modelAndView;
 	}
 	
 	@RequestMapping(value="changeInfo.do", method={RequestMethod.GET,RequestMethod.POST})

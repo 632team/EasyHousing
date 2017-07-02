@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyhousing.dao.RentHouse_CharacteristicsDao">
+	<insert id="insertRentHouse_Characteristics" parameterType="com.easyhousing.model.RentHouse_Characteristics">
+		INSERT INTO `RentHouse_Characteristics`(`rentHouseId`, `characteristicsId`) VALUES (#{rentHouseId}, #{characteristicsId})
+	</insert>
+	
+	<select id="selectAllByUserId" resultType="com.easyhousing.model.RentHouse_Characteristics">
+		SELECT * FROM `RentHouse_Characteristics` WHERE characteristicsId=#{0}
+	</select>
+</mapper>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.easyhousing.dao.RentHouseDao">
-	<insert id="insertRentHouse" parameterType="com.easyhousing.model.RentHouse">
-		INSERT INTO RentHouse(communityId, rentHouseAddress, rentHouseArea, rentHouseBuildTime, rentHouseFloor, rentHouseFloorAttribute, rentHouseHall, rentHouseRoom, rentHouseSubway, rentHouseToilet, rentHouseToward, rentHousePrice) VALUES(#{communityId}, #{rentHouseAddress}, #{rentHouseArea}, #{rentHouseBuildTime}, #{rentHouseFloor}, #{rentHouseFloorAttribute}, #{rentHouseHall}, #{rentHouseRoom}, #{rentHouseSubway}, #{rentHouseToilet}, #{rentHouseToward}, #{rentHousePrice})
+	<insert id="insertRentHouse" parameterType="com.easyhousing.model.RentHouse" useGeneratedKeys="true">
+		<selectKey  keyProperty="rentHouseId" resultType="Integer" order="AFTER">
+		  	select last_insert_id() AS rentHouseId
+		</selectKey>
+		INSERT INTO RentHouse(communityId, rentHouseAddress, rentHouseArea, rentHouseBuildTime, rentHouseFloor, rentHouseFloorAttribute, rentHouseHall, rentHouseRoom, rentHouseSubway, rentHouseToilet, rentHouseToward, rentHousePrice, rentHousePublishTime) VALUES(#{communityId}, #{rentHouseAddress}, #{rentHouseArea}, #{rentHouseBuildTime}, #{rentHouseFloor}, #{rentHouseFloorAttribute}, #{rentHouseHall}, #{rentHouseRoom}, #{rentHouseSubway}, #{rentHouseToilet}, #{rentHouseToward}, #{rentHousePrice}, #{rentHousePublishTime})
 	</insert>
 	
 	<delete id="deleteRentHouse" parameterType="com.easyhousing.model.RentHouse">

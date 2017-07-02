@@ -1,4 +1,5 @@
 <%@page import="com.easyhousing.model.*"%>
+<%@page import="java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -1019,23 +1020,24 @@
       <div class="main-right fr" style="width: 950px">
         <div class="allList">
           <div class="title" >出租房屋</div>
+          <font color="#FF0000">${requestScope.rentMessage}</font>
 
           <div class="tab">
             <span class="actTap actSetArgs hover ">委托出租</span>
             <span class="actTap actSetArgs ">我的委托</span>
 
           </div>
-          <form id="submitRent" style="display: inline" class="js_module">
+          <form id="submitRent" style="display: inline" class="js_module" action=${pageContext.request.contextPath}/sendRentHouse.do method="post" enctype="multipart/form-data">
           <ul class="">
             <li class="js_ajaxError ErrMsgNew" style="display: none"></li>
 
             <li style="display: block">
               <nobr>
-                <label style="text-align:right; width:150px">城市：</label>
-                <input type="text" class="form-control" style=" display: inline;width: 200px" id="rentHouseProvince" placeholder="请输入所在城市">
+                <label style="text-align:right; width:150px">区域：</label>
+                <input type="text" class="form-control" style=" display: inline;width: 200px" id="rentHouseProvince" placeholder="请输入所在区域" name="rentHouseRegion">
                 <label style="text-align:right; width:150px">小区：</label>
                 <input type="text" class="form-control" style=" display: inline;width:150px" id="communityName" placeholder="请输入小区"
-                       maxlength="14" name="nickname" rule="notNull" validatename="小区">
+                       maxlength="14" name="communityName" rule="notNull" validatename="小区">
               </nobr>
             </li>
 
@@ -1043,33 +1045,33 @@
             <li style="display:block">
               <nobr>
                 <label style="text-align:right; width:150px">租金：</label>
-                <input type="text" class="form-control" style=" display: inline; width:200px" id="rentHousePrice" placeholder="xx元/月"  rule="notNull" validatename="租金">
+                <input type="text" class="form-control" style=" display: inline; width:200px" id="rentHousePrice" placeholder="xx元/月"  rule="notNull" validatename="租金" name="rentHousePrice">
                 <label style="text-align:right; width:150px">面积：</label>
-                <input type="text" class="form-control" style=" display: inline; width:150px" id="	rentHouseArea" placeholder="请输入面积" rule="notNull" validatename="地址">
+                <input type="text" class="form-control" style=" display: inline; width:150px" id="	rentHouseArea" placeholder="请输入面积" rule="notNull" validatename="地址" name="rentHouseArea">
               </nobr>
             </li>
             <li style="display: block">
               <nobr>
                 <label style="text-align:right; width:150px">地址：</label>
-                <input type="text" class="form-control" style=" display: inline; width:200px" id="	rentHouseUnitNumber" placeholder="楼栋号-单元号-门牌号" rule="notNull" >
+                <input type="text" class="form-control" style=" display: inline; width:200px" id="	rentHouseUnitNumber" placeholder="楼栋号-单元号-门牌号" rule="notNull" name="rentHouseAddress">
                 <label style="text-align:right; width:150px">地铁：</label>
-                <input type="text" class="form-control" style=" display: inline; width:150px" id="	rentHouseSubway" placeholder="请输入地铁">
+                <input type="text" class="form-control" style=" display: inline; width:150px" id="	rentHouseSubway" placeholder="请输入地铁" name="rentHouseSubway">
               </nobr>
             </li>
             <li style="display: block">
               <nobr>
                 <label style="text-align:right; width:150px">朝向：</label>
-                <input type="text" class="form-control" style=" display: inline; width:200px" id="	rentHouseToward" placeholder="请输入朝向" rule="notNull" >
+                <input type="text" class="form-control" style=" display: inline; width:200px" id="	rentHouseToward" placeholder="请输入朝向" rule="notNull" name="rentHouseToward">
                 <label style="text-align:right; width:150px">楼层：</label>
-                <input type="text" class="form-control" style=" display: inline; width:150px" id="	rentHouseFloor" placeholder="请输入楼层">
+                <input type="text" class="form-control" style=" display: inline; width:150px" id="	rentHouseFloor" placeholder="请输入楼层" name="	rentHouseFloor">
               </nobr>
             </li>
             <li style="display: block">
               <nobr>
                 <label style="text-align:right; width:150px">房型：</label>
-                <input type="text" class="form-control" style=" display: inline; width:100px" id="	rentHouseRoom" placeholder="几室" >
-                <input type="text" class="form-control" style=" display: inline; width:100px" id="	rentHouseHall" placeholder="几厅">
-                <input type="text" class="form-control" style=" display: inline; width:100px" id="	rentHouseToilet" placeholder="几厕">
+                <input type="text" class="form-control" style=" display: inline; width:100px" id="	rentHouseRoom" placeholder="几室" name="rentHouseRoom">
+                <input type="text" class="form-control" style=" display: inline; width:100px" id="	rentHouseHall" placeholder="几厅" name="rentHouseHall">
+                <input type="text" class="form-control" style=" display: inline; width:100px" id="	rentHouseToilet" placeholder="几厕" name="rentHouseToilet">
               </nobr>
             </li>
             <li style="display: block">
@@ -1082,7 +1084,7 @@
 
             <li style="display: block">
               <label style="text-align:right; width:150px"></label>
-              <span></span><button type="button" class="actSubmit lj-btn btn btn-primary" id="nameSubmit" >提交委托</button>
+              <span></span><button type="submit" class="actSubmit lj-btn btn btn-primary" id="nameSubmit" >提交委托</button>
             </li>
           </ul>
         </form>
@@ -1149,16 +1151,24 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr role="row" class="odd">
-                    <td>2018年9月30日</td>
-                    <td>重大虎溪松园632</td>
-                    <td>1室</td>
-                    <td>500</td>
-                    <td>18983204962</td>
-                    <td class="td-manage">
-                      <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
-                    </td>
-                  </tr>
+                   <%
+                  List<Application> lra = (List<Application>)s.getAttribute("rentHouseApplication");
+                  for (int i = 0; i < lra.size(); ++i) {
+                	  Application a = lra.get(i);
+                	  %>
+                	  <tr role="row" class="odd">
+	                    <td><%=a.date %></td>
+	                    <td><%=a.address %></td>
+	                    <td><%=a.room %>室<%=a.hall %>厅<%=a.toilet %>厕</td>
+	                    <td><%=a.price %></td>
+	                    <td><%=a.phone %></td>
+	                    <td class="td-manage">
+	                      <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
+	                    </td>
+	                  </tr>
+                	  <%
+                  }
+                  %>
                   </tbody>
 
 
