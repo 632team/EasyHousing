@@ -26,12 +26,15 @@ import com.easyhousing.dao.RentHousePicDao;
 import com.easyhousing.dao.RentHouse_CharacteristicsDao;
 import com.easyhousing.model.Application;
 import com.easyhousing.model.Collect;
+import com.easyhousing.model.Deal;
 import com.easyhousing.model.Order;
 import com.easyhousing.model.Register;
 import com.easyhousing.model.RentHouse;
 import com.easyhousing.model.RentHousePic;
 import com.easyhousing.model.RentHouse_Characteristics;
 import com.easyhousing.model.User;
+import com.easyhousing.service.CommentService;
+import com.easyhousing.service.DealService;
 import com.easyhousing.service.OrderService;
 import com.easyhousing.service.UserCollectService;
 import com.easyhousing.service.UserService;
@@ -48,6 +51,12 @@ public class UserController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private CommentService commentService;
+	
+	@Autowired
+	private DealService dealService;
 	
 	@Autowired
 	private RentHouseDao rentHouseDao;
@@ -177,6 +186,11 @@ public class UserController {
 		s.setAttribute("rentHouseApplication", rentHouseApplication);
 		
 		// 我的评论
+		List<Collect> rentHouseComment = commentService.selectAllRentHouseCommentByUserId(user);
+		List<Collect> buyHouseComment = commentService.selectAllBuildingCommentByUserId(user);
+		s.setAttribute("rentHouseComment", rentHouseComment);
+		s.setAttribute("buyHouseComment", buyHouseComment);
+		
 		// 我的申请
 		List<Order> orderBuilding = orderService.selectAllBuildingByUserId(user);
 		List<Order> orderRentHouse = orderService.selectAllRentHouseByUserId(user);
@@ -184,6 +198,10 @@ public class UserController {
 		s.setAttribute("orderRentHouse", orderRentHouse);
 		
 		// 成交记录
+		List<Deal> buildingDeal = dealService.selectAllBuildingDeal(user);
+		List<Deal> rentHouseDeal = dealService.selectAllRentHouseDeal(user);
+		s.setAttribute("buildingDeal", buildingDeal);
+		s.setAttribute("rentHouseDeal", rentHouseDeal);
 		
 		return "/MyHome/userCenter";
 	}

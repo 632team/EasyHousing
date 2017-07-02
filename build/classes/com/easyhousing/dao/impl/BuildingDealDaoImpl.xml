@@ -19,4 +19,7 @@
 		select * from BuildingDeal where buildingDealId=#{buildingDealId}
 	</select>
 	
+	<select id="selectAllByUserId" resultType="com.easyhousing.model.BuildingDeal">
+		select * from BuildingDeal where userId=#{0}
+	</select>
 </mapper>

@@ -17,4 +17,7 @@
 		SELECT * FROM RentHouseComment WHERE  rentHouseCommentId=#{rentHouseCommentId}
 	</select>
 	
+	<select id="selectAllByUserId" resultType="com.easyhousing.model.RentHouseComment">
+		select * from RentHouseComment where userId=#{0}
+	</select>
 </mapper>

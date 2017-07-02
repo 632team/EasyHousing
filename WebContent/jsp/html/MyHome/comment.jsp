@@ -806,113 +806,123 @@
           </div>
           <div class="all-list selected fav-list" style="display:block;" id="building">
             <ul class="list-bot">
-              <li style="width: 750px" style="display: block">
-                <div class="list" style="display: block">
-                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
-                    <img
-                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-                      class="lj-lazy"
-                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
-                      style="display: inline;"> </a>
-                  <br><br>
-
-                    <!--以下是评论区-->
-                    <div class="Input_Box" style="text-align: left ;width:700px; padding:10px 10px 10px 10px; height: auto; display: inline-block; ">
-                      <!--<textarea class="Input_text" style="text-align: left">-->
-                        <!--梁先锋axsxasxasxasxasxasx-->
-                      <!--</textarea>-->
-                      <span class="text-muted" style="border-radius:50%; display: inline-block">
-                        这个离地铁很近，很方便！！！很小的时候我就有两个爱好：一是站在高楼， 二则是喜欢看那些带有机器人的科幻片。
-                      </span>
-                      </div>
-
-                  </div>
-                  <div class="info-panel" style="float: left">
-                    <h2><a target="_blank"
-                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> 上海villa </a>
-                      <button type="button" class="btn btn-danger" style="float: right">删除评论</button>
-                    </h2>
-
-                    <div class="col-1">
-                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank">嘉定</a>- 恒荣路589弄
-                      </div>
-                      <div class="other">
-                        <div class="con"> 3居</div>
-                      </div>
-                      <div class="chanquan">
-                        <div class="left agency"><span class="xinfangTag tag1">
-                          <span>车位充足</span>                                </span>
-                          <span class="xinfangTag tag2"><span>外环外</span></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-3"><span class="price-pre">总价：</span> <span class="price">	                            <span
-                      class="num">450</span>	                        </span> <span class="price-pre"> 万元起</span></div>
-                  </div>
-
-                </div>
-                <a class="del-fav actDelFollow" index="349" style="display: none;">删除评论</a>
-                <br>
-
-              </li>
-              <li>
-
-              </li>
+           		<%
+           		List<Collect> lb = (List<Collect>)s.getAttribute("buyHouseComment");
+           		for (Collect c: lb) {
+           			%>
+           			<li style="width: 750px" style="display: block">
+	                <div class="list" style="display: block">
+	                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+	                    <img
+	                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+	                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+	                      class="lj-lazy"
+	                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
+	                      style="display: inline;"> </a>
+	                  <br><br>
+	
+	                    <!--以下是评论区-->
+	                    <div class="Input_Box" style="text-align: left ;width:700px; padding:10px 10px 10px 10px; height: auto; display: inline-block; ">
+	                      <!--<textarea class="Input_text" style="text-align: left">-->
+	                        <!--梁先锋axsxasxasxasxasxasx-->
+	                      <!--</textarea>-->
+	                      <span class="text-muted" style="border-radius:50%; display: inline-block">
+	                      <%=c.comment %>
+	                      </span>
+	                      </div>
+	
+	                  </div>
+	                  <div class="info-panel" style="float: left">
+	                    <h2><a target="_blank"
+	                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"><%=c.name %> </a>
+	                      <button type="button" class="btn btn-danger" style="float: right">删除评论</button>
+	                    </h2>
+	
+	                    <div class="col-1">
+	                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank"><%=c.houseAddress %>></a>-<%=c.decoration %>
+	                      </div>
+	                      <div class="other">
+	                        <div class="con"> <%=c.room %>居</div>
+	                      </div>
+	                      <div class="chanquan">
+	                        <div class="left agency"><span class="xinfangTag tag1">
+	                          <span>环境优雅</span>                                </span>
+	                          <span class="xinfangTag tag2"><span>商业街</span></span>
+	                        </div>
+	                      </div>
+	                    </div>
+	                    <div class="col-3"><span class="price-pre">总价：</span> <span class="price">	                            <span
+	                      class="num"><%=c.price %></span>	                        </span> <span class="price-pre"> 万元起</span></div>
+	                  </div>
+	
+	                </div>
+	                <a class="del-fav actDelFollow" index="349" style="display: none;">删除评论</a>
+	                <br>
+	
+	              </li>
+	              <li></li>
+           			<%
+           		}
+           		%>
             </ul>
           </div>
           <div class="all-list selected fav-list" style="display:none;" id="rent">
             <ul class="list-bot">
-              <li style="width: 750px" style="display: block">
-                <div class="list" style="display: block">
-                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
-                    <img
-                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-                      class="lj-lazy"
-                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
-                      style="display: inline;"> </a>
-                    <br><br>
-
-                    <!--以下是评论区-->
-                    <div class="Input_Box" style="text-align: left ;width:700px; padding:10px 10px 10px 10px; height: auto; display: inline-block; ">
-                      <!--<textarea class="Input_text" style="text-align: left">-->
-                      <!--梁先锋axsxasxasxasxasxasx-->
-                      <!--</textarea>-->
-                      <span class="text-muted" style="border-radius:50%; display: inline-block">
-                        离公司很近，环境也不错!!!
-                      </span>
-                    </div>
-                  </div>
-
-
-                  <div class="info-panel" style="float: left">
-                    <h2><a target="_blank"
-                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> 重庆租房 </a>
-                      <button type="button" class="btn btn-danger" style="float: right">删除评论</button>
-                    </h2>
-                    <div class="col-1">
-                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank">沙坪坝</a>- 大学城
-                      </div>
-                      <div class="other">
-                        <div class="con"> 1居</div>
-                      </div>
-                      <div class="chanquan">
-                        <div class="left agency">
-                          <span class="xinfangTag tag1"><span>车位充足</span></span>
-                          <span class="xinfangTag tag2"><span>外环外</span></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-3"><span class="price-pre">租金：</span> <span class="price">	                            <span
-                      class="num">1450</span>	                        </span> <span class="price-pre"> 元/月</span></div>
-                  </div>
-                </div>
-                <a class="del-fav actDelFollow" index="349" style="display: none;">删除评论</a>
-              </li>
-              <li>
-
-              </li>
+            	<%
+            	List<Collect> lr = (List<Collect>)s.getAttribute("rentHouseComment");
+            	for (Collect c: lr) {
+            		%>
+            		 <li style="width: 750px" style="display: block">
+	                <div class="list" style="display: block">
+	                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+	                    <img
+	                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+	                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+	                      class="lj-lazy"
+	                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
+	                      style="display: inline;"> </a>
+	                    <br><br>
+	
+	                    <!--以下是评论区-->
+	                    <div class="Input_Box" style="text-align: left ;width:700px; padding:10px 10px 10px 10px; height: auto; display: inline-block; ">
+	                      <!--<textarea class="Input_text" style="text-align: left">-->
+	                      <!--梁先锋axsxasxasxasxasxasx-->
+	                      <!--</textarea>-->
+	                      <span class="text-muted" style="border-radius:50%; display: inline-block">
+	                      <%=c.comment %>
+	                      </span>
+	                    </div>
+	                  </div>
+	
+	
+	                  <div class="info-panel" style="float: left">
+	                    <h2><a target="_blank"
+	                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"><%=c.name %> </a>
+	                      <button type="button" class="btn btn-danger" style="float: right">删除评论</button>
+	                    </h2>
+	                    <div class="col-1">
+	                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank"><%=c.province %></a>-<%=c.region %>
+	                      </div>
+	                      <div class="other">
+	                        <div class="con"> <%=c.room %>居</div>
+	                      </div>
+	                      <div class="chanquan">
+	                        <div class="left agency">
+	                        <span>环境优雅</span>                                </span>
+	                          <span class="xinfangTag tag2"><span>商业街</span></span>
+	                        </div>
+	                      </div>
+	                    </div>
+	                    <div class="col-3"><span class="price-pre">租金：</span> <span class="price">	                            <span
+	                      class="num"><%=c.price %></span>	                        </span> <span class="price-pre"> 元/月</span></div>
+	                  </div>
+	                </div>
+	                <a class="del-fav actDelFollow" index="349" style="display: none;">删除评论</a>
+	              </li>
+	              <li></li>
+            		<%
+            	}
+            	%>
             </ul>
           </div>
           <div class="page">

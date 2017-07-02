@@ -22,4 +22,7 @@
 		select * from BuyHouseComment where buyHouseCommentId=#{buyHouseCommentId}
 	</select>
 	
+	<select id="selectAllByUserId" resultType="com.easyhousing.model.BuyHouseComment">
+		select * from BuyHouseComment where userId=#{0}
+	</select>
 </mapper>

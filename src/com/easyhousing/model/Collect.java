@@ -10,4 +10,6 @@ public class Collect {
 	public String picUrl;
 	public int price;
 	public int room;
+	public int commentId;
+	public String comment;
 }

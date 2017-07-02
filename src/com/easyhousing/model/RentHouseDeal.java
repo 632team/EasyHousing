@@ -9,6 +9,7 @@ public class RentHouseDeal {
 	private Date rentTime;
 	private int rentId;
 	private double rentPrice;
+	private int rentHouseDay;
 	public int getAgentId() {
 		return agentId;
 	}
@@ -44,5 +45,11 @@ public class RentHouseDeal {
 	}
 	public void setRentPrice(double rentPrice) {
 		this.rentPrice = rentPrice;
+	}
+	public int getRentHouseDay() {
+		return rentHouseDay;
+	}
+	public void setRentHouseDay(int rentHouseDay) {
+		this.rentHouseDay = rentHouseDay;
 	}
 }

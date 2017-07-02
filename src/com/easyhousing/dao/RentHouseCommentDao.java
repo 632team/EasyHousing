@@ -1,5 +1,7 @@
 package com.easyhousing.dao;
 
+import java.util.List;
+
 import com.easyhousing.model.RentHouseComment;
 
 public interface RentHouseCommentDao {
@@ -7,4 +9,5 @@ public interface RentHouseCommentDao {
 	public int deleteRentHouseComment(RentHouseComment u);
 	public int updateRentHouseComment(RentHouseComment u);
 	public RentHouseComment selectRentHouseComment(RentHouseComment u);
+	public List<RentHouseComment> selectAllByUserId(int id);
 }

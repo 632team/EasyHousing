@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.easyhousing.dao.RentHouseDealDao">
 	<insert id="insertRentHouseDeal" parameterType="com.easyhousing.model.RentHouseDeal">
-		INSERT INTO RentHouseDeal(agentId, rentHouseId, userId, rentTime, rentPrice) VALUES(#{agentId}, #{rentHouseId}, #{userId}, #{rentTime}, #{rentPrice})
+		INSERT INTO RentHouseDeal(agentId, rentHouseId, userId, rentTime, rentPrice, rentHouseDay) VALUES(#{agentId}, #{rentHouseId}, #{userId}, #{rentTime}, #{rentPrice}, #{rentHouseDay})
 	</insert>
 	
 	<delete id="deleteRentHouseDeal" parameterType="com.easyhousing.model.RentHouseDeal">
@@ -10,11 +10,15 @@
 	</delete>
 	
 	<update id="updateRentHouseDeal" parameterType="com.easyhousing.model.RentHouseDeal">
-		UPDATE `RentHouseDeal` SET `agentId`=#{agentId},`rentHouseId`=#{rentHouseId},`userId`=#{userId},`rentTime`=#{rentTime},`rentPrice`=#{rentPrice} WHERE rentId=#{rentId}
+		UPDATE `RentHouseDeal` SET `agentId`=#{agentId},`rentHouseId`=#{rentHouseId},`userId`=#{userId},`rentTime`=#{rentTime},`rentPrice`=#{rentPrice}, 'rentHouseDay'=#{rentHouseDay} WHERE rentId=#{rentId}
 	</update>
 	
 	<select id="selectRentHouseDeal" parameterType="com.easyhousing.model.RentHouseDeal" resultType="com.easyhousing.model.RentHouseDeal">
 		SELECT * FROM RentHouseDeal WHERE  rentId=#{rentId}
+	</select>
+	
+	<select id="selectAllByUserId" resultType="com.easyhousing.model.RentHouseDeal">
+		SELECT * FROM RentHouseDeal WHERE  userId=#{0}
 	</select>
 	
 </mapper>

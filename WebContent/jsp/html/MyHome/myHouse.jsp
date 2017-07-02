@@ -11,48 +11,59 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/codemirror.css">
+  <!--<link rel="stylesheet" href="css/ace.min.css">-->
+  <link rel="stylesheet" href="css/font-awesome.min.cs">
 
-  <!--<link rel="stylesheet" href="../../css/SystemUser/bootstrap.min.css">-->
-  <link rel="stylesheet" href="../../css/SystemUser/style.css">
-  <link rel="stylesheet" href="../../css/SystemUser/codemirror.css">
-  <!--<link rel="stylesheet" href="../../css/ace.min.css">-->
-  <link rel="stylesheet" href="../../css/SystemUser/font-awesome.min.cs">
-
-  <link rel="stylesheet" href="../../css/SystemUser/ace-rtl.min.css">
-  <link rel="stylesheet" href="../../css/SystemUser/ace-skins.min.css">
-  <link rel="stylesheet" href="../../css/login.css">
-  <link rel="stylesheet" href="../../css/SystemUser/layer.css">
-
+  <link rel="stylesheet" href="css/ace-rtl.min.css">
+  <link rel="stylesheet" href="css/ace-skins.min.css">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/layer.css">
 
 
-  <script src="../../js/SystemUser/jquery.min.js"></script>
-  <script src="../../js/SystemUser/bootstrap.min.js"></script>
-  <script src="../../js/SystemUser/typeahead-bs2.min.js"></script>
-  <script src="../../js/SystemUser/jquery.dataTables.min.js"></script>
-  <script src="../../js/SystemUser/jquery.dataTables.bootstrap.js"></script>
-  <script src="../../js/SystemUser/H-ui.js"></script>
-  <script src="../../js/SystemUser/H-ui.admin.js"></script>
-  <script src="../../js/SystemUser/layer.js"></script>
-  <link rel="stylesheet" href="../../css/SystemUser/layer.css">
-  <script src="../../js/SystemUser/layate.js"></script>
-  <link rel="stylesheet" href="../../css/SystemUser/laydate.css">
-  <link rel="stylesheet" href="../../css/SystemUser/laydate(1).css">
-  <!--<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">-->
 
-  <!--<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>-->
-  <!--<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
-  <link href="./cropper/cropper.min.css" rel="stylesheet">
+  <script src="js/typeahead-bs2.min.js"></script>
+  <script src="js/H-ui.js"></script>
+  <script src="js/H-ui.admin.js"></script>
+  <script src="js/layer.js"></script>
+  <link rel="stylesheet" href="css/layer.css">
+  <script src="js/layate.js"></script>
+  <link rel="stylesheet" href="css/laydate.css">
+  <link rel="stylesheet" href="css/laydate(1).css">
+
+
+  <link rel="stylesheet" href="css/font-awesome.min.css">
   <link href="./sitelogo/sitelogo.css" rel="stylesheet">
-
-  <script src="./cropper/cropper.min.js"></script>
-  <script src="./sitelogo/sitelogo.js"></script>
   <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-  <script type="text/javascript" src="js/cropbox.js"></script>
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.dataTables.min.js"></script>
+  <script src="js/jquery.dataTables.bootstrap.js"></script>
   <style>
+    .form-control {
+      display: block;
+      width: 100%;
+      height: 34px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+      -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
     th,td,.table-bordered
     {
       border-radius: 0!important;
@@ -376,7 +387,7 @@
     }
 
     .list_tit .hovs {
-      background: url(../images/rentWindow/djimg80.png) no-repeat right center;
+      background: url(images/rentWindow/djimg80.png) no-repeat right center;
     }
 
     .list_tit .hovs, .list_tit .hovx {
@@ -394,7 +405,7 @@
     }
 
     .list_tit .hovx {
-      background: url(../images/rentWindow/djimg81.png) no-repeat right center;
+      background: url(images/rentWindow/djimg81.png) no-repeat right center;
     }
 
     .list_tit .hovs, .list_tit .hovx {
@@ -514,7 +525,7 @@
     .mor_list li .mor_txt .dor {
       height: 24px;
       padding-left: 15px;
-      background: url(../images/rentWindow/djimg25.png) no-repeat left center;
+      background: url(images/rentWindow/djimg25.png) no-repeat left center;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -955,6 +966,21 @@
     }
   </style>
 </head>
+
+ <style>
+		   .dataTable th.sorting_desc:after {
+		     content: "\f0dd";
+		     top: 5px;
+		     color: #307ecc;
+		   }
+		 </style>
+		 <script>
+		   $(document).ready(function() {
+		     $('#sample-table').DataTable();
+		   } );
+		   $.fn.dataTable.ext.errMode = function(s,h,m){}
+		 </script>
+
 <body>
 <div class="container">
   <div class="row clearfix">
@@ -1106,23 +1132,7 @@
 
             <div class="table_menu_list">
               <div id="sample-table_wrapper" class="dataTables_wrapper no-footer">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="dataTables_length" id="sample-table_length"><label>每页显示条数: <select
-                      name="sample-table_length" aria-controls="sample-table" class="">
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                    </select></label></div>
-                  </div>
-                  <div class="col-sm-6" style="display: none">
-                    <div id="sample-table_filter" class="dataTables_filter"><label>搜索:<input type="search" class=""
-                                                                                             placeholder=""
-                                                                                             aria-controls="sample-table"></label>
-                    </div>
-                  </div>
-                </div>
+
                 <table class="table table-striped table-bordered table-hover dataTable no-footer" id="sample-table"
                        role="grid" aria-describedby="sample-table_info">
                   <thead>
