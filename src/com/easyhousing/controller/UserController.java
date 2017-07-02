@@ -21,8 +21,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.easyhousing.model.Collect;
+import com.easyhousing.model.Order;
 import com.easyhousing.model.Register;
 import com.easyhousing.model.User;
+import com.easyhousing.service.OrderService;
 import com.easyhousing.service.UserCollectService;
 import com.easyhousing.service.UserService;
 import com.easyhousing.util.Tool;
@@ -35,6 +37,9 @@ public class UserController {
 	
 	@Autowired
 	private UserCollectService userCollectService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@RequestMapping(value="login.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView login(User u, HttpSession httpSession) {
@@ -139,6 +144,11 @@ public class UserController {
 		// 我的房子
 		// 我的评论
 		// 我的申请
+		List<Order> orderBuilding = orderService.selectAllBuildingByUserId(user);
+		List<Order> orderRentHouse = orderService.selectAllRentHouseByUserId(user);
+		s.setAttribute("orderBuilding", orderBuilding);
+		s.setAttribute("orderRentHouse", orderRentHouse);
+		
 		// 成交记录
 		
 		return "/MyHome/userCenter";

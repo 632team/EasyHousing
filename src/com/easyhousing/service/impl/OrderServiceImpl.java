@@ -36,6 +36,7 @@ public class OrderServiceImpl implements OrderService {
 			temp.phoneNumber = i.getUserPhoneNumber();
 			temp.status = i.getOrderStatus();
 			temp.userName = u.getUsername();
+			temp.id = i.getOrderId();
 			
 			Agent a = new Agent();
 			a.setAgentId(i.getAgentId());
@@ -43,7 +44,9 @@ public class OrderServiceImpl implements OrderService {
 			
 			BuildingInfo b = new BuildingInfo();
 			b.setBuildingId(i.getBuildingId());
-			temp.address = buildingInfoDao.selectBuildingInfo(b).getBuildingAddress();
+			b = buildingInfoDao.selectBuildingInfo(b);
+			temp.address = b.getBuildingAddress();
+			temp.name = b.getBuildingName();
 			
 			res.add(temp);
 		}
@@ -62,6 +65,7 @@ public class OrderServiceImpl implements OrderService {
 			temp.phoneNumber = i.getUserPhoneNumber();
 			temp.status = i.getOrderStatus();
 			temp.userName = u.getUsername();
+			temp.id = i.getRentHouseId();
 			
 			Agent a = new Agent();
 			a.setAgentId(i.getAgentId());

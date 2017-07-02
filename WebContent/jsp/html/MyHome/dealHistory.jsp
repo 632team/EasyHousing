@@ -11,9 +11,201 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!--<link rel="stylesheet" href="../../css/SystemUser/bootstrap.min.css">-->
+  <link rel="stylesheet" href="../../css/SystemUser/style.css">
+  <link rel="stylesheet" href="../../css/SystemUser/codemirror.css">
+  <!--<link rel="stylesheet" href="../../css/ace.min.css">-->
+  <link rel="stylesheet" href="../../css/SystemUser/font-awesome.min.cs">
+
+  <link rel="stylesheet" href="../../css/SystemUser/ace-rtl.min.css">
+  <link rel="stylesheet" href="../../css/SystemUser/ace-skins.min.css">
+  <link rel="stylesheet" href="../../css/login.css">
+  <link rel="stylesheet" href="../../css/SystemUser/layer.css">
+
+
+
+  <script src="../../js/SystemUser/jquery.min.js"></script>
+  <script src="../../js/SystemUser/bootstrap.min.js"></script>
+  <script src="../../js/SystemUser/typeahead-bs2.min.js"></script>
+  <script src="../../js/SystemUser/jquery.dataTables.min.js"></script>
+  <script src="../../js/SystemUser/jquery.dataTables.bootstrap.js"></script>
+  <script src="../../js/SystemUser/H-ui.js"></script>
+  <script src="../../js/SystemUser/H-ui.admin.js"></script>
+  <script src="../../js/SystemUser/layer.js"></script>
+  <link rel="stylesheet" href="../../css/SystemUser/layer.css">
+  <script src="../../js/SystemUser/layate.js"></script>
+  <link rel="stylesheet" href="../../css/SystemUser/laydate.css">
+  <link rel="stylesheet" href="../../css/SystemUser/laydate(1).css">
+  <!--<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+  <!--<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>-->
+  <!--<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+  <link href="./cropper/cropper.min.css" rel="stylesheet">
+  <link href="./sitelogo/sitelogo.css" rel="stylesheet">
+
+  <script src="./cropper/cropper.min.js"></script>
+  <script src="./sitelogo/sitelogo.js"></script>
+  <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="js/cropbox.js"></script>
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
+    th,td,.table-bordered
+    {
+      border-radius: 0!important;
+    }
+
+    .table thead tr
+    {
+      color: #707070;
+      font-weight: normal;
+      background: #f2f2f2;
+      /* background-image: -webkit-gradient(linear,left 0,left 100%,from(#f8f8f8),to(#ececec));
+       background-image: -webkit-linear-gradient(top,#f8f8f8,0%,#ececec,100%);
+       background-image: -moz-linear-gradient(top,#f8f8f8 0,#ececec 100%);
+       background-image: linear-gradient(to bottom,#f8f8f8 0,#ececec 100%);*/
+      background-repeat: repeat-x;
+      /*  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff8f8f8',endColorstr='#ffececec',GradientType=0);
+      */}
+
+    .table thead tr th
+    {
+      border-color: #DDD;
+      font-weight: bold;
+    }
+
+    .table thead tr th [class*="icon-"]:first-child
+    {
+      margin-right: 2px;
+    }
+
+    .table thead tr th:first-child
+    {
+      border-left-color: #f1f1f1;
+    }
+
+    .table thead tr th:left-child
+    {
+      border-right-color: #f1f1f1;
+    }
+
+    .table.table-bordered thead tr th
+    {
+      vertical-align: middle;
+      text-align:center;
+    }
+
+    .table.table-bordered thead tr th:first-child
+    {
+      border-left-color: #DDD;
+    }
+
+    th.center,td.center
+    {
+      text-align: center;
+    }
+
+    th .lbl,td .lbl
+    {
+      margin-bottom: 0;
+    }
+
+    th .lbl:only-child,td .lbl:only-child
+    {
+      vertical-align: top;
+    }
+
+    .table.table-bordered thead tr th {
+      vertical-align: middle;
+      text-align: center;
+    }
+    .table thead tr th {
+      border-color: #DDD;
+      font-weight: bold;
+    }
+    .dataTables_wrapper .row:first-child+.dataTable {
+      border-top: 1px solid #DDD;
+      border-bottom: 1px solid #DDD;
+    }
+    .table-bordered {
+      border: 1px solid #ddd;
+    }
+    .table {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+    .dataTable {
+      margin-bottom: 0;
+      text-align: center;
+    }
+
+    th, td, .table-bordered {
+      border-radius: 0!important;
+    }
+    .dataTables_wrapper label {
+      display: inline-block;
+      font-size: 13px;
+    }
+    .dataTables_length label {
+      font-weight: normal;
+    }
+    label {
+      display: inline-block;
+      max-width: 100%;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+    label, .lbl {
+      vertical-align: middle;
+    }
+    label {
+      font-weight: normal;
+      font-size: 14px;
+    }
+    .dataTables_wrapper input[type=text], .dataTables_wrapper select {
+      margin-bottom: 0!important;
+      margin: 0 4px;
+    }
+    .dataTables_wrapper .row:first-child {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+    .table.table-bordered tbody tr td {
+      word-wrap: break-word;
+      word-break: break-all;
+      vertical-align: middle;
+      font-family: "æ–°å®‹ä½“";
+      text-align: center;
+    }
+    .dataTables_wrapper .row {
+      margin: 0;
+    }
+    .table.table-bordered thead tr th:first-child {
+      border-left-color: #DDD;
+    }
+    .dataTables_length select {
+      width: 70px;
+      height: 25px;
+      padding: 2px 3px;
+    }
+    textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+      border-radius: 0!important;
+      color: #858585;
+      background-color: #fff;
+      border: 1px solid #d5d5d5;
+      padding: 5px 4px;
+      margin-left: 10px;
+      line-height: 1.2;
+      font-size: 14px;
+      font-family: inherit;
+      -webkit-box-shadow: none!important;
+      box-shadow: none!important;
+      -webkit-transition-duration: .1s;
+      transition-duration: .1s;
+    }
     .name {
       width: 100px;
       height: 100px;
@@ -122,8 +314,647 @@
       color: #333;
       cursor: default;
     }
+
+    .list_tit {
+      width: 100%;
+      height: 35px;
+      line-height: 35px;
+      font-size: 14px;
+      margin-top: 10px;
+      border-bottom: 1px solid #ccc;
+      overflow: hidden;
+    }
+
+    .list_tit .cenl {
+      width: 500px;
+      height: 35px;
+      overflow: hidden;
+    }
+
+    .fl {
+      float: left;
+    }
+
+    .list_tit .cenl strong {
+      color: #c00000;
+      font-weight: bold;
+    }
+
+    i, em {
+      font-style: normal;
+    }
+
+    .list_tit .cenr {
+      width: 600px;
+      height: 35px;
+      text-align: right;
+      overflow: hidden;
+    }
+
+    .fr {
+      float: right;
+    }
+
+    .list_tit a.first {
+      margin: 0;
+    }
+
+    .list_tit .active {
+      font-weight: bold;
+      color: #c00000;
+    }
+
+    .list_tit a {
+      margin-left: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    .list_tit .hovs {
+      background: url(../images/rentWindow/djimg80.png) no-repeat right center;
+    }
+
+    .list_tit .hovs, .list_tit .hovx {
+      padding-right: 10px;
+    }
+
+    .list_tit a {
+      margin-left: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    .list_tit .hovx {
+      background: url(../images/rentWindow/djimg81.png) no-repeat right center;
+    }
+
+    .list_tit .hovs, .list_tit .hovx {
+      padding-right: 10px;
+    }
+
+    .list_tit a {
+      margin-left: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    ol, ul, li {
+      list-style: none;
+    }
+
+    ul, menu, dir {
+      display: block;
+      list-style-type: disc;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+    }
+
+    .mor_list li {
+      height: 190px;
+      padding: 20px 10px 20px 195px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .data_link {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 200;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    .mor_list li .mor_img {
+      width: 185px;
+      height: 150px;
+      overflow: hidden;
+      background: #ccc;
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      z-index: 1;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    .mor_list li .mor_img img {
+      width: 100%;
+      height: 100%;
+    }
+
+    fieldset, img {
+      border: 0;
+    }
+
+    .mor_list li .mor_txt {
+      width: 100%;
+      height: 150px;
+      margin-left: 10px;
+      position: relative;
+    }
+
+    .mor_list li .mor_txt h3 {
+      height: 23px;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 20px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .mor_list li .mor_txt .dot {
+      width: 100%;
+      height: 48px;
+    }
+
+    .mor_list li .mor_txt p {
+      width: 100%;
+      height: 24px;
+      margin-top: 10px;
+      line-height: 24px;
+      font-size: 14px;
+      color: #666;
+      overflow: hidden;
+    }
+
+    .mor_list li .mor_txt .dor {
+      height: 24px;
+      padding-left: 15px;
+      background: url(../images/rentWindow/djimg25.png) no-repeat left center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    p {
+      display: block;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+    }
+
+    .mor_list li .mor_txt a {
+      height: 22px;
+      line-height: 22px;
+      display: block;
+      float: left;
+      margin-right: 5px;
+      border: 1px solid;
+      padding: 0 5px;
+      cursor: default;
+    }
+
+    .bq_cor_1, .bq_cor_11, .bq_cor_21, .bq_cor_31, .bq_cor_41, .bq_cor_51, .bq_cor_61, .bq_cor_71, .bq_cor_81, .bq_cor_91, .bq_cor_101, .bq_cor_111, .bq_cor_121, .bq_cor_131, .bq_cor_141, .bq_cor_151, .bq_cor_161, .bq_cor_171, .bq_cor_181, .bq_cor_191 {
+      color: #ff943e;
+      border-color: #ff943e;
+    }
+
+    .bq_cor_2, .bq_cor_12, .bq_cor_22, .bq_cor_32, .bq_cor_42, .bq_cor_52, .bq_cor_62, .bq_cor_72, .bq_cor_82, .bq_cor_92, .bq_cor_102, .bq_cor_112, .bq_cor_122, .bq_cor_132, .bq_cor_142, .bq_cor_152, .bq_cor_162, .bq_cor_172, .bq_cor_182, .bq_cor_192 {
+      color: #9a89b9;
+      border-color: #9a89b9;
+    }
+
+    .bq_cor_3, .bq_cor_13, .bq_cor_23, .bq_cor_33, .bq_cor_43, .bq_cor_53, .bq_cor_63, .bq_cor_73, .bq_cor_83, .bq_cor_93, .bq_cor_103, .bq_cor_113, .bq_cor_123, .bq_cor_133, .bq_cor_143, .bq_cor_153, .bq_cor_163, .bq_cor_173, .bq_cor_183, .bq_cor_193 {
+      color: #47a8d9;
+      border-color: #47a8d9;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    .mor_list li .mor_tip:last-child {
+      right: 0;
+    }
+
+    .mor_list li .mor_w {
+      width: 240px;
+    }
+
+    .mor_list li .mor_tip {
+      width: 140px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 18px;
+      overflow: hidden;
+      position: absolute;
+      top: 65px;
+      right: 170px;
+      z-index: 1;
+    }
+
+    .mor_list li .mor_tip p {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    .mor_list li .mor_tip strong {
+      color: #c00000;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    .mor_list li .mor_tip:last-child {
+      right: 0;
+    }
+
+    .mor_list li .mor_w {
+      width: 240px;
+    }
+
+    .mor_list li .mor_tip {
+      width: 140px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 18px;
+      overflow: hidden;
+      position: absolute;
+      top: 65px;
+      right: 170px;
+      z-index: 1;
+    }
+    .colorFillLabel {display:inline-block; float:left; height:25px; line-height:25px; padding:0 5px; color:#fff; text-align:center; font-size:12px; margin-right:5px}
+    .colorFillLabel.yangtai {background:#00ae66}
+    .colorFillLabel.weishengjian {background:#F1B541}
+    .xinfangTag {
+      height:22px;
+      line-height:22px;
+      text-align:center;
+      border:1px solid #fff;
+      padding: 0 8px;
+      font-size: 12px;
+      margin-right: 8px;
+      line-height: 22px;
+      display: inline-block;
+    }
+    .xinfangTag.tag1 {
+      border-color:#e2d197;
+      color:#e2d197
+    }
+    .xinfangTag.tag2 {
+      border-color:#C5A9DD;
+      color:#C5A9DD
+    }
+    .xinfangTag.tag3 {
+      border-color:#E0A0A0;
+      color:#E0A0A0
+    }
+    .xinfangTag.tag4 {
+      border-color:#85c6dc;
+      color:#85c6dc
+    }
+    .user-main .main-right li .info-panel .col-3 {
+      width: 200px;
+      text-align: right;
+      float: left;
+      position: absolute;
+      top: 30px;
+      right: 80px;
+    }
+    .user-main .main-right li .info-panel .col-3 .price {
+      color: #e4393c;
+      margin-top: 6px;
+      width: 100%;
+      position: relative;
+      font-size: 16px;
+    }
+    .user-main .main-right li .info-panel .col-3 .price_xiajia,
+    .user-main .main-right li .info-panel .col-3 .price_shixiao,
+    .user-main .main-right li .info-panel .col-3 .price_chengjiao {
+      color: #808080;
+      margin-top: 6px;
+      width: 100%;
+      position: relative;
+      font-size: 16px;
+    }
+    .user-main .main-right li .info-panel .col-3 .price .num,
+    .user-main .main-right li .info-panel .col-3 .price_shixiao .num,
+    .user-main .main-right li .info-panel .col-3 .price_xiajia .num,
+    .user-main .main-right li .info-panel .col-3 .price_chengjiao .num {
+      font-size: 30px;
+      font-weight: 700;
+      margin-right: 3px;
+      font-family: tahoma;
+    }
+    .user-main .main-right li .info-panel .col-3 .price-pre {
+      font-size: 12px;
+      color: #999;
+      font-family: Arial;
+      margin-top: 5px;
+    }
+    .user-main .main-right li .pic-panel img.lj-lazy {
+      width: 173px;
+      height: 130px;
+    }
+    .user-main .main-right li .info-panel h2 {
+      font-size: 19px;
+      white-space: nowrap;
+      width: 100%;
+      height: 32px;
+      line-height: 20px;
+      vertical-align: middle;
+      font-family: "Hiragino Sans GB","微软雅黑","Microsoft YaHei",SimHei,Tahoma,"宋体b8b\4f53",SimSun,sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+      font-size: 100%;
+      font-weight: normal;
+    }
+    user agent stylesheet
+    h2 {
+      display: block;
+      font-size: 1.5em;
+      -webkit-margin-before: 0.83em;
+      -webkit-margin-after: 0.83em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      font-weight: bold;
+    }
+    .user-main .main-right li .info-panel h2 a, .user-main .main-right li .info-panel h2 span {
+      font-family: "Hiragino Sans GB","微软雅黑","Microsoft YaHei",SimHei,Tahoma,"宋体b8b\4f53",SimSun,sans-serif;
+      color: #009de8;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .user-main .main-right .all-list .list-bot li {
+      border-bottom: 1px dashed #e9e9e9;
+      height: 170px;
+      position: relative;
+    }
+    .user-main .main-right li {
+      clear: both;
+      padding-top: 30px;
+    }
+    dl, dt, dd, ul, ol, li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    li {
+      display: list-item;
+      text-align: -webkit-match-parent;
+    }
+    .user-main .main-right li .other .con {
+      width: 410px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      color: #888;
+    }
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    div {
+      display: block;
+    }
+    .main-right li .info-panel {
+      color: #565a5c;
+      padding-left: 14px;
+      width: 505px;
+      position: relative;
+      float: right;
+      height: 130px;
+    }
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    div {
+      display: block;
+    }
+    .main-right li .pic-panel {
+      width: 175px;
+      float: left;
+      position: relative;
+    }
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    div {
+      display: block;
+    }
+    .colorFillLabel {display:inline-block; float:left; height:25px; line-height:25px; padding:0 5px; color:#fff; text-align:center; font-size:12px; margin-right:5px}
+    .colorFillLabel.yangtai {background:#00ae66}
+    .colorFillLabel.weishengjian {background:#F1B541}
+    .xinfangTag {
+      height:22px;
+      line-height:22px;
+      text-align:center;
+      border:1px solid #fff;
+      padding: 0 8px;
+      font-size: 12px;
+      margin-right: 8px;
+      line-height: 22px;
+      display: inline-block;
+    }
+    .xinfangTag.tag1 {
+      border-color:#e2d197;
+      color:#e2d197
+    }
+    .xinfangTag.tag2 {
+      border-color:#C5A9DD;
+      color:#C5A9DD
+    }
+    .xinfangTag.tag3 {
+      border-color:#E0A0A0;
+      color:#E0A0A0
+    }
+    .xinfangTag.tag4 {
+      border-color:#85c6dc;
+      color:#85c6dc
+    }
+    .user-main .main-right li .info-panel .col-3 {
+      width: 200px;
+      text-align: right;
+      float: left;
+      position: absolute;
+      top: 30px;
+      right: 80px;
+    }
+    .user-main .main-right li .info-panel .col-3 .price {
+      color: #e4393c;
+      margin-top: 6px;
+      width: 100%;
+      position: relative;
+      font-size: 16px;
+    }
+    .user-main .main-right li .info-panel .col-3 .price_xiajia,
+    .user-main .main-right li .info-panel .col-3 .price_shixiao,
+    .user-main .main-right li .info-panel .col-3 .price_chengjiao {
+      color: #808080;
+      margin-top: 6px;
+      width: 100%;
+      position: relative;
+      font-size: 16px;
+    }
+    .user-main .main-right li .info-panel .col-3 .price .num,
+    .user-main .main-right li .info-panel .col-3 .price_shixiao .num,
+    .user-main .main-right li .info-panel .col-3 .price_xiajia .num,
+    .user-main .main-right li .info-panel .col-3 .price_chengjiao .num {
+      font-size: 30px;
+      font-weight: 700;
+      margin-right: 3px;
+      font-family: tahoma;
+    }
+    .user-main .main-right li .info-panel .col-3 .price-pre {
+      font-size: 12px;
+      color: #999;
+      font-family: Arial;
+      margin-top: 5px;
+    }
+    .user-main .main-right li .pic-panel img.lj-lazy {
+      width: 173px;
+      height: 130px;
+    }
+    .user-main .main-right li .info-panel h2 {
+      font-size: 19px;
+      white-space: nowrap;
+      width: 100%;
+      height: 32px;
+      line-height: 20px;
+      vertical-align: middle;
+      font-family: "Hiragino Sans GB","微软雅黑","Microsoft YaHei",SimHei,Tahoma,"宋体b8b\4f53",SimSun,sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+      font-size: 100%;
+      font-weight: normal;
+    }
+    user agent stylesheet
+    h2 {
+      display: block;
+      font-size: 1.5em;
+      -webkit-margin-before: 0.83em;
+      -webkit-margin-after: 0.83em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      font-weight: bold;
+    }
+    .user-main .main-right li .info-panel h2 a, .user-main .main-right li .info-panel h2 span {
+      font-family: "Hiragino Sans GB","微软雅黑","Microsoft YaHei",SimHei,Tahoma,"宋体b8b\4f53",SimSun,sans-serif;
+      color: #009de8;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .user-main .main-right .all-list .list-bot li {
+      border-bottom: 1px dashed #e9e9e9;
+      height: 170px;
+      position: relative;
+    }
+    .user-main .main-right li {
+      clear: both;
+      padding-top: 30px;
+    }
+    dl, dt, dd, ul, ol, li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    li {
+      display: list-item;
+      text-align: -webkit-match-parent;
+    }
+    .user-main .main-right li .other .con {
+      width: 410px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      color: #888;
+    }
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    div {
+      display: block;
+    }
+    .main-right li .info-panel {
+      color: #565a5c;
+      padding-left: 14px;
+      width: 505px;
+      position: relative;
+      float: right;
+      height: 130px;
+    }
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    div {
+      display: block;
+    }
+    .main-right li .pic-panel {
+      width: 175px;
+      float: left;
+      position: relative;
+    }
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+    user agent stylesheet
+    div {
+      display: block;
+    }
+    .navbar  .navbar-brand {
+      float: left;
+      height: 50px;
+      padding: 15px 15px;
+      font-size: 18px;
+      line-height: 20px;
+      margin-bottom: 0px;
+    }
   </style>
 </head>
+
 <body>
 <div class="container">
   <div class="row clearfix">
@@ -173,7 +1004,7 @@
   </div>
   <br><br><br>
   <div class="container">
-    <div class="user-main">
+    <div class="user-main" style="width: 1200px">
       <div class="main-left fl">
         <ul class="nav nav-pills nav-stacked">
           <li role="presentation"><img class="img-responsive name img-rounded"></li>
@@ -186,16 +1017,204 @@
           <li role="presentation" class="active"><a href=${pageContext.request.contextPath}/jsp/html/MyHome/dealHistory.jsp>成交记录</a></li>
         </ul>
       </div>
-      <div class="main-right fr">
+<div class="main-right fr" style="width: 1000px">
         <div class="allList">
-          <div class="title">您的交易历史</div>
+          <div class="title">您的成交记录</div>
 
           <div class="tab">
-            <span class="actTap actSetArgs hover">全部</span>
-            <span class="actTap actSetArgs ">买房</span>
+            <span class="actTap actSetArgs hover">新房</span>
             <span class="actTap actSetArgs ">租房</span>
 
           </div>
+          <div class="d_Confirm_Order_style" id="building">
+            <div class="search_style" style="display: block">
+              <div class="title_names">搜索查询</div>
+              <ul class="search_content clearfix" style="display: inline-block">
+                <nobr>
+                  <li>
+                    <label class="l_f">楼盘ID</label>
+                    <input name="" type="text" class="text_add " placeholder="输入楼盘ID" style=" width:200px">
+                    <button type="button" class="btn_search"><i class="icon-search"></i>查询</button>
+                  </li>
+
+                </nobr>
+              </ul>
+            </div>
+
+
+
+            <div class="table_menu_list">
+              <div id="sample-table_wrapper1" class="dataTables_wrapper no-footer">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="dataTables_length" id="sample-table_length1"><label>每页显示条数: <select
+                      name="sample-table_length" aria-controls="sample-table" class="">
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select></label></div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div id="sample-table_filter1" class="dataTables_filter"><label>搜索:<input type="search" class=""
+                                                                                              placeholder=""
+                                                                                              aria-controls="sample-table"></label>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover dataTable no-footer" id="sample-table1"
+                       role="grid" aria-describedby="sample-table_info">
+                  <thead>
+                  <tr role="row">
+
+                    <th tabindex="0" aria-controls="sample-table" rowspan="1"
+                        colspan="1" aria-sort="descending" aria-label="交易时间" style="width: 200px;">交易时间
+                    </th>
+                    <th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                         aria-label="楼盘" style="width: 200px;">楼盘
+                    </th>
+
+
+                    <th tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                        aria-label="户型" style="width: 150px;">户型
+                    </th>
+                    <th tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                        aria-label="房价" style="width: 150px;">房价(元/平米)
+                    </th>
+                    <th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                         aria-label="成交价" style="width: 150px;">成交价(元)
+                    </th>
+
+                    <th tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                        aria-label="经纪人" style="width: 150px;">经纪人
+                    </th>
+
+                    <th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                         aria-label="经纪人联系方式" style="width: 250px;">经纪人联系方式
+                    </th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr role="row" class="odd">
+                    <td>2018年9月30日</td>
+                    <td >国贸天悦佘山</td>
+                    <td>4室</td>
+
+
+                    <td>45000 </td>
+                    <td >3500000 </td>
+
+                    <td>张秋红 </td>
+                    <td>4007675016</td>
+
+                  </tr>
+                  </tbody>
+
+
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="d_Confirm_Order_style" id="rent" style="display: none;">
+            <div class="search_style" style="display: block">
+              <div class="title_names">搜索查询</div>
+              <ul class="search_content clearfix" style="display: inline-block">
+                <nobr>
+                  <li>
+                    <label class="l_f">租房ID</label>
+                    <input name="" type="text" class="text_add " placeholder="输入租房ID" style=" width:200px">
+                    <button type="button" class="btn_search"><i class="icon-search"></i>查询</button>
+                  </li>
+
+                </nobr>
+              </ul>
+            </div>
+
+
+
+            <div class="table_menu_list">
+              <div id="sample-table_wrapper2" class="dataTables_wrapper no-footer">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="dataTables_length" id="sample-table_length2"><label>每页显示条数: <select
+                      name="sample-table_length" aria-controls="sample-table" class="">
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select></label></div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div id="sample-table_filter2" class="dataTables_filter"><label>搜索:<input type="search" class=""
+                                                                                              placeholder=""
+                                                                                              aria-controls="sample-table"></label>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover dataTable no-footer" id="sample-table2"
+                       role="grid" aria-describedby="sample-table_info">
+                  <thead>
+                  <tr role="row">
+
+                    <th tabindex="0" aria-controls="sample-table" rowspan="1"
+                        colspan="1" aria-sort="descending" aria-label="租房时间" style="width: 200px;">租房时间
+                    </th>
+                    <th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                         aria-label="房源" style="width: 200px;">房源
+                    </th>
+                    <th tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                        aria-label="户型" style="width: 100px;">租金
+                    </th>
+
+                    <th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                         aria-label="成交价" style="width: 100px;">租期
+                    </th>
+
+                    <th tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                        aria-label="经纪人" style="width: 100px;">经纪人
+                    </th>
+
+                    <th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                         aria-label="经纪人联系方式" style="width: 200px;">经纪人联系方式
+                    </th>
+                    <th tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                        aria-label="房东" style="width: 100px;">房东
+                    </th>
+                    <th tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                        aria-label="房东联系方式" style="width: 150px;">房东联系方式
+                    </th>
+
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr role="row" class="odd">
+                    <td>2018年9月30日</td>
+                    <td >国贸天悦佘山</td>
+                    <td>3000</td>
+
+
+                    <td>6 </td>
+
+
+                    <td>张秋红 </td>
+                    <td>4007675016</td>
+                    <td>郭子尧 </td>
+                    <td>18059739987</td>
+                  </tr>
+                  </tbody>
+
+
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+
         </div>
       </div>
     </div>
@@ -203,4 +1222,22 @@
 
 </div>
 </body>
+<script>
+  $('.user-main .main-right .tab span').click(function () {
+    $('.js_ajaxError').hide();
+    if ($(this).text() == '新房') {
+      $(this).addClass('hover').siblings().removeClass('hover');
+      $('#building').css('display', 'block');
+      $('#rent').css('display', 'none');
+    }
+    if ($(this).text() == '租房') {
+      $(this).addClass('hover').siblings().removeClass('hover');
+      $('#building').css('display', 'none');
+      $('#rent ').css('display', 'block');
+    }
+
+
+  });
+
+</script>
 </html>

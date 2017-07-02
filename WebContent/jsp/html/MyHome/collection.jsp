@@ -654,10 +654,10 @@
       </div>
       <div class="main-right fr">
         <div class="allList">
-          <div class="title">您关注的楼盘/租房最新动态</div>
+          <div class="title">您关注的新房/租房最新动态</div>
 
           <div class="tab">
-            <span class="actTap actSetArgs hover">楼盘</span>
+            <span class="actTap actSetArgs hover">新房</span>
             <span class="actTap actSetArgs ">租房</span>
           </div>
           
@@ -776,7 +776,7 @@
 <script>
 $('.user-main .main-right .tab span').click(function () {
   $('.js_ajaxError').hide();
-  if ($(this).text() == '楼盘') {
+  if ($(this).text() == '新房') {
     $(this).addClass('hover').siblings().removeClass('hover');
     $('#building').css('display', 'block');
     $('#rent').css('display', 'none');

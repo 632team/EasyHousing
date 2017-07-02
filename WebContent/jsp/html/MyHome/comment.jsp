@@ -1,4 +1,5 @@
 <%@page import="com.easyhousing.model.*"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -122,6 +123,614 @@
       color: #333;
       cursor: default;
     }
+
+    .list_tit {
+      width: 100%;
+      height: 35px;
+      line-height: 35px;
+      font-size: 14px;
+      margin-top: 10px;
+      border-bottom: 1px solid #ccc;
+      overflow: hidden;
+    }
+
+    .list_tit .cenl {
+      width: 500px;
+      height: 35px;
+      overflow: hidden;
+    }
+
+    .fl {
+      float: left;
+    }
+
+    .list_tit .cenl strong {
+      color: #c00000;
+      font-weight: bold;
+    }
+
+    i, em {
+      font-style: normal;
+    }
+
+    .list_tit .cenr {
+      width: 600px;
+      height: 35px;
+      text-align: right;
+      overflow: hidden;
+    }
+
+    .fr {
+      float: right;
+    }
+
+    .list_tit a.first {
+      margin: 0;
+    }
+
+    .list_tit .active {
+      font-weight: bold;
+      color: #c00000;
+    }
+
+    .list_tit a {
+      margin-left: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    .list_tit .hovs {
+      background: url(../images/rentWindow/djimg80.png) no-repeat right center;
+    }
+
+    .list_tit .hovs, .list_tit .hovx {
+      padding-right: 10px;
+    }
+
+    .list_tit a {
+      margin-left: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    .list_tit .hovx {
+      background: url(../images/rentWindow/djimg81.png) no-repeat right center;
+    }
+
+    .list_tit .hovs, .list_tit .hovx {
+      padding-right: 10px;
+    }
+
+    .list_tit a {
+      margin-left: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    ol, ul, li {
+      list-style: none;
+    }
+
+    ul, menu, dir {
+      display: block;
+      list-style-type: disc;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+    }
+
+    .mor_list li {
+      height: 190px;
+      padding: 20px 10px 20px 195px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .data_link {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 200;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    .mor_list li .mor_img {
+      width: 185px;
+      height: 150px;
+      overflow: hidden;
+      background: #ccc;
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      z-index: 1;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    .mor_list li .mor_img img {
+      width: 100%;
+      height: 100%;
+    }
+
+    fieldset, img {
+      border: 0;
+    }
+
+    .mor_list li .mor_txt {
+      width: 100%;
+      height: 150px;
+      margin-left: 10px;
+      position: relative;
+    }
+
+    .mor_list li .mor_txt h3 {
+      height: 23px;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 20px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .mor_list li .mor_txt .dot {
+      width: 100%;
+      height: 48px;
+    }
+
+    .mor_list li .mor_txt p {
+      width: 100%;
+      height: 24px;
+      margin-top: 10px;
+      line-height: 24px;
+      font-size: 14px;
+      color: #666;
+      overflow: hidden;
+    }
+
+    .mor_list li .mor_txt .dor {
+      height: 24px;
+      padding-left: 15px;
+      background: url(../images/rentWindow/djimg25.png) no-repeat left center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    p {
+      display: block;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+    }
+
+    .mor_list li .mor_txt a {
+      height: 22px;
+      line-height: 22px;
+      display: block;
+      float: left;
+      margin-right: 5px;
+      border: 1px solid;
+      padding: 0 5px;
+      cursor: default;
+    }
+
+    .bq_cor_1, .bq_cor_11, .bq_cor_21, .bq_cor_31, .bq_cor_41, .bq_cor_51, .bq_cor_61, .bq_cor_71, .bq_cor_81, .bq_cor_91, .bq_cor_101, .bq_cor_111, .bq_cor_121, .bq_cor_131, .bq_cor_141, .bq_cor_151, .bq_cor_161, .bq_cor_171, .bq_cor_181, .bq_cor_191 {
+      color: #ff943e;
+      border-color: #ff943e;
+    }
+
+    .bq_cor_2, .bq_cor_12, .bq_cor_22, .bq_cor_32, .bq_cor_42, .bq_cor_52, .bq_cor_62, .bq_cor_72, .bq_cor_82, .bq_cor_92, .bq_cor_102, .bq_cor_112, .bq_cor_122, .bq_cor_132, .bq_cor_142, .bq_cor_152, .bq_cor_162, .bq_cor_172, .bq_cor_182, .bq_cor_192 {
+      color: #9a89b9;
+      border-color: #9a89b9;
+    }
+
+    .bq_cor_3, .bq_cor_13, .bq_cor_23, .bq_cor_33, .bq_cor_43, .bq_cor_53, .bq_cor_63, .bq_cor_73, .bq_cor_83, .bq_cor_93, .bq_cor_103, .bq_cor_113, .bq_cor_123, .bq_cor_133, .bq_cor_143, .bq_cor_153, .bq_cor_163, .bq_cor_173, .bq_cor_183, .bq_cor_193 {
+      color: #47a8d9;
+      border-color: #47a8d9;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+
+    .mor_list li .mor_tip:last-child {
+      right: 0;
+    }
+
+    .mor_list li .mor_w {
+      width: 240px;
+    }
+
+    .mor_list li .mor_tip {
+      width: 140px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 18px;
+      overflow: hidden;
+      position: absolute;
+      top: 65px;
+      right: 170px;
+      z-index: 1;
+    }
+
+    .mor_list li .mor_tip p {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    .mor_list li .mor_tip strong {
+      color: #c00000;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    .mor_list li .mor_tip:last-child {
+      right: 0;
+    }
+
+    .mor_list li .mor_w {
+      width: 240px;
+    }
+
+    .mor_list li .mor_tip {
+      width: 140px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 18px;
+      overflow: hidden;
+      position: absolute;
+      top: 65px;
+      right: 170px;
+      z-index: 1;
+    }
+
+    .colorFillLabel {
+      display: inline-block;
+      float: left;
+      height: 25px;
+      line-height: 25px;
+      padding: 0 5px;
+      color: #fff;
+      text-align: center;
+      font-size: 12px;
+      margin-right: 5px
+    }
+
+    .colorFillLabel.yangtai {
+      background: #00ae66
+    }
+
+    .colorFillLabel.weishengjian {
+      background: #F1B541
+    }
+
+    .xinfangTag {
+      height: 22px;
+      line-height: 22px;
+      text-align: center;
+      border: 1px solid #fff;
+      padding: 0 8px;
+      font-size: 12px;
+      margin-right: 8px;
+      line-height: 22px;
+      display: inline-block;
+    }
+
+    .xinfangTag.tag1 {
+      border-color: #e2d197;
+      color: #e2d197
+    }
+
+    .xinfangTag.tag2 {
+      border-color: #C5A9DD;
+      color: #C5A9DD
+    }
+
+    .xinfangTag.tag3 {
+      border-color: #E0A0A0;
+      color: #E0A0A0
+    }
+
+    .xinfangTag.tag4 {
+      border-color: #85c6dc;
+      color: #85c6dc
+    }
+
+    .user-main .main-right li .info-panel .col-3 {
+      width: 200px;
+      text-align: right;
+      float: left;
+      position: absolute;
+      top: 30px;
+      right: 80px;
+    }
+
+    .user-main .main-right li .info-panel .col-3 .price {
+      color: #e4393c;
+      margin-top: 6px;
+      width: 100%;
+      position: relative;
+      font-size: 16px;
+    }
+
+    .user-main .main-right li .info-panel .col-3 .price_xiajia,
+    .user-main .main-right li .info-panel .col-3 .price_shixiao,
+    .user-main .main-right li .info-panel .col-3 .price_chengjiao {
+      color: #808080;
+      margin-top: 6px;
+      width: 100%;
+      position: relative;
+      font-size: 16px;
+    }
+
+    .user-main .main-right li .info-panel .col-3 .price .num,
+    .user-main .main-right li .info-panel .col-3 .price_shixiao .num,
+    .user-main .main-right li .info-panel .col-3 .price_xiajia .num,
+    .user-main .main-right li .info-panel .col-3 .price_chengjiao .num {
+      font-size: 30px;
+      font-weight: 700;
+      margin-right: 3px;
+      font-family: tahoma;
+    }
+
+    .user-main .main-right li .info-panel .col-3 .price-pre {
+      font-size: 12px;
+      color: #999;
+      font-family: Arial;
+      margin-top: 5px;
+    }
+
+    .user-main .main-right li .pic-panel img.lj-lazy {
+      width: 173px;
+      height: 130px;
+    }
+
+    .user-main .main-right li .info-panel h2 {
+      font-size: 19px;
+      white-space: nowrap;
+      width: 100%;
+      height: 32px;
+      line-height: 20px;
+      vertical-align: middle;
+      font-family: "Hiragino Sans GB", "微软雅黑", "Microsoft YaHei", SimHei, Tahoma, "宋体b8b\4f53", SimSun, sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+      font-size: 100%;
+      font-weight: normal;
+    }
+
+    user agent stylesheet
+    h2 {
+      display: block;
+      font-size: 1.5em;
+      -webkit-margin-before: 0.83em;
+      -webkit-margin-after: 0.83em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      font-weight: bold;
+    }
+
+    .user-main .main-right li .info-panel h2 a, .user-main .main-right li .info-panel h2 span {
+      font-family: "Hiragino Sans GB", "微软雅黑", "Microsoft YaHei", SimHei, Tahoma, "宋体b8b\4f53", SimSun, sans-serif;
+      color: #009de8;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .user-main .main-right .all-list .list-bot li {
+      border-bottom: 1px dashed #e9e9e9;
+      height: 170px;
+      position: relative;
+    }
+
+    .user-main .main-right li {
+      clear: both;
+      padding-top: 30px;
+    }
+
+    dl, dt, dd, ul, ol, li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    user agent stylesheet
+    li {
+      display: list-item;
+      text-align: -webkit-match-parent;
+    }
+
+    .user-main .main-right li .other .con {
+      width: 410px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      color: #888;
+    }
+
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+
+    user agent stylesheet
+    div {
+      display: block;
+    }
+
+    .main-right li .info-panel {
+      color: #565a5c;
+      padding-left: 14px;
+      width: 505px;
+      position: relative;
+      float: right;
+      height: 130px;
+    }
+
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+
+    user agent stylesheet
+    div {
+      display: block;
+    }
+
+    .main-right li .pic-panel {
+      width: 175px;
+      float: left;
+      position: relative;
+    }
+
+    body, div, p {
+      margin: 0;
+      padding: 0;
+    }
+
+    user agent stylesheet
+    div {
+      display: block;
+    }
+    .Input_Box {
+      width: 495px;
+      height: 160px;
+      border: 1px solid #ccc;
+      transition: border linear .2s, box-shadow linear .5s;
+      -moz-transition: border linear .2s, -moz-box-shadow linear .5s;
+      -webkit-transition: border linear .2s, -webkit-box-shadow linear .5s;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      background-color: #fff;
+      overflow: hidden;
+      position: absolute;
+      -moz-box-shadow: 0 0 5px #ccc;
+      -webkit-box-shadow: 0 0 5px #ccc;
+      box-shadow: 0 0 5px #ccc;
+    }
+    .Input_Box>textarea {
+      width: 485px;
+      height: auto;
+      padding: 5px;
+      outline: none;
+      border: 0px solid #fff;
+      resize: none;
+      font: 13px "微软雅黑", Arial, Helvetica, sans-serif;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+    }
+    .Input_Foot {
+      width: 100%;
+      height: auto;
+      border-top: 1px solid #ccc;
+      background-color: #fff;
+      -moz-border-radius: 0 0 5px 5px;
+      -webkit-border-radius: 0 0 5px 5px;
+      border-radius: 0 0 5px 5px;
+      position: absolute;
+    }
+    .imgBtn {
+      float: left;
+      margin-top: 8px;
+      margin-left: 10px;
+      background-image: url(imgs.png);
+      background-repeat: no-repeat;
+      background-position: 0 -13px;
+      height: 18px;
+      width: 20px;
+      cursor: pointer
+    }
+    .imgBtn:active {
+      margin-top: 9px;
+    }
+    .imgBtn:hover {
+      background-position: 0 -31px
+    }
+    .postBtn {
+      float: rightright;
+      font: 13px "微软雅黑", Arial, Helvetica, sans-serif;
+      color: #808080;
+      padding: 9px 20px 7px 20px;
+      border-left: 1px solid #ccc;
+      cursor: pointer;
+      -moz-border-radius: 0 0 5px 0;
+      -webkit-border-radius: 0 0 5px 0;
+      border-radius: 0 0 5px 0;
+    }
+    .postBtn:hover {
+      color: #333;
+      background-color: #efefef;
+    }
+    .postBtn:active {
+      padding: 10px 20px 6px 20px;
+    }
+    .faceDiv {
+      width: 500px;
+      height: 120px;
+      border-top: 1px solid #ccc;
+      position: absolute;
+      background-color: #fff;
+      -moz-border-radius: 5px 5px 0 0;
+      -webkit-border-radius: 5px 5px 0 0;
+      border-radius: 5px 5px 0 0;
+    }
+    .faceDiv>img {
+      border: 1px solid #ccc;
+      float: left;
+      margin-left: -1px;
+      margin-top: -1px;
+      position: relative;
+      width: 24px;
+      height: 24px;
+      padding: 3px 3px 3px 3px;
+      cursor: pointer;
+    }
+    .faceDiv>img:hover {
+      background-color: #efefef;
+    }
+    .faceDiv>img:active {
+      padding: 4px 3px 2px 3px;
+    }
   </style>
 </head>
 <body>
@@ -188,13 +797,126 @@
       </div>
       <div class="main-right fr">
         <div class="allList">
-          <div class="title">您发表的评论</div>
+          <div class="title">我的所有评论</div>
 
           <div class="tab">
-            <span class="actTap actSetArgs hover">全部</span>
-            <span class="actTap actSetArgs ">买房</span>
+            <span class="actTap actSetArgs hover">新房</span>
             <span class="actTap actSetArgs ">租房</span>
 
+          </div>
+          <div class="all-list selected fav-list" style="display:block;" id="building">
+            <ul class="list-bot">
+              <li style="width: 750px" style="display: block">
+                <div class="list" style="display: block">
+                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+                    <img
+                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                      class="lj-lazy"
+                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
+                      style="display: inline;"> </a>
+                  <br><br>
+
+                    <!--以下是评论区-->
+                    <div class="Input_Box" style="text-align: left ;width:700px; padding:10px 10px 10px 10px; height: auto; display: inline-block; ">
+                      <!--<textarea class="Input_text" style="text-align: left">-->
+                        <!--梁先锋axsxasxasxasxasxasx-->
+                      <!--</textarea>-->
+                      <span class="text-muted" style="border-radius:50%; display: inline-block">
+                        这个离地铁很近，很方便！！！很小的时候我就有两个爱好：一是站在高楼， 二则是喜欢看那些带有机器人的科幻片。
+                      </span>
+                      </div>
+
+                  </div>
+                  <div class="info-panel" style="float: left">
+                    <h2><a target="_blank"
+                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> 上海villa </a>
+                      <button type="button" class="btn btn-danger" style="float: right">删除评论</button>
+                    </h2>
+
+                    <div class="col-1">
+                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank">嘉定</a>- 恒荣路589弄
+                      </div>
+                      <div class="other">
+                        <div class="con"> 3居</div>
+                      </div>
+                      <div class="chanquan">
+                        <div class="left agency"><span class="xinfangTag tag1">
+                          <span>车位充足</span>                                </span>
+                          <span class="xinfangTag tag2"><span>外环外</span></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-3"><span class="price-pre">总价：</span> <span class="price">	                            <span
+                      class="num">450</span>	                        </span> <span class="price-pre"> 万元起</span></div>
+                  </div>
+
+                </div>
+                <a class="del-fav actDelFollow" index="349" style="display: none;">删除评论</a>
+                <br>
+
+              </li>
+              <li>
+
+              </li>
+            </ul>
+          </div>
+          <div class="all-list selected fav-list" style="display:none;" id="rent">
+            <ul class="list-bot">
+              <li style="width: 750px" style="display: block">
+                <div class="list" style="display: block">
+                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+                    <img
+                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                      class="lj-lazy"
+                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
+                      style="display: inline;"> </a>
+                    <br><br>
+
+                    <!--以下是评论区-->
+                    <div class="Input_Box" style="text-align: left ;width:700px; padding:10px 10px 10px 10px; height: auto; display: inline-block; ">
+                      <!--<textarea class="Input_text" style="text-align: left">-->
+                      <!--梁先锋axsxasxasxasxasxasx-->
+                      <!--</textarea>-->
+                      <span class="text-muted" style="border-radius:50%; display: inline-block">
+                        离公司很近，环境也不错!!!
+                      </span>
+                    </div>
+                  </div>
+
+
+                  <div class="info-panel" style="float: left">
+                    <h2><a target="_blank"
+                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> 重庆租房 </a>
+                      <button type="button" class="btn btn-danger" style="float: right">删除评论</button>
+                    </h2>
+                    <div class="col-1">
+                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank">沙坪坝</a>- 大学城
+                      </div>
+                      <div class="other">
+                        <div class="con"> 1居</div>
+                      </div>
+                      <div class="chanquan">
+                        <div class="left agency">
+                          <span class="xinfangTag tag1"><span>车位充足</span></span>
+                          <span class="xinfangTag tag2"><span>外环外</span></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-3"><span class="price-pre">租金：</span> <span class="price">	                            <span
+                      class="num">1450</span>	                        </span> <span class="price-pre"> 元/月</span></div>
+                  </div>
+                </div>
+                <a class="del-fav actDelFollow" index="349" style="display: none;">删除评论</a>
+              </li>
+              <li>
+
+              </li>
+            </ul>
+          </div>
+          <div class="page">
+            <div id="paginageBox" class="page-box"></div>
           </div>
         </div>
       </div>
@@ -203,4 +925,23 @@
 
 </div>
 </body>
+<script>
+  $('.user-main .main-right .tab span').click(function () {
+    $('.js_ajaxError').hide();
+    if ($(this).text() == '新房') {
+      $(this).addClass('hover').siblings().removeClass('hover');
+      $('#building').css('display', 'block');
+      $('#rent').css('display', 'none');
+    }
+    if ($(this).text() == '租房') {
+      $(this).addClass('hover').siblings().removeClass('hover');
+      $('#building').css('display', 'none');
+      $('#rent ').css('display', 'block');
+    }
+
+
+  });
+
+</script>
 </html>
+
