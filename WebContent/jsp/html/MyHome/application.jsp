@@ -1111,6 +1111,7 @@
                   for (int i = 0; i < lb.size(); ++i) {
                 	  Order tmp = lb.get(i);
                 	  %>
+                	  
                 	  <tr role="row" class="odd">
 
 	                    <td class="sorting_1" value="<%=tmp.id %>"><%=tmp.id %></td>
@@ -1129,6 +1130,7 @@
 	                      <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
 	                    </td>
 	                  </tr>
+	                  
                 	  <%
                   }
                   %>
@@ -1192,12 +1194,13 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr role="row" class="odd">
+                  
                   	<%
                   	List<Order> lr = (List<Order>)s.getAttribute("orderRentHouse");
                   	for (int i = 0; i < lr.size(); ++i) {
                   		Order tmp = lr.get(i);
                   		%>
+                  		<tr role="row" class="odd">
                   		<td class="sorting_1" value="<%=tmp.id %>"><%=tmp.id %></td>
 	                    <td><%=tmp.address %></td>
 	
@@ -1213,10 +1216,11 @@
 	
 	                      <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
 	                    </td>
+	                    </tr>
                   		<%
                   	}
                   	%>
-                  </tr>
+                  
                   </tbody>
 
 

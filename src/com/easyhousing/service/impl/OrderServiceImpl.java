@@ -69,7 +69,11 @@ public class OrderServiceImpl implements OrderService {
 			
 			Agent a = new Agent();
 			a.setAgentId(i.getAgentId());
-			temp.agentName = agentDao.selectAgent(a).getAgentName();
+			if (agentDao.selectAgent(a) != null)
+				temp.agentName = agentDao.selectAgent(a).getAgentName();
+			else {
+				temp.agentName = "无";
+			}
 			
 			temp.address = rentHouseDao.selectRentHouseById(i.getRentHouseId()).getRentHouseAddress();
 			

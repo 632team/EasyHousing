@@ -714,16 +714,16 @@
 	  </div>
 	        <div class="nav navml">
 	          <span>
-	            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">首页&nbsp&nbsp&nbsp</a>
+	            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">首页</a>&nbsp&nbsp&nbsp
 	          </span>
 	          <span>
-	            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">二手房&nbsp&nbsp&nbsp</a>
+	            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">二手房</a>&nbsp&nbsp&nbsp
 	          </span>
 	          <span>
-	            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">新房&nbsp&nbsp&nbsp</a>
+	            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">新房</a>&nbsp&nbsp&nbsp
 	          </span>
 	          <span>
-	            <a href=${pageContext.request.contextPath}/jsp/html/rentHouse.jsp class="href">租房</a>
+	            <a href=${pageContext.request.contextPath}/rentHouse.do class="href">租房</a>
 	          </span>
 	
 	        </div>
