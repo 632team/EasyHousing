@@ -1,6 +1,12 @@
+<%@page import="java.util.List"%>
+<%@page import="com.easyhousing.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+HttpSession s = request.getSession();
+List<User> userList = (List<User>)session.getAttribute("userList");
+%>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -36,7 +42,6 @@
   <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace-rtl.min.css>
   <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace-skins.min.css>
 
-
 </head>
 <body>
 <div class="page-content clearfix">
@@ -59,7 +64,7 @@
         <div class="border clearfix" style="display: block">
                <span class="l_f">
                 <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加用户</a>
-                <a href="javascript:ovid()" class="btn btn-danger">批量删除</a>
+                <a class="btn btn-danger" onclick="deletePart();" href=${pageContext.request.contextPath}/managerUserinit.do>批量删除</a>
                </span>
           <!--<span class="r_f">共：<b>2345</b>条</span>-->
         </div>
@@ -103,23 +108,55 @@
               </tr>
               </thead>
               <tbody>
-              <tr role="row" class="odd">
-                <td><label><input type="checkbox"><span class="lbl"></span></label></td>
-                <td class="sorting_1" value="5">2</td>
-                <td><u style="cursor:pointer" class="text-primary">郭子尧</u></td>
-                <td>gzy</td>
-                <td>男</td>
-                <td>13000000000</td>
-                <td>admin@mail.com</td>
-                <td class="text-l">http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png</td>
+              
+              <%
+              for(int i = 0; i < userList.size(); i++) {
+            	  User iuser = userList.get(i);
+              %>
+              	<tr role="row" class="odd">
+                <td><label><input type="checkbox" name="checkbox" id="<%=iuser.getUserId()%>" value="<%=iuser.getUserId()%>"><span class="lbl"></span></label></td>
+                <td class="sorting_1" value="5">
+                <% 
+                out.print(iuser.getUserId());
+                %>
+                </td>
+                <td><u style="cursor:pointer" class="text-primary">
+                <%
+             	out.print(iuser.getName());
+                %></u></td>
+                <td>
+                <%
+                out.print(iuser.getUsername());
+                %></td>
+                <td>
+                <%
+                out.print(iuser.getUserSex());
+                %>
+                </td>
+                <td>
+                <%
+                out.print(iuser.getUserPhoneNumber());
+                %></td>
+                <td>
+                <%
+                out.print(iuser.getUserEmail());
+                %></td>
+                <td class="text-l">
+                <%
+                out.print(iuser.getUserPhoto());
+                %>
+                </td>
 
                 <td class="td-manage">
 
-                  <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
+                  <a id="<%=iuser.getUserId() %>" title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML, this.id)">编辑</a>
 
-                  <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
+                  <a id="<%=iuser.getUserId() %>" title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML, this.id)">删除</a>
                 </td>
-              </tr>
+                </tr>
+              <%
+              }
+              %>
               </tbody>
 
 
@@ -134,20 +171,20 @@
 
 
 <div class="add_menber" id="add_menber_style" style="display:none">
-
+  <form action=${pageContext.request.contextPath}/adminAddUser.do id="addUser" enctype="multipart/form-data" method="post">
   <ul class=" page-content">
-    <li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span class="add_name"><input value="" name="用户名" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
-    <li><label class="label_name">真实姓名：</label><span class="add_name"><input name="真实姓名" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span class="add_name"><input value="" name="username" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">真实姓名：</label><span class="add_name"><input name="name" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
 
-    <li><label class="label_name">密码：</label><span class="add_name"><input name="密码" type="password"  class="form-control"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">密码：</label><span class="add_name"><input name="userPassword" type="password"  class="form-control"/></span><div class="prompt r_f"></div></li>
     <li><label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
-     <label><input name="form-field-radio" type="radio" checked="checked" ><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
-     <label><input name="form-field-radio" type="radio" ><span class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
+     <label><input name="userSex" type="radio" checked="checked"><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
+     <label><input name="userSex" type="radio" ><span class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
      </span>
       <div class="prompt r_f"></div>
     </li>
-    <li><label class="label_name">手机：</label><span class="add_name"><input name="移动电话" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
-    <li><label class="label_name">邮箱：</label><span class="add_name"><input name="电子邮箱" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">手机：</label><span class="add_name"><input name="userPhoneNumber" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">邮箱：</label><span class="add_name"><input name="userEmail" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
     <!--<li class="adderss"><label class="label_name">家庭住址：</label><span class="add_name"><input name="家庭住址" type="text"  class="text_add" style=" width:350px"/></span><div class="prompt r_f"></div></li>-->
     <li style="display: block">
       <nobr>
@@ -158,10 +195,43 @@
       </nobr>
     </li>
   </ul>
+  </form>
+</div>
+
+<div class="update_menber" id="update_menber_style" style="display:none">
+  <form action=${pageContext.request.contextPath}/adminUpdateUser.do id="updateUser" enctype="multipart/form-data" method="post">
+  <ul class=" page-content">
+    <li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span class="add_name"><input value="" name="username" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">真实姓名：</label><span class="add_name"><input name="name" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+
+    <li><label class="label_name">密码：</label><span class="add_name"><input name="userPassword" type="password"  class="form-control"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
+     <label><input name="userSex" type="radio" checked="checked"><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
+     <label><input name="userSex" type="radio" ><span class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
+     </span>
+      <div class="prompt r_f"></div>
+    </li>
+    <li><label class="label_name">手机：</label><span class="add_name"><input name="userPhoneNumber" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">邮箱：</label><span class="add_name"><input name="userEmail" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <!--<li class="adderss"><label class="label_name">家庭住址：</label><span class="add_name"><input name="家庭住址" type="text"  class="text_add" style=" width:350px"/></span><div class="prompt r_f"></div></li>-->
+    <li style="display: block">
+      <nobr>
+        <span class="add_name">
+        <label label class="label_name">图片：</label>
+        <input type="file" name="img" multiple="multiple"  style="display: inline-block" />
+        </span>
+      </nobr>
+    </li>
+  </ul>
+  </form>
 </div>
 
 <script>
 
+	function refresh(){
+		 //location.reload(); // 父页面刷新
+   		window.location.reload();//刷新当前页面.
+   	}
 
   jQuery(function($) {
     var oTable1 = $('#sample-table').dataTable( {
@@ -200,6 +270,7 @@
   })
   /*用户-添加*/
   $('#member_add').on('click', function(){
+	
     layer.open({
       type: 1,
       title: '添加用户',
@@ -225,12 +296,10 @@
         });
         if(num>0){  return false;}
         else{
-          layer.alert('添加成功！',{
-            title: '提示框',
-            icon:1,
-          });
+          $(".add_menber #addUser").submit();
           layer.close(index);
         }
+      	//refresh();
       }
     });
   });
@@ -258,19 +327,20 @@
     });
   }
   /*用户-编辑*/
-  function member_edit(id){
+  function member_edit(id, updateUserId){
+	setCookie("updateUserId", updateUserId, 365);
     layer.open({
       type: 1,
       title: '修改用户信息',
       maxmin: true,
       shadeClose:false, //点击遮罩关闭层
       area : ['800px' , ''],
-      content:$('#add_menber_style'),
+      content:$('#update_menber_style'),
       btn:['提交','取消'],
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $(".update_menber input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -288,15 +358,19 @@
             title: '提示框',
             icon:1,
           });
+          $(".update_menber #addUser").submit();
           layer.close(index);
         }
       }
     });
   }
   /*用户-删除*/
-  function member_del(obj,id){
+  function member_del(obj,id,userId){
     layer.confirm('确认要删除吗？',function(index){
       $(obj).parents("tr").remove();
+      
+      setCookie("userId",userId,365);
+      transpDel();
       layer.msg('已删除!',{icon:1,time:1000});
     });
   }
@@ -304,6 +378,46 @@
     elem: '#start',
     event: 'focus'
   });
+  
+  function transpDel() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/deleteUserAjax.do"
+		})
+	}
+
+	function setCookie(c_name, value, expiredays) {
+		var exdate = new Date()
+		exdate.setDate(exdate.getDate() + expiredays)
+		document.cookie = c_name
+				+ "="
+				+ escape(value)
+				+ ((expiredays == null) ? "" : ";expires="
+						+ exdate.toGMTString())
+	}
+	
+	function transpDelPart() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/deleteUserPartAjax.do"
+		})
+	}
+
+	function deletePart() {
+		var chckBox = document.getElementsByName("checkbox");
+		var num = chckBox.length;
+		var ids = "";
+		for (var index = 0; index < num; index++) {
+			if (chckBox[index].checked) {
+				ids += chckBox[index].value + ".";
+			}
+		}
+		alert(ids);
+		setCookie("deletePart", ids, 365);
+		transpDelPart();
+	}
 </script>
 
 </body>

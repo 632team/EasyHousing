@@ -20,4 +20,12 @@
 	<select id="selectUserByUserNameAndPassword" parameterType="com.easyhousing.model.User" resultType="com.easyhousing.model.User">
 		SELECT * FROM User WHERE username=#{username} AND userPassword=#{userPassword}
 	</select>
+	
+	<select id="selectUserByUserName" parameterType="com.easyhousing.model.User" resultType="com.easyhousing.model.User">
+		SELECT * FROM User WHERE username=#{username}
+	</select>
+	
+	<select id="selectAllUser" parameterType="com.easyhousing.model.User" resultType="com.easyhousing.model.User">
+		SELECT * FROM User
+	</select>
 </mapper>

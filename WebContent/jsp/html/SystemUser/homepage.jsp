@@ -58,7 +58,7 @@
         var divHeigth = $(this).height();
         $aobjs.height(divHeigth / rowCount);
       });
-      //初始化宽度、高度
+      //初始化宽度、高度 
       $("#main-container").height($(window).height() - 76);
       $("#iframe").height($(window).height() - 140);
 
@@ -192,7 +192,7 @@
           <a class="dropdown-toggle" href="#"><span class="menu-text"> 用户 </span></a>
           <ul class="submenu" id="Sort_link_1">
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="用户管理" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerUser.jsp class="iframeurl" style="text-align: center">用户管理</a>
+              <a href="#" title="用户管理" name=${pageContext.request.contextPath}/managerUserinit.do class="iframeurl" style="text-align: center">用户管理</a>
             </li>
             <li class="home" style="height: 41.3333px;">
               <a href="#" title="用户统计" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerCalUser.jsp class="iframeurl" style="text-align: center">用户统计</a>
