@@ -1,5 +1,7 @@
 package com.easyhousing.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -12,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.easyhousing.dao.RentHouseCommentDao;
+import com.easyhousing.dao.UserDao;
+import com.easyhousing.model.Collect;
 import com.easyhousing.model.RentHouse;
+import com.easyhousing.model.RentHouseComment;
 import com.easyhousing.model.User;
 import com.easyhousing.service.RentHouseCollect;
 import com.easyhousing.service.RentHousePicUrlService;
@@ -29,6 +35,12 @@ public class RentHouseDetailController {
 	
 	@Autowired
 	private RentHousePicUrlService rentHousePicUrlService;
+	
+	@Autowired
+	private RentHouseCommentDao rentHouseCommentDao;
+	
+	@Autowired
+	private UserDao userDao;
 	
 	@RequestMapping(value="rentHouseDetail.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView rentHouseDetail(HttpServletRequest request) {
@@ -68,7 +80,31 @@ public class RentHouseDetailController {
 		session.setAttribute("haveRent", haveRent);
 		session.setAttribute("rentHouse", rentHouse);
 		session.setAttribute("rentHousePicList", rentHousePicList);
+		
+		List<RentHouseComment> lr = rentHouseCommentDao.selectAllByRentHouseId(rentHouseId);
+		List<Collect> lc = new ArrayList<>();
+		for (RentHouseComment i : lr) {
+			Collect tmp = new Collect();
+			User u = new User();
+			u.setUserId(i.getUserId());
+			tmp.name = userDao.selectUserByUserId(u).getName();
+			tmp.comment = i.getUserComment();
+			tmp.picUrl = userDao.selectUserByUserId(u).getUserPhoto();
+			tmp.decoration = i.getUserCommentDate().toString();
+			lc.add(tmp);
+		}
+		session.setAttribute("rentHouseUserComments", lc);
+		
 		modelAndView.setViewName("rentDetail");
 		return modelAndView;
+	}
+	
+	@RequestMapping(value="userCommentRentHouse.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String userCommentRentHouse(HttpSession s, RentHouseComment u) {
+		u.setUserCommentDate(new Date());
+		u.setUserId(((User)s.getAttribute("user")).getUserId());
+	    u.setRentHouseId(((RentHouse)s.getAttribute("rentHouse")).getRentHouseId());
+		rentHouseCommentDao.insertRentHouseComment(u);
+		return "Comment/loading";
 	}
 }

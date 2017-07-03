@@ -1,5 +1,5 @@
 <%@page import="java.util.List"%>
-<%@page import="com.easyhousing.model.RentHouse"%>
+<%@page import="com.easyhousing.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -324,7 +324,7 @@
   top:50%;
   left:50%;
   width:660px;
-  height:360px;
+  height:460px;
   margin:-180px 0 0 -330px;
   border-radius:5px;
   border:solid 2px #666;
@@ -1251,7 +1251,7 @@
       <div class="container">
         <div class="fl l-txt">
           <i class="icon"></i>&nbsp;
-          <a href="https://cq.lianjia.com/">易购房</a>
+          <a href=${pageContext.request.contextPath}/rentHouse.do>易购房</a>
           <!-- <span class="stp">&nbsp;&gt;&nbsp;</span>
           <a href="https://cq.lianjia.com/zufang/">重庆租房</a>
           <span class="stp">&nbsp;&gt;&nbsp;</span>
@@ -1264,21 +1264,32 @@
         </div>
       </div>
       
-       <div class="theme-popover" style="display: none;">
-	  <div class="theme-poptit">
-	  <a href="javascript:;" title="关闭" class="close">×</a>
-	  <h3>请填写申请表单</h3>
-	  </div>
-	  <div class="theme-popbod dform">
-		  <form class="theme-signin" name="loginform" action="https://www.baidu.com" method="post">
-		  <ol>
-		  <li><strong>联系电话：</strong><input class="ipt" type="text" name="pwd" placeholder="请输入联系电话" size="20"></li>
-		  <li><strong>看房时间：</strong><input class="ipt" type="text" name="pwd" placeholder="请输入看房时间" size="20"></li>
-		  <li><input class="btn btn-primary" type="submit" name="submit" value=" 确定申请 " onclick=alert("你的申请已提交");></li>
-		  </ol>
-		  </form>
-	  </div>
-	  </div>
+       <%
+       if (s.getAttribute("user") != null) {
+    	   %>
+    	   <div class="theme-popover" style="display: none;">
+		  <div class="theme-poptit">
+		  <a href="javascript:;" title="关闭" class="close">×</a>
+		  <h3>请填写申请表单</h3>
+		  </div>
+		  <div class="theme-popbod dform">
+			  <form class="theme-signin" name="loginform" 
+			  action=${pageContext.request.contextPath}/sendRentHouseOrder.do 
+			  method="post">
+			  <ol>
+			  <li>用户ID：<input class="ipt" type="text" name="userId" value="<%=(((User)s.getAttribute("user")).getUserId()) %>" size="20" readonly="true" style="background-color:gray;"></li>
+			  <li>房子ID：<input class="ipt" type="text" name="rentHouseId" value="<%=irentHouse.getRentHouseId() %>" size="20" readonly="true" style="background-color:gray;"></li>
+			  <li>状态：<input class="ipt" type="text" name="orderStatus" value="未处理" size="20" readonly="true" style="background-color:gray;"></li>
+			  <li>联系电话：<input class="ipt" type="text" name="userPhoneNumber" placeholder="请输入联系电话" size="20"></li>
+			  <li>看房时间：<input class="ipt" type="text" name="date" placeholder="xxxx-xx-xx" size="20"></li>
+			  <li><input class="btn btn-primary" type="submit" name="submit" value=" 确定申请 " onclick=alert("你的申请已提交");></li>
+			  </ol>
+			  </form>
+		  </div>
+		  </div>
+    	   <%
+       }
+       %>
 	  
     </div>
     <div class="content-wrapper" style="display: block;">
@@ -1342,17 +1353,22 @@
       <div class="overview">
         <div class="img" id="topImg">
           <div class="imgContainer">
-            <img src="<%out.print(rentHousePicList.get(0)); %>" alt="">
+            <img src="<%
+            if (rentHousePicList.size() != 0)
+            	out.print(rentHousePicList.get(0)); 
+            %>" alt="">
             <span>卧室B</span>
             <div class="loading" style="display: none;"></div>
           </div>
           <div class="thumbnail">
             <ul>
             <% 
-            for(int i = 0; i < rentHousePicList.size(); i++) {
-            %>
-              <li class=""><img src="<%out.print(rentHousePicList.get(i));%>" style="width:100%; height:100%" alt=""></li>
-            <%
+            if (rentHousePicList.size() != 0) {
+            	for(int i = 0; i < rentHousePicList.size(); i++) {
+            	%>
+             	 <li class=""><img src="<%out.print(rentHousePicList.get(i));%>" style="width:100%; height:100%" alt=""></li>
+            	<%
+            	}
             }
             %>
             </ul>
@@ -1404,29 +1420,20 @@
         <!--<div id="uyan_frame"></div>-->
         <!--<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>-->
         <!-- UY END -->
-        <% 
-        if (s.getAttribute("user") != null) {
-        %>
-        <textarea style="width: 95%; height:100px; margin-left: 20px; margin-right: 20px" onfocus="on_focus(this)" onblur="on_blur(this)" placeholder="您可以在这里输入您的评论："></textarea>
-        <!--<input type="button" style="float: right;" value="评论"></input>-->
-        <button class="commentPress" style="float: right; margin-right:25px;">评论</button>
-        <%
-        }
-        %>
+        <!--
+        <form action=${pageContext.request.contextPath}/userCommentRentHouse.do method="post">
+	        <textarea style="width: 95%; height:100px; margin-left: 20px; margin-right: 20px" onfocus="on_focus(this)" onblur="on_blur(this)" placeholder="您可以在这里输入您的评论："></textarea>
+	        <button class="commentPress" style="float: right; margin-right:25px;">评论</button>
+	    </form>
+	    -->
         
-        <ul class="comentList" style="margin-top: 20px; margin-left:
-        20px; width:95%">
-          <li style="margin-top: 10px;">
-            <strong style="font-size: large; color: red;">赵欢</strong>:
-            <span>房子不错哦</span>
-          </li>
-          
-          <li style="margin-top: 10px;" >
-            <strong style="font-size: large; color: red;">赵欢</strong>:
-            <span>房子不错哦</span>
-          </li>
-        </ul>
-        <div style="height: 100px;"></div>
+
+		<!--用户评论-->
+      <div class="mod-wrap" style="width: 1000px;  margin-top:20px;  background-color: white;">
+        <iframe id="iframe" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "
+              name="iframe" frameborder="0" src="/EasyHousing/jsp/html/Comment/commentBox.jsp"></iframe>
+      </div>
+        
         
       </div>
   </body>
