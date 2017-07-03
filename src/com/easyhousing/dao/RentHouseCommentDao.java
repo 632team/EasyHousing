@@ -10,4 +10,5 @@ public interface RentHouseCommentDao {
 	public int updateRentHouseComment(RentHouseComment u);
 	public RentHouseComment selectRentHouseComment(RentHouseComment u);
 	public List<RentHouseComment> selectAllByUserId(int id);
+	public List<RentHouseComment> selectAllByRentHouseId(int id);
 }

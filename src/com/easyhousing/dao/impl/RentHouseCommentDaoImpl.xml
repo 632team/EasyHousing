@@ -20,4 +20,8 @@
 	<select id="selectAllByUserId" resultType="com.easyhousing.model.RentHouseComment">
 		select * from RentHouseComment where userId=#{0}
 	</select>
+	
+	<select id="selectAllByRentHouseId" resultType="com.easyhousing.model.RentHouseComment">
+		select * from RentHouseComment where rentHouseId=#{0}
+	</select>
 </mapper>

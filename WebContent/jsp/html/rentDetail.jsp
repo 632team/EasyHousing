@@ -1420,29 +1420,20 @@
         <!--<div id="uyan_frame"></div>-->
         <!--<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>-->
         <!-- UY END -->
-        <% 
-        if (s.getAttribute("user") != null) {
-        %>
-        <textarea style="width: 95%; height:100px; margin-left: 20px; margin-right: 20px" onfocus="on_focus(this)" onblur="on_blur(this)" placeholder="您可以在这里输入您的评论："></textarea>
-        <!--<input type="button" style="float: right;" value="评论"></input>-->
-        <button class="commentPress" style="float: right; margin-right:25px;">评论</button>
-        <%
-        }
-        %>
+        <!--
+        <form action=${pageContext.request.contextPath}/userCommentRentHouse.do method="post">
+	        <textarea style="width: 95%; height:100px; margin-left: 20px; margin-right: 20px" onfocus="on_focus(this)" onblur="on_blur(this)" placeholder="您可以在这里输入您的评论："></textarea>
+	        <button class="commentPress" style="float: right; margin-right:25px;">评论</button>
+	    </form>
+	    -->
         
-        <ul class="comentList" style="margin-top: 20px; margin-left:
-        20px; width:95%">
-          <li style="margin-top: 10px;">
-            <strong style="font-size: large; color: red;">赵欢</strong>:
-            <span>房子不错哦</span>
-          </li>
-          
-          <li style="margin-top: 10px;" >
-            <strong style="font-size: large; color: red;">赵欢</strong>:
-            <span>房子不错哦</span>
-          </li>
-        </ul>
-        <div style="height: 100px;"></div>
+
+		<!--用户评论-->
+      <div class="mod-wrap" style="width: 1000px;  margin-top:20px;  background-color: white;">
+        <iframe id="iframe" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "
+              name="iframe" frameborder="0" src="/EasyHousing/jsp/html/Comment/commentBox.jsp"></iframe>
+      </div>
+        
         
       </div>
   </body>
