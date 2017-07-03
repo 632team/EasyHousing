@@ -16,7 +16,7 @@
 	</update>
 	
 	<select id="selectAdministrator" parameterType="com.easyhousing.model.Administrator" resultType="com.easyhousing.model.Administrator">
-		select * from Administrator where administratorId=#{administratorId}
+		select * from Administrator where administratorName=#{administratorName}
 	</select>
 	
 </mapper>

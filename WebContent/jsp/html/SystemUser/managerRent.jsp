@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -46,8 +48,8 @@
           <div class="title_names">搜索查询</div>
           <ul class="search_content clearfix">
 
-            <li><label class="l_f" style="width: 60px">楼盘ID</label><input name="" type="text" class="text_add "
-                                                                          placeholder="输入楼盘ID" style=" width:300px"></li>
+            <li><label class="l_f" style="width: 60px">租房ID</label><input name="" type="text" class="text_add "
+                                                      placeholder="输入租房ID" style=" width:300px"></li>
 
             <li style="width:90px;">
               <button type="button" class="btn_search">查询</button>
@@ -57,7 +59,7 @@
 
         <div class="border clearfix" style="display: block">
                <span class="l_f">
-                <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加楼盘</a>
+                <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加租房</a>
                 <a href="javascript:ovid()" class="btn btn-danger">批量删除</a>
                </span>
           <span class="r_f">共：<b>2345</b>条</span>
@@ -75,34 +77,34 @@
                   class="lbl"></span></label>
                 </th>
                 <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1"
-                    colspan="1" aria-sort="descending" aria-label="楼盘编号" style="width: 80px;">楼盘编号
+                    colspan="1" aria-sort="descending" aria-label="租房编号" style="width: 80px;">租房编号
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="楼盘名称" style="width: 80px;">楼盘名称
+                    aria-label="社区ID" style="width: 80px;">社区编号
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
                     aria-label="地址" style="width: 200px;">地址
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="面积" style="width: 100px;">最小面积
-                </th>
-                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="租金" style="width: 100px;">最大面积
-                </th>
-                <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="装修" style="width: 100px;">装修情况
-                </th>
-                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="小区" style="width: 100px;">小区
-                </th>
-                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="参考价" style="width: 100px;">参考价
-                </th>
-                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="售卖情况" style="width: 90px;"> 售卖情况
+                    aria-label="时间" style="width: 100px;">上架时间
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="时间" style="width: 100px;">交房时间
+                    aria-label="面积" style="width: 60px;">面积
+                </th>
+                <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="楼层" style="width: 60px;">楼层
+                </th>
+                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="房型" style="width: 100px;">房型
+                </th>
+                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="交通情况" style="width: 150px;">交通
+                </th>
+                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="朝向" style="width: 60px;">朝向
+                </th>
+                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="租金" style="width: 60px;">租金
                 </th>
                 <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
                     aria-label="操作" style="width: 150px;">操作
@@ -114,17 +116,37 @@
               <tbody>
               <tr role="row" class="odd">
                 <td><label><input type="checkbox"><span class="lbl"></span></label></td>
-                <td class="sorting_1" value="5">1</td>
+                <td class="sorting_1" value="5">5</td>
                 <!--<td><u style="cursor:pointer" class="text-primary">20141791</u></td>-->
-                <td>国贸天悦佘山（二期）</td>
-                <td>[松江佘山]沉塔路勋业路交汇处</td>
-                <td>75</td>
-                <td>140</td>
-                <td>精装</td>
-                <td>佘北家园悦山庭</td>
-                <td>3000000</td>
-                <td>在售</td>
-                <td>2017-08-01</td>
+                <td>02</td>
+                <td>重庆市渝北区加州城市花园</td>
+                <td>2017-10-12</td>
+                <td>182</td>
+                <td>8</td>
+                <td>三室一厅</td>
+                <td>距离1号线700米</td>
+                <td>朝南</td>
+                <td>3200</td>
+                <td class="td-manage">
+
+                  <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
+
+                  <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
+                </td>
+              </tr>
+              <tr role="row" class="even">
+                <td><label><input type="checkbox"><span class="lbl"></span></label></td>
+                <td class="sorting_1" value="5">5</td>
+                <!--<td><u style="cursor:pointer" class="text-primary">20141791</u></td>-->
+                <td>02</td>
+                <td>重庆市渝北区加州城市花园</td>
+                <td>2017-10-12</td>
+                <td>182</td>
+                <td>8</td>
+                <td>三室一厅</td>
+                <td>距离1号线700米</td>
+                <td>朝南</td>
+                <td>3200</td>
                 <td class="td-manage">
 
                   <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
@@ -154,54 +176,54 @@
   <ul class=" page-content">
 
     <li>
-      <label class="label_name">楼盘名称：</label>
+      <label class="label_name">社区ID：</label>
       <span class="add_name">
-          <input name="楼盘名称" type="text"  class="text_add"/>
+          <input name="社区ID" type="text"  class="text_add"/>
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
-      <label class="label_name">最小面积：</label>
+      <label class="label_name">上架时间：</label>
       <span class="add_name">
-       <input name="最小面积" type="text"  class="text_add" />
+        <input class="inline laydate-icon" id="start" style=" margin-left:10px;">
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
-      <label class="label_name">最大面积：</label>
+      <label class="label_name">面积：</label>
       <span class="add_name">
-          <input name="最大面积" type="text"  class="text_add" />
+          <input name="面积" type="text"  class="text_add" />
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
-      <label class="label_name">装修情况：</label>
+      <label class="label_name">楼层：</label>
       <span class="add_name">
-          <input name="装修情况" type="text"  class="text_add"/>
+          <input name="楼层" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
-      <label class="label_name">小区：</label>
+      <label class="label_name">房型：</label>
       <span class="add_name">
-          <input name="小区" type="text"  class="text_add"/>
+          <input name="房型" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
-      <label class="label_name">参考价：</label>
+      <label class="label_name">交通：</label>
       <span class="add_name">
-          <input name="参考价" type="text"  class="text_add"/>
+          <input name="交通" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
-      <label class="label_name">售卖情况：</label>
+      <label class="label_name">朝向：</label>
       <span class="add_name">
-          <input name="售卖情况" type="text"  class="text_add"/>
+          <input name="朝向" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
-      <label class="label_name">交房时间：</label>
+      <label class="label_name">租金：</label>
       <span class="add_name">
-         <input class="inline laydate-icon" id="start" style=" margin-left:10px;" name="交房时间">
+          <input name="租金" type="text"  class="text_add"/>
         </span>
     </li>
     <li class="adderss">
@@ -224,7 +246,7 @@
       "bStateSave": true,//状态保存
       "aoColumnDefs": [
         //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-        {"orderable":false,"aTargets":[0,2,3,6,7,9,11]}// 制定列不参与排序
+        {"orderable":false,"aTargets":[0,9]}// 制定列不参与排序
       ] } );
 
 

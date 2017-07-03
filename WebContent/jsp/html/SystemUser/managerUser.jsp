@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -31,7 +33,7 @@
       top: 15px;
       color: #307ecc;
     }
-  </style>
+    </style>
   <link rel="stylesheet" href="css/ace-rtl.min.css">
   <link rel="stylesheet" href="css/ace-skins.min.css">
 
@@ -46,8 +48,8 @@
           <div class="title_names">搜索查询</div>
           <ul class="search_content clearfix">
 
-            <li><label class="l_f" style="width: 60px">用户名称</label><input name="" type="text" class="text_add "
-                                                                          placeholder="输入用户名称、电话、邮箱" style=" width:300px"></li>
+            <li><label class="l_f" style="width: 60px">会员名称</label><input name="" type="text" class="text_add "
+                                                      placeholder="输入会员名称、电话、邮箱" style=" width:300px"></li>
 
             <li style="width:90px;">
               <button type="button" class="btn_search">查询</button>
@@ -57,7 +59,7 @@
 
         <div class="border clearfix" style="display: block">
                <span class="l_f">
-                <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加购买评论</a>
+                <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加用户</a>
                 <a href="javascript:ovid()" class="btn btn-danger">批量删除</a>
                </span>
           <!--<span class="r_f">共：<b>2345</b>条</span>-->
@@ -75,18 +77,26 @@
                   class="lbl"></span></label>
                 </th>
                 <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1"
-                    colspan="1" aria-sort="descending" aria-label="ID" style="width: 90px;">用户ID
+                    colspan="1" aria-sort="descending" aria-label="ID: 升序排列" style="width: 90px;">ID
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="楼盘ID" style="width: 80px;">楼盘ID
+                    aria-label="用户名" style="width: 80px;">姓名
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="评论" style="width: 80px;">评论
+                    aria-label="用户名" style="width: 80px;">用户名
                 </th>
                 <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="时间" style="width: 60px;">评论时间
+                    aria-label="性别" style="width: 60px;">性别
                 </th>
-
+                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="手机" style="width: 150px;">手机
+                </th>
+                <th width="150" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="邮箱" style="width: 150px;">邮箱
+                </th>
+                <th width="150" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="地址" style="width: 350px;">头像
+                </th>
                 <th width="250" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
                     aria-label="操作" style="width: 200px;">操作
                 </th>
@@ -96,11 +106,13 @@
               <tbody>
               <tr role="row" class="odd">
                 <td><label><input type="checkbox"><span class="lbl"></span></label></td>
-                <td class="sorting_1" value="5">20141791</td>
-                <td>2</td>
-                <td>阳光不错，价格也能接受。</td>
-                <td>2017-06-26 00:00:00</td>
-
+                <td class="sorting_1" value="5">2</td>
+                <td><u style="cursor:pointer" class="text-primary">郭子尧</u></td>
+                <td>gzy</td>
+                <td>男</td>
+                <td>13000000000</td>
+                <td>admin@mail.com</td>
+                <td class="text-l">http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png</td>
 
                 <td class="td-manage">
 
@@ -125,35 +137,27 @@
 <div class="add_menber" id="add_menber_style" style="display:none">
 
   <ul class=" page-content">
-    <li>
-      <label class="label_name">用户ID：</label>
-      <span class="add_name">
-          <input name="用户ID" type="text"  class="text_add"/>
-        </span>
-    </li>
+    <li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span class="add_name"><input value="" name="用户名" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">真实姓名：</label><span class="add_name"><input name="真实姓名" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
 
-    <li>
-      <label class="label_name">楼盘ID：</label>
-      <span class="add_name">
-          <input name="楼盘ID" type="text"  class="text_add"/>
-        </span>
-    </li>
-    <li>
-      <label class="label_name">买房时间：</label>
-      <span class="add_name">
-        <input class="inline laydate-icon" id="start" style=" margin-left:10px;">
-        </span>
+    <li><label class="label_name">密码：</label><span class="add_name"><input name="密码" type="password"  class="form-control"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
+     <label><input name="form-field-radio" type="radio" checked="checked" ><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
+     <label><input name="form-field-radio" type="radio" ><span class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
+     </span>
       <div class="prompt r_f"></div>
     </li>
-    <li class="adderss">
-      <label class="label_name">评论：</label>
-      <span class="add_name">
-          <!--<input name="评论" type="text"  class="text_add" style="width: 600px"/>-->
-         <textarea name="评论" cols="40 " rows="4"> </textarea>
+    <li><label class="label_name">手机：</label><span class="add_name"><input name="移动电话" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">邮箱：</label><span class="add_name"><input name="电子邮箱" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <!--<li class="adderss"><label class="label_name">家庭住址：</label><span class="add_name"><input name="家庭住址" type="text"  class="text_add" style=" width:350px"/></span><div class="prompt r_f"></div></li>-->
+    <li style="display: block">
+      <nobr>
+        <span class="add_name">
+        <label label class="label_name">图片：</label>
+        <input type="file" name="img" multiple="multiple"  style="display: inline-block" />
         </span>
-      <div class="prompt r_f"></div>
+      </nobr>
     </li>
-
   </ul>
 </div>
 
@@ -199,7 +203,7 @@
   $('#member_add').on('click', function(){
     layer.open({
       type: 1,
-      title: '添加用户评论',
+      title: '添加用户',
       maxmin: true,
       shadeClose: true, //点击遮罩关闭层
       area : ['800px' , ''],
@@ -258,7 +262,7 @@
   function member_edit(id){
     layer.open({
       type: 1,
-      title: '修改用户评论信息',
+      title: '修改用户信息',
       maxmin: true,
       shadeClose:false, //点击遮罩关闭层
       area : ['800px' , ''],

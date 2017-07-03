@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,7 +36,159 @@
   </style>
   <link rel="stylesheet" href="css/ace-rtl.min.css">
   <link rel="stylesheet" href="css/ace-skins.min.css">
+  <script type="text/javascript">
+    $(function(){
+      var cid = $('#nav_list> li>.submenu');
+      cid.each(function(i){
+        $(this).attr('id',"Sort_link_"+i);
 
+      })
+    })
+    jQuery(document).ready(function(){
+      $.each($(".submenu"),function(){
+        var $aobjs=$(this).children("li");
+        var rowCount=$aobjs.size();
+        var divHeigth=$(this).height();
+        $aobjs.height(divHeigth/rowCount);
+      });
+      //初始化宽度、高度
+      $("#main-container").height($(window).height()-76);
+      $("#iframe").height($(window).height()-140);
+
+      $(".sidebar").height($(window).height()-99);
+      var thisHeight = $("#nav_list").height($(window).outerHeight()-173);
+      $(".submenu").height();
+      $("#nav_list").children(".submenu").css("height",thisHeight);
+
+      //当文档窗口发生改变时 触发
+      $(window).resize(function(){
+        $("#main-container").height($(window).height()-76);
+        $("#iframe").height($(window).height()-140);
+        $(".sidebar").height($(window).height()-99);
+
+        var thisHeight = $("#nav_list").height($(window).outerHeight()-173);
+        $(".submenu").height();
+        $("#nav_list").children(".submenu").css("height",thisHeight);
+      });
+      $(".iframeurl").click(function(){
+        var cid = $(this).attr("name");
+        var cname = $(this).attr("title");
+        $("#iframe").attr("src",cid).ready();
+        $("#Bcrumbs").attr("href",cid).ready();
+        $(".Current_page a").attr('href',cid).ready();
+        $(".Current_page").attr('name',cid);
+        $(".Current_page").html(cname).css({"color":"#333333","cursor":"default"}).ready();
+        $("#parentIframe").html('<span class="parentIframe iframeurl"> </span>').css("display","none").ready();
+        $("#parentIfour").html(''). css("display","none").ready();
+      });
+
+
+    });
+
+    //jQuery( document).ready(function(){
+    //	  $("#submit").click(function(){
+    //	// var num=0;
+    //     var str="";
+    //     $("input[type$='password']").each(function(n){
+    //          if($(this).val()=="")
+    //          {
+    //              // num++;
+    //			   layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
+    //                title: '提示框',
+    //				icon:0,
+    //          });
+    //             // layer.msg(str+=""+$(this).attr("name")+"不能为空！\r\n");
+    //             layer.close(index);
+    //          }
+    //     });
+    //})
+    //	});
+    /*********************点击事件*********************/
+    $( document).ready(function(){
+      $('#nav_list').find('li.home').click(function(){
+        $('#nav_list').find('li.home').removeClass('active');
+        $(this).addClass('active');
+      });
+
+
+//时间设置
+      function currentTime(){
+        var d=new Date(),str='';
+        str+=d.getFullYear()+'年';
+        str+=d.getMonth() + 1+'月';
+        str+=d.getDate()+'日';
+        str+=d.getHours()+'时';
+        str+=d.getMinutes()+'分';
+        str+= d.getSeconds()+'秒';
+        return str;
+      }
+      setInterval(function(){$('#time').html(currentTime)},1000);
+//修改密码
+      $('.change_Password').on('click', function(){
+        layer.open({
+          type: 1,
+          title:'修改密码',
+          area: ['300px','300px'],
+          shadeClose: true,
+          content: $('#change_Pass'),
+          btn:['确认修改'],
+          yes:function(index, layero){
+            if ($("#password").val()==""){
+              layer.alert('原密码不能为空!',{
+                title: '提示框',
+                icon:0,
+
+              });
+              return false;
+            }
+            if ($("#Nes_pas").val()==""){
+              layer.alert('新密码不能为空!',{
+                title: '提示框',
+                icon:0,
+
+              });
+              return false;
+            }
+
+            if ($("#c_mew_pas").val()==""){
+              layer.alert('确认新密码不能为空!',{
+                title: '提示框',
+                icon:0,
+
+              });
+              return false;
+            }
+            if(!$("#c_mew_pas").val || $("#c_mew_pas").val() != $("#Nes_pas").val() )
+            {
+              layer.alert('密码不一致!',{
+                title: '提示框',
+                icon:0,
+
+              });
+              return false;
+            }
+            else{
+              layer.alert('修改成功！',{
+                title: '提示框',
+                icon:1,
+              });
+              layer.close(index);
+            }
+          }
+        });
+      });
+      $('#Exit_system').on('click', function(){
+        layer.confirm('是否确定退出系统？', {
+            btn: ['是','否'] ,//按钮
+            icon:2,
+          },
+          function(){
+            location.href="login.html";
+
+          });
+      });
+    })
+  </script>
 
 </head>
 <body>
@@ -46,8 +200,8 @@
           <div class="title_names">搜索查询</div>
           <ul class="search_content clearfix">
 
-            <li><label class="l_f" style="width: 60px">租房ID</label><input name="" type="text" class="text_add "
-                                                      placeholder="输入租房ID" style=" width:300px"></li>
+            <li><label class="l_f" style="width: 80px">经纪人名称</label><input name="" type="text" class="text_add "
+                                                                          placeholder="输入经纪人名称、电话、邮箱" style=" width:300px"></li>
 
             <li style="width:90px;">
               <button type="button" class="btn_search">查询</button>
@@ -57,10 +211,10 @@
 
         <div class="border clearfix" style="display: block">
                <span class="l_f">
-                <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加租房</a>
+                <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加经纪人</a>
                 <a href="javascript:ovid()" class="btn btn-danger">批量删除</a>
                </span>
-          <span class="r_f">共：<b>2345</b>条</span>
+          <!--<span class="r_f">共：<b>2345</b>条</span>-->
         </div>
 
         <div class="table_menu_list">
@@ -75,76 +229,43 @@
                   class="lbl"></span></label>
                 </th>
                 <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1"
-                    colspan="1" aria-sort="descending" aria-label="租房编号" style="width: 80px;">租房编号
+                    colspan="1" aria-sort="descending" aria-label="ID: 升序排列" style="width: 90px;">ID
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="社区ID" style="width: 80px;">社区编号
+                    aria-label="用户名" style="width: 80px;">姓名
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="地址" style="width: 200px;">地址
-                </th>
-                <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="时间" style="width: 100px;">上架时间
-                </th>
-                <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="面积" style="width: 60px;">面积
+                    aria-label="用户名" style="width: 80px;">用户名
                 </th>
                 <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="楼层" style="width: 60px;">楼层
+                    aria-label="性别" style="width: 60px;">性别
                 </th>
                 <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="房型" style="width: 100px;">房型
+                    aria-label="手机" style="width: 150px;">手机
                 </th>
-                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="交通情况" style="width: 150px;">交通
+                <th width="150" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="邮箱" style="width: 150px;">邮箱
                 </th>
-                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="朝向" style="width: 60px;">朝向
+                <th width="150" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="地址" style="width: 350px;">头像
                 </th>
-                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="租金" style="width: 60px;">租金
-                </th>
-                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="操作" style="width: 150px;">操作
+                <th width="250" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="操作" style="width: 200px;">操作
                 </th>
 
               </tr>
-
               </thead>
               <tbody>
               <tr role="row" class="odd">
                 <td><label><input type="checkbox"><span class="lbl"></span></label></td>
-                <td class="sorting_1" value="5">5</td>
-                <!--<td><u style="cursor:pointer" class="text-primary">20141791</u></td>-->
-                <td>02</td>
-                <td>重庆市渝北区加州城市花园</td>
-                <td>2017-10-12</td>
-                <td>182</td>
-                <td>8</td>
-                <td>三室一厅</td>
-                <td>距离1号线700米</td>
-                <td>朝南</td>
-                <td>3200</td>
-                <td class="td-manage">
+                <td class="sorting_1" value="5">2</td>
+                <td><u style="cursor:pointer" class="text-primary">郭子尧</u></td>
+                <td>gzy</td>
+                <td>男</td>
+                <td>13000000000</td>
+                <td>admin@mail.com</td>
+                <td class="text-l">http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png</td>
 
-                  <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
-
-                  <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
-                </td>
-              </tr>
-              <tr role="row" class="even">
-                <td><label><input type="checkbox"><span class="lbl"></span></label></td>
-                <td class="sorting_1" value="5">5</td>
-                <!--<td><u style="cursor:pointer" class="text-primary">20141791</u></td>-->
-                <td>02</td>
-                <td>重庆市渝北区加州城市花园</td>
-                <td>2017-10-12</td>
-                <td>182</td>
-                <td>8</td>
-                <td>三室一厅</td>
-                <td>距离1号线700米</td>
-                <td>朝南</td>
-                <td>3200</td>
                 <td class="td-manage">
 
                   <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
@@ -164,74 +285,31 @@
 </div>
 
 
-<style>
-  .notnull{
 
-  }
-</style>
 <div class="add_menber" id="add_menber_style" style="display:none">
 
   <ul class=" page-content">
+    <li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span class="add_name"><input value="" name="用户名" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">真实姓名：</label><span class="add_name"><input name="真实姓名" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
 
-    <li>
-      <label class="label_name">社区ID：</label>
-      <span class="add_name">
-          <input name="社区ID" type="text"  class="text_add"/>
-        </span>
+    <li><label class="label_name">密码：</label><span class="add_name"><input name="密码" type="password"  class="form-control"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
+     <label><input name="form-field-radio" type="radio" checked="checked" ><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
+     <label><input name="form-field-radio" type="radio" ><span class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
+     </span>
       <div class="prompt r_f"></div>
     </li>
-    <li>
-      <label class="label_name">上架时间：</label>
-      <span class="add_name">
-        <input class="inline laydate-icon" id="start" style=" margin-left:10px;">
+    <li><label class="label_name">手机：</label><span class="add_name"><input name="移动电话" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">邮箱：</label><span class="add_name"><input name="电子邮箱" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <!--<li class="adderss"><label class="label_name">家庭住址：</label><span class="add_name"><input name="家庭住址" type="text"  class="text_add" style=" width:350px"/></span><div class="prompt r_f"></div></li>-->
+    <li style="display: block">
+      <nobr>
+        <span class="add_name">
+        <label label class="label_name">图片：</label>
+        <input type="file" name="img" multiple="multiple"  style="display: inline-block" />
         </span>
-      <div class="prompt r_f"></div>
+      </nobr>
     </li>
-    <li>
-      <label class="label_name">面积：</label>
-      <span class="add_name">
-          <input name="面积" type="text"  class="text_add" />
-        </span>
-      <div class="prompt r_f"></div>
-    </li>
-    <li>
-      <label class="label_name">楼层：</label>
-      <span class="add_name">
-          <input name="楼层" type="text"  class="text_add"/>
-        </span>
-    </li>
-    <li>
-      <label class="label_name">房型：</label>
-      <span class="add_name">
-          <input name="房型" type="text"  class="text_add"/>
-        </span>
-    </li>
-    <li>
-      <label class="label_name">交通：</label>
-      <span class="add_name">
-          <input name="交通" type="text"  class="text_add"/>
-        </span>
-    </li>
-    <li>
-      <label class="label_name">朝向：</label>
-      <span class="add_name">
-          <input name="朝向" type="text"  class="text_add"/>
-        </span>
-    </li>
-    <li>
-      <label class="label_name">租金：</label>
-      <span class="add_name">
-          <input name="租金" type="text"  class="text_add"/>
-        </span>
-    </li>
-    <li class="adderss">
-      <label class="label_name">地址：</label>
-      <span class="add_name">
-          <input name="地址" type="text"  class="text_add" style="width: 350px"/>
-        </span>
-      <div class="prompt r_f"></div>
-    </li>
-
   </ul>
 </div>
 
@@ -244,7 +322,7 @@
       "bStateSave": true,//状态保存
       "aoColumnDefs": [
         //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-        {"orderable":false,"aTargets":[0,9]}// 制定列不参与排序
+        {"orderable":false,"aTargets":[0,7]}// 制定列不参与排序
       ] } );
 
 
@@ -287,7 +365,7 @@
         var num=0;
         var str="";
         $(".add_menber input[type$='text']").each(function(n){
-          if($(this).val()=="" )
+          if($(this).val()=="")
           {
 
             layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{

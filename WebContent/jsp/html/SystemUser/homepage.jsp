@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- saved from url=(0134)./home.html# -->
 <html lang="en">
 <head>
@@ -12,34 +14,33 @@
 
 
 
-
-
-  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+ <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <script src="js/ace.min.js"></script>
-  <script src="js/ace-elements.min.js"></script>
-  <script src="js/ace-extra.min.js"></script>
-  <script src="js/bar.js"></script>
-  <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/codemirror.css">
-  <link rel="stylesheet" href="css/ace.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/typeahead-bs2.min.js"></script>
-  <script src="js/jquery.dataTables.min.js"></script>
-  <script src="js/jquery.dataTables.bootstrap.js"></script>
-  <script src="js/H-ui.js"></script>
-  <script src="js/H-ui.admin.js"></script>
-  <script src="js/layer.js"></script>
-  <link rel="stylesheet" href="css/layer.css">
-  <script src="js/laydate.js"></script>
-  <link rel="stylesheet" href="css/laydate.css">
-  <link rel="stylesheet" href="css/laydate(1).css">
+
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/bootstrap.min.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/ace.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/ace-elements.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/ace-extra.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/bar.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/dataTables.bootstrap.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/style.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/style.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/codemirror.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/font-awesome.min.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/bootstrap.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/typeahead-bs2.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.dataTables.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.dataTables.bootstrap.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/H-ui.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/H-ui.admin.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/layer.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/layer.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/laydate.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/laydate.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/laydate(1).css>
 
 
   <script type="text/javascript">
@@ -123,7 +124,7 @@
             icon: 2,
           },
           function () {
-            location.href = "login.html";
+            location.href = '${pageContext.request.contextPath}/jsp/html/SystemUser/adminLogin.jsp';
 
           });
       });
@@ -142,9 +143,9 @@
   </script>
   <div class="navbar-container" id="navbar-container">
     <div class="navbar-header pull-left">
-      <a href="./home.html#" class="navbar-brand">
+      <a href=${pageContext.request.contextPath}/jsp/html/SystemUser/home.jsp# class="navbar-brand">
         <small>
-          <img src="../../images/SystemUser/logo.png">
+          <!--<img src="../../images/SystemUser/logo.png">-->
         </small>
       </a><!-- /.brand -->
     </div><!-- /.navbar-header -->
@@ -159,7 +160,7 @@
     }
   </script>
   <div class="main-container-inner">
-    <a class="menu-toggler" id="menu-toggler" href="./home.html#">
+    <a class="menu-toggler" id="menu-toggler" href=${pageContext.request.contextPath}/jsp/html/SystemUser/home.jsp#>
       <span class="menu-text"></span>
     </a>
     <div class="sidebar" id="sidebar" style="height: 514px;">
@@ -182,7 +183,7 @@
       </div><!-- #sidebar-shortcuts -->
       <ul class="nav nav-list" id="nav_list" style="height: 440px;text-align: right">
         <li class="home">
-          <a href="javascript:void(0)"  name="./home.html" class="iframeurl" title="">
+          <a href="javascript:void(0)"  name=${pageContext.request.contextPath}/jsp/html/SystemUser/home.jsp class="iframeurl" title="">
             <span class="menu-text"> 系统首页 </span>
           </a>
         </li>
@@ -191,10 +192,10 @@
           <a class="dropdown-toggle" href="#"><span class="menu-text"> 用户 </span></a>
           <ul class="submenu" id="Sort_link_1">
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="用户管理" name="managerUser.html" class="iframeurl" style="text-align: center">用户管理</a>
+              <a href="#" title="用户管理" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerUser.jsp class="iframeurl" style="text-align: center">用户管理</a>
             </li>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="用户统计" name="managerCalUser.html" class="iframeurl" style="text-align: center">用户统计</a>
+              <a href="#" title="用户统计" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerCalUser.jsp class="iframeurl" style="text-align: center">用户统计</a>
             </li>
           </ul>
         </li>
@@ -203,45 +204,45 @@
           <a href="#" class="dropdown-toggle"><span class="menu-text"> 租房管理 </span></a>
           <ul class="submenu" id="Sort_link_2">
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="租房管理" class="iframeurl" name="managerRent.html" style="text-align: center">租房管理</a>
+              <a href="#" title="租房管理" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerRent.jsp style="text-align: center">租房管理</a>
             </li>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="租房记录" name="managerRentHistory.html" class="iframeurl" style="text-align: center">租房记录</a>
+              <a href="#" title="租房记录" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerRentHistory.jsp class="iframeurl" style="text-align: center">租房记录</a>
             </li>
           </ul>
         </li>
 
 
         <li>
-          <a href="#" class="iframeurl" name="managerAgent.html"><span class="menu-text"> 经纪人 </span></a>
+          <a href="#" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerAgent.jsp><span class="menu-text"> 经纪人 </span></a>
         </li>
 
         <li>
-          <a href="#" class="dropdown-toggle" name="managerBuilding.html"><span class="menu-text"> 楼盘管理 </span></a>
+          <a href="#" class="dropdown-toggle" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuilding.jsp><span class="menu-text"> 楼盘管理 </span></a>
           <ul class="submenu" id="Sort_link_5">
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘管理" class="iframeurl" name="managerBuilding.html" style="text-align: center">楼盘管理</a>
+              <a href="#" title="楼盘管理" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuilding.jsp style="text-align: center">楼盘管理</a>
             </li>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘图片" class="iframeurl" name="managerBuildingPic.html" style="text-align: center">楼盘图片</a>
+              <a href="#" title="楼盘图片" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingPic.jsp style="text-align: center">楼盘图片</a>
             </li>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘交易" name="managerBuildingHistory.html" class="iframeurl" style="text-align: center">买房记录</a>
+              <a href="#" title="楼盘交易" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingHistory.jsp class="iframeurl" style="text-align: center">买房记录</a>
             </li>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘评论" name="managerBuildingComment.html" class="iframeurl" style="text-align: center">楼盘评论</a>
+              <a href="#" title="楼盘评论" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingComment.jsp class="iframeurl" style="text-align: center">楼盘评论</a>
             </li>
           </ul>
         </li>
 
         <li>
-          <a href="#" class="dropdown-toggle" name="managerPic.html"><span class="menu-text"> 图片 </span></a>
+          <a href="#" class="dropdown-toggle" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerPic.jsp><span class="menu-text"> 图片 </span></a>
           <ul class="submenu" id="Sort_link_3">
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘图片" class="iframeurl" name="managerBuildingPic.html" style="text-align: center">楼盘图片</a>
+              <a href="#" title="楼盘图片" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingPic.jsp style="text-align: center">楼盘图片</a>
             </li>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="租房图片" name="managerRentPic.html" class="iframeurl" style="text-align: center">租房图片</a>
+              <a href="#" title="租房图片" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerRentPic.jsp class="iframeurl" style="text-align: center">租房图片</a>
             </li>
           </ul>
         </li>
@@ -249,24 +250,24 @@
           <a href="#" class="dropdown-toggle"><span class="menu-text"> 交易记录 </span></a>
           <ul class="submenu" id="Sort_link_4">
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="卖房记录" class="iframeurl" name="managerBuildingHistory.html" style="text-align: center">买房记录</a>
+              <a href="#" title="卖房记录" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingHistory.jsp style="text-align: center">买房记录</a>
             </li>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="租房记录" name="managerRentHistory.html" class="iframeurl" style="text-align: center">租房记录</a>
+              <a href="#" title="租房记录" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerRentHistory.jsp class="iframeurl" style="text-align: center">租房记录</a>
             </li>
           </ul>
         </li>
         <li>
-          <a  class="iframeurl" name="managerApplicant.html"><span class="menu-text"> 申请处理 </span></a>
+          <a  class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerApplicant.jsp><span class="menu-text"> 申请处理 </span></a>
         </li>
         <li>
-          <a  class="dropdown-toggle" name="managerComment.html"><span class="menu-text"> 评论管理 </span></a>
+          <a  class="dropdown-toggle" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerComment.jsp><span class="menu-text"> 评论管理 </span></a>
           <ul class="submenu" id="Sort_link_6">
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘评论" name="managerBuildingComment.html" class="iframeurl" style="text-align: center">楼盘评论</a>
+              <a href="#" title="楼盘评论" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingComment.jsp class="iframeurl" style="text-align: center">楼盘评论</a>
             </li>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="租房评论" name="managerRentComment.html" class="iframeurl" style="text-align: center">租房评论</a>
+              <a href="#" title="租房评论" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerRentComment.jsp class="iframeurl" style="text-align: center">租房评论</a>
             </li>
           </ul>
         </li>
@@ -295,7 +296,7 @@
         <ul class="breadcrumb">
           <li>
             <i class="icon-home home-icon"></i>
-            <a href="./home.html">首页</a>
+            <a href=${pageContext.request.contextPath}/jsp/html/SystemUser/home.jsp>首页</a>
           </li>
           <li class="active"><span class="Current_page iframeurl"></span></li>
           <li class="active" id="parentIframe"><span class="parentIframe iframeurl"></span></li>
@@ -305,8 +306,8 @@
 
 
 
-      <iframe id="iframe" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "
-              name="iframe" frameborder="0" src="./home.html"></iframe>
+      <iframe id="iframe" style="border: 0px; width: 90%; background-color: rgb(255, 255, 255); height: 473px; "
+              name="iframe" frameborder="0" src=${pageContext.request.contextPath}/jsp/html/SystemUser/home.jsp></iframe>
       <!--<iframe id="managerUser" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
               <!--name="iframe" frameborder="0" src="./managerUser.html"></iframe>-->
       <!--<iframe id="managerRent" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->

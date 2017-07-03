@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -38,6 +40,7 @@
 
 </head>
 <body>
+<div class="page-content clearfix">
   <div class="page-content clearfix" style="display: inline-block">
     <div id="Member_Ratings">
       <div class="d_Confirm_Order_style">
@@ -45,8 +48,8 @@
           <div class="title_names">搜索查询</div>
           <ul class="search_content clearfix">
 
-            <li><label class="l_f" style="width: 70px">租房ID</label><input name="" type="text" class="text_add "
-                                                      placeholder="输入租房ID" style=" width:300px"></li>
+            <li><label class="l_f" style="width: 60px">楼盘ID</label><input name="" type="text" class="text_add "
+                                                                          placeholder="输入楼盘ID" style=" width:300px"></li>
 
             <li style="width:90px;">
               <button type="button" class="btn_search">查询</button>
@@ -56,10 +59,10 @@
 
         <div class="border clearfix" style="display: block">
                <span class="l_f">
-                <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加租房记录</a>
+                <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加楼盘图片</a>
                 <a href="javascript:ovid()" class="btn btn-danger">批量删除</a>
                </span>
-          <!--<span class="r_f">共：<b>2345</b>条</span>-->
+          <span class="r_f">共：<b>2345</b>条</span>
         </div>
 
         <div class="table_menu_list">
@@ -68,49 +71,42 @@
             <table class="table table-striped table-bordered table-hover dataTable no-footer" id="sample-table"
                    role="grid" aria-describedby="sample-table_info">
               <thead>
-              <tr role="row" class="odd">
+              <tr role="row">
                 <th width="25" class="sorting_disabled" rowspan="1" colspan="1" aria-label=""
                     style="width: 20.3333px;"><label><input id="selectedAll" type="checkbox"><span
                   class="lbl"></span></label>
                 </th>
-                <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1"
-                    colspan="1" aria-sort="descending" aria-label="交易ID" style="width: 90px;">交易ID
+                <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1"
+                    colspan="1" aria-sort="descending" aria-label="楼盘编号" style="width: 150px;">楼盘编号
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="经纪人ID" style="width: 120px;">经纪人编号
+                    aria-label="图片类型" style="width: 150px;">图片类型
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="租房ID" style="width: 120px;">租房编号
-                </th>
-                <th width="150" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="用户ID" style="width: 150px;">用户ID
+                    aria-label="图片链接" style="width: 400px;">图片链接
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="时间" style="width: 150px;">租房时间
+                    aria-label="时间" style="width: 250px;"> 插入时间
                 </th>
-                <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="租期" style="width: 150px;">租期
+
+                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    aria-label="操作" style="width: 150px;">操作
                 </th>
-                <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="租金" style="width: 120px;">租金(元/月)
-                </th>
-                <th width="150" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="操作" style="width: 250px;">操作
-                </th>
+
+
 
               </tr>
+
               </thead>
               <tbody>
-
               <tr role="row" class="odd">
                 <td><label><input type="checkbox"><span class="lbl"></span></label></td>
-                <td class="sorting_1" value="5">1</td>
-                <td>02</td>
-                <td>21242</td>
-                <td>20141791</td>
-                <td>2017-07-02</td>
-                <td>1年</td>
-                <td>3200</td>
+                <td class="sorting_1" value="5">5</td>
+                <!--<td><u style="cursor:pointer" class="text-primary">20141791</u></td>-->
+                <td>卧室</td>
+                <td>http://os8z6i0zb.bkt.clouddn.com/Pic1</td>
+                <td>2017-07-08 00:00:00</td>
+
                 <td class="td-manage">
 
                   <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
@@ -126,51 +122,42 @@
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 
+<style>
+  .notnull{
 
+  }
+</style>
 <div class="add_menber" id="add_menber_style" style="display:none">
 
   <ul class=" page-content">
-    <li>
-      <label class="label_name">经纪人ID：</label>
-      <span class="add_name">
-          <input name="经纪人ID" type="text"  class="text_add"/>
-        </span>
-    </li>
-    <li>
-      <label class="label_name">租房编号：</label>
-      <span class="add_name">
-          <input name="租房编号" type="text"  class="text_add"/>
-        </span>
-    </li>
-    <li>
-      <label class="label_name">用户ID：</label>
-      <span class="add_name">
-          <input name="用户ID" type="text"  class="text_add"/>
-        </span>
-    </li>
 
     <li>
-      <label class="label_name">租房时间：</label>
+      <label class="label_name">楼盘编号：</label>
       <span class="add_name">
-        <input class="inline laydate-icon" id="start" style=" margin-left:10px;">
+          <input name="楼盘编号" type="text"  class="text_add"/>
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
-      <label class="label_name">租期：</label>
+      <label class="label_name">图片类型：</label>
       <span class="add_name">
-          <input name="租期" type="text"  class="text_add"/>
+        <input name="图片类型" type="text"  class="text_add"/>
         </span>
+      <div class="prompt r_f"></div>
     </li>
     <li>
-      <label class="label_name">租金(月)：</label>
+      <label class="label_name">上传图片：</label>
       <span class="add_name">
-          <input name="租金" type="text"  class="text_add"/>
+           <input type="file" name="img" multiple="multiple"  style="display: inline-block" />
         </span>
+      <div class="prompt r_f"></div>
     </li>
+
+
   </ul>
 </div>
 
@@ -183,7 +170,7 @@
       "bStateSave": true,//状态保存
       "aoColumnDefs": [
         //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-        {"orderable":false,"aTargets":[0,9]}// 制定列不参与排序
+        {"orderable":false,"aTargets":[0]}// 制定列不参与排序
       ] } );
 
 
@@ -226,7 +213,7 @@
         var num=0;
         var str="";
         $(".add_menber input[type$='text']").each(function(n){
-          if($(this).val()=="")
+          if($(this).val()=="" )
           {
 
             layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{

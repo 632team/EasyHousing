@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -46,8 +48,8 @@
           <div class="title_names">搜索查询</div>
           <ul class="search_content clearfix">
 
-            <li><label class="l_f" style="width: 60px">楼盘ID</label><input name="" type="text" class="text_add "
-                                                                          placeholder="输入楼盘ID" style=" width:300px"></li>
+            <li><label class="l_f" style="width: 60px">租房ID</label><input name="" type="text" class="text_add "
+                                                                          placeholder="输入租房ID" style=" width:300px"></li>
 
             <li style="width:90px;">
               <button type="button" class="btn_search">查询</button>
@@ -57,7 +59,7 @@
 
         <div class="border clearfix" style="display: block">
                <span class="l_f">
-                <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加楼盘图片</a>
+                <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加租房图片</a>
                 <a href="javascript:ovid()" class="btn btn-danger">批量删除</a>
                </span>
           <span class="r_f">共：<b>2345</b>条</span>
@@ -75,7 +77,7 @@
                   class="lbl"></span></label>
                 </th>
                 <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1"
-                    colspan="1" aria-sort="descending" aria-label="楼盘编号" style="width: 150px;">楼盘编号
+                    colspan="1" aria-sort="descending" aria-label="租房编号" style="width: 150px;">租房编号
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
                     aria-label="图片类型" style="width: 150px;">图片类型
@@ -134,9 +136,9 @@
   <ul class=" page-content">
 
     <li>
-      <label class="label_name">楼盘编号：</label>
+      <label class="label_name">租房编号：</label>
       <span class="add_name">
-          <input name="楼盘编号" type="text"  class="text_add"/>
+          <input name="租房编号" type="text"  class="text_add"/>
         </span>
       <div class="prompt r_f"></div>
     </li>
