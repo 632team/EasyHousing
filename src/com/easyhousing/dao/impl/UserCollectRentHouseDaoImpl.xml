@@ -13,4 +13,7 @@
 		SELECT * FROM UserCollectRentHouse WHERE userId=#{userId}
 	</select>
 
+	<select id="selectAllByUserIdRentHouseId" parameterType="com.easyhousing.model.UserCollectRentHouse" resultType="com.easyhousing.model.UserCollectRentHouse">
+		SELECT * FROM UserCollectRentHouse WHERE userId=#{userId} AND rentHouseId=#{rentHouseId}
+	</select>
 </mapper>

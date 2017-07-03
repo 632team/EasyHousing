@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.easyhousing.model.RentHouse;
+import com.easyhousing.model.User;
+import com.easyhousing.service.RentHouseCollect;
 import com.easyhousing.service.RentHousePicUrlService;
 import com.easyhousing.service.RentHouseSearch;
 
@@ -21,6 +23,9 @@ public class RentHouseDetailController {
 	
 	@Autowired
 	private RentHouseSearch rentHouseSearch;
+	
+	@Autowired
+	private RentHouseCollect rentHouseCollect;
 	
 	@Autowired
 	private RentHousePicUrlService rentHousePicUrlService;
@@ -52,6 +57,15 @@ public class RentHouseDetailController {
 				System.err.println(iString);
 			}
 		}
+		User user = (User)session.getAttribute("user");
+		int haveRent =  0;
+		if(user != null)
+			haveRent = rentHouseCollect.selectByUserIdRentHouseId(user.getUserId(), rentHouseId);
+		if(user != null)
+			System.err.println(user.getUserId());
+		System.err.println(rentHouseId);
+		System.err.println(haveRent);
+		session.setAttribute("haveRent", haveRent);
 		session.setAttribute("rentHouse", rentHouse);
 		session.setAttribute("rentHousePicList", rentHousePicList);
 		modelAndView.setViewName("rentDetail");

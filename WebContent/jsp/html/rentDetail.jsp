@@ -778,13 +778,38 @@
           <div class="btnContainer ">
             <button id="follow"
             <%
-             if (s.getAttribute("user") == null) {
-            	 out.print("href=/EasyHousing/jsp/html/logIn.jsp");
-             }
-             else {
-            	 out.print("href='${pageContext.request.contextPath}/collect.do'");
-             }
-             %>>关注房源</button>
+            int ok1 = 1;
+            int ok2 = 0;
+            if (s.getAttribute("user") == null)
+            	ok1 = 0;
+            else
+            	ok1 = 1;
+            if(s.getAttribute("haveRent") == null) {
+            	ok2 = 0;
+            }
+            else {
+            	ok2 = (Integer)s.getAttribute("haveRent");
+            }
+            if(ok1 == 0) {
+            	out.print("onclick=\"window.location.href='/EasyHousing/jsp/html/logIn.jsp'\"");
+            }
+            else if(ok2 == 0) {
+            	out.print("onclick=\"window.location.href='/EasyHousing/rentHouseCollect.do'\"");
+            }
+            else {
+            	out.print("onclick=\"window.location.href='/EasyHousing/calcelRentHouseCollect.do'\"");
+            }
+            %>>
+            <%
+            System.err.println(ok1);
+            System.err.println(ok2);
+            if(ok1 != 0 && ok2 != 0) {
+            	out.print("已关注房源");
+            }
+            else {
+            	out.print("关注房源");
+            }
+            %></button>
           </div>
         </div>
       </div>
