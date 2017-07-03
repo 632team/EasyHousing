@@ -11,4 +11,5 @@ public interface BuyHouseCommentDao {
 	public int updateBuyHouseComment(BuyHouseComment u);
 	public BuyHouseComment selectBuyHouseComment(BuyHouseComment u);
 	public List<BuyHouseComment> selectAllByUserId(int id);
+	public List<BuyHouseComment> selectAllByBuildingId(int id);
 }

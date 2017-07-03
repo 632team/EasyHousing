@@ -477,7 +477,7 @@
               <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">二手房</a>
             </span>
             <span>
-              <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">新房</a>
+              <a href=${pageContext.request.contextPath}/buildingSelect.do class="href">新房</a>
             </span>
             <span>
               <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="href">租房</a>
@@ -494,7 +494,7 @@
           <div class="sh_l fl">
             <div class="sh_sel fl">
               <span>
-                租房
+              	 租房
               </span>
               <ul id="serchar" style>
                 <li class="sel">
@@ -508,7 +508,7 @@
                 </li>
               </ul>
             </div>
-            <input type="text" id="autoSearchText" value="请输入位置开始找房" class="text" maxlength="20" autocomplete="off">
+            <input type="text" id="autoSearchText" placeholder="请输入位置开始找房" class="text" maxlength="20" autocomplete="off">
             <div id="autoSearchItem" style="height:285px; visibility: hidden">
             </div>
             <input type="button" value onclick="indexSerch()" class="btn">

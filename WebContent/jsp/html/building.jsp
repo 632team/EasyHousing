@@ -1,16 +1,16 @@
-<%@page import="com.easyhousing.model.RentHouse"%>
-<%@page import="java.util.*"%>
-<%@page import="java.lang.Math"%>
+<%@page import="java.util.List"%>
+<%@page import="com.easyhousing.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+HttpSession s = request.getSession(); 
+String strtemp;
+List<BuildingInfo> list = (List<BuildingInfo>)s.getAttribute("buildingList");
+%>
 <html>
 <head>
-  <%
-  HttpSession s = request.getSession(); 
-  String strtemp;
-  %>
-  <title>租房</title>
+  <title>新房</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -52,39 +52,52 @@
       padding-top: 20px;
       position: relative;
     }
+    /*logo CSS*/
     .listhead .header .logo {
       width: 120px;
       margin-top: -1px;
-      margin-left:60px;
+      margin-left: 60px;
     }
-  .header .logo {
-  width: 120px;
-  height:50px;
-  margin-top: 0px;
-  float: left;
-  }
+    .header .logo {
+      width: 120px;
+      height:50px;
+      margin-top: 0px;
+      float: left;
+    }
     .listhead .header .nav {
       height: 60px;
       font-size: 15px;
+
     }
-  .header .nav {
-  width: 600px;
-  height: 30px;
-  float: right;
-  font-size: 15px;
-  font-weight:bold;
-  margin-right: 350px;
-  margin-top: -30px;
-  }
-  .header .nav1 {
-  width: 100px;
-  height: 30px;
-  float: right;
-  font-size: 12px;
-  font-weight: bold;
-  margin-top: -7px;
-  margin-right: -5px;
-  }
+    /* .header .nav {
+       width: 850px;
+       height: 50px;
+       float: left;
+       font-size: 18px;
+       font-weight: bold;
+       margin-left: 100px;
+     }*/
+    /*顶上字体CSS*/
+    .header .nav {
+      width: 600px;
+      height: 30px;
+      float: right;
+      font-size: 15px;
+      font-weight:bold;
+      margin-right: 350px;
+      margin-top: -30px;
+    }
+    /*登录注册字体CSS*/
+    .header .nav1 {
+      width: 100px;
+      height: 30px;
+      float: right;
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: -7px;
+      margin-right: -5px;
+    }
+    /*搜索框大小CSS*/
     .listhead .header .nav span {
       height: 160px;
       margin: 0;
@@ -99,6 +112,7 @@
     .header a {
       color: #fff;
     }
+    /*搜索栏灰色底框距离底部的距离*/
     .wsrrent {
       width: 100%;
       border-bottom: 1px solid #ddd;
@@ -106,12 +120,16 @@
       margin-bottom: 30px;
       box-shadow: 0 1px 1px #e1e1e1;
     }
-  .wsrrent .container {
-  width: 100%;
-  height:110px;
-  margin-top: 70px;             /*搜索底框的上边距离顶栏的距离*/
-  background:#faf7fa;
-  }
+
+    /*搜索栏白色底框CSS*/
+    .wsrrent .container {
+      width: 100%;
+      height:110px;
+      margin-top: 70px;             /*搜索底框的上边距离顶栏的距离*/
+      background:#faf7fa;
+    }
+
+    /*范围栏*/
     .container {
       width: 1200px;
       margin: auto;
@@ -120,18 +138,20 @@
       height: 35px;
       padding: 10px 0;
     }
+    /*搜索框边线*/
     .subsh_l {
       width: 388px;
       height: 33px;
       border: 1px solid #bbb;
       position: relative;
       background: #fff;
-  margin-left: 110px;
-  margin-top:20px;
+      margin-left: 110px;
+      margin-top:20px;
     }
     .fl {
       float: left;
     }
+    /*搜索小框内文字*/
     .subsh_l .sd_sel {
       width: 60px;
       height: 33px;
@@ -245,10 +265,12 @@
       width: 85px;
       height: 31px;
       line-height: 31px;
-      /*border: 2px solid #ddd;
-      border-right: none;
-      border-top-left-radius: 5px;
+
+      /*border: 2px solid #ddd;*/
+      /*border-right: none;*/
+      /*border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;*/
+
       color: #333;
     }
     .subsh_r a {
@@ -267,16 +289,21 @@
     .subsh_r .al span {
       padding-left: 15px;
       background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/djimg25.png) no-repeat left center;
+
+
     }
     .subsh_r a span {
       display: inline-block;
     }
     strong, b {
       font-weight: bold;
-  font-size: 16px;
+      font-size: 16px;
+
     }
     .subsh_r .al span i {
       display: none;
+
+
     }
     i, em {
       font-style: normal;
@@ -291,8 +318,8 @@
     }
     .current {
       width: 1205px;
-     /* margin: auto;*/
-  margin-left: 30px;
+      /*margin: auto;*/
+      margin-left: 30px;
       font-size: 14px;
       height: 32px;
       line-height: 32px;
@@ -347,12 +374,13 @@
       border-top: none;
       display: none;
       background: #fff;
-  margin-left: 30px;
-  margin-right: 20px;
+      margin-left: 30px;
+      margin-right: 20px;
 
-  }
+    }
     .nv_menu ul {
       padding: 10px 20px 0 20px;
+
     }
     .nv_menu li {
       padding: 6px 0;
@@ -363,7 +391,7 @@
       font-weight: bold;
     }
     .nv_menu li .on {
-      color: #c00000;
+      color: #449d44;
       font-weight: bold;
     }
     .nv_menu li a {
@@ -399,7 +427,7 @@
       width: 500px;
       height: 35px;
       overflow: hidden;
-  margin-left: 30px;
+      margin-left: 30px;
     }
     .fl {
       float: left;
@@ -416,7 +444,7 @@
       height: 35px;
       text-align: right;
       overflow: hidden;
-  margin-right: 20px;
+      margin-right: 20px;
     }
     .fr {
       float: right;
@@ -474,87 +502,87 @@
       -webkit-margin-after: 1em;
       -webkit-margin-start: 0px;
       -webkit-margin-end: 0px;
-      /*-webkit-padding-start: 40px;*/
-  margin-left: 30px;
-  margin-right: 20px;
-    }
-  .mor_list li {
-  height: 190px;
-  padding: 20px 10px 20px 195px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  }
-  .data_link {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 200;
-  display: block;
 
-  }
-  a {
-  text-decoration: none;
-  color: #333;
-  outline: none;
-  }
-  .mor_list li .mor_img {
-  width: 185px;
-  height: 150px;
-  overflow: hidden;
-  background: #ccc;
-  position: absolute;
-  top: 20px;
-  left: 10px;
-  z-index: 1;
-  font-size: 14px;
-  font-weight: bold;
-  }
-  a {
-  text-decoration: none;
-  color: #333;
-  outline: none;
-  }
-  .mor_list li .mor_img img {
-  width: 100%;
-  height: 100%;
-  }
-  fieldset, img {
-  border: 0;
-  }
-  .mor_list li .mor_txt {
-  width: 100%;
-  height: 150px;
-  margin-left: 10px;
-  position: relative;
-  left:50px;
-  }
-  .mor_list li .mor_txt h3 {
-  height: 23px;
-  font-size: 21px;
-  font-weight:bold;
-  line-height: 20px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: #0a92f5;
-  }
-  .mor_list li .mor_txt .dot {
-  width: 100%;
-  height: 48px;
-  }
-  .mor_list li .mor_txt p {
-  width: 100%;
-  height: 24px;
-  margin-top: 10px;
-  line-height: 24px;
-  font-size: 14px;
-  color: #666;
-  overflow: hidden;
+      margin-left: 30px;
+      margin-right: 20px;
+
+
+    }
+    .mor_list li {
+      height: 190px;
+      padding: 20px 10px 20px 195px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+
+    }
+    .data_link {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 200;
+      display: block;
+
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+    .mor_list li .mor_img {
+      width: 185px;
+      height: 150px;
+      overflow: hidden;
+      background: #ccc;
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      z-index: 1;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+    .mor_list li .mor_img img {
+      width: 100%;
+      height: 100%;
+    }
+    fieldset, img {
+      border: 0;
+    }
+    .mor_list li .mor_txt {
+      width: 100%;
+      height: 150px;
+      margin-left: 10px;
+      position: relative;
+      left:50px;
+    }
+    .mor_list li .mor_txt h3 {
+      font-family: "Hiragino Sans GB", 微软雅黑, "Microsoft YaHei", SimHei, Tahoma, 宋体b8b体, SimSun, sans-serif;
+      color: rgb(51, 51, 51);
+      font-size: 20px;
+      font-weight: 700;
+      vertical-align: middle;
+    }
+    .mor_list li .mor_txt .dot {
+      width: 100%;
+      height: 48px;
+    }
+    .mor_list li .mor_txt p {
+      width: 100%;
+      height: 24px;
+      margin-top: 10px;
+      line-height: 24px;
+      font-size: 14px;
+      color: #666;
+      overflow: hidden;
     }
     .mor_list li .mor_txt .dor {
       height: 24px;
@@ -563,23 +591,24 @@
       white-space: nowrap;
       text-overflow: ellipsis;
     }
-  p {
-  display: block;
-  -webkit-margin-before: 1em;
-  -webkit-margin-after: 1em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
-  }
-  .mor_list li .mor_txt a {
-  height: 22px;
-  line-height: 22px;
-  display: block;
-  float: left;
-  margin-right: 5px;
-  border: 1px solid;
-  padding: 0 5px;
-  cursor: default;
-  }
+    p {
+      display: block;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+    }
+    .mor_list li .mor_txt a {
+      height: 22px;
+      line-height: 22px;
+      display: block;
+      float: left;
+      margin-right: 5px;
+      border: 1px solid;
+      padding: 0 5px;
+      cursor: default;
+
+    }
     .bq_cor_1, .bq_cor_11, .bq_cor_21, .bq_cor_31, .bq_cor_41, .bq_cor_51, .bq_cor_61, .bq_cor_71, .bq_cor_81, .bq_cor_91, .bq_cor_101, .bq_cor_111, .bq_cor_121, .bq_cor_131, .bq_cor_141, .bq_cor_151, .bq_cor_161, .bq_cor_171, .bq_cor_181, .bq_cor_191 {
       color: #ff943e;
       border-color: #ff943e;
@@ -603,30 +632,81 @@
     .mor_list li .mor_w {
       width: 240px;
     }
-  p {
-  display: block;
-  -webkit-margin-before: 1em;
-  -webkit-margin-after: 1em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
-  }
-  .mor_list li .mor_txt a {
-  height: 22px;
-  line-height: 22px;
-  display: block;
-  float: left;
-  margin-right: 5px;
-  border: 1px solid;
-  padding: 0 5px;
-  cursor: default;
-  }
-  * {
-  font-family: "Microsoft YaHei",Helvetica,sans-serif;
-  font-family: "宋体", Helvetica, Arial, sans-serif;
-  word-break: break-all;
-  }
-  </style>
 
+    .mor_list li .mor_tip p {
+      height: 30px;
+      line-height: 30px;
+      color:#003300;
+      font-size: 16px;
+    }
+    .mor_list li .mor_tip strong {
+
+      color: #f15044;
+      font-size: 30px;
+
+      font-family: "Tahoma";
+      vertical-align: -2px;
+    }
+    .mor_list li .mor_tip:last-child {
+      right: 0;
+    }
+    .mor_list li .mor_w {
+      width: 240px;
+    }
+    .mor_list li .mor_tip {
+      width: 180px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 18px;
+      overflow: hidden;
+      position: absolute;
+      top: 65px;
+      right: 170px;
+      z-index: 1;
+      margin-right: 40px;
+    }
+
+    #pagination {
+      width: 1120px;
+      font-size: 16px;
+      text-align: center;
+      padding: 10px 0;
+      clear: both;
+      background: #fff;
+      overflow: hidden;
+      margin-left: 30px;
+
+    }
+    .pagination .sel.next, .pagination .sel.prev {
+      color: #333;
+      border-color: #666;
+
+
+    }
+    .pagination .sel {
+      color: #c00000;
+      border-color: #c00000;
+
+    }
+    .pagination a, .pagination span {
+      min-width: 16px;
+      height: 32px;
+      line-height: 32px;
+      border: 1px solid #666;
+      text-align: center;
+      margin: 5px 2px;
+      padding: 0 8px;
+      display: inline-block;
+      vertical-align: top;
+      cursor: pointer;
+    }
+    * {
+      font-family: "Microsoft YaHei",Helvetica,sans-serif;
+      font-family: "宋体", Helvetica, Arial, sans-serif;
+      word-break: break-all;
+    }
+  </style>
+  
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js "></script>
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js "></script>
 <script type="text/javascript">
@@ -635,7 +715,7 @@
 		$.ajax({
 			type : "GET",
 			async : false,
-			url : "${pageContext.request.contextPath}/rentHouseSelectAjax.do"
+			url : "${pageContext.request.contextPath}/buildingSelectAjax.do"
 		})
 	}
 
@@ -650,40 +730,32 @@
 	}
 
 	function clickArea1(id, address) {
-		setCookie("address", address, 365);
-		setCookie("class1", id, 365);
+		setCookie("buildingAddress", address, 365);
+		setCookie("buildingClass1", id, 365);
 		transp();
 		window.location.reload(false);
 	}
 
 	function clickArea2(id, lowPrice, highPrice) {
-		setCookie("class2", id, 365);
-		setCookie("lowPrice", lowPrice, 365);
-		setCookie("highPrice", highPrice, 365);
-		transp();
-		window.location.reload(false);
-	}
-	
-	function clickArea3(id, lowRoomNum, highRoomNum) {
-		setCookie("class3", id, 365);
-		setCookie("lowRoomNum", lowRoomNum, 365);
-		setCookie("highRoomNum", highRoomNum, 365);
+		setCookie("buildingClass2", id, 365);
+		setCookie("buildingLowPrice", lowPrice, 365);
+		setCookie("buildingHighPrice", highPrice, 365);
 		transp();
 		window.location.reload(false);
 	}
 	
 	function clickArea4(id) {
-		setCookie("rentHouseId", id, 365);
+		setCookie("buildingId", id, 365);
 	}
 </script>
 </head>
 <body>
-  <div class="fotpof">
-    <div class="pofcons pofsoll pofcont">
-      <span></span>
-      <div>
-      </div>
+<div class="fotpof">
+  <div class="pofcons pofsoll pofcont">
+    <span></span>
+    <div>
     </div>
+  </div>
     <div class="headerbg listhead">
       <div class="header">
         <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp>
@@ -720,69 +792,70 @@
 	            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">二手房</a>&nbsp&nbsp&nbsp
 	          </span>
 	          <span>
-	            <a href=${pageContext.request.contextPath}/buildingSelect.do class="href">新房</a>&nbsp&nbsp&nbsp
+	            <a href=${pageContext.request.contextPath}/buildingSelect.do class="href" style="color: #8fcafe">新房</a>&nbsp&nbsp&nbsp
 	          </span>
 	          <span>
-	            <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="href" style="color: #8fcafe">租房</a>
+	            <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="href">租房</a>
 	          </span>
 	
 	        </div>
 	      </div>
 	
 	    </div>
-		    
-    <div class="wsrrent">
-      <div class="container">
-        <div class="subsh subsher">
-          <div class="subsh_l fl">
-            <div class="sd_sel fl">
-              <span>新房</span>
-              <ul id="serchar">
-                <li>
-                  二手房
-                </li>
-                <li class="sel">
-                  新房
-                </li>
-                <li>
-                  租房
-                </li>
-              </ul>
-            </div>
-            <input type="text" placeholder="请输入小区、地铁、区域开始找房" class="text" id="autoSearchText" maxlength="20" autocomplete="off">
-            <div id="autoSearchItem" style="height: 285px; visibility: hidden;">
-              <ul class="menu_v"></ul>
-            </div>
-            <input type="button" value class="submit" id="btnSearch" onclick="indexSerch()">
-            <input type="hidden" value="1" id="pageIndex">
+
+  </div>
+  <div class="wsrrent">
+    <div class="container">
+      <div class="subsh subsher">
+        <div class="subsh_l fl">
+          <div class="sd_sel fl">
+            <span>新房</span>
+            <ul id="serchar">
+              <li>
+                二手房
+              </li>
+              <li class="sel">
+                新房
+              </li>
+              <li>
+                租房
+              </li>
+            </ul>
           </div>
-          <div class="subsh_r fr">
-            <a href="#" class="al">
+          <input type="text" placeholder="请输入小区、地铁、区域开始找房" class="text" id="autoSearchText" maxlength="20" autocomplete="off">
+          <div id="autoSearchItem" style="height: 285px; visibility: hidden;">
+            <ul class="menu_v"></ul>
+          </div>
+          <input type="button" value class="submit" id="btnSearch" onclick="indexSerch()">
+          <input type="hidden" value="1" id="pageIndex">
+        </div>
+        <div class="subsh_r fr">
+          <a href="#" class="al">
               <span>
                 <b>地图找房</b>
                 <i>地图</i>
               </span>
-            </a>
-          </div>
+          </a>
         </div>
       </div>
     </div>
-    <div class="container bodywhitew">
-      <div class="current">
-        当前位置：
-        <a href="#" target="_blank">易购房</a>
-        >
-        <span>
-          <a href="#" target="_blank">租房</a>
+  </div>
+  <div class="container bodywhitew">
+    <div class="current">
+      当前位置：
+      <a href="#" target="_blank">易购房</a>
+      >
+      <span>
+          <a href="#" target="_blank">新房</a>
         </span>
-      </div>
-      <div class="nv_list">
-       
-        <div class="nv_menu nv_menut" style="display: block;">
-          <ul id="qybox">
-            <li class="Switch">
+    </div>
+    <div class="nv_list">
+
+      <div class="nv_menu nv_menut" style="display: block;">
+        <ul id="qybox">
+          <li class="Switch">
             <%
-            strtemp = (String)s.getAttribute("class1");
+            strtemp = (String)s.getAttribute("buildingClass1");
             System.err.print("id" + strtemp);
             %>
               <strong>区域:</strong>
@@ -863,20 +936,11 @@
               else
             	  out.print("qy");
               %>" id="10" onclick="clickArea1(this.id, '江津');">江津区</a>
-            </li>
-            <li class="Switch">
-              <strong>地铁:</strong>
-              <a class="mt on" id="bx">不限</a>
-              <a class="qy" id="11">1号线</a>
-              <a class="qy" id="12">2号线</a>
-              <a class="qy" id="13">3号线</a>
-              <a class="qy" id="14">6号线</a>
-              <a class="qy" id="15">国博线</a>
-            </li>
-            <li class="Switch">
-              <strong>租金:</strong>
-              <%
-              strtemp = (String)s.getAttribute("class2");
+          </li>
+          <li class="Switch">
+            <strong>售价:</strong>
+            <%
+              strtemp = (String)s.getAttribute("buildingClass2");
            	  System.err.print("id" + strtemp);
               %>
               <a class="
@@ -892,195 +956,173 @@
             	  out.print("mt on");
               else
             	  out.print("qy");
-              %>" id="12" onclick="clickArea2(this.id, '0', '999');">1000元以下</a>
+              %>" id="12" onclick="clickArea2(this.id, '0', '29');">30万以下</a>
               <a class="
               <%
               if(strtemp.equals("13"))
             	  out.print("mt on");
               else
             	  out.print("qy");
-              %>" id="13" onclick="clickArea2(this.id, '1000', '1999');">1000-2000元</a>
+              %>" id="13" onclick="clickArea2(this.id, '30', '39');">30-40万</a>
               <a class="
               <%
               if(strtemp.equals("14"))
             	  out.print("mt on");
               else
             	  out.print("qy");
-              %>" id="14" onclick="clickArea2(this.id, '2000','2999');">2000-3000元</a>
+              %>" id="14" onclick="clickArea2(this.id, '40','49');">40-50万</a>
               <a class="
               <%
               if(strtemp.equals("15"))
             	  out.print("mt on");
               else
             	  out.print("qy");
-              %>" id="15" onclick="clickArea2(this.id, '3000', '3999');">3000-4000元</a>
+              %>" id="15" onclick="clickArea2(this.id, '50', '59');">50-60万</a>
               <a class="
               <%
               if(strtemp.equals("16"))
             	  out.print("mt on");
               else
             	  out.print("qy");
-              %>" id="16" onclick="clickArea2(this.id, '4000', '4999');">4000-5000元</a>
+              %>" id="16" onclick="clickArea2(this.id, '60', '79');">60-80万</a>
               <a class="
               <%
               if(strtemp.equals("17"))
             	  out.print("mt on");
               else
             	  out.print("qy");
-              %>" id="17" onclick="clickArea2(this.id, '5000', '1000000000');">5000元及以上</a>
-            </li>
-            <li class="Switch">
-              <strong>户型:</strong>
-              <%
-              strtemp = (String)s.getAttribute("class3");
-           	  System.err.print("id" + strtemp);
-              %>
+              %>" id="17" onclick="clickArea2(this.id, '80', '99');">80-100万</a>
               <a class="
               <%
-              if(strtemp.equals("21"))
+              if(strtemp.equals("18"))
             	  out.print("mt on");
               else
             	  out.print("qy");
-              %>" id="21" onclick="clickArea3(this.id, '0', '1000000000');">不限</a>
+              %>" id="18" onclick="clickArea2(this.id, '100', '149');">100-150万</a>
               <a class="
               <%
-              if(strtemp.equals("23"))
+              if(strtemp.equals("19"))
             	  out.print("mt on");
               else
             	  out.print("qy");
-              %>" id="23" onclick="clickArea3(this.id, '1', '1');">一室</a>
+              %>" id="19" onclick="clickArea2(this.id, '150', '199');">150-200万</a>
               <a class="
               <%
-              if(strtemp.equals("24"))
+              if(strtemp.equals("20"))
             	  out.print("mt on");
               else
             	  out.print("qy");
-              %>" id="24" onclick="clickArea3(this.id, '2', '2');">两室</a>
-              <a class="
-              <%
-              if(strtemp.equals("25"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="25" onclick="clickArea3(this.id, '3', '3');">三室</a>
-              <a class="
-              <%
-              if(strtemp.equals("26"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="26" onclick="clickArea3(this.id, '4', '1000000000');">四室及以上</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="list_tit">
-        <div class="cenl fl">
-        共找到
-          <strong id="resultNum">
-          <% 
-            
-      		List<RentHouse>list = (List<RentHouse>)s.getAttribute("list");
-      		System.err.print(list.size());
-      		out.print(list.size());
-      	  %>
-          </strong>
-          <em>套符合您的要求</em>
-        </div>
-        <div class="cenr fr">
-          <span>排序:</span>
-          <a href="#" class="first active" tvalue="p1">默认</a>
-          <a href="#" class="hovs" tvalue="p2">价格</a>
-          <a href="#" class="hovx" tvalue="p3">价格</a>
-        </div>
-      </div>
-      <form action="rentHouseDetail.do">
-      <ul class="mor_list">
-      	<%
-      	int st = (Integer)s.getAttribute("st");
-      	int ed = Math.min(st + 5, list.size());
-      	for(int iter = st; iter < ed; iter++) {
-      		RentHouse i = list.get(iter);
-      	%>
-      	<li>
-          <a onclick="clickArea4('<% out.print(list.get(iter).getRentHouseId()); %>');" href=${pageContext.request.contextPath}/rentHouseDetail.do class="data_link" target="_blank"></a>
-          <div class="mor_img">
-            <a href="#" target="_blank" onerror="this.src='#'" alt="沙坪坝区沙正街 电力小区 3房130平米3000元/月" title="沙坪坝区沙正街 电力小区 3房130平米3000元/月">
-              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
-            </a>
-          </div>
-          <div class="mor_txt">
-            <h3>
-            	<%
-            		out.print(i.getRentHouseAddress()+" ");
-            		out.print(i.getRentHouseRoom()+"房");
-            		out.print(i.getRentHouseArea()+"平米");
-            		out.print(i.getRentHousePrice()+"元/月");
-            	%>
-            	<!--沙坪坝区沙正街 电力小区 3房130平米3000元/月-->
-            </h3>
-            <p class="dot">
-            	<%
-            		out.print(i.getCommunityId()+"小区|");
-            		out.print(i.getRentHouseBuildTime()+"年建");
-            	%>
-              <!--  电力小区｜1997年建｜中装<br>
-              		商圈：沙正街｜-->
-              <em>
-              	<%
-              		out.print(i.getRentHouseFloorAttribute()+" ");
-              	%>
-              </em>
-              /
-              <abbr>
-              	<%
-              		out.print("共" + i.getRentHouseFloor()+ "层");
-              	%>
-              </abbr>
-            </p>
-            <p class="dor">
-            <%
-            	out.print(i.getRentHouseAddress());
-            %>
-            	<!--  沙坪坝区沙南街60号-->
-            </p>
-            <p>
-              <a href="#" class="bq_cor_1">南北通透</a>
-              <a href="#" class="bq_cor_2">品质小区</a>
-              <a href="#" class="bq_cor_3">拎包入住</a>
-            </p>
-          </div>
-          <div class="mor_tip mor_w">
-            <p>
-              <strong>
-              <%
-              out.print(i.getRentHousePrice());
-              %>
-              </strong>元/月
-            </p>
-            3室2厅
-          </div>
-        </li>
-        <%}%>
-      </ul>
-      </form>
-     <div id="pagination" class="pagination simple-pagination">
-        <div class="lightbox">
-          <strong class="active">
-             <a href=${pageContext.request.contextPath}/prePage.do style="border: 0px;">
-            <span class="sel prev">上一页</span>
-            </a>
-          </strong>
-          <strong class="active">
-            <a href=${pageContext.request.contextPath}/nextPage.do style="border: 0px;">
-            <span class="sel prev">下一页</span>
-            </a>
-          </strong>
-        </div>
+              %>" id="20" onclick="clickArea2(this.id, '200', '1000000000');">200万以上</a>
+
+          </li>
+          <li class="Switch">
+            <strong>特色:</strong>
+            <a class="mt on" tvalue="bx">不限</a>
+            <a class="qy" tvalue="yihaoxian">低密度</a>
+            <a class="qy" tvalue="erhaoxian">花园</a>
+            <a class="qy" tvalue="sanhaoxian">洋房</a>
+            <a class="qy" tvalue="liuhaoxian">车位充足</a>
+          </li>
+          <li class="Switch">
+            <strong>类型:</strong>
+            <a class="mt on" tvalue="bx">不限</a>
+            <a class="qy" tvalue="yihaoxian">住宅</a>
+            <a class="qy" tvalue="erhaoxian">别墅</a>
+            <a class="qy" tvalue="sanhaoxian">写字楼</a>
+            <a class="qy" tvalue="liuhaoxian">商铺</a>
+          </li>
+        </ul>
       </div>
     </div>
+    <div class="list_tit">
+      <div class="cenl fl">
+                       共找到
+        <strong id="resultNum"><%=list.size() %></strong>
+        <em>套符合您的要求</em>
+      </div>
+      <div class="cenr fr">
+        <span>排序:</span>
+        <a href="#" class="first active" tvalue="p1">默认</a>
+        <a href="#" class="hovs" tvalue="p2">价格</a>
+        <a href="#" class="hovx" tvalue="p3">价格</a>
+      </div>
+    </div>
+    <ul class="mor_list">
+    	<%
+    	int st = (Integer)s.getAttribute("buildingSt");
+    	int ed = Math.min(st + 5, list.size());
+    	for (int iter = st; iter < ed; ++iter) {
+    		BuildingInfo i = list.get(iter);
+    		%>
+    		<li>
+    		<a onclick="clickArea4('<%=i.getBuildingId() %>');" href=${pageContext.request.contextPath}/buildingDetail.do class="data_link" target="_blank"></a>
+	        <div class="mor_img">
+	          <a href="#" target="_blank" onerror="this.src='#'" alt="绿地城" title="绿地城">
+	            <img src=${pageContext.request.contextPath}/jsp/images/newhouse/lvdic.jpg>
+	          </a>
+	        </div>
+	        <div class="mor_txt">
+	          <h3><%=i.getBuildingName() %></h3>
+	
+	          <p class="dor"><%=i.getBuildingAddress() %></p>
+	          <p><%=i.getBuildingMinArea() %>m²-<%=i.getBuildingMaxArea() %>m²</p>
+	
+	          <p>
+	            <a href="javascript" class="bq_cor_1"><%=i.getBuildingSaleState() %></a>
+	            <a href="javascript" class="bq_cor_2"><%=i.getBuildingDecoration() %></a>
+	            <a href="javascript" class="bq_cor_3"><%=i.getBuildingNeighbourhood() %></a>
+	          </p>
+	        </div>
+	        <div class="mor_tip mor_w">
+	          <p>均价<strong><%=i.getBuildingReferencePrice() %></strong>万元</p>
+	        </div>
+    		</li>
+    		<%
+    	}
+    	%>
+      <!-- <li>
+        <a href="#" class="data_link" target="_blank"></a>
+        <div class="mor_img">
+          <a href="#" target="_blank" onerror="this.src='#'" alt="绿地城" title="绿地城">
+            <img src="${pageContext.request.contextPath}/jsp/images/newhouse/lvdic.jpg">
+          </a>
+        </div>
+        <div class="mor_txt">
+          <h3>绿地城</h3>
 
+          <p class="dor">大渡口-轻轨2号线绿地城白居寺站</p>
+          <p>两居室-套内89.5m²</p>
 
+          <p>
+            <a href="javascript" class="bq_cor_1">在售</a>
+            <a href="javascript" class="bq_cor_2">住宅</a>
+            <a href="javascript" class="bq_cor_3">五证齐全</a>
+          </p>
+        </div>
+        <div class="mor_tip mor_w">
+          <p>均价<strong>10000</strong>元/平</p>
+        </div>
+      </li>
+      -->
+      
+    </ul>
+    <div id="pagination" class="pagination simple-pagination">
+      <div class="lightbox">
+        <strong class="active">
+        <a href=${pageContext.request.contextPath}/buildingPrePage.do style="border: 0px;">
+          <span class="sel prev">上一页</span>
+        </a>
+        </strong>
+        <strong class="active">
+          <a href=${pageContext.request.contextPath}/buildingNextPage.do style="border: 0px;">
+            <span class="sel prev">下一页</span>
+          </a>
+        </strong>
+      </div>
+    </div>
   </div>
+
+
+</div>
 </body>
 </html>

@@ -25,4 +25,13 @@
 		select * from BuildingInfo where buildingId=#{buildingId}
 	</select>
 	
+	<select id="selectBuildingById" resultType="com.easyhousing.model.BuildingInfo">
+		select * from BuildingInfo where buildingId=#{0}
+	</select>
+	
+	<select id="selectBuilding" resultType="com.easyhousing.model.BuildingInfo">
+		SELECT * FROM BuildingInfo WHERE buildingAddress like "%"#{0}"%"
+			AND buildingReferencePrice>=#{1} AND #{2}>=buildingReferencePrice
+	</select>
+	
 </mapper>

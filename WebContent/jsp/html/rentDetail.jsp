@@ -1202,10 +1202,10 @@
               <a href="homepage.html" class="hrf">二手房</a>
             </span>
           <span>
-              <a href="homepage.html" class="hrf">新房</a>
+              <a href=${pageContext.request.contextPath}/buildingSelect.do class="hrf">新房</a>
             </span>
           <span>
-              <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="hrf">租房</a>
+              <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="hrf" style="color: #8fcafe">租房</a>
             </span>
         </div>
       </div>
