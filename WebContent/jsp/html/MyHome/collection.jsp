@@ -588,6 +588,22 @@
       display: block;
     }
   </style>
+  <script type="text/javascript">
+  		function setCookie(c_name, value, expiredays) {
+		var exdate = new Date()
+		exdate.setDate(exdate.getDate() + expiredays)
+		document.cookie = c_name
+				+ "="
+				+ escape(value)
+				+ ((expiredays == null) ? "" : ";expires="
+						+ exdate.toGMTString())
+		}
+  		
+  		function click(id) {
+  			setCookie("rentHouseId", id, 365);
+  		}
+  
+  </script>
 </head>
 <body>
 <div class="container">
@@ -736,7 +752,11 @@
 		                   <div class="info-panel" style="float: left">
 		                    <h2><a target="_blank"
 		                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"><%=i.name %> </a>
-		                           <button type="button" class="btn btn-danger" style="float: right">取消关注</button>
+		                           <a id=<%=i.houseId%> onclick="click(this.id);" href=${pageContext.request.contextPath}/userCancelRentCollect.do>
+		                           <button type="button" class="btn btn-danger" style="float: right" >
+		                                                取消关注
+		                           </button>
+		                           </a>
 		                    </h2>
 		                    <div class="col-1">
 		                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank"><%=i.province %></a>- <%=i.region %>

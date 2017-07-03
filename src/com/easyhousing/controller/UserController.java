@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,6 +37,7 @@ import com.easyhousing.model.User;
 import com.easyhousing.service.CommentService;
 import com.easyhousing.service.DealService;
 import com.easyhousing.service.OrderService;
+import com.easyhousing.service.RentHouseCollect;
 import com.easyhousing.service.UserCollectService;
 import com.easyhousing.service.UserService;
 import com.easyhousing.util.Tool;
@@ -66,6 +68,9 @@ public class UserController {
 	
 	@Autowired
 	private RentHousePicDao rentHousePicDao;
+	
+	@Autowired
+	private RentHouseCollect rentHouseCollect;
 	
 	@RequestMapping(value="login.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView login(User u, HttpSession httpSession) {
@@ -351,5 +356,27 @@ public class UserController {
 	public String logout(HttpSession s) {
 		s.removeAttribute("user");
 		return "homepage";
+	}
+	
+	@RequestMapping(value="userCancelRentCollect.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String userCancelRentCollect(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Cookie[] cookies = request.getCookies();
+		int rentHouseId = 0;
+		for(Cookie iCookie : cookies) {
+			String name = iCookie.getName();
+			String value = iCookie.getValue();
+			if(name.equals("rentHouseId")) {
+				rentHouseId = Integer.parseInt(value);
+			}
+		}
+		User user = (User)session.getAttribute("user");
+		int userId = user.getUserId();
+		rentHouseCollect.delete(userId, rentHouseId);
+		
+		List<Collect> userCollectRentHouse = userCollectService.selectUserCollectRentHouse(user);
+		session.setAttribute("userCollectRentHouse", userCollectRentHouse);
+		
+		return "/MyHome/userCenter";
 	}
 }

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<!-- saved from url=(0134)./home.html# -->
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>网站后台管理系统 </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/ace.min.js"></script>
+  <script src="js/ace-elements.min.js"></script>
+  <script src="js/ace-extra.min.js"></script>
+  <script src="js/bar.js"></script>
+  <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/codemirror.css">
+  <link rel="stylesheet" href="css/ace.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/typeahead-bs2.min.js"></script>
+  <script src="js/jquery.dataTables.min.js"></script>
+  <script src="js/jquery.dataTables.bootstrap.js"></script>
+  <script src="js/H-ui.js"></script>
+  <script src="js/H-ui.admin.js"></script>
+  <script src="js/layer.js"></script>
+  <link rel="stylesheet" href="css/layer.css">
+  <script src="js/laydate.js"></script>
+  <link rel="stylesheet" href="css/laydate.css">
+  <link rel="stylesheet" href="css/laydate(1).css">
+
+
+  <script type="text/javascript">
+    $(function () {
+      var cid = $('#nav_list> li>.submenu');
+      cid.each(function (i) {
+        $(this).attr('id', "Sort_link_" + i);
+
+      })
+    })
+    jQuery(document).ready(function () {
+      $.each($(".submenu"), function () {
+        var $aobjs = $(this).children("li");
+        var rowCount = $aobjs.size();
+        var divHeigth = $(this).height();
+        $aobjs.height(divHeigth / rowCount);
+      });
+      //初始化宽度、高度
+      $("#main-container").height($(window).height() - 76);
+      $("#iframe").height($(window).height() - 140);
+
+      $(".sidebar").height($(window).height() - 99);
+      var thisHeight = $("#nav_list").height($(window).outerHeight() - 173);
+      $(".submenu").height();
+      $("#nav_list").children(".submenu").css("height", thisHeight);
+
+      //当文档窗口发生改变时 触发
+      $(window).resize(function () {
+        $("#main-container").height($(window).height() - 76);
+        $("#iframe").height($(window).height() - 140);
+        $(".sidebar").height($(window).height() - 99);
+
+        var thisHeight = $("#nav_list").height($(window).outerHeight() - 173);
+        $(".submenu").height();
+        $("#nav_list").children(".submenu").css("height", thisHeight);
+      });
+      $(".iframeurl").click(function () {
+        var cid = $(this).attr("name");
+        var cname = $(this).attr("title");
+        $("#iframe").attr("src", cid).ready();
+        $("#Bcrumbs").attr("href", cid).ready();
+        $(".Current_page a").attr('href', cid).ready();
+        $(".Current_page").attr('name', cid);
+        $(".Current_page").html(cname).css({"color": "#333333", "cursor": "default"}).ready();
+        $("#parentIframe").html('<span class="parentIframe iframeurl"> </span>').css("display", "none").ready();
+        $("#parentIfour").html('').css("display", "none").ready();
+      });
+
+
+    });
+
+
+    /*********************点击事件*********************/
+    $(document).ready(function () {
+      $('#nav_list').find('li.home').click(function () {
+        $('#nav_list').find('li.home').removeClass('active');
+        $(this).addClass('active');
+      });
+
+
+//时间设置
+      function currentTime() {
+        var d = new Date(), str = '';
+        str += d.getFullYear() + '年';
+        str += d.getMonth() + 1 + '月';
+        str += d.getDate() + '日';
+        str += d.getHours() + '时';
+        str += d.getMinutes() + '分';
+        str += d.getSeconds() + '秒';
+        return str;
+      }
+
+      setInterval(function () {
+        $('#time').html(currentTime)
+      }, 1000);
+//修改密码
+
+      $('#Exit_system').on('click', function () {
+        layer.confirm('是否确定退出系统？', {
+            btn: ['是', '否'],//按钮
+            icon: 2,
+          },
+          function () {
+            location.href = "login.html";
+
+          });
+      });
+    })
+  </script>
+
+</head>
+
+<body>
+<div class="navbar navbar-default" id="navbar">
+  <script type="text/javascript">
+    try {
+      ace.settings.check('navbar', 'fixed')
+    } catch (e) {
+    }
+  </script>
+  <div class="navbar-container" id="navbar-container">
+    <div class="navbar-header pull-left">
+      <a href="./home.html#" class="navbar-brand">
+        <small>
+          <img src="../../images/SystemUser/logo.png">
+        </small>
+      </a><!-- /.brand -->
+    </div><!-- /.navbar-header -->
+
+  </div>
+</div>
+<div class="main-container" id="main-container" style="height: 537px;">
+  <script type="text/javascript">
+    try {
+      ace.settings.check('main-container', 'fixed')
+    } catch (e) {
+    }
+  </script>
+  <div class="main-container-inner">
+    <a class="menu-toggler" id="menu-toggler" href="./home.html#">
+      <span class="menu-text"></span>
+    </a>
+    <div class="sidebar" id="sidebar" style="height: 514px;">
+      <script type="text/javascript">
+        try {
+          ace.settings.check('sidebar', 'fixed')
+        } catch (e) {
+        }
+      </script>
+      <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+          Easyhousing后台管理系统
+        </div>
+        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+          <span class="btn btn-success"></span>
+          <span class="btn btn-info"></span>
+          <span class="btn btn-warning"></span>
+          <span class="btn btn-danger"></span>
+        </div>
+      </div><!-- #sidebar-shortcuts -->
+      <ul class="nav nav-list" id="nav_list" style="height: 440px;text-align: right">
+        <li class="home">
+          <a href="javascript:void(0)"  name="./home.html" class="iframeurl" title="">
+            <span class="menu-text"> 系统首页 </span>
+          </a>
+        </li>
+
+        <li>
+          <a class="dropdown-toggle" href="#"><span class="menu-text"> 用户 </span></a>
+          <ul class="submenu" id="Sort_link_1">
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="用户管理" name="managerUser.html" class="iframeurl" style="text-align: center">用户管理</a>
+            </li>
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="用户统计" name="managerCalUser.html" class="iframeurl" style="text-align: center">用户统计</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#" class="dropdown-toggle"><span class="menu-text"> 租房管理 </span></a>
+          <ul class="submenu" id="Sort_link_2">
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="租房管理" class="iframeurl" name="managerRent.html" style="text-align: center">租房管理</a>
+            </li>
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="租房记录" name="managerRentHistory.html" class="iframeurl" style="text-align: center">租房记录</a>
+            </li>
+          </ul>
+        </li>
+
+
+        <li>
+          <a href="#" class="iframeurl" name="managerAgent.html"><span class="menu-text"> 经纪人 </span></a>
+        </li>
+
+        <li>
+          <a href="#" class="dropdown-toggle" name="managerBuilding.html"><span class="menu-text"> 楼盘管理 </span></a>
+          <ul class="submenu" id="Sort_link_5">
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="楼盘管理" class="iframeurl" name="managerBuilding.html" style="text-align: center">楼盘管理</a>
+            </li>
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="楼盘图片" class="iframeurl" name="managerBuildingPic.html" style="text-align: center">楼盘图片</a>
+            </li>
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="楼盘交易" name="managerBuildingHistory.html" class="iframeurl" style="text-align: center">买房记录</a>
+            </li>
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="楼盘评论" name="managerBuildingComment.html" class="iframeurl" style="text-align: center">楼盘评论</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#" class="dropdown-toggle" name="managerPic.html"><span class="menu-text"> 图片 </span></a>
+          <ul class="submenu" id="Sort_link_3">
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="楼盘图片" class="iframeurl" name="managerBuildingPic.html" style="text-align: center">楼盘图片</a>
+            </li>
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="租房图片" name="managerRentPic.html" class="iframeurl" style="text-align: center">租房图片</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="dropdown-toggle"><span class="menu-text"> 交易记录 </span></a>
+          <ul class="submenu" id="Sort_link_4">
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="卖房记录" class="iframeurl" name="managerBuildingHistory.html" style="text-align: center">买房记录</a>
+            </li>
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="租房记录" name="managerRentHistory.html" class="iframeurl" style="text-align: center">租房记录</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a  class="iframeurl" name="managerApplicant.html"><span class="menu-text"> 申请处理 </span></a>
+        </li>
+        <li>
+          <a  class="dropdown-toggle" name="managerComment.html"><span class="menu-text"> 评论管理 </span></a>
+          <ul class="submenu" id="Sort_link_6">
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="楼盘评论" name="managerBuildingComment.html" class="iframeurl" style="text-align: center">楼盘评论</a>
+            </li>
+            <li class="home" style="height: 41.3333px;">
+              <a href="#" title="租房评论" name="managerRentComment.html" class="iframeurl" style="text-align: center">租房评论</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+
+      <div class="sidebar-collapse" id="sidebar-collapse">
+        <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+      </div>
+
+      <script type="text/javascript">
+        try {
+          ace.settings.check('sidebar', 'collapsed')
+        } catch (e) {
+        }
+      </script>
+    </div>
+    <div class="main-content">
+      <script type="text/javascript">
+        try {
+          ace.settings.check('breadcrumbs', 'fixed')
+        } catch (e) {
+        }
+      </script>
+      <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="icon-home home-icon"></i>
+            <a href="./home.html">首页</a>
+          </li>
+          <li class="active"><span class="Current_page iframeurl"></span></li>
+          <li class="active" id="parentIframe"><span class="parentIframe iframeurl"></span></li>
+          <li class="active" id="parentIfour"><span class="parentIfour iframeurl"></span></li>
+        </ul>
+      </div>
+
+
+
+      <iframe id="iframe" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "
+              name="iframe" frameborder="0" src="./home.html"></iframe>
+      <!--<iframe id="managerUser" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
+              <!--name="iframe" frameborder="0" src="./managerUser.html"></iframe>-->
+      <!--<iframe id="managerRent" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
+              <!--name="iframe" frameborder="0" src="./managerRent.html"></iframe>-->
+      <!--<iframe id="managerRentHistory" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
+              <!--name="iframe" frameborder="0" src="./managerRentHistory.html"></iframe>-->
+      <!--<iframe id="managerAgent" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
+              <!--name="iframe" frameborder="0" src="./managerAgent.html"></iframe>-->
+      <!--<iframe id="managerBuilding" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
+              <!--name="iframe" frameborder="0" src="./managerBuilding.html"></iframe>-->
+      <!--<iframe id="managerBuildingHistory" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
+              <!--name="iframe" frameborder="0" src="./managerBuildingHistory.html"></iframe>-->
+      <!--<iframe id="managerPic" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
+              <!--name="iframe" frameborder="0" src="./managerPic.html"></iframe>-->
+      <!--<iframe id="managerApplicant" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
+              <!--name="iframe" frameborder="0" src="./managerApplicant.html"></iframe>-->
+      <!--<iframe id="managerComment" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
+              <!--name="iframe" frameborder="0" src="./managerComment.html"></iframe>-->
+      <div id="calUser" style="display: none">
+
+      </div>
+
+
+      <!-- /.page-content -->
+    </div><!-- /.main-content -->
+
+  </div><!-- /.main-container-inner -->
+
+</div>
+<!--底部样式-->
+
+<div class="footer_style" id="footerstyle">
+  <p class="l_f">版权所有：重庆大学team632</p>
+  <p class="r_f">地址：重庆市沙坪坝大学城重庆大学虎溪校区 邮编：401331 技术支持：XXXX</p>
+</div>
+<!--修改密码样式-->
+
+<!-- /.main-container -->
+<!-- basic scripts -->
+
+
+</body>
+</html>
