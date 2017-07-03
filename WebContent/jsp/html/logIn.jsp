@@ -106,10 +106,10 @@
       <form action=${pageContext.request.contextPath}/login.do class="cmxform" id="signupForm" method="post">
         <h1>快来这里看房吧</h1>
         <div class="form-group">
-          <input id="mobile" class="form-control input-lg"  name="username" type="text"  placeholder="请输入用户名或邮箱或手机号" value="">
+          <input id="mobile" class="form-control input-lg"  name="username" type="text"  placeholder="请输入用户名或邮箱或手机号"style="font-size: 16px" value="">
         </div>
         <div class="form-group">
-          <input id="password" class="form-control input-lg"  name="userPassword" type="password"  placeholder="请输入密码" value="">
+          <input id="password" class="form-control input-lg"  name="userPassword" type="password"  placeholder="请输入密码" style="font-size: 16px"value="">
         </div>
         <div class="form-group">
          <a style="float:right;color:#4064c2;cursor:pointer;font-size:14px;display:inline-block;" id="forgetPassword" href="https://www.baidu.com">忘记密码？</a>
@@ -118,12 +118,13 @@
           <button class="btn form-btn login-btn" type="submit">登 录</button>
           <a id="login-join-a" class="btn form-btn" href=${pageContext.request.contextPath}/jsp/html/register.jsp>加入EasyHousing</a>
         </div>
-        <font color="#FF0000">${requestScope.message}</font> 
+        <font color="#FF0000">${requestScope.message}</font>
       </form>
     </div>
   </div>
-</div>
 
+  <div style="color: white;font-size: 13px;font-weight: 100;position:fixed; bottom:10px; left:550px; font-size:14px; text-align:center;">Copyright 2017-2018©重庆大学632技术小组版权所有</div>
+  </div>
 
 </body>
 </html>

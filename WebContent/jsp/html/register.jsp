@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>用户登录</title>
+  <title>用户注册</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -40,7 +40,10 @@
     min-width: 1280px;
     background-repeat: no-repeat;
   }
-
+  p{
+  margin: 0;
+  padding: 0;
+  }
 
   .fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
   input[type="text"],input[type="password"]{padding-left:26px;}
@@ -58,10 +61,10 @@
     	  elem.disabled = false;
       }
     }
-    function genTimestamp() {    
-        var time = new Date();    
-        return time.getTime();    
-    }    
+    function genTimestamp() {
+        var time = new Date();
+        return time.getTime();
+    }
     function reloadValidateCode(){
         $("#captcha_img").attr("src", "${pageContext.request.contextPath}/validateCode.do?t=" + genTimestamp());
     }
@@ -74,16 +77,19 @@
     <div class="row clearfix">
 
       <div class="col-md-2 column">
-        <p style="color: white; font-size: 30px;">  &nbsp EasyHousing</p>
+      <p style="color: white; font-size: 25px;font-weight: bold">  &nbsp &nbsp Easy</p>
+      <p style="color:white;font-size: 25px;font-weight: bold"> &nbsp Housing</p>
       </div>
 
       <div class="col-md-2 col-md-offset-8 column">
-        <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="gotoIndex">
+        <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="gotoIndex"style="padding-top: 25px;padding-right:20px;font-size: 15px;font-weight: 100">
           <font color="white">返回EasyHousing首页  <span class="glyphicon glyphicon-arrow-right"></span> </font>
         </a>
       </div>
     </div>
+  <hr size="1">
   </div>
+
 <div class="container">
 
   <div class="row clearfix">
@@ -116,7 +122,7 @@
 
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control input-lg" name="username" placeholder="请输入用户名" value=${requestScope.username}>
+                      <input type="text" class="form-control input-lg" name="username" placeholder="请输入用户名" style="font-size: 16px"value=${requestScope.username}>
                       <div class="input-group-addon">
                         <span class="glyphicon glyphicon-user"></span>
                       </div>
@@ -127,7 +133,7 @@
                 <div class="form-group">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="password" class="form-control input-lg" name="userPassword" placeholder="请输入密码（六位以上）" value=${requestScope.userPassword}>
+                      <input type="password" class="form-control input-lg" name="userPassword" placeholder="请输入密码（六位以上）" style="font-size: 16px"value=${requestScope.userPassword}>
                       <div class="input-group-addon">
                         <span class="glyphicon glyphicon-lock"></span>
                       </div>
@@ -138,7 +144,7 @@
                 <div class="form-group">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="password" class="form-control input-lg" name="confirmPassword" placeholder="确认密码" value="">
+                      <input type="password" class="form-control input-lg" name="confirmPassword" placeholder="确认密码"style="font-size: 16px" value="">
                       <div class="input-group-addon">
                         <span class="glyphicon glyphicon-lock"></span>
                       </div>
@@ -151,7 +157,7 @@
 
                   <div class="col-md-8">
                     <div class="input-group">
-                      <input type="text" class="form-control input-lg" name="registerValidateCode" placeholder="请输入验证码" value=${requestScope.registerValidateCode}>
+                      <input type="text" class="form-control input-lg" name="registerValidateCode" placeholder="请输入验证码"style="font-size: 16px"value=${requestScope.registerValidateCode}>
                       <div class="input-group-addon">
                         <span class="glyphicon glyphicon-ok"></span>
                       </div>
@@ -170,13 +176,13 @@
                   <a href="https://github.com/632team/Course-Selection-Guidance-in-CQU/blob/master/README.md" target="_blank">《EasyHousing使用协议》</a>
                 </label><br>
                 <font color="#FF0000">${requestScope.failuremessage}</font>
-                <font color="#FF0000">${requestScope.successmessage}</font>  
+                <font color="#FF0000">${requestScope.successmessage}</font>
                 <br>
 
 
                 <div class="row clearfix">
                   <div class="col-md-12 column">
-                  <button type="submit" id="submitButton" class="btn btn-primary btn-block" type="submit">注册</button>
+                  <button type="submit" id="submitButton" class="btn btn-primary btn-block" type="submit"style="width: 323px;height: 45px">注册</button>
                   </div>
 
 
