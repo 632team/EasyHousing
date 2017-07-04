@@ -10,4 +10,5 @@ public interface RentHouseDao {
 	public int updateRentHouse(RentHouse u);
 	public List<RentHouse> selectRentHouse(String area, int lowPrice, int highPrice, int lowRoomNum, int highRoomNum);
 	public RentHouse selectRentHouseById(int id);
+	public List<RentHouse> selectAllRentHouse();
 }

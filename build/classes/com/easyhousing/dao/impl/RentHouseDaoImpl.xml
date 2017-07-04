@@ -26,4 +26,8 @@
 		SELECT * FROM RentHouse WHERE rentHouseId=#{0}
 	</select>
 	
+	<select id="selectAllRentHouse" resultType="com.easyhousing.model.RentHouse">
+		SELECT * FROM RentHouse
+	</select>
+	
 </mapper>
