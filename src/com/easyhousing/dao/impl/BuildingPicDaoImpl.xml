@@ -23,7 +23,7 @@
 	</select>
 	
 	<select id="selectBuildingPicByBuildingId"  resultType="java.lang.String">
-		select * from BuildingPic where buildingId=#{0}
+		select buildingPicUrl from BuildingPic where buildingId=#{0}
 	</select>
 	
 </mapper>
