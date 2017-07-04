@@ -431,6 +431,26 @@
   }
 
   </style>
+  
+      <script type="text/javascript">
+      function showall(){
+        var temp = document.getElementById("serchar");
+        temp.style.display = "block";
+      }
+      function hideall(){
+        var temp = document.getElementById("serchar");
+        temp.style.display = "none";
+      }
+      $(function(){
+        $("#serchar .sel").click(function(){
+//          var temp = document.getElementById("searchName");
+//          temp.innerHTML = $(this).text();
+         // alert( $("span#searchName").html());
+          $("span#searchName").text($(this).text());
+        });
+      });
+    </script>
+    
 </head>
 <body class="homebd">
   <div class="fotpof">
@@ -489,24 +509,16 @@
       <div class="search_box searchtp">
         <div class="shtop" style="text-align: center">
           <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg01.png>
-        </div>
+        </div>s
         <div class="search">
           <div class="sh_l fl">
             <div class="sh_sel fl">
-              <span>
-              	 租房
-              </span>
-              <ul id="serchar" style>
-                <li class="sel">
-                  <i>租房</i>
-                </li>
-                <li>
-                  <i>新房</i>
-                </li>
-                <li>
-                  <i>租房</i>
-                </li>
-              </ul>
+              <span id="searchName" onclick="showall()">新房</span>
+				<ul id="serchar" onmouseleave="hideall()">
+					<!-- <li class="sel">二手房</li> -->
+					<li class="sel">新房</li>
+					<li class="sel">租房</li>
+				</ul>
             </div>
             <input type="text" id="autoSearchText" placeholder="请输入位置开始找房" class="text" maxlength="20" autocomplete="off">
             <div id="autoSearchItem" style="height:285px; visibility: hidden">

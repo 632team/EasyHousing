@@ -758,6 +758,25 @@
 		setCookie("rentHouseId", id, 365);
 	}
 </script>
+  
+      <script type="text/javascript">
+      function showall(){
+        var temp = document.getElementById("serchar");
+        temp.style.display = "block";
+      }
+      function hideall(){
+        var temp = document.getElementById("serchar");
+        temp.style.display = "none";
+      }
+      $(function(){
+        $("#serchar .sel").click(function(){
+//          var temp = document.getElementById("searchName");
+//          temp.innerHTML = $(this).text();
+         // alert( $("span#searchName").html());
+          $("span#searchName").text($(this).text());
+        });
+      });
+    </script>
 </head>
 <body>
   <div class="fotpof">
@@ -818,18 +837,12 @@
         <div class="subsh subsher">
           <div class="subsh_l fl">
             <div class="sd_sel fl">
-              <span>新房</span>
-              <ul id="serchar">
-                <li>
-                  二手房
-                </li>
-                <li class="sel">
-                  新房
-                </li>
-                <li>
-                  租房
-                </li>
-              </ul>
+              <span id="searchName" onclick="showall()">新房</span>
+				<ul id="serchar" onmouseleave="hideall()">
+					<!-- <li class="sel">二手房</li> -->
+					<li class="sel">新房</li>
+					<li class="sel">租房</li>
+				</ul>
             </div>
             <input type="text" placeholder="请输入小区、地铁、区域开始找房" class="text" id="autoSearchText" maxlength="20" autocomplete="off">
             <div id="autoSearchItem" style="height: 285px; visibility: hidden;">
@@ -1104,7 +1117,7 @@
             </h3>
             <p class="dot">
             	<%
-            		out.print(i.getCommunityId()+"小区|");
+            		out.print(i.getCommunityName()+"小区|");
             		if (i.getRentHouseBuildTime() != null)
             			out.print(sdf.format(i.getRentHouseBuildTime())+"年建");
             	%>
