@@ -207,7 +207,7 @@
               <a href="#" title="租房管理" class="iframeurl" name=${pageContext.request.contextPath}/managerRentHouseinit.do style="text-align: center">租房管理</a>
             </li>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="租房记录" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerRentHistory.jsp class="iframeurl" style="text-align: center">租房记录</a>
+              <a href="#" title="租房记录" name=${pageContext.request.contextPath}/managerRentHouseDealinit.do class="iframeurl" style="text-align: center">租房记录</a>
             </li>
           </ul>
         </li>

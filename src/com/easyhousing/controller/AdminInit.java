@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.easyhousing.dao.RentHouseDao;
+import com.easyhousing.dao.RentHouseDealDao;
 import com.easyhousing.model.RentHouse;
+import com.easyhousing.model.RentHouseDeal;
 import com.easyhousing.model.User;
 import com.easyhousing.service.UserService;
 
@@ -24,6 +26,9 @@ public class AdminInit {
 	
 	@Autowired
 	private RentHouseDao rentHouseDao;
+	
+	@Autowired
+	private RentHouseDealDao rentHouseDealDao;
 	
 
 	@RequestMapping(value="managerUserinit.do", method={RequestMethod.GET,RequestMethod.POST})
@@ -47,6 +52,18 @@ public class AdminInit {
 		session.setAttribute("rentHouseList", rentHouseList);
 		
 		modelAndView.setViewName("SystemUser/managerRent");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="managerRentHouseDealinit.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView managerRentHouseDealinit(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		List<RentHouseDeal> rentHouseDealList = rentHouseDealDao.selectAll();
+		session.setAttribute("rentHouseDealList", rentHouseDealList);
+		
+		modelAndView.setViewName("SystemUser/managerRentHistory");
 		return modelAndView;
 	}
 }

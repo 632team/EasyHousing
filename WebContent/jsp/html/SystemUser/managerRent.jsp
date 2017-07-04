@@ -65,7 +65,7 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
         <div class="border clearfix" style="display: block">
                <span class="l_f">
                 <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加租房</a>
-                <a href="javascript:ovid()" class="btn btn-danger">批量删除</a>
+                <a class="btn btn-danger" onclick="deletePart();" href=${pageContext.request.contextPath}/managerRentHouseinit.do>批量删除</a>
                </span>
           <span class="r_f">共：<b>2345</b>条</span>
         </div>
@@ -124,7 +124,7 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
             	  RentHouse irentHouse = rentHouseList.get(i);
               %>
               <tr role="row" class="odd">
-                <td><label><input type="checkbox"><span class="lbl"></span></label></td>
+                <td><label><input type="checkbox" name="checkbox" id="<%=irentHouse.getRentHouseId()%>" value="<%=irentHouse.getRentHouseId()%>"><span class="lbl"></span></label></td>
                 <td class="sorting_1" value="5"><%=irentHouse.getRentHouseId() %></td>
                 <!--<td><u style="cursor:pointer" class="text-primary">20141791</u></td>-->
                 <td><%=irentHouse.getCommunityId() %></td>
@@ -138,9 +138,9 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
                 <td><%=irentHouse.getRentHousePrice() %></td>
                 <td class="td-manage">
 
-                  <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
+                  <a id=<%=irentHouse.getRentHouseId() %> title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML,this.id)">编辑</a>
 
-                  <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
+                  <a id=<%=irentHouse.getRentHouseId() %> title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML,this.id)">删除</a>
                 </td>
               </tr>
               <%
@@ -229,8 +229,8 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
   </ul>
 </div>
 
-<div class="update_menber" id="update_menber_style" style="display:none">
-  <form action=${pageContext.request.contextPath}/adminAddRentHouse.do id="addRentHouse" enctype="multipart/form-data" method="post">
+<div class="add_menber" id="update_menber_style" style="display:none">
+  <form action=${pageContext.request.contextPath}/adminUpdateRentHouse.do id="updateRentHouse" enctype="multipart/form-data" method="post">
   <ul class=" page-content">
 
     <li>
@@ -241,9 +241,9 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
       <div class="prompt r_f"></div>
     </li>
     <li>
-      <label class="label_name">上架时间：</label>
+      <label class="label_name1">上架时间：</label>
       <span class="add_name">
-        <input name="rentHousePublishTime" class="inline laydate-icon" id="start" style=" margin-left:10px;">
+        <input name="inputPublishTime" class="inline laydate-icon" id="start" style=" margin-left:10px;">
         </span>
       <div class="prompt r_f"></div>
     </li>
@@ -416,7 +416,7 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".update_menber input[type$='text']").each(function(n){
+        $("#update_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -434,16 +434,21 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
             title: '提示框',
             icon:1,
           });
-          $(".update_menber #addUser").submit();
+          $("#update_menber_style #updateRentHouse").submit();
           layer.close(index);
         }
       }
     });
   }
   /*用户-删除*/
-  function member_del(obj,id){
+  function member_del(obj,id, delRentHouseId){
+	 alert(delRentHouseId);
     layer.confirm('确认要删除吗？',function(index){
       $(obj).parents("tr").remove();
+      
+      setCookie("delRentHouseId",delRentHouseId,365);
+      transpDel();
+      
       layer.msg('已删除!',{icon:1,time:1000});
     });
   }
@@ -451,6 +456,36 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
     elem: '#start',
     event: 'focus'
   });
+  
+  function transpDel() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/deleteRentHouseAjax.do"
+		})
+	}
+  
+  function transpDelPart() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/deleteRentHousePartAjax.do"
+		})
+	}
+
+	function deletePart() {
+		var chckBox = document.getElementsByName("checkbox");
+		var num = chckBox.length;
+		var ids = "";
+		for (var index = 0; index < num; index++) {
+			if (chckBox[index].checked) {
+				ids += chckBox[index].value + ".";
+			}
+		}
+		alert(ids);
+		setCookie("deleteRentHousePart", ids, 365);
+		transpDelPart();
+	}
 </script>
 
 </body>

@@ -177,11 +177,20 @@ List<User> userList = (List<User>)session.getAttribute("userList");
     <li><label class="label_name">真实姓名：</label><span class="add_name"><input name="name" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
 
     <li><label class="label_name">密码：</label><span class="add_name"><input name="userPassword" type="password"  class="form-control"/></span><div class="prompt r_f"></div></li>
-    <li><label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
-     <label><input name="userSex" type="radio" checked="checked"><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
-     <label><input name="userSex" type="radio" ><span class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
+        <li>
+      <label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
+      <input name="userSex" value="男" style="display: none"></input>
+     <label><input name="form-field-radio" type="radio" checked="checked" onchange="getSex()" value="男"><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
+     <label><input name="form-field-radio" type="radio" onchange="getSex()" value="女"><span class="lbl" value="女">女</span></label>&nbsp;&nbsp;&nbsp;
      </span>
       <div class="prompt r_f"></div>
+      <script>
+        function getSex() {
+          var sex = $('#add_menber_style input[name="form-field-radio"]:checked ').val();
+          $("#add_menber_style input[name='userSex']").val(sex);
+        
+        }
+      </script>
     </li>
     <li><label class="label_name">手机：</label><span class="add_name"><input name="userPhoneNumber" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
     <li><label class="label_name">邮箱：</label><span class="add_name"><input name="userEmail" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
@@ -198,18 +207,27 @@ List<User> userList = (List<User>)session.getAttribute("userList");
   </form>
 </div>
 
-<div class="update_menber" id="update_menber_style" style="display:none">
+<div class="add_menber" id="update_menber_style" style="display:none">
   <form action=${pageContext.request.contextPath}/adminUpdateUser.do id="updateUser" enctype="multipart/form-data" method="post">
   <ul class=" page-content">
     <li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span class="add_name"><input value="" name="username" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
     <li><label class="label_name">真实姓名：</label><span class="add_name"><input name="name" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
 
     <li><label class="label_name">密码：</label><span class="add_name"><input name="userPassword" type="password"  class="form-control"/></span><div class="prompt r_f"></div></li>
-    <li><label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
-     <label><input name="userSex" type="radio" checked="checked"><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
-     <label><input name="userSex" type="radio" ><span class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
+    <li>
+      <label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
+      <input name="userSex" value="男" style="display: none"></input>
+     <label><input name="form-field-radio" type="radio" checked="checked" onchange="getSex()" value="男"><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
+     <label><input name="form-field-radio" type="radio" onchange="getSex()" value="女"><span class="lbl" value="女">女</span></label>&nbsp;&nbsp;&nbsp;
      </span>
       <div class="prompt r_f"></div>
+      <script>
+        function getSex() {
+          var sex = $('#update_menber_style input[name="form-field-radio"]:checked ').val();
+          $("#update_menber_style input[name='userSex']").val(sex);
+        
+        }
+      </script>
     </li>
     <li><label class="label_name">手机：</label><span class="add_name"><input name="userPhoneNumber" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
     <li><label class="label_name">邮箱：</label><span class="add_name"><input name="userEmail" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
@@ -282,7 +300,7 @@ List<User> userList = (List<User>)session.getAttribute("userList");
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("#add_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -296,7 +314,7 @@ List<User> userList = (List<User>)session.getAttribute("userList");
         });
         if(num>0){  return false;}
         else{
-          $(".add_menber #addUser").submit();
+          $("#add_menber_style #addUser").submit();
           layer.close(index);
         }
       	//refresh();
@@ -340,7 +358,7 @@ List<User> userList = (List<User>)session.getAttribute("userList");
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".update_menber input[type$='text']").each(function(n){
+        $("#update_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -358,7 +376,7 @@ List<User> userList = (List<User>)session.getAttribute("userList");
             title: '提示框',
             icon:1,
           });
-          $(".update_menber #addUser").submit();
+          $("#update_menber_style #updateUser").submit();
           layer.close(index);
         }
       }
@@ -395,6 +413,22 @@ List<User> userList = (List<User>)session.getAttribute("userList");
 				+ escape(value)
 				+ ((expiredays == null) ? "" : ";expires="
 						+ exdate.toGMTString())
+	}
+	
+	function getCookie(c_name)
+	{
+	if (document.cookie.length>0)
+	  {
+	  c_start=document.cookie.indexOf(c_name + "=")
+	  if (c_start!=-1)
+	    { 
+	    c_start=c_start + c_name.length+1 
+	    c_end=document.cookie.indexOf(";",c_start)
+	    if (c_end==-1) c_end=document.cookie.length
+	    return unescape(document.cookie.substring(c_start,c_end))
+	    } 
+	  }
+	return ""
 	}
 	
 	function transpDelPart() {

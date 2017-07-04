@@ -21,4 +21,8 @@
 		SELECT * FROM RentHouseDeal WHERE  userId=#{0}
 	</select>
 	
+	<select id="selectAll" resultType="com.easyhousing.model.RentHouseDeal">
+		SELECT * FROM RentHouseDeal
+	</select>
+	
 </mapper>
