@@ -8,6 +8,7 @@
 HttpSession s = request.getSession(); 
 BuildingInfo bi = (BuildingInfo)s.getAttribute("buildingInfo");
 int bid = (Integer)s.getAttribute("buildingId");
+boolean collect = (Boolean)s.getAttribute("collectYet");
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 %>
 <html lang="en">
@@ -1431,10 +1432,27 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
         <div class="match-nav">
           <div class="unadd-nav-box">
             <div class="focusloupan" data-xftrack="10179_1">
-              <div class="theme-buy">
-              <!--  
-              <a class="btn btn-primary btn-large theme-login" href="javascript:;" style="width: 100%;height: 100%;">申请看房</a>
-              -->
+              <div class="theme-buy" style="background-color:#C00000;">
+              <%
+              if (s.getAttribute("user") == null) {
+            	  %>
+            	  <a href=${pageContext.request.contextPath}/jsp/html/logIn.jsp style="width: 100%;height: 100%; ">收藏楼盘</a>
+            	  <%
+              }
+              else {
+            	  if (collect) {
+            		  %>
+            		  <a href=${pageContext.request.contextPath}/userCancelBuildingCollectDetail.do style="width: 100%;height: 100%; ">取消楼盘收藏</a>
+            		  <%
+            	  }
+            	  else {
+            		  %>
+            		  <a href=${pageContext.request.contextPath}/userBuildingCollect.do style="width: 100%;height: 100%; ">收藏楼盘</a>
+            		  <%
+            	  }
+              }
+              %>
+         
             </div>
             </div>
 
@@ -1449,13 +1467,12 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
         <div class="mid-content">
           <div class="breadcrumbs">
             <i class="icon"></i>&nbsp
-            <a href="#">易购房</a>
+            <a href=${pageContext.request.contextPath}/buildingSelect.do>易购房</a>
             <span class="stp">&nbsp>&nbsp</span>
             <a href="#"><%=bi.getBuildingName() %></a>
-            <span class="stp">&nbsp>&nbsp</span>
           </div>
         </div>
-        <div class="banner-box" style="background-image: url(${pageContext.request.contextPath}/jsp/images/loupan/bf0ac046-24ae-46b8-bbb2-9cb0d92a3f62.jpg.1000x506.jpg)">
+        <div class="banner-box" style="background-image: url(<%=(String)s.getAttribute("buildingDetailPic") %>)">
           <a target="_blank" href="#" style="display:inline-block;position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 1;"></a>
           <span class="coverpic-type coverpic-pos-rtf">效果图</span>
           <div class="youhui-detail formis"></div>

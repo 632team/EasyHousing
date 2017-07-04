@@ -732,6 +732,7 @@
       padding: 4px 3px 2px 3px;
     }
   </style>
+
 </head>
 <body>
 <div class="container">
@@ -835,11 +836,14 @@
 	                  <div class="info-panel" style="float: left">
 	                    <h2><a target="_blank"
 	                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"><%=c.name %> </a>
-	                      <button type="button" class="btn btn-danger" style="float: right">删除评论</button>
+	                       <form method="post" action=${pageContext.request.contextPath}/userCancelBuildingComment.do>
+	                       <input type="hidden" name="buyHouseCommentId" value="<%=c.commentId %>"></input>
+	                      <button type="submit" class="btn btn-danger" style="float: right">删除评论</button>
+	                      </form>
 	                    </h2>
 	
 	                    <div class="col-1">
-	                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank"><%=c.houseAddress %>></a>-<%=c.decoration %>
+	                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank"><%=c.houseAddress %></a>-<%=c.decoration %>
 	                      </div>
 	                      <div class="other">
 	                        <div class="con"> <%=c.room %>居</div>
@@ -856,7 +860,6 @@
 	                  </div>
 	
 	                </div>
-	                <a class="del-fav actDelFollow" index="349" style="display: none;">删除评论</a>
 	                <br>
 	
 	              </li>
@@ -898,7 +901,10 @@
 	                  <div class="info-panel" style="float: left">
 	                    <h2><a target="_blank"
 	                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"><%=c.name %> </a>
-	                      <button type="button" class="btn btn-danger" style="float: right">删除评论</button>
+	                      <form method="post" action=${pageContext.request.contextPath}/userCancelRentComment.do>
+	                       <input type="hidden" name="rentHouseCommentId" value="<%=c.commentId %>"></input>
+	                      <button type="submit" class="btn btn-danger" style="float: right">删除评论</button>
+	                      </form>
 	                    </h2>
 	                    <div class="col-1">
 	                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank"><%=c.province %></a>-<%=c.region %>
@@ -917,7 +923,6 @@
 	                      class="num"><%=c.price %></span>	                        </span> <span class="price-pre"> 元/月</span></div>
 	                  </div>
 	                </div>
-	                <a class="del-fav actDelFollow" index="349" style="display: none;">删除评论</a>
 	              </li>
 	              <li></li>
             		<%

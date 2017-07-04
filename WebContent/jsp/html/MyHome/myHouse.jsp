@@ -1154,9 +1154,9 @@
                         aria-label="联系方式" style="width: 150px;">联系方式
                     </th>
 
-                    <th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                    <!--<th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
                         aria-label="操作" style="width: 150px;">操作
-                    </th>
+                    </th>-->
 
                   </tr>
                   </thead>
@@ -1172,9 +1172,9 @@
 	                    <td><%=a.room %>室<%=a.hall %>厅<%=a.toilet %>厕</td>
 	                    <td><%=a.price %></td>
 	                    <td><%=a.phone %></td>
-	                    <td class="td-manage">
-	                      <a id="<%=a.houseId %>" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
-	                    </td>
+	                    <!--<td class="td-manage">
+	                      <a id="<% //a.houseId %>" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
+	                    </td>-->
 	                  </tr>
                 	  <%
                   }

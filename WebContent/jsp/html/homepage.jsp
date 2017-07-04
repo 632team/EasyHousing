@@ -443,10 +443,12 @@
       }
       $(function(){
         $("#serchar .sel").click(function(){
-//          var temp = document.getElementById("searchName");
+         var temp = document.getElementById("keyword");
+         temp.value = $(this).text();
 //          temp.innerHTML = $(this).text();
          // alert( $("span#searchName").html());
           $("span#searchName").text($(this).text());
+          
         });
       });
     </script>
@@ -506,6 +508,8 @@
           </div>
         </div>
       </div>
+      
+      <form action=${pageContext.request.contextPath}/globalSearch.do method="post" id="searchForm">
       <div class="search_box searchtp">
         <div class="shtop" style="text-align: center">
           <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg01.png>
@@ -513,6 +517,7 @@
         <div class="search">
           <div class="sh_l fl">
             <div class="sh_sel fl">
+              <input hidden=true id="keyword" value="新房" name="which"></input>
               <span id="searchName" onclick="showall()">新房</span>
 				<ul id="serchar" onmouseleave="hideall()">
 					<!-- <li class="sel">二手房</li> -->
@@ -526,11 +531,12 @@
             <input type="button" value onclick="indexSerch()" class="btn">
           </div>
           <div class="sh_r fr">
-            <a href="/" class="a1">开始找房</a>
+            <a class="a1" onclick="document.getElementById('searchForm').submit();">开始找房</a>
           </div>
         </div>
-
       </div>
+      </form>
+      
     </div>
 
     <div class="home_background">
