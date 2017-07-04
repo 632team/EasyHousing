@@ -533,6 +533,7 @@
 
 			
 			<form  method="post" id="updatePortrait" class="js_module" action=${pageContext.request.contextPath}/changePhoto.do enctype="multipart/form-data">
+				<!--
 				<ul>
 					<li>
 	                	<span style="text-align:right">选择图像：</span>
@@ -540,6 +541,50 @@
 	             	</li></br>
 					<span></span><button type="submit" class="actSubmit lj-btn" id="nameSubmit">提交</button>
 				</ul>
+				-->
+				 <div class="container"
+					 style="  width: 400px;margin: 40px auto 0 0;position: relative;font-family: 微软雅黑;font-size: 12px;">
+					  <img name="myImg" id = "myImg"  src="" style="display: block; width:300px; height: 300px">
+					  <br/><br/>
+					  <input type="file" name="upload-file" id="imgFile" onchange="changeImg()"  class=""  style="">
+					  <br/>
+					  <input type="submit" name="submitImg"  id="submitImg" style="width:64px; display:inline-block">
+				
+					<script>
+					  function changeImg() {
+						if (typeof FileReader === 'undefined') {
+						  alert('Your browser does not support FileReader...');
+						  return;
+						}
+						var reader = new FileReader();
+				
+						reader.onload = function(e) {
+						  var img = document.getElementById("myImg");
+						  img.src = this.result;
+						}
+						reader.readAsDataURL(document.getElementById("imgFile").files[0]);
+					  }
+					</script>
+				  <!--<div class="imageBox">-->
+					<!--<div class="thumbBox"></div>-->
+					<!--<div class="spinner" style="display: none">Loading...</div>-->
+				  <!--</div>-->
+				  <!--<div class="action">-->
+					<!--&lt;!&ndash; <input type="file" id="file" style=" width: 200px">&ndash;&gt;-->
+					<!--<div class="new-contentarea tc"><a href="javascript:void(0)" class="upload-img">-->
+					  <!--<label for="upload-file" style="text-align: center">上传图像</label>-->
+					<!--</a>-->
+				
+					  <!--<input type="file" class="" name="upload-file" value="Add" id="upload-file" />-->
+					<!--</div>-->
+					<!--<input type="button" id="btnCrop" class="Btnsty_peyton" value="裁切">-->
+					<!--<input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+">-->
+					<!--<input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-">-->
+					<!--<input type="submit" id="btnSave" class="Btnsty_peyton" value="保存">-->
+				  <!--</div>-->
+				  <!--<div class="cropped"></div>-->
+				</div>
+				
             </form>
            
             

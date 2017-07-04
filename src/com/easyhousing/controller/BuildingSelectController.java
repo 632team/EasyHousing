@@ -1,5 +1,6 @@
 package com.easyhousing.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.easyhousing.dao.BuildingPicDao;
 import com.easyhousing.model.BuildingInfo;
 import com.easyhousing.service.BuildingSearch;
 
@@ -20,6 +22,9 @@ public class BuildingSelectController {
 	
 	@Autowired
 	private BuildingSearch buildingSearch;
+	
+	@Autowired
+	private BuildingPicDao buildingPicDao;
 	
 	@RequestMapping(value="buildingSelect.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView buildingSelect(HttpServletRequest request, HttpSession session) {
@@ -54,6 +59,17 @@ public class BuildingSelectController {
 		int highPrice = Integer.parseInt((String)session.getAttribute("buildingHighPrice"));
 		
 		List<BuildingInfo>list = buildingSearch.searchBuilding(address, lowPrice, highPrice);
+		
+		List<String> buildingPicList = new ArrayList<>();
+		for (BuildingInfo i: list) {
+			List<String> t = buildingPicDao.selectBuildingPicByBuildingId(i.getBuildingId());
+			if (t.size() == 0) {
+				buildingPicList.add("");
+			}
+			else buildingPicList.add(t.get(0));
+		}
+		session.setAttribute("buildingPicList", buildingPicList);
+		
 		session.setAttribute("buildingList", list);
 		session.setAttribute("buildingSt", 0);
 		session.setAttribute("buildingListSize", list.size());
@@ -123,6 +139,17 @@ public class BuildingSelectController {
 		int highPrice = Integer.parseInt((String)session.getAttribute("buildingHighPrice"));
 
 		List<BuildingInfo> list = buildingSearch.searchBuilding(address, lowPrice, highPrice);
+		
+		List<String> buildingPicList = new ArrayList<>();
+		for (BuildingInfo i: list) {
+			List<String> t = buildingPicDao.selectBuildingPicByBuildingId(i.getBuildingId());
+			if (t.size() == 0) {
+				buildingPicList.add("");
+			}
+			else buildingPicList.add(t.get(0));
+		}
+		session.setAttribute("buildingPicList", buildingPicList);
+		
 		session.setAttribute("buildingList", list);
 		session.setAttribute("buildingSt", 0);
 		session.setAttribute("buildingListSize", list.size());

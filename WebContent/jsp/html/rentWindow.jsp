@@ -1,6 +1,7 @@
 <%@page import="com.easyhousing.model.RentHouse"%>
 <%@page import="java.util.*"%>
 <%@page import="java.lang.Math"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,6 +10,7 @@
   <%
   HttpSession s = request.getSession(); 
   String strtemp;
+  SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
   %>
   <title>租房</title>
   <meta charset="utf-8">
@@ -52,39 +54,52 @@
       padding-top: 20px;
       position: relative;
     }
+    /*logo CSS*/
     .listhead .header .logo {
       width: 120px;
       margin-top: -1px;
-      margin-left:60px;
+      margin-left: 60px;
     }
-  .header .logo {
-  width: 120px;
-  height:50px;
-  margin-top: 0px;
-  float: left;
-  }
+    .header .logo {
+      width: 120px;
+      height:50px;
+      margin-top: 0px;
+      float: left;
+    }
     .listhead .header .nav {
       height: 60px;
       font-size: 15px;
+
     }
-  .header .nav {
-  width: 600px;
-  height: 30px;
-  float: right;
-  font-size: 15px;
-  font-weight:bold;
-  margin-right: 350px;
-  margin-top: -30px;
-  }
-  .header .nav1 {
-  width: 100px;
-  height: 30px;
-  float: right;
-  font-size: 12px;
-  font-weight: bold;
-  margin-top: -7px;
-  margin-right: -5px;
-  }
+    /* .header .nav {
+       width: 850px;
+       height: 50px;
+       float: left;
+       font-size: 18px;
+       font-weight: bold;
+       margin-left: 100px;
+     }*/
+    /*顶上字体CSS*/
+    .header .nav {
+      width: 600px;
+      height: 30px;
+      float: right;
+      font-size: 15px;
+      font-weight:bold;
+      margin-right: 350px;
+      margin-top: -30px;
+    }
+    /*登录注册字体CSS*/
+    .header .nav1 {
+      width: 100px;
+      height: 30px;
+      float: right;
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: -7px;
+      margin-right: -5px;
+    }
+    /*搜索框大小CSS*/
     .listhead .header .nav span {
       height: 160px;
       margin: 0;
@@ -99,6 +114,7 @@
     .header a {
       color: #fff;
     }
+    /*搜索栏灰色底框距离底部的距离*/
     .wsrrent {
       width: 100%;
       border-bottom: 1px solid #ddd;
@@ -106,12 +122,16 @@
       margin-bottom: 30px;
       box-shadow: 0 1px 1px #e1e1e1;
     }
-  .wsrrent .container {
-  width: 100%;
-  height:110px;
-  margin-top: 70px;             /*搜索底框的上边距离顶栏的距离*/
-  background:#faf7fa;
-  }
+
+    /*搜索栏白色底框CSS*/
+    .wsrrent .container {
+      width: 100%;
+      height:110px;
+      margin-top: 70px;             /*搜索底框的上边距离顶栏的距离*/
+      background:#faf7fa;
+    }
+
+    /*范围栏*/
     .container {
       width: 1200px;
       margin: auto;
@@ -120,18 +140,20 @@
       height: 35px;
       padding: 10px 0;
     }
+    /*搜索框边线*/
     .subsh_l {
       width: 388px;
       height: 33px;
       border: 1px solid #bbb;
       position: relative;
       background: #fff;
-  margin-left: 110px;
-  margin-top:20px;
+      margin-left: 110px;
+      margin-top:20px;
     }
     .fl {
       float: left;
     }
+    /*搜索小框内文字*/
     .subsh_l .sd_sel {
       width: 60px;
       height: 33px;
@@ -245,10 +267,12 @@
       width: 85px;
       height: 31px;
       line-height: 31px;
-      /*border: 2px solid #ddd;
-      border-right: none;
-      border-top-left-radius: 5px;
+
+      /*border: 2px solid #ddd;*/
+      /*border-right: none;*/
+      /*border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;*/
+
       color: #333;
     }
     .subsh_r a {
@@ -267,16 +291,21 @@
     .subsh_r .al span {
       padding-left: 15px;
       background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/djimg25.png) no-repeat left center;
+
+
     }
     .subsh_r a span {
       display: inline-block;
     }
     strong, b {
       font-weight: bold;
-  font-size: 16px;
+      font-size: 16px;
+
     }
     .subsh_r .al span i {
       display: none;
+
+
     }
     i, em {
       font-style: normal;
@@ -291,8 +320,8 @@
     }
     .current {
       width: 1205px;
-     /* margin: auto;*/
-  margin-left: 30px;
+      /*margin: auto;*/
+      margin-left: 30px;
       font-size: 14px;
       height: 32px;
       line-height: 32px;
@@ -347,12 +376,13 @@
       border-top: none;
       display: none;
       background: #fff;
-  margin-left: 30px;
-  margin-right: 20px;
+      margin-left: 30px;
+      margin-right: 20px;
 
-  }
+    }
     .nv_menu ul {
       padding: 10px 20px 0 20px;
+
     }
     .nv_menu li {
       padding: 6px 0;
@@ -363,7 +393,7 @@
       font-weight: bold;
     }
     .nv_menu li .on {
-      color: #c00000;
+      color: #C00000;
       font-weight: bold;
     }
     .nv_menu li a {
@@ -399,7 +429,7 @@
       width: 500px;
       height: 35px;
       overflow: hidden;
-  margin-left: 30px;
+      margin-left: 30px;
     }
     .fl {
       float: left;
@@ -416,7 +446,7 @@
       height: 35px;
       text-align: right;
       overflow: hidden;
-  margin-right: 20px;
+      margin-right: 20px;
     }
     .fr {
       float: right;
@@ -474,87 +504,87 @@
       -webkit-margin-after: 1em;
       -webkit-margin-start: 0px;
       -webkit-margin-end: 0px;
-      /*-webkit-padding-start: 40px;*/
-  margin-left: 30px;
-  margin-right: 20px;
-    }
-  .mor_list li {
-  height: 190px;
-  padding: 20px 10px 20px 195px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  }
-  .data_link {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 200;
-  display: block;
 
-  }
-  a {
-  text-decoration: none;
-  color: #333;
-  outline: none;
-  }
-  .mor_list li .mor_img {
-  width: 185px;
-  height: 150px;
-  overflow: hidden;
-  background: #ccc;
-  position: absolute;
-  top: 20px;
-  left: 10px;
-  z-index: 1;
-  font-size: 14px;
-  font-weight: bold;
-  }
-  a {
-  text-decoration: none;
-  color: #333;
-  outline: none;
-  }
-  .mor_list li .mor_img img {
-  width: 100%;
-  height: 100%;
-  }
-  fieldset, img {
-  border: 0;
-  }
-  .mor_list li .mor_txt {
-  width: 100%;
-  height: 150px;
-  margin-left: 10px;
-  position: relative;
-  left:50px;
-  }
-  .mor_list li .mor_txt h3 {
-  height: 23px;
-  font-size: 21px;
-  font-weight:bold;
-  line-height: 20px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: #0a92f5;
-  }
-  .mor_list li .mor_txt .dot {
-  width: 100%;
-  height: 48px;
-  }
-  .mor_list li .mor_txt p {
-  width: 100%;
-  height: 24px;
-  margin-top: 10px;
-  line-height: 24px;
-  font-size: 14px;
-  color: #666;
-  overflow: hidden;
+      margin-left: 30px;
+      margin-right: 20px;
+
+
+    }
+    .mor_list li {
+      height: 190px;
+      padding: 20px 10px 20px 195px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+
+    }
+    .data_link {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 200;
+      display: block;
+
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+    .mor_list li .mor_img {
+      width: 185px;
+      height: 150px;
+      overflow: hidden;
+      background: #ccc;
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      z-index: 1;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+      outline: none;
+    }
+    .mor_list li .mor_img img {
+      width: 100%;
+      height: 100%;
+    }
+    fieldset, img {
+      border: 0;
+    }
+    .mor_list li .mor_txt {
+      width: 100%;
+      height: 150px;
+      margin-left: 10px;
+      position: relative;
+      left:50px;
+    }
+    .mor_list li .mor_txt h3 {
+      font-family: "Hiragino Sans GB", 微软雅黑, "Microsoft YaHei", SimHei, Tahoma, 宋体b8b体, SimSun, sans-serif;
+      color: rgb(51, 51, 51);
+      font-size: 20px;
+      font-weight: 700;
+      vertical-align: middle;
+    }
+    .mor_list li .mor_txt .dot {
+      width: 100%;
+      height: 48px;
+    }
+    .mor_list li .mor_txt p {
+      width: 100%;
+      height: 24px;
+      margin-top: 10px;
+      line-height: 24px;
+      font-size: 14px;
+      color: #666;
+      overflow: hidden;
     }
     .mor_list li .mor_txt .dor {
       height: 24px;
@@ -563,23 +593,24 @@
       white-space: nowrap;
       text-overflow: ellipsis;
     }
-  p {
-  display: block;
-  -webkit-margin-before: 1em;
-  -webkit-margin-after: 1em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
-  }
-  .mor_list li .mor_txt a {
-  height: 22px;
-  line-height: 22px;
-  display: block;
-  float: left;
-  margin-right: 5px;
-  border: 1px solid;
-  padding: 0 5px;
-  cursor: default;
-  }
+    p {
+      display: block;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+    }
+    .mor_list li .mor_txt a {
+      height: 22px;
+      line-height: 22px;
+      display: block;
+      float: left;
+      margin-right: 5px;
+      border: 1px solid;
+      padding: 0 5px;
+      cursor: default;
+
+    }
     .bq_cor_1, .bq_cor_11, .bq_cor_21, .bq_cor_31, .bq_cor_41, .bq_cor_51, .bq_cor_61, .bq_cor_71, .bq_cor_81, .bq_cor_91, .bq_cor_101, .bq_cor_111, .bq_cor_121, .bq_cor_131, .bq_cor_141, .bq_cor_151, .bq_cor_161, .bq_cor_171, .bq_cor_181, .bq_cor_191 {
       color: #ff943e;
       border-color: #ff943e;
@@ -603,28 +634,79 @@
     .mor_list li .mor_w {
       width: 240px;
     }
-  p {
-  display: block;
-  -webkit-margin-before: 1em;
-  -webkit-margin-after: 1em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
-  }
-  .mor_list li .mor_txt a {
-  height: 22px;
-  line-height: 22px;
-  display: block;
-  float: left;
-  margin-right: 5px;
-  border: 1px solid;
-  padding: 0 5px;
-  cursor: default;
-  }
-  * {
-  font-family: "Microsoft YaHei",Helvetica,sans-serif;
-  font-family: "宋体", Helvetica, Arial, sans-serif;
-  word-break: break-all;
-  }
+
+    .mor_list li .mor_tip p {
+      height: 30px;
+      line-height: 30px;
+      color:#003300;
+      font-size: 16px;
+    }
+    .mor_list li .mor_tip strong {
+
+      color: #f15044;
+      font-size: 30px;
+
+      font-family: "Tahoma";
+      vertical-align: -2px;
+    }
+    .mor_list li .mor_tip:last-child {
+      right: 0;
+    }
+    .mor_list li .mor_w {
+      width: 240px;
+    }
+    .mor_list li .mor_tip {
+      width: 180px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 18px;
+      overflow: hidden;
+      position: absolute;
+      top: 65px;
+      right: 170px;
+      z-index: 1;
+      margin-right: 40px;
+    }
+
+    #pagination {
+      width: 1120px;
+      font-size: 16px;
+      text-align: center;
+      padding: 10px 0;
+      clear: both;
+      background: #fff;
+      overflow: hidden;
+      margin-left: 30px;
+
+    }
+    .pagination .sel.next, .pagination .sel.prev {
+      color: #333;
+      border-color: #666;
+
+
+    }
+    .pagination .sel {
+      color: #c00000;
+      border-color: #c00000;
+
+    }
+    .pagination a, .pagination span {
+      min-width: 16px;
+      height: 32px;
+      line-height: 32px;
+      border: 1px solid #666;
+      text-align: center;
+      margin: 5px 2px;
+      padding: 0 8px;
+      display: inline-block;
+      vertical-align: top;
+      cursor: pointer;
+    }
+    * {
+      font-family: "Microsoft YaHei",Helvetica,sans-serif;
+      font-family: "宋体", Helvetica, Arial, sans-serif;
+      word-break: break-all;
+    }
   </style>
 
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js "></script>
@@ -676,6 +758,25 @@
 		setCookie("rentHouseId", id, 365);
 	}
 </script>
+  
+      <script type="text/javascript">
+      function showall(){
+        var temp = document.getElementById("serchar");
+        temp.style.display = "block";
+      }
+      function hideall(){
+        var temp = document.getElementById("serchar");
+        temp.style.display = "none";
+      }
+      $(function(){
+        $("#serchar .sel").click(function(){
+//          var temp = document.getElementById("searchName");
+//          temp.innerHTML = $(this).text();
+         // alert( $("span#searchName").html());
+          $("span#searchName").text($(this).text());
+        });
+      });
+    </script>
 </head>
 <body>
   <div class="fotpof">
@@ -736,18 +837,12 @@
         <div class="subsh subsher">
           <div class="subsh_l fl">
             <div class="sd_sel fl">
-              <span>新房</span>
-              <ul id="serchar">
-                <li>
-                  二手房
-                </li>
-                <li class="sel">
-                  新房
-                </li>
-                <li>
-                  租房
-                </li>
-              </ul>
+              <span id="searchName" onclick="showall()">新房</span>
+				<ul id="serchar" onmouseleave="hideall()">
+					<!-- <li class="sel">二手房</li> -->
+					<li class="sel">新房</li>
+					<li class="sel">租房</li>
+				</ul>
             </div>
             <input type="text" placeholder="请输入小区、地铁、区域开始找房" class="text" id="autoSearchText" maxlength="20" autocomplete="off">
             <div id="autoSearchItem" style="height: 285px; visibility: hidden;">
@@ -999,14 +1094,15 @@
       	<%
       	int st = (Integer)s.getAttribute("st");
       	int ed = Math.min(st + 5, list.size());
+      	List<String> picUrl = (List<String>)s.getAttribute("rentHousePicList");
       	for(int iter = st; iter < ed; iter++) {
       		RentHouse i = list.get(iter);
       	%>
       	<li>
           <a onclick="clickArea4('<% out.print(list.get(iter).getRentHouseId()); %>');" href=${pageContext.request.contextPath}/rentHouseDetail.do class="data_link" target="_blank"></a>
           <div class="mor_img">
-            <a href="#" target="_blank" onerror="this.src='#'" alt="沙坪坝区沙正街 电力小区 3房130平米3000元/月" title="沙坪坝区沙正街 电力小区 3房130平米3000元/月">
-              <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/38.jpg>
+            <a href="#" target="_blank" onerror="this.src='#'" alt="" title="">
+              <img src=<%=picUrl.get(iter) %>>
             </a>
           </div>
           <div class="mor_txt">
@@ -1021,8 +1117,9 @@
             </h3>
             <p class="dot">
             	<%
-            		out.print(i.getCommunityId()+"小区|");
-            		out.print(i.getRentHouseBuildTime()+"年建");
+            		out.print(i.getCommunityName()+"小区|");
+            		if (i.getRentHouseBuildTime() != null)
+            			out.print(sdf.format(i.getRentHouseBuildTime())+"年建");
             	%>
               <!--  电力小区｜1997年建｜中装<br>
               		商圈：沙正街｜-->

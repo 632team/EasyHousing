@@ -1,10 +1,14 @@
 <%@page import="java.util.List"%>
 <%@page import="com.easyhousing.model.*"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 HttpSession s = request.getSession(); 
+BuildingInfo bi = (BuildingInfo)s.getAttribute("buildingInfo");
+int bid = (Integer)s.getAttribute("buildingId");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 %>
 <html lang="en">
 <head>
@@ -168,7 +172,7 @@ HttpSession s = request.getSession();
       text-align: center;
       height: 33px;
       line-height: 33px;
-      background: url(../images/rentWindow/djimg23.png) no-repeat right center;
+      background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/djimg23.png) no-repeat right center;
       display: block;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -242,7 +246,7 @@ HttpSession s = request.getSession();
       height: 33px;
       float: right;
       font-size: 0;
-      background: url(../images/rentWindow/djimg24.png) no-repeat center center;
+      background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/djimg24.png) no-repeat center center;
       border: none;
     }
     input[type="button"], input[type="file"], input[type="submit"], input[type="reset"] {
@@ -297,7 +301,7 @@ HttpSession s = request.getSession();
     }
     .subsh_r .al span {
       padding-left: 15px;
-      background: url(../images/rentWindow/djimg25.png) no-repeat left center;
+      background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/djimg25.png) no-repeat left center;
 
     }
     .subsh_r a span {
@@ -342,7 +346,7 @@ HttpSession s = request.getSession();
       border: 0;
     }
     .unadd-nav-box {
-      width: 45px;
+      width: 70px;
       height: 75px;
       border: 1px solid #efeeef;
       border-top-color: #f9f9f9;
@@ -352,7 +356,7 @@ HttpSession s = request.getSession();
       background-color: white;
     }
     .focusloupan {
-      padding: 5px 10px;
+      /*padding: 5px 10px;*/
       color: black;
       font-size: 12px;
       border-top-color: #f9f9f9;
@@ -421,7 +425,7 @@ HttpSession s = request.getSession();
       line-height: 35px;
     }
     .mod-banner .mid-content .breadcrumbs .icon {
-      background: url(../images/loupan/bread-icon.png) no-repeat;
+      background: url(${pageContext.request.contextPath}/jsp/images/loupan/bread-icon.png) no-repeat;
       width: 13px;
       height: 19px;
       display: inline-block;
@@ -613,7 +617,7 @@ HttpSession s = request.getSession();
       margin-right: 8px;
       width: 7px;
       height: 13px;
-      /*!*background: url(../../img/detail/iic.png);*!  background: -webkit-image-set(url(../../img/detail/iic.png) 1x, url(../../img/detail/iic@2x.png) 2x);*/
+      /*!*background: url(${pageContext.request.contextPath}/jsp/${pageContext.request.contextPath}/jsp/img/detail/iic.png);*!  background: -webkit-image-set(url(${pageContext.request.contextPath}/jsp/${pageContext.request.contextPath}/jsp/img/detail/iic.png) 1x, url(${pageContext.request.contextPath}/jsp/${pageContext.request.contextPath}/jsp/img/detail/iic@2x.png) 2x);*/
       background-repeat: no-repeat;
     }
     .mod-banner .banner-box .box-left .box-left-bottom .bottom-info .where {
@@ -906,6 +910,430 @@ HttpSession s = request.getSession();
       margin-left: 100px;
     }
   </style>
+
+  <script type="text/javascript">try {
+    var AG_onLoad=function(func){
+      if(document.readyState==="complete"||document.readyState==="interactive")
+        func();
+      else if(document.addEventListener)
+        document.addEventListener("DOMContentLoaded",func);
+      else if(document.attachEvent)
+        document.attachEvent("DOMContentLoaded",func)};
+    var AG_removeElementById = function(id) {
+      var element = document.getElementById(id);
+      if (element && element.parentNode) {
+        element.parentNode.removeChild(element);
+      }
+    };
+    var AG_removeElementBySelector = function(selector) {
+      if (!document.querySelectorAll) {
+        return;
+      }
+      var nodes = document.querySelectorAll(selector);
+      if (nodes) {
+        for (var i = 0; i < nodes.length; i++) {
+          if (nodes[i] && nodes[i].parentNode) {
+            nodes[i].parentNode.removeChild(nodes[i]);
+          }
+        }
+      }
+    };
+    var AG_each = function(selector, fn) {
+      if (!document.querySelectorAll)
+        return;
+      var elements = document.querySelectorAll(selector);
+      for (var i = 0; i < elements.length; i++) {
+        fn(elements[i]);
+      }
+    };
+    var AG_removeParent = function(el, fn) {
+      while (el && el.parentNode) {
+        if (fn(el)) {
+          el.parentNode.removeChild(el);
+          return;
+        }
+        el = el.parentNode;
+      }
+    };
+    window.wcs_add = {};
+    window.wcs_do = function() { };
+  } catch (ex) { console.error('Error executing AG js: ' + ex);}
+  </script>
+  <script>
+    jQuery(document).ready(function($) {
+      $('.theme-login').click(function(){
+        $('.theme-popover-mask').fadeIn(100);
+        $('.theme-popover').slideDown(200);
+      })
+      $('.theme-poptit .close').click(function(){
+        $('.theme-popover-mask').fadeOut(100);
+        $('.theme-popover').slideUp(200);
+      })
+
+    })
+  </script>
+  <style type="text/css">
+
+    body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, code, del, dfn, em, img, strong, dd, dl, dt, li, ol, ul, fieldset, form, label, button, input, table, caption, tbody, tfoot, thead, tr, th, td, menu {
+      margin:0;
+      padding:0;
+    }
+    article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+      display:block
+    }
+    audio, canvas, video {
+      display:inline-block;
+      *display:inline;
+      *zoom:1
+    }
+    audio:not([controls]) {
+      display:none
+    }
+    table {
+      border-collapse:collapse;
+      border-spacing:0;
+      empty-cells:show
+    }
+    ol, ul, menu {
+      list-style:none
+    }
+    img {
+      border:0
+    }
+    a:focus {
+      outline:none
+    }
+    em, i {
+      font-style: normal;
+    }
+    button, input, select, textarea {
+      font-size:100%;
+      margin:0;
+      vertical-align:-3px;
+      outline:none;
+    }
+    button, input {
+      border:1px solid;
+      outline:none;
+      line-height:normal;
+      *overflow:visible
+    }
+    button::-moz-focus-inner, input::-moz-focus-inner {
+      border:0;
+      padding:0
+    }
+    button, input[type="button"], input[type="reset"], input[type="submit"] {
+      cursor:pointer;
+      -webkit-appearance:button
+    }
+    input[type="search"] {
+      -webkit-appearance:textfield;
+      -webkit-box-sizing:content-box;
+      -moz-box-sizing:content-box;
+      box-sizing:content-box
+    }
+    input[type="search"]::-webkit-search-decoration {
+      -webkit-appearance:none
+    }
+    textarea {
+      overflow:auto;
+      vertical-align:top
+    }
+    ::selection {
+      background:#72d0eb;
+      color:#fff;
+      text-shadow:none
+    }
+    ::-moz-selection {
+      background:#72d0eb;
+      color:#fff;
+      text-shadow:none
+    }
+    *[hidden] {
+      display:none
+    }
+    a {
+      color:#0088DB;
+      text-decoration:none;
+      cursor:pointer
+    }
+    a:hover {
+      color:#2A5E8E
+    }
+    .clearfix:after, .central:after, .widget ul:after, .paging:after, .pagenav:after, .base-tit:after {
+      content:".";
+      display:block;
+      height:0;
+      clear:both;
+      visibility:hidden
+    }
+    .clearfix, .central, .widget ul, .paging, .pagenav, .base-tit {
+      height:1%;
+    }
+    body, button, input, select, textarea, code {
+      font-size:12px;
+      font-family:microsoft yahei;
+      color: #444;
+    }
+    .ipt {
+      border: solid 1px #d2d2d2;
+      border-left-color: #ccc;
+      border-top-color: #ccc;
+      border-radius: 2px;
+      box-shadow: inset 0 1px 0 #f8f8f8;
+      background-color: #fff;
+      padding: 4px 6px;
+      height: 21px;
+      line-height: 21px;
+      color: #555;
+      width: 180px;
+      vertical-align: baseline;
+    }
+    .ipt-mini {
+      width: 140px;
+      padding: 1px 3px;
+    }
+    .ipt:focus {
+      border-color: #95C8F1;
+      box-shadow: 0 0 4px #95C8F1;
+    }
+    /* btn */
+    .btn {
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 12px;
+      font-weight: bold;
+      height: 27px;
+      line-height: 27px;
+      min-width: 52px;
+      padding: 0 12px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 2px;
+      border: 1px solid #ddd;
+      color: #666;
+      background-color: #f5f5f5;
+      background: -webkit-linear-gradient(top, #F5F5F5, #F1F1F1);
+      background: -moz-linear-gradient(top, #F5F5F5, #F1F1F1);
+      background: linear-gradient(top, #F5F5F5, #F1F1F1);
+    }
+    input.btn {
+      height: 29px;
+    }
+    .btn:hover {
+      border-color:#c6c6c6;
+      color:#333;
+      background-color:#f8f8f8;
+      background:-webkit-linear-gradient(top, #f8f8f8, #f1f1f1);
+      background:-moz-linear-gradient(top, #f8f8f8, #f1f1f1);
+      background:linear-gradient(top, #f8f8f8, #f1f1f1);
+      box-shadow:#ddd 0 1px 1px 0;
+    }
+    .btn:active, .btn.btn-active {
+      box-shadow:#ddd 0 1px 2px 0 inset;
+      border-color:#c6c6c6;
+    }
+    .btn:focus {
+      border-color:#4d90fe;
+      outline:none
+    }
+    .btn-primary {
+      border-color: #3079ED;
+      color: #F3F7FC;
+      background-color: #4D90FE;
+      background: -webkit-linear-gradient(top, #4D90FE, #4787ED);
+      background: -moz-linear-gradient(top, #4D90FE, #4787ED);
+      background: linear-gradient(top, #4D90FE, #4787ED);
+    }
+    .btn-primary:hover {
+      border-color:#2F5BB7;
+      color:#fff;
+      background-color: #4D90FE;
+      background: -webkit-linear-gradient(top, #4D90FE, #357AE8);
+      background: -moz-linear-gradient(top, #4D90FE, #357AE8);
+      background: linear-gradient(top, #4D90FE, #357AE8);
+    }
+    .btn-primary:active, .btn-primary.btn-active {
+      box-shadow:#2176D3 0 1px 2px 0 inset;
+      border-color: #3079ED;
+    }
+    .btn-primary:focus {
+      border-color:#4d90fe;
+      outline:none
+    }
+    .theme-buy {
+      margin-top:10%;
+      text-align: center;
+    }
+    .theme-gobuy, .theme-signin {
+      font-size: 15px;
+    }
+    .theme-price {
+      position: relative;
+      bottom: -6px;
+      font-family: microsoft yahei, Arial, Helvetica, sans-serif;
+      margin-right: 20px;
+      font-weight: bold;
+      color: #f60;
+      line-height: 32px;
+      font-size: 24px;
+      display: inline-block;
+    }
+    .theme-price dfn {
+      font-style: normal;
+      font-size: 18px;
+      margin-right: 2px;
+    }
+    .theme-desc {
+      padding: 30px;
+    }
+    .theme-version {
+      padding: 30px;
+    }
+    .theme-popover-mask {
+      z-index: 9998;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:#000;
+      opacity:0.4;
+      filter:alpha(opacity=40);
+      display:none
+    }
+    .theme-popover {
+      z-index:9999;
+      position:fixed;
+      top:50%;
+      left:50%;
+      width:660px;
+      height:360px;
+      margin:-180px 0 0 -330px;
+      border-radius:5px;
+      border:solid 2px #666;
+      background-color:#fff;
+      display:none;
+      box-shadow: 0 0 10px #666;
+    }
+    .theme-poptit {
+      border-bottom:1px solid #ddd;
+      padding:12px;
+      position: relative;
+    }
+    .theme-popbod {
+      padding:60px 15px;
+      color:#444;
+      height: 148px;
+    }
+    .theme-popbom {
+      padding:15px;
+      background-color:#f6f6f6;
+      border-top:1px solid #ddd;
+      border-radius:0 0 5px 5px;
+      color:#666
+    }
+    .theme-popbom a {
+      margin-left:8px
+    }
+    .theme-poptit .close {
+      float:right;
+      color:#999;
+      padding:5px;
+      margin:-2px -5px -5px;
+      font:bold 14px/14px simsun;
+      text-shadow:0 1px 0 #ddd
+    }
+    .theme-poptit .close:hover {
+      color:#444;
+    }
+    .btn.theme-reg {
+      position: absolute;
+      top: 8px;
+      left: 43%;
+      display: none
+    }
+    .inp-gray, .feed-mail-inp {
+      border:1px solid #ccc;
+      background-color:#fdfdfd;
+      width:220px;
+      height:16px;
+      padding:4px;
+      color:#444;
+      margin-right:6px
+    }
+    .dform {
+      padding:80px 60px 40px;
+      text-align: center;
+    }
+    .dform .ipt_error {
+      background-color:#FFFFCC;
+      border-color:#FFCC66
+    }
+    .dform-tip {
+      display:none;
+      background-color:#080;
+      color:#fff;
+      line-height:42px;
+      margin-top:10px;
+      /*display:;*/
+      font-size: 14px;
+    }
+    .dform-tip-errer {
+      background-color: #CF301A;
+    }
+    .dform-tip a {
+      display: inline-block;
+      padding: 0 20px;
+      margin-left:10px;
+      background-color: #FFE924;
+      color: #CF301A;
+    }
+    .dform-login {
+      padding:0;
+      height: 270px;
+      overflow: hidden;
+    }
+    .dform-login iframe {
+      height: 470px;
+      margin-top: -180px;
+    }
+    .theme-signin {
+      margin: -50px -20px -50px 90px;
+      text-align:left;
+      font-size: 14px;
+    }
+    .theme-signin h4 {
+      color:#999;
+      font-weight:100;
+      margin-bottom: 20px;
+      font-size: 12px;
+    }
+    .theme-signin li {
+      padding-left: 80px;
+      margin-bottom: 15px;
+    }
+    .theme-signin li strong {
+      float: left;
+      margin-left: -80px;
+      width: 80px;
+      text-align: right;
+      line-height: 32px;
+    }
+    .theme-signin .btn {
+      margin-bottom: 10px;
+    }
+    .theme-signin p {
+      font-size: 12px;
+      color: #999;
+    }
+    .theme-desc, .theme-version {
+      padding-top: 0
+    }
+
+  </style>
 </head>
 <body>
   <div class="fotpof">
@@ -914,13 +1342,13 @@ HttpSession s = request.getSession();
     <div>
     </div>
   </div>
-    <div class="headerbg listhead">
-      <div class="header">
-        <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp>
-          <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/logo1.png class="logo" >
-        </a>
-        <div class="nav1 navml">
-        <span>
+  <div class="headerbg listhead">
+    <div class="header">
+      <a href="#">
+        <img src="${pageContext.request.contextPath}/jsp/images/rentWindow/logo1.png" class="logo" >
+      </a>
+      <div class="nav1 navml">
+           <span>
               <%
               if (s.getAttribute("user") == null) {
             	  out.println("<a href=/EasyHousing/jsp/html/logIn.jsp class=\"href\">登录</a>");
@@ -955,12 +1383,11 @@ HttpSession s = request.getSession();
 	          <span>
 	            <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="href">租房</a>
 	          </span>
-	
-	        </div>
-	      </div>
-	
-	    </div>
-	    
+
+      </div>
+    </div>
+
+  </div>
   <div class="wsrrent">
     <div class="container">
       <div class="subsh subsher">
@@ -1003,13 +1430,20 @@ HttpSession s = request.getSession();
       <div id="matchBar">
         <div class="match-nav">
           <div class="unadd-nav-box">
-            <div class="focusloupan" data-xftrack="10179_1">关注楼盘</div>
+            <div class="focusloupan" data-xftrack="10179_1">
+              <div class="theme-buy">
+              <!--  
+              <a class="btn btn-primary btn-large theme-login" href="javascript:;" style="width: 100%;height: 100%;">申请看房</a>
+              -->
+            </div>
+            </div>
+
           </div>
         </div>
       </div>
       <div class="mod-banner">
         <div class="filter-bg">
-          <img src="../images/loupan/bf0ac046-24ae-46b8-bbb2-9cb0d92a3f62.jpg.100x36.jpg" style="width:100%;height:100%;">
+          <img src="${pageContext.request.contextPath}/jsp/images/loupan/bf0ac046-24ae-46b8-bbb2-9cb0d92a3f62.jpg.100x36.jpg" style="width:100%;height:100%;">
         </div>
         <div class="opacity-bg"></div>
         <div class="mid-content">
@@ -1017,17 +1451,11 @@ HttpSession s = request.getSession();
             <i class="icon"></i>&nbsp
             <a href="#">易购房</a>
             <span class="stp">&nbsp>&nbsp</span>
-            <a href="#">新房</a>
-            <span class="stp">&nbsp>&nbsp</span>
-            <a href="#">楼盘</a>
-            <span class="stp">&nbsp>&nbsp</span>
-            <a href="#">沙坪坝</a>
-            <span class="stp">&nbsp>&nbsp</span>
-            <a href="#">融创春晖十里</a>
+            <a href="#"><%=bi.getBuildingName() %></a>
             <span class="stp">&nbsp>&nbsp</span>
           </div>
         </div>
-        <div class="banner-box" style="background-image: url(../images/loupan/bf0ac046-24ae-46b8-bbb2-9cb0d92a3f62.jpg.1000x506.jpg)">
+        <div class="banner-box" style="background-image: url(${pageContext.request.contextPath}/jsp/images/loupan/bf0ac046-24ae-46b8-bbb2-9cb0d92a3f62.jpg.1000x506.jpg)">
           <a target="_blank" href="#" style="display:inline-block;position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 1;"></a>
           <span class="coverpic-type coverpic-pos-rtf">效果图</span>
           <div class="youhui-detail formis"></div>
@@ -1036,16 +1464,16 @@ HttpSession s = request.getSession();
             <div class="box-left-top">
               <div class="name-box">
                 <div class="state-div">
-                  <span class="state">在售</span>
+                  <span class="state"><%=bi.getBuildingSaleState() %></span>
                 </div>
                 <a class="clear" href="#" title="融创春晖十里">
-                  <h1>融创春晖十里</h1>
+                  <h1><%=bi.getBuildingName() %></h1>
                 </a>
               </div>
               <div class="jiage">
-                <span>均价</span>
-                <span class="junjia">3万</span>
-                <span class="yuan">元/平</span>
+                <span>参考价</span>
+                <span class="junjia"><%=bi.getBuildingReferencePrice() %>万</span>
+                <span class="yuan">元/套</span>
               </div>
             </div>
             <div class="box-left-bottom clickTargetBox">
@@ -1061,11 +1489,11 @@ HttpSession s = request.getSession();
                   <i class="iic" style="display: none;"></i>
                 </p>
                 <p class="where" style="cursor: pointer;">
-                  <span title="沙坪坝某地">项目地址：沙坪坝某地</span>
+                  <span title="沙坪坝某地">项目地址：<%=bi.getBuildingAddress() %></span>
                 </p>
                 <p class="when">
                   <span>最新开盘：</span>
-                  <span>2017年7月1日</span>
+                  <span><%=sdf.format(bi.getBuildingTimeHanded()) %></span>
                 </p>
                 <div class="phonetag clickAction">
                   <div class="btn_phone_ll LOGCLICK">
@@ -1092,8 +1520,8 @@ HttpSession s = request.getSession();
               <div class="dynamic-wrap-block clearfix">
                 <h4 class="pull-left">销售动态</h4>
                 <div class="dynamic-block-detail pull-right">
-                  <div class="dongtai-title" title="洋房在售">洋房在售</div>
-                  <span class="detail">现在购买，只要9999</span>
+                  <div class="dongtai-title" title="<%=bi.getBuildingSaleState() %>"><%=bi.getBuildingSaleState() %></div>
+                  <span class="detail">赶快来购买吧！</span>
                 </div>
               </div>
             </div>
@@ -1114,11 +1542,11 @@ HttpSession s = request.getSession();
             <div class="houselist">
               <ul class="clear house-det">
                 <li class="img-li">
-                  <img class="" src="../images/loupan/2e3571c9-f321-4231-a645-7ab1b85db3da.jpg.280x.jpg">
+                  <img class="" src="${pageContext.request.contextPath}/jsp/images/loupan/2e3571c9-f321-4231-a645-7ab1b85db3da.jpg.280x.jpg">
                 </li>
                 <li class="info-li">
-                  <p class="p1">3室一厅<span>套内 100m²</span></p>
-                  <p class="p2">均价<span>100</span>万/套</p>
+                  <p class="p1"><%=bi.getBuildingDecoration() %><span>套内 <%=bi.getBuildingMinArea() %>m²-<%=bi.getBuildingMaxArea() %>m²</span></p>
+                  <p class="p2">均价<span><%=bi.getBuildingReferencePrice() %></span>万/套</p>
                   <p class="p4"><span class="tag1">南北通透</span></p>
                 </li>
               </ul>
@@ -1128,21 +1556,17 @@ HttpSession s = request.getSession();
       </div>
 
       <!--楼盘详情-->
-      <div class="mod-wrap"  style="width: 1000px;height: 584px; margin-top:20px;  background-color: white;">
+      <div class="mod-wrap"  style="width: 1000px;height: 354px; margin-top:20px;  background-color: white;">
         <div class="mod-panel mod-details" id="house-details">
           <h2>
             <a href="#" class="title-link" style="color: #00ae66; text-decoration: none">楼盘详情</a>
           </h2>
           <p class="mod-details-line"></p>
-          <div class="box-loupan" style="width: 940px; height: 483px;">
+          <div class="box-loupan" style="width: 940px; height: 263px;">
             <p class="desc-p"></p>
             <p class="desc-p clear">
               <span class="label">项目地址：</span>
-              <span class="label-val">沙坪坝</span>
-            </p>
-            <p class="desc-p clear">
-              <span class="label">售楼处地址：</span>
-              <span class="label-val">沙坪坝三峡广场</span>
+              <span class="label-val"><%=bi.getBuildingNeighbourhood() %></span>
             </p>
             <p class="desc-p clear">
               <span class="label">开发商：</span>
@@ -1152,18 +1576,21 @@ HttpSession s = request.getSession();
               <span class="label">物业公司：</span>
               <span class="label-val">重庆正大物业公司</span>
             </p>
+            <!--  
             <p class="desc-p clear">
               <span class="label">最新开盘：</span>
               <span class="label-val">2017年04月14日</span>
             </p>
+            -->
             <p class="desc-p clear">
               <span class="label">交房时间：</span>
-              <span class="label-val">2018年06月30日</span>
+              <span class="label-val"><%=sdf.format(bi.getBuildingTimeHanded()) %></span>
             </p>
             <p class="desc-p clear">
               <span class="label">产权年限：</span>
               <span class="label-val">50年</span>
             </p>
+            <!--  
             <p class="desc-p clear">
               <span class="label">规划户数：</span>
               <span class="label-val">100户</span>
@@ -1184,18 +1611,37 @@ HttpSession s = request.getSession();
               <span class="label">占地面积：</span>
               <span class="label-val">218,421㎡</span>
             </p>
+            -->
           </div>
         </div>
       </div>
-
-      <!--用户评论-->
-      <div class="mod-wrap" style="width: 1000px;  margin-top:20px;  background-color: white;">
-        <!-- UY BEGIN -->
-        <div id="uyan_frame"></div>
-        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
-        <!-- UY END -->
+      
       </div>
+ 	 <!--用户评论-->
+      <div class="mod-wrap" style="width: 1000px;  margin-top:20px;  background-color: white;">
+        <iframe id="iframe" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "
+              name="iframe" frameborder="0" src="/EasyHousing/jsp/html/Comment/commentBox2.jsp"></iframe>
+      </div>
+      
 
+    </div>
+  
+  <div class="theme-popover" style="display: none;">
+    <div class="theme-poptit">
+      <a href="javascript:;" title="关闭" class="close">×</a>
+      <h3>请填写申请表单</h3>
+    </div>
+    <div class="theme-popbod dform">
+      <form class="theme-signin" name="loginform" action="https://www.baidu.com" method="post">
+        <ol>
+          <li></li>
+          <li><strong>用户名：</strong><input class="ipt" type="text" name="log" value="用户名" size="20"></li>
+          <li><strong>密码：</strong><input class="ipt" type="text" name="pwd" value="姓名" size="20"></li>
+          <li><strong>密码：</strong><input class="ipt" type="text" name="pwd" value="电话" size="20"></li>
+          <li><strong>密码：</strong><input class="ipt" type="text" name="pwd" value="时间" size="20"></li>
+          <li><input class="btn btn-primary" type="submit" name="submit" value=" 确定申请 " onclick=alert("你的申请已提交");></li>
+        </ol>
+      </form>
     </div>
   </div>
 </body>

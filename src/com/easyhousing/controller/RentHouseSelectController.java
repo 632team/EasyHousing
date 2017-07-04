@@ -2,6 +2,7 @@ package com.easyhousing.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.easyhousing.dao.RentHousePicDao;
 import com.easyhousing.model.RentHouse;
+import com.easyhousing.model.RentHousePic;
 import com.easyhousing.service.RentHouseSearch;
 
 import jdk.internal.dynalink.linker.LinkerServices;
@@ -135,6 +138,9 @@ public class RentHouseSelectController {
 	@Autowired
 	private RentHouseSearch rentHouseSearch;
 	
+	@Autowired
+	private RentHousePicDao rentHousePicDao;
+	
 	@RequestMapping(value="rentHouseSelect.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView rentHouseSelect(HttpServletRequest request, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -176,6 +182,17 @@ public class RentHouseSelectController {
 		int lowRoomNum = Integer.parseInt((String)session.getAttribute("lowRoomNum"));
 		int highRoomNum = Integer.parseInt((String)session.getAttribute("highRoomNum"));
 		List<RentHouse>list = rentHouseSearch.searchRentHouse(address, lowPrice, highPrice, lowRoomNum, highRoomNum);
+		
+		List<String> rentHousePicList = new ArrayList<>();
+		for (RentHouse i : list) {
+			List<String> t = rentHousePicDao.selectRentHousePicByRentHouseId(i.getRentHouseId());
+			if (t.size() == 0) {
+				rentHousePicList.add("");
+			}
+			else rentHousePicList.add(t.get(0));
+		}
+		session.setAttribute("rentHousePicList", rentHousePicList);
+		
 		session.setAttribute("list", list);
 		session.setAttribute("st", 0);
 		session.setAttribute("listSize", list.size());
@@ -262,6 +279,17 @@ public class RentHouseSelectController {
 		int lowRoomNum = Integer.parseInt((String)session.getAttribute("lowRoomNum"));
 		int highRoomNum = Integer.parseInt((String)session.getAttribute("highRoomNum"));
 		List<RentHouse>list = rentHouseSearch.searchRentHouse(address, lowPrice, highPrice, lowRoomNum, highRoomNum);
+		
+		List<String> rentHousePicList = new ArrayList<>();
+		for (RentHouse i : list) {
+			List<String> t = rentHousePicDao.selectRentHousePicByRentHouseId(i.getRentHouseId());
+			if (t.size() == 0) {
+				rentHousePicList.add("");
+			}
+			else rentHousePicList.add(t.get(0));
+		}
+		session.setAttribute("rentHousePicList", rentHousePicList);
+		
 		session.setAttribute("list", list);
 		session.setAttribute("st", 0);
 		session.setAttribute("listSize", list.size());
