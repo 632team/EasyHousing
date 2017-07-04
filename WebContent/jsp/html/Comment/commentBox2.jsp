@@ -18,7 +18,7 @@
 <!--rentHouseUserComments  -->
 <%
 HttpSession s = request.getSession();
-RentHouse irentHouse = (RentHouse)s.getAttribute("rentHouse");
+int bid = (Integer)s.getAttribute("buildingId");
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 %>
 <div class="commentAll">
@@ -26,7 +26,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
   <%
   if (s.getAttribute("user") != null) {
 	  %>
-	  <form action=${pageContext.request.contextPath}/userCommentRentHouse.do method="post">
+	  <form action=${pageContext.request.contextPath}/userCommentBuilding.do method="post">
 	  <div class="reviewArea clearfix">
 	    <textarea class="content comment-input" placeholder="请在此处输入评论："
 	              onkeyup="keyUP(this)" name="userComment"></textarea>
@@ -40,7 +40,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
   <!--回复区域 begin-->
   <div class="comment-show">
   <%
-    List<Collect> lc = (List<Collect>)s.getAttribute("rentHouseUserComments");
+    List<Collect> lc = (List<Collect>)s.getAttribute("buildingUserComments");
     for (Collect i : lc) {
     	%>
     	<div class="comment-show-con clearfix">

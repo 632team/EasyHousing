@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.easyhousing.dao.BuyHouseCommentDao;
 import com.easyhousing.dao.RentHouseCommentDao;
 import com.easyhousing.dao.UserDao;
+import com.easyhousing.model.BuildingInfo;
+import com.easyhousing.model.BuyHouseComment;
 import com.easyhousing.model.Collect;
 import com.easyhousing.model.RentHouse;
 import com.easyhousing.model.RentHouseComment;
@@ -41,6 +44,9 @@ public class RentHouseDetailController {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private BuyHouseCommentDao buyHouseCommentDao;
 	
 	@RequestMapping(value="rentHouseDetail.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView rentHouseDetail(HttpServletRequest request) {
@@ -107,4 +113,5 @@ public class RentHouseDetailController {
 		rentHouseCommentDao.insertRentHouseComment(u);
 		return "Comment/loading";
 	}
+	
 }

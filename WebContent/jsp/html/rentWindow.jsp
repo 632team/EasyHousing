@@ -1,6 +1,7 @@
 <%@page import="com.easyhousing.model.RentHouse"%>
 <%@page import="java.util.*"%>
 <%@page import="java.lang.Math"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,6 +10,7 @@
   <%
   HttpSession s = request.getSession(); 
   String strtemp;
+  SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
   %>
   <title>租房</title>
   <meta charset="utf-8">
@@ -1022,7 +1024,7 @@
             <p class="dot">
             	<%
             		out.print(i.getCommunityId()+"小区|");
-            		out.print(i.getRentHouseBuildTime()+"年建");
+            		out.print(sdf.format(i.getRentHouseBuildTime())+"年建");
             	%>
               <!--  电力小区｜1997年建｜中装<br>
               		商圈：沙正街｜-->

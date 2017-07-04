@@ -1,4 +1,4 @@
-<%@page import="java.util.List"%>
+<%@page import="java.util.*"%>
 <%@page import="com.easyhousing.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -1309,7 +1309,9 @@
           <div class="btnContainer ">
           
            <div class="theme-buy" style="display: inline;">
+		  	<!--
 		  	<a class="btn btn-primary btn-large theme-login" href="javascript:;">点击申请</a>
+		  	-->
 		  </div>
   			<div class="theme-buy" style="display: inline;">
             <button 
@@ -1401,7 +1403,7 @@
             <p><i>小区：</i><a href="https://cq.lianjia.com/xiaoqu/3611060655470/">巴教村社区</a>
               - <a href="https://cq.lianjia.com/zufang/c3611060655470/">1套出租中</a></p>
             <p><i>位置：</i><a href="https://cq.lianjia.com/zufang/yuzhong/">渝中</a> <a href="https://cq.lianjia.com/zufang/lianglukou/">两路口</a></p>
-            <p class="lf"><i>时间：</i>4天前发布</p>      <div class="clear"></div>
+            <p class="lf"><i>时间：</i><%=(((new Date()).getTime() - irentHouse.getRentHousePublishTime().getTime() +1000000)/(3600*24*1000)) %>天前发布</p>      <div class="clear"></div>
           </div>
           <div class="brokerInfo" log-mod="zufang_detail_diamond-first">
             <div class="noData">暂无相关经纪人，请直接联系客服  10109666</div>

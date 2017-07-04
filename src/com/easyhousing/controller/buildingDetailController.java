@@ -82,7 +82,7 @@ public class buildingDetailController {
 	public String userCommentBuilding(HttpSession s, BuyHouseComment u) {
 		u.setUserCommentDate(new Date());
 		u.setUserId(((User)s.getAttribute("user")).getUserId());
-	    u.setBuildingId(((BuildingInfo)s.getAttribute("BuildingInfo")).getBuildingId());
+	    u.setBuildingId(((BuildingInfo)s.getAttribute("buildingInfo")).getBuildingId());
 		buyHouseCommentDao.insertBuyHouseComment(u);
 		return "Comment/loading";
 	}
