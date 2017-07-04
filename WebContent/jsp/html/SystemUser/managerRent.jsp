@@ -241,9 +241,9 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
       <div class="prompt r_f"></div>
     </li>
     <li>
-      <label class="label_name1">上架时间：</label>
+      <label class="label_name">上架时间：</label>
       <span class="add_name">
-        <input name="inputPublishTime" class="inline laydate-icon" id="start" style=" margin-left:10px;">
+        <input name="inputPublishTime" class="inline laydate-icon" id="start1" style=" margin-left:10px;">
         </span>
       <div class="prompt r_f"></div>
     </li>
@@ -456,6 +456,11 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
     elem: '#start',
     event: 'focus'
   });
+  
+  laydate({
+	    elem: '#start1',
+	    event: 'focus'
+	  });
   
   function transpDel() {
 		$.ajax({

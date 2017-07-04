@@ -106,6 +106,7 @@ public class AdminController {
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
+		u.setUserPhoto("http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png");
 		
 		int updateUserId = 0;
 		for(Cookie iCookie : cookies) {
@@ -116,30 +117,26 @@ public class AdminController {
 			}
 		}
 		
-		// 得到文件
-		String path = request.getSession().getServletContext().getRealPath("upload");
-		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-		Iterator iter = multiRequest.getFileNames();
-		MultipartFile file = multiRequest.getFile(iter.next().toString());
-		String fileName = file.getOriginalFilename();
-		File dir = new File(path, fileName);
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		// MultipartFile自带的解析方法
-		file.transferTo(dir);
-
 		try {
+			// 得到文件
+			String path = request.getSession().getServletContext().getRealPath("upload");
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+			Iterator iter = multiRequest.getFileNames();
+			MultipartFile file = multiRequest.getFile(iter.next().toString());
+			String fileName = file.getOriginalFilename();
+			File dir = new File(path, fileName);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			// MultipartFile自带的解析方法
+			file.transferTo(dir);
 			String filePath = path + "\\" + fileName;
 			System.err.println(filePath);
 			String name = new Date().toInstant().toString();
 			new Tool().upload(filePath, name);
 			u.setUserPhoto(String.valueOf("http://os8z6i0zb.bkt.clouddn.com/" + name));
 		} catch (Exception e) {
-			modelAndView.addObject("infoMessage", "上传头像失败TAT");
-			return modelAndView;
 		}
-		modelAndView.addObject("infoMessage", "上传头像成功！");
 		
 		u.setUserId(updateUserId);
 		userService.updateUser(u);

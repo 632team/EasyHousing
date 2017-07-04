@@ -1,5 +1,7 @@
 package com.easyhousing.dao;
 
+import java.util.List;
+
 import com.easyhousing.model.Agent;
 
 public interface AgentDao {
@@ -7,4 +9,5 @@ public interface AgentDao {
 	public int deleteAgent(Agent u);
 	public int updateAgent(Agent u);
 	public Agent selectAgent(Agent u);
+	public List<Agent> selectAll();
 }

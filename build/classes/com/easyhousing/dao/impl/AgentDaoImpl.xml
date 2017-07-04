@@ -4,7 +4,7 @@
 <mapper namespace="com.easyhousing.dao.AgentDao">
 
 	<insert id="insertAgent" parameterType="com.easyhousing.model.Agent">
-		INSERT INTO Agent(picUrl, agentName, agentEmail, agentPhoneNumber, agentSex) VALUES(#{picUrl}, #{agentName}, #{agentEmail}, #{agentPhoneNumber}, #{agentSex})
+		INSERT INTO Agent(picUrl, agentName, agentEmail, agentPhoneNumber, agentSex, agentId) VALUES(#{picUrl}, #{agentName}, #{agentEmail}, #{agentPhoneNumber}, #{agentSex}, #{agentId})
 	</insert>
 	
 	<delete id="deleteAgent" parameterType="com.easyhousing.model.Agent">
@@ -17,6 +17,10 @@
 	
 	<select id="selectAgent" parameterType="com.easyhousing.model.Agent" resultType="com.easyhousing.model.Agent">
 		select * from Agent where agentId=#{agentId}
+	</select>
+	
+	<select id="selectAll" resultType="com.easyhousing.model.Agent">
+		select * from Agent
 	</select>
 	
 </mapper>

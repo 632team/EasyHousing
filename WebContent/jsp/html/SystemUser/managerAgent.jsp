@@ -1,31 +1,36 @@
+<%@page import="com.easyhousing.model.Agent"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+HttpSession s = request.getSession();
+List<Agent> agentList = (List<Agent>)s.getAttribute("agentList");
+%>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="../../css/SystemUser/style.css">
-  <link rel="stylesheet" href="css/codemirror.css">
-  <link rel="stylesheet" href="css/ace.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/typeahead-bs2.min.js"></script>
-  <script src="js/jquery.dataTables.min.js"></script>
-  <script src="js/jquery.dataTables.bootstrap.js"></script>
-  <script src="js/H-ui.js"></script>
-  <script src="js/H-ui.admin.js"></script>
-  <script src="js/layer.js"></script>
-  <link rel="stylesheet" href="css/layer.css">
-  <script src="js/laydate.js"></script>
-  <link rel="stylesheet" href="css/laydate.css">
-  <link rel="stylesheet" href="css/laydate(1).css">
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/bootstrap.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/dataTables.bootstrap.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/style.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/codemirror.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/font-awesome.min.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/bootstrap.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/typeahead-bs2.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.dataTables.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.dataTables.bootstrap.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/H-ui.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/H-ui.admin.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/layer.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/layer.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/laydate.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/laydate.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/laydate(1).css>
 
   <style>
     .dataTable th.sorting_desc:after {
@@ -34,8 +39,8 @@
       color: #307ecc;
     }
   </style>
-  <link rel="stylesheet" href="css/ace-rtl.min.css">
-  <link rel="stylesheet" href="css/ace-skins.min.css">
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace-rtl.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace-skins.min.css>
   <script type="text/javascript">
     $(function(){
       var cid = $('#nav_list> li>.submenu');
@@ -212,7 +217,7 @@
         <div class="border clearfix" style="display: block">
                <span class="l_f">
                 <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加经纪人</a>
-                <a href="javascript:ovid()" class="btn btn-danger">批量删除</a>
+                <a class="btn btn-danger" onclick="deletePart();" href=${pageContext.request.contextPath}/managerAgentinit.do>批量删除</a>
                </span>
           <!--<span class="r_f">共：<b>2345</b>条</span>-->
         </div>
@@ -229,13 +234,10 @@
                   class="lbl"></span></label>
                 </th>
                 <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1"
-                    colspan="1" aria-sort="descending" aria-label="ID: 升序排列" style="width: 90px;">ID
+                    colspan="1" aria-sort="descending" aria-label="ID: 升序排列" style="width: 90px;">用户名
                 </th>
                 <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
                     aria-label="用户名" style="width: 80px;">姓名
-                </th>
-                <th width="100" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="用户名" style="width: 80px;">用户名
                 </th>
                 <th width="80" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
                     aria-label="性别" style="width: 60px;">性别
@@ -256,23 +258,29 @@
               </tr>
               </thead>
               <tbody>
+              <%
+              for(int i = 0; i < agentList.size(); i++) {
+            	  Agent iagent = agentList.get(i);
+              %>
               <tr role="row" class="odd">
-                <td><label><input type="checkbox"><span class="lbl"></span></label></td>
-                <td class="sorting_1" value="5">2</td>
-                <td><u style="cursor:pointer" class="text-primary">郭子尧</u></td>
-                <td>gzy</td>
-                <td>男</td>
-                <td>13000000000</td>
-                <td>admin@mail.com</td>
-                <td class="text-l">http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png</td>
+                <td><label><input type="checkbox" name="checkbox" id="<%=iagent.getAgentId()%>" value="<%=iagent.getAgentId()%>"><span class="lbl"></span></label></td>
+                <td class="sorting_1" value="5"><%=iagent.getAgentId() %></td>
+                <td><u style="cursor:pointer" class="text-primary"><%=iagent.getAgentName() %></u></td>
+                <td><%=iagent.getAgentSex() %></td>
+                <td><%=iagent.getAgentPhoneNumber() %></td>
+                <td><%=iagent.getAgentEmail() %></td>
+                <td class="text-l"><%=iagent.getPicUrl() %></td>
 
                 <td class="td-manage">
 
-                  <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
+                  <a id="<%=iagent.getAgentId() %>" title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML,this.id)">编辑</a>
 
-                  <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
+                  <a id="<%=iagent.getAgentId() %>" title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML,this.id)">删除</a>
                 </td>
               </tr>
+              <%
+              }
+              %>
               </tbody>
 
 
@@ -287,20 +295,27 @@
 
 
 <div class="add_menber" id="add_menber_style" style="display:none">
-
+  <form action=${pageContext.request.contextPath}/adminAddAgent.do id="addAgent" enctype="multipart/form-data" method="post">
   <ul class=" page-content">
-    <li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span class="add_name"><input value="" name="用户名" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
-    <li><label class="label_name">真实姓名：</label><span class="add_name"><input name="真实姓名" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
-
-    <li><label class="label_name">密码：</label><span class="add_name"><input name="密码" type="password"  class="form-control"/></span><div class="prompt r_f"></div></li>
-    <li><label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
-     <label><input name="form-field-radio" type="radio" checked="checked" ><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
-     <label><input name="form-field-radio" type="radio" ><span class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
+    <li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span class="add_name"><input value="" name="agentId" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">真实姓名：</label><span class="add_name"><input name="agentName" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+        <li>
+      <label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
+      <input name="agentSex" value="男" style="display: none"></input>
+     <label><input name="form-field-radio" type="radio" checked="checked" onchange="getSex()" value="男"><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
+     <label><input name="form-field-radio" type="radio" onchange="getSex()" value="女"><span class="lbl" value="女">女</span></label>&nbsp;&nbsp;&nbsp;
      </span>
       <div class="prompt r_f"></div>
+      <script>
+        function getSex() {
+          var sex = $('#add_menber_style input[name="form-field-radio"]:checked ').val();
+          $("#add_menber_style input[name='userSex']").val(sex);
+        
+        }
+      </script>
     </li>
-    <li><label class="label_name">手机：</label><span class="add_name"><input name="移动电话" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
-    <li><label class="label_name">邮箱：</label><span class="add_name"><input name="电子邮箱" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">手机：</label><span class="add_name"><input name="agentPhoneNumber" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">邮箱：</label><span class="add_name"><input name="agentEmail" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
     <!--<li class="adderss"><label class="label_name">家庭住址：</label><span class="add_name"><input name="家庭住址" type="text"  class="text_add" style=" width:350px"/></span><div class="prompt r_f"></div></li>-->
     <li style="display: block">
       <nobr>
@@ -311,6 +326,41 @@
       </nobr>
     </li>
   </ul>
+  </form>
+</div>
+
+<div class="add_menber" id="update_menber_style" style="display:none">
+  <form action=${pageContext.request.contextPath}/adminUpdateAgent.do id="updateAgent" enctype="multipart/form-data" method="post">
+  <ul class=" page-content">
+    <li><label class="label_name">真实姓名：</label><span class="add_name"><input name="agentName" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li>
+      <label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span class="add_name">
+      <input name="agentSex" value="男" style="display: none"></input>
+     <label><input name="form-field-radio" type="radio" checked="checked" onchange="getSex()" value="男"><span class="lbl">男</span></label>&nbsp;&nbsp;&nbsp;
+     <label><input name="form-field-radio" type="radio" onchange="getSex()" value="女"><span class="lbl" value="女">女</span></label>&nbsp;&nbsp;&nbsp;
+     </span>
+      <div class="prompt r_f"></div>
+      <script>
+        function getSex() {
+          var sex = $('#update_menber_style input[name="form-field-radio"]:checked ').val();
+          $("#update_menber_style input[name='userSex']").val(sex);
+        
+        }
+      </script>
+    </li>
+    <li><label class="label_name">手机：</label><span class="add_name"><input name="agentPhoneNumber" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <li><label class="label_name">邮箱：</label><span class="add_name"><input name="agentEmail" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
+    <!--<li class="adderss"><label class="label_name">家庭住址：</label><span class="add_name"><input name="家庭住址" type="text"  class="text_add" style=" width:350px"/></span><div class="prompt r_f"></div></li>-->
+    <li style="display: block">
+      <nobr>
+        <span class="add_name">
+        <label label class="label_name">图片：</label>
+        <input type="file" name="img" multiple="multiple"  style="display: inline-block" />
+        </span>
+      </nobr>
+    </li>
+  </ul>
+  </form>
 </div>
 
 <script>
@@ -364,7 +414,7 @@
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("#add_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -382,6 +432,7 @@
             title: '提示框',
             icon:1,
           });
+          $("#add_menber_style #addAgent").submit();
           layer.close(index);
         }
       }
@@ -411,19 +462,20 @@
     });
   }
   /*用户-编辑*/
-  function member_edit(id){
+  function member_edit(id, updateAgentId){
+	setCookie("updateAgentId", updateAgentId, 365);
     layer.open({
       type: 1,
       title: '修改用户信息',
       maxmin: true,
       shadeClose:false, //点击遮罩关闭层
       area : ['800px' , ''],
-      content:$('#add_menber_style'),
+      content:$('#update_menber_style'),
       btn:['提交','取消'],
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("#update_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -441,15 +493,20 @@
             title: '提示框',
             icon:1,
           });
+          $("#update_menber_style #updateAgent").submit();
           layer.close(index);
         }
       }
     });
   }
   /*用户-删除*/
-  function member_del(obj,id){
+  function member_del(obj,id,deleteAgentId){
     layer.confirm('确认要删除吗？',function(index){
       $(obj).parents("tr").remove();
+      
+      setCookie("deleteAgentId",deleteAgentId,365);
+      transpDel();
+      
       layer.msg('已删除!',{icon:1,time:1000});
     });
   }
@@ -457,6 +514,46 @@
     elem: '#start',
     event: 'focus'
   });
+  
+  function setCookie(c_name, value, expiredays) {
+		var exdate = new Date()
+		exdate.setDate(exdate.getDate() + expiredays)
+		document.cookie = c_name
+				+ "="
+				+ escape(value)
+				+ ((expiredays == null) ? "" : ";expires="
+						+ exdate.toGMTString())
+	}
+  
+  function transpDel() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/deleteAgentAjax.do"
+		})
+	}
+  
+  function transpDelPart() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/deleteAgentPartAjax.do"
+		})
+	}
+
+	function deletePart() {
+		var chckBox = document.getElementsByName("checkbox");
+		var num = chckBox.length;
+		var ids = "";
+		for (var index = 0; index < num; index++) {
+			if (chckBox[index].checked) {
+				ids += chckBox[index].value + ".";
+			}
+		}
+		alert(ids);
+		setCookie("deleteAgentPart", ids, 365);
+		transpDelPart();
+	}
 </script>
 
 </body>

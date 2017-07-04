@@ -26,4 +26,8 @@
 		select * from BuildingPic where buildingId=#{0}
 	</select>
 	
+	<select id="selectAll"  resultType="com.easyhousing.model.BuildingPic">
+		select * from BuildingPic
+	</select>
+	
 </mapper>

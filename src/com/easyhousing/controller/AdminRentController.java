@@ -43,7 +43,7 @@ public class AdminRentController {
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
 			String value = iCookie.getValue();
-			if(name.equals("updateUserId")) {
+			if(name.equals("updateRentHouseId")) {
 				updateRentHouseId = Integer.parseInt(value);
 			}
 		}

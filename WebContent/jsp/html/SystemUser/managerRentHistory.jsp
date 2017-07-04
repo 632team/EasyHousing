@@ -169,7 +169,7 @@ List<RentHouseDeal> rentHouseDealList = (List<RentHouseDeal>)s.getAttribute("ren
     <li>
       <label class="label_name">租房时间：</label>
       <span class="add_name">
-        <input  class="inline laydate-icon" id="start2" style=" margin-left:10px;">
+        <input name="inputTime" class="inline laydate-icon" id="start" style=" margin-left:10px;">
         </span>
       <div class="prompt r_f"></div>
     </li>
@@ -189,7 +189,7 @@ List<RentHouseDeal> rentHouseDealList = (List<RentHouseDeal>)s.getAttribute("ren
   </form>
 </div>
 
-<div class="update_menber" id="update_menber_style" style="display:none">
+<div class="add_menber" id="update_menber_style" style="display:none">
   <form action=${pageContext.request.contextPath}/adminUpdateRentHouseDeal.do id="updateRentHouseDeal" enctype="multipart/form-data" method="post">
   <ul class=" page-content">
     <li>
@@ -214,7 +214,7 @@ List<RentHouseDeal> rentHouseDealList = (List<RentHouseDeal>)s.getAttribute("ren
     <li>
       <label class="label_name">租房时间：</label>
       <span class="add_name">
-        <input name="inputTime" class="inline laydate-icon" id="start" style=" margin-left:10px;">
+        <input name="inputUpdateTime" class="inline laydate-icon" id="start1" style=" margin-left:10px;">
         </span>
       <div class="prompt r_f"></div>
     </li>
@@ -294,7 +294,7 @@ List<RentHouseDeal> rentHouseDealList = (List<RentHouseDeal>)s.getAttribute("ren
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("#add_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -312,7 +312,7 @@ List<RentHouseDeal> rentHouseDealList = (List<RentHouseDeal>)s.getAttribute("ren
             title: '提示框',
             icon:1,
           });
-          $(".add_menber #addRentHouseDeal").submit();
+          $("#add_menber_style #addRentHouseDeal").submit();
           layer.close(index);
         }
       }
@@ -355,7 +355,7 @@ List<RentHouseDeal> rentHouseDealList = (List<RentHouseDeal>)s.getAttribute("ren
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".update_menber input[type$='text']").each(function(n){
+        $("#update_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -373,7 +373,7 @@ List<RentHouseDeal> rentHouseDealList = (List<RentHouseDeal>)s.getAttribute("ren
             title: '提示框',
             icon:1,
           });
-          $(".update_menber #updateRentHouseDeal").submit();
+          $("#update_menber_style #updateRentHouseDeal").submit();
           layer.close(index);
         }
       }
@@ -393,6 +393,11 @@ List<RentHouseDeal> rentHouseDealList = (List<RentHouseDeal>)s.getAttribute("ren
     elem: '#start',
     event: 'focus'
   });
+  
+  laydate({
+	    elem: '#start1',
+	    event: 'focus'
+	  });
   
   function transpDel() {
 		$.ajax({

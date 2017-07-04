@@ -1,31 +1,36 @@
+<%@page import="com.easyhousing.model.BuildingPic"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+HttpSession s = request.getSession();
+List<BuildingPic> buildingPicList = (List<BuildingPic>)s.getAttribute("buildingPicList");
+%>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="../../css/SystemUser/style.css">
-  <link rel="stylesheet" href="css/codemirror.css">
-  <link rel="stylesheet" href="css/ace.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/typeahead-bs2.min.js"></script>
-  <script src="js/jquery.dataTables.min.js"></script>
-  <script src="js/jquery.dataTables.bootstrap.js"></script>
-  <script src="js/H-ui.js"></script>
-  <script src="js/H-ui.admin.js"></script>
-  <script src="js/layer.js"></script>
-  <link rel="stylesheet" href="css/layer.css">
-  <script src="js/laydate.js"></script>
-  <link rel="stylesheet" href="css/laydate.css">
-  <link rel="stylesheet" href="css/laydate(1).css">
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/bootstrap.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/dataTables.bootstrap.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/style.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/codemirror.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/font-awesome.min.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/bootstrap.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/typeahead-bs2.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.dataTables.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.dataTables.bootstrap.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/H-ui.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/H-ui.admin.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/layer.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/layer.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/laydate.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/laydate.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/laydate(1).css>
 
   <style>
     .dataTable th.sorting_desc:after {
@@ -34,8 +39,8 @@
       color: #307ecc;
     }
   </style>
-  <link rel="stylesheet" href="css/ace-rtl.min.css">
-  <link rel="stylesheet" href="css/ace-skins.min.css">
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace-rtl.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace-skins.min.css>
 
 
 </head>
@@ -99,21 +104,28 @@
 
               </thead>
               <tbody>
+              <%
+              for(int i = 0; i < buildingPicList.size(); i++) {
+            	  BuildingPic iBuildingPic = buildingPicList.get(i);
+              %>
               <tr role="row" class="odd">
-                <td><label><input type="checkbox"><span class="lbl"></span></label></td>
-                <td class="sorting_1" value="5">5</td>
+                <td><label><input type="checkbox" name="checkbox" id="<%=iBuildingPic.getBuildingId()%>" value="<%=iBuildingPic.getBuildingId()%>"><span class="lbl"></span></label></td>
+                <td class="sorting_1" value="5"><%=iBuildingPic.getBuildingId() %></td>
                 <!--<td><u style="cursor:pointer" class="text-primary">20141791</u></td>-->
-                <td>卧室</td>
-                <td>http://os8z6i0zb.bkt.clouddn.com/Pic1</td>
-                <td>2017-07-08 00:00:00</td>
+                <td><%=iBuildingPic.getBuildingPicType() %></td>
+                <td><%=iBuildingPic.getBuildingPicUrl() %></td>
+                <td><%=iBuildingPic.getBuildingPicInsertTime() %></td>
 
                 <td class="td-manage">
 
-                  <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
+                  <a id="<%=iBuildingPic.getBuildingId() %>" title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML,this.id)">编辑</a>
 
-                  <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
+                  <a id="<%=iBuildingPic.getBuildingId() %>" title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML,this.id)">删除</a>
                 </td>
               </tr>
+              <%
+              }
+              %>
               </tbody>
 
 
@@ -132,7 +144,38 @@
   }
 </style>
 <div class="add_menber" id="add_menber_style" style="display:none">
+  <form action=${pageContext.request.contextPath}/adminAddBuildingPic.do id="addBuildingPic" enctype="multipart/form-data" method="post">
+  <ul class=" page-content">
 
+    <li>
+      <label class="label_name">楼盘编号：</label>
+      <span class="add_name">
+          <input name="buildingId" type="text"  class="text_add"/>
+        </span>
+      <div class="prompt r_f"></div>
+    </li>
+    <li>
+      <label class="label_name">图片类型：</label>
+      <span class="add_name">
+        <input name="buildingPicType" type="text"  class="text_add"/>
+        </span>
+      <div class="prompt r_f"></div>
+    </li>
+    <li>
+      <label class="label_name">上传图片：</label>
+      <span class="add_name">
+           <input type="file" name="buildingPic/url" multiple="multiple"  style="display: inline-block" />
+        </span>
+      <div class="prompt r_f"></div>
+    </li>
+
+
+  </ul>
+  </form>
+</div>
+
+<div class="add_menber" id="update_menber_style" style="display:none">
+  <form action=${pageContext.request.contextPath}/adminUpdateBuildingPic.do id="updateBuildingPic" enctype="multipart/form-data" method="post">
   <ul class=" page-content">
 
     <li>
@@ -159,6 +202,7 @@
 
 
   </ul>
+  </form>
 </div>
 
 <script>
@@ -212,7 +256,7 @@
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("#add_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="" )
           {
 
@@ -230,6 +274,7 @@
             title: '提示框',
             icon:1,
           });
+          $("#add_menber_style #addBuildingPic").submit();
           layer.close(index);
         }
       }
@@ -259,7 +304,8 @@
     });
   }
   /*用户-编辑*/
-  function member_edit(id){
+  function member_edit(id, updateBuildingPicId){
+	setCookie("updateBuildingPicId", updateBuildingPicId, 365);
     layer.open({
       type: 1,
       title: '修改用户信息',
@@ -271,7 +317,7 @@
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("#update_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -289,6 +335,7 @@
             title: '提示框',
             icon:1,
           });
+          $("#update_menber_style #updateBuildingPic").submit();
           layer.close(index);
         }
       }
@@ -305,6 +352,16 @@
     elem: '#start',
     event: 'focus'
   });
+  
+  function setCookie(c_name, value, expiredays) {
+		var exdate = new Date()
+		exdate.setDate(exdate.getDate() + expiredays)
+		document.cookie = c_name
+				+ "="
+				+ escape(value)
+				+ ((expiredays == null) ? "" : ";expires="
+						+ exdate.toGMTString())
+	}
 </script>
 
 </body>

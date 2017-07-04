@@ -214,7 +214,7 @@
 
 
         <li>
-          <a href="#" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerAgent.jsp><span class="menu-text"> 经纪人 </span></a>
+          <a href="#" class="iframeurl" name=${pageContext.request.contextPath}/managerAgentinit.do><span class="menu-text"> 经纪人 </span></a>
         </li>
 
         <li>
@@ -224,7 +224,7 @@
               <a href="#" title="楼盘管理" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuilding.jsp style="text-align: center">楼盘管理</a>
             </li>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘图片" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingPic.jsp style="text-align: center">楼盘图片</a>
+              <a href="#" title="楼盘图片" class="iframeurl" name=${pageContext.request.contextPath}/managerBuildingPicInit.do style="text-align: center">楼盘图片</a>
             </li>
             <li class="home" style="height: 41.3333px;">
               <a href="#" title="楼盘交易" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingHistory.jsp class="iframeurl" style="text-align: center">买房记录</a>
