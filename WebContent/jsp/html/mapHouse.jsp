@@ -1,18 +1,22 @@
-<%@page import="java.util.List"%>
-<%@page import="com.easyhousing.model.*"%>
+<%@page import="com.easyhousing.model.RentHouse"%>
+<%@page import="java.util.*"%>
+<%@page import="java.lang.Math"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%
-HttpSession s = request.getSession(); 
-String strtemp;
-List<BuildingInfo> list = (List<BuildingInfo>)s.getAttribute("buildingList");
-%>
-<html>
+<html lang="en">
 <head>
-  <title>新房</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%
+  HttpSession s = request.getSession(); 
+  String strtemp;
+  SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+  %>
+  
+    <meta charset="UTF-8">
+    <title>地图找房</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IzuDNWzXS4qfBqXxSEMsISl6Pc1Ga8Kr"></script>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -391,7 +395,7 @@ List<BuildingInfo> list = (List<BuildingInfo>)s.getAttribute("buildingList");
       font-weight: bold;
     }
     .nv_menu li .on {
-      color: #449d44;
+      color: #C00000;
       font-weight: bold;
     }
     .nv_menu li a {
@@ -707,49 +711,7 @@ List<BuildingInfo> list = (List<BuildingInfo>)s.getAttribute("buildingList");
     }
   </style>
   
-<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js "></script>
-<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js "></script>
-<script type="text/javascript">
-  
-	function transp() {
-		$.ajax({
-			type : "GET",
-			async : false,
-			url : "${pageContext.request.contextPath}/buildingSelectAjax.do"
-		})
-	}
-
-	function setCookie(c_name, value, expiredays) {
-		var exdate = new Date()
-		exdate.setDate(exdate.getDate() + expiredays)
-		document.cookie = c_name
-				+ "="
-				+ escape(value)
-				+ ((expiredays == null) ? "" : ";expires="
-						+ exdate.toGMTString())
-	}
-
-	function clickArea1(id, address) {
-		setCookie("buildingAddress", address, 365);
-		setCookie("buildingClass1", id, 365);
-		transp();
-		window.location.reload(false);
-	}
-
-	function clickArea2(id, lowPrice, highPrice) {
-		setCookie("buildingClass2", id, 365);
-		setCookie("buildingLowPrice", lowPrice, 365);
-		setCookie("buildingHighPrice", highPrice, 365);
-		transp();
-		window.location.reload(false);
-	}
-	
-	function clickArea4(id) {
-		setCookie("buildingId", id, 365);
-	}
-</script>
-  
-      <script type="text/javascript">
+    <script type="text/javascript">
       function showall(){
         var temp = document.getElementById("serchar");
         temp.style.display = "block";
@@ -759,23 +721,23 @@ List<BuildingInfo> list = (List<BuildingInfo>)s.getAttribute("buildingList");
         temp.style.display = "none";
       }
       $(function(){
-    	  $("ul .sel").click(function(){
+        $("ul .sel").click(function(){
         	var temp = document.getElementById("keyword");
             temp.value = $(this).text();
-//          temp.innerHTML = $(this).text();
-         // alert( $("span#searchName").html());
-          $("#searchName").text($(this).text());
+          $("span#searchName").text($(this).text());
         });
       });
     </script>
+    
+    
 </head>
 <body>
-<div class="fotpof">
-  <div class="pofcons pofsoll pofcont">
-    <span></span>
-    <div>
+  <div class="fotpof">
+    <div class="pofcons pofsoll pofcont">
+      <span></span>
+      <div>
+      </div>
     </div>
-  </div>
     <div class="headerbg listhead">
       <div class="header">
         <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp>
@@ -812,7 +774,7 @@ List<BuildingInfo> list = (List<BuildingInfo>)s.getAttribute("buildingList");
 	            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">二手房</a>&nbsp&nbsp&nbsp
 	          </span>
 	          <span>
-	            <a href=${pageContext.request.contextPath}/buildingSelect.do class="href" style="color: #8fcafe">新房</a>&nbsp&nbsp&nbsp
+	            <a href=${pageContext.request.contextPath}/buildingSelect.do class="href">新房</a>&nbsp&nbsp&nbsp
 	          </span>
 	          <span>
 	            <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="href">租房</a>
@@ -820,14 +782,11 @@ List<BuildingInfo> list = (List<BuildingInfo>)s.getAttribute("buildingList");
 	
 	        </div>
 	      </div>
-	
 	    </div>
-
-  </div>
-  <div class="wsrrent">
-    <div class="container">
-      <div class="subsh subsher">
-       <form action=${pageContext.request.contextPath}/globalSearch.do method="post" id="searchForm">
+    <div class="wsrrent">
+      <div class="container">
+        <div class="subsh subsher">
+         <form action=${pageContext.request.contextPath}/mapSearch.do method="post" id="searchForm">
           <div class="subsh_l fl">
             <div class="sd_sel fl">
             <input hidden=true id="keyword" value="新房" name="which"></input>
@@ -845,301 +804,29 @@ List<BuildingInfo> list = (List<BuildingInfo>)s.getAttribute("buildingList");
             <input type="hidden" value="1" id="pageIndex">
           </div>
           </form>
-        <div class="subsh_r fr">
-          <a href=${pageContext.request.contextPath}/jsp/html/mapHouse.jsp class="al">
-              <span>
-                <b>地图找房</b>
-                <i>地图</i>
-              </span>
-          </a>
+          <div class="subsh_r fr">
+            <!--<a href="#" class="al">-->
+                <!--<span>-->
+                  <!--<b>地图找房</b>-->
+                  <!--<i>地图</i>-->
+                <!--</span>-->
+            <!--</a>-->
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container bodywhitew">
-    <div class="current">
-      当前位置：
-      <a href="#" target="_blank">易购房</a>
-      >
-      <span>
-          <a href="#" target="_blank">新房</a>
-        </span>
-    </div>
-    <div class="nv_list">
-
-      <div class="nv_menu nv_menut" style="display: block;">
-        <ul id="qybox">
-          <li class="Switch">
-            <%
-            strtemp = (String)s.getAttribute("buildingClass1");
-            System.err.print("id" + strtemp);
-            %>
-              <strong>区域:</strong>
-              <a class= "
-              <%
-              if(strtemp.equals("0"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="0" onclick="clickArea1(this.id, '不限');"> 不限 </a>
-              <a class="
-              <%
-              if(strtemp.equals("1"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="1" onclick="clickArea1(this.id, '九龙坡');">九龙坡</a>
-              <a class="
-              <%
-              if(strtemp.equals("2"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="2" onclick="clickArea1(this.id, '渝中');">渝中区</a>
-              <a class="
-              <%
-              if(strtemp.equals("3"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="3" onclick="clickArea1(this.id, '江北');">江北区</a>
-              <a class="
-              <%
-              if(strtemp.equals("4"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="4" onclick="clickArea1(this.id, '南岸');">南岸区</a>
-              <a class="
-              <%
-              if(strtemp.equals("5"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="5" onclick="clickArea1(this.id, '沙坪坝');">沙坪坝区</a>
-              <a class="
-              <%
-              if(strtemp.equals("6"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="6" onclick="clickArea1(this.id, '渝北');">渝北区</a>
-              <a class="
-              <%
-              if(strtemp.equals("7"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="7" onclick="clickArea1(this.id, '大渡口');">大渡口区</a>
-              <a class="
-              <%
-              if(strtemp.equals("8"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="8" onclick="clickArea1(this.id, '巴南');">巴南区</a>
-              <a class="
-              <%
-              if(strtemp.equals("9"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="9" onclick="clickArea1(this.id, '北碚');">北碚区</a>
-              <a class="
-              <%
-              if(strtemp.equals("10"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="10" onclick="clickArea1(this.id, '江津');">江津区</a>
-          </li>
-          <li class="Switch">
-            <strong>售价:</strong>
-            <%
-              strtemp = (String)s.getAttribute("buildingClass2");
-           	  System.err.print("id" + strtemp);
-              %>
-              <a class="
-              <%
-              if(strtemp.equals("11"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="11" onclick="clickArea2(this.id, '0', '1000000000');">不限</a>
-              <a class="
-              <%
-              if(strtemp.equals("12"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="12" onclick="clickArea2(this.id, '0', '29');">30万以下</a>
-              <a class="
-              <%
-              if(strtemp.equals("13"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="13" onclick="clickArea2(this.id, '30', '39');">30-40万</a>
-              <a class="
-              <%
-              if(strtemp.equals("14"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="14" onclick="clickArea2(this.id, '40','49');">40-50万</a>
-              <a class="
-              <%
-              if(strtemp.equals("15"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="15" onclick="clickArea2(this.id, '50', '59');">50-60万</a>
-              <a class="
-              <%
-              if(strtemp.equals("16"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="16" onclick="clickArea2(this.id, '60', '79');">60-80万</a>
-              <a class="
-              <%
-              if(strtemp.equals("17"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="17" onclick="clickArea2(this.id, '80', '99');">80-100万</a>
-              <a class="
-              <%
-              if(strtemp.equals("18"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="18" onclick="clickArea2(this.id, '100', '149');">100-150万</a>
-              <a class="
-              <%
-              if(strtemp.equals("19"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="19" onclick="clickArea2(this.id, '150', '199');">150-200万</a>
-              <a class="
-              <%
-              if(strtemp.equals("20"))
-            	  out.print("mt on");
-              else
-            	  out.print("qy");
-              %>" id="20" onclick="clickArea2(this.id, '200', '1000000000');">200万以上</a>
-
-          </li>
-          <li class="Switch">
-            <strong>特色:</strong>
-            <a class="mt on" tvalue="bx">不限</a>
-            <a class="qy" tvalue="yihaoxian">低密度</a>
-            <a class="qy" tvalue="erhaoxian">花园</a>
-            <a class="qy" tvalue="sanhaoxian">洋房</a>
-            <a class="qy" tvalue="liuhaoxian">车位充足</a>
-          </li>
-          <li class="Switch">
-            <strong>类型:</strong>
-            <a class="mt on" tvalue="bx">不限</a>
-            <a class="qy" tvalue="yihaoxian">住宅</a>
-            <a class="qy" tvalue="erhaoxian">别墅</a>
-            <a class="qy" tvalue="sanhaoxian">写字楼</a>
-            <a class="qy" tvalue="liuhaoxian">商铺</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="list_tit">
-      <div class="cenl fl">
-                       共找到
-        <strong id="resultNum"><%=list.size() %></strong>
-        <em>套符合您的要求</em>
-      </div>
-      <div class="cenr fr">
-        <span>排序:</span>
-        <a href="#" class="first active" tvalue="p1">默认</a>
-        <a href="#" class="hovs" tvalue="p2">价格</a>
-        <a href="#" class="hovx" tvalue="p3">价格</a>
-      </div>
-    </div>
-    <ul class="mor_list">
-    	<%
-    	int st = (Integer)s.getAttribute("buildingSt");
-    	int ed = Math.min(st + 5, list.size());
-    	List<String> picUrl = (List<String>)s.getAttribute("buildingPicList");
-    	for (int iter = st; iter < ed; ++iter) {
-    		BuildingInfo i = list.get(iter);
-    		%>
-    		<li>
-    		<a onclick="clickArea4('<%=i.getBuildingId() %>');" href=${pageContext.request.contextPath}/buildingDetail.do class="data_link" target="_blank"></a>
-	        <div class="mor_img">
-	          <a href="#" target="_blank" onerror="this.src='#'" alt="绿地城" title="绿地城">
-	            <img src=<%=picUrl.get(iter) %>>
-	          </a>
-	        </div>
-	        <div class="mor_txt">
-	          <h3><%=i.getBuildingName() %></h3>
-	
-	          <p class="dor"><%=i.getBuildingAddress() %></p>
-	          <p><%=i.getBuildingMinArea() %>m²-<%=i.getBuildingMaxArea() %>m²</p>
-	
-	          <p>
-	            <a href="javascript" class="bq_cor_1"><%=i.getBuildingSaleState() %></a>
-	            <a href="javascript" class="bq_cor_2"><%=i.getBuildingDecoration() %></a>
-	            <a href="javascript" class="bq_cor_3"><%=i.getBuildingNeighbourhood() %></a>
-	          </p>
-	        </div>
-	        <div class="mor_tip mor_w">
-	          <p>均价<strong><%=i.getBuildingReferencePrice() %></strong>万元</p>
-	        </div>
-    		</li>
-    		<%
-    	}
-    	%>
-      <!-- <li>
-        <a href="#" class="data_link" target="_blank"></a>
-        <div class="mor_img">
-          <a href="#" target="_blank" onerror="this.src='#'" alt="绿地城" title="绿地城">
-            <img src="${pageContext.request.contextPath}/jsp/images/newhouse/lvdic.jpg">
-          </a>
-        </div>
-        <div class="mor_txt">
-          <h3>绿地城</h3>
-
-          <p class="dor">大渡口-轻轨2号线绿地城白居寺站</p>
-          <p>两居室-套内89.5m²</p>
-
-          <p>
-            <a href="javascript" class="bq_cor_1">在售</a>
-            <a href="javascript" class="bq_cor_2">住宅</a>
-            <a href="javascript" class="bq_cor_3">五证齐全</a>
-          </p>
-        </div>
-        <div class="mor_tip mor_w">
-          <p>均价<strong>10000</strong>元/平</p>
-        </div>
-      </li>
-      -->
-      
-    </ul>
-    <div id="pagination" class="pagination simple-pagination">
-      <div class="lightbox">
-        <strong class="active">
-        <a href=${pageContext.request.contextPath}/buildingPrePage.do style="border: 0px;">
-          <span class="sel prev">上一页</span>
-        </a>
-        </strong>
-        <strong class="active">
-          <a href=${pageContext.request.contextPath}/buildingNextPage.do style="border: 0px;">
-            <span class="sel prev">下一页</span>
-          </a>
-        </strong>
-      </div>
-    </div>
+  <div  id="allmap" style="width:100%;height:1000px;">
   </div>
-
-
-
 </body>
 </html>
+<script type="text/javascript">
+  // 百度地图API功能
+  var map = new BMap.Map("allmap");    // 创建Map实例
+  map.centerAndZoom(new BMap.Point(106.33,29.34), 12);  // 初始化地图,设置中心点坐标和地图级别
+  map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+  map.addControl(new BMap.NavigationControl({enableGeolocation:true}));
+  map.addControl(new BMap.OverviewMapControl());
+  map.setCurrentCity("重庆");          // 设置地图显示的城市 此项是必须设置的
+  map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+</script>

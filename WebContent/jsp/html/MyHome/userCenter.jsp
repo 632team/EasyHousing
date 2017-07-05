@@ -506,23 +506,72 @@
               </li>
               <li>
                 <span style="text-align:right">邮箱：</span>
-                <input type="text" class="form-control" style=" display: inline" id="email" placeholder="请输入邮箱"
-                       maxlength="14" name="userEmail" rule="notNull" validatename="邮箱" value=<%out.print(user.getUserEmail()); %>>
+                <%
+                if (user.getUserEmail() == null) {
+                	%>
+                	<input type="text" class="form-control" style=" display: inline" id="email" placeholder="请输入邮箱"
+                       maxlength="30" name="userEmail" rule="notNull" validatename="邮箱">
+                	<%
+                }
+                else {
+                	%>
+                	<input type="text" class="form-control" style=" display: inline" id="email" placeholder="请输入邮箱"
+                       maxlength="30" name="userEmail" rule="notNull" validatename="邮箱" value=<%out.print(user.getUserEmail()); %>>
+                	<%
+                }
+                %>
               </li>
               <li>
                 <span style="text-align:right">手机：</span>
-                <input type="text" class="form-control" style=" display: inline" id="phonenum" placeholder="请输入手机"
+                <%
+                if (user.getUserPhoneNumber() == null) {
+                	%>
+                	<input type="text" class="form-control" style=" display: inline" id="phonenum" placeholder="请输入手机"
+                       maxlength="14" name="userPhoneNumber" rule="notNull" validatename="手机">
+                	<%
+                }
+                else {
+                	%>
+                	<input type="text" class="form-control" style=" display: inline" id="phonenum" placeholder="请输入手机"
                        maxlength="14" name="userPhoneNumber" rule="notNull" validatename="手机" value=<%out.print(user.getUserPhoneNumber()); %>>
+                	<%
+                }
+                %>
               </li>
               <li>
                 <span style="text-align:right">姓名：</span>
-                <input type="text" class="form-control" style=" display: inline" id="myname" placeholder="请输入姓名"
+                <%
+                if (user.getUserPhoneNumber() == null) {
+                	%>
+                	<input type="text" class="form-control" style=" display: inline" id="myname" placeholder="请输入姓名"
+                       maxlength="14" name="name" rule="notNull" validatename="姓名">
+                	<%
+                }
+                else {
+                	%>
+                	<input type="text" class="form-control" style=" display: inline" id="myname" placeholder="请输入姓名"
                        maxlength="14" name="name" rule="notNull" validatename="姓名" value=<%out.print(user.getName()); %>>
+                	<%
+                }
+                %>
               </li>
               <li>
                 <span style="text-align:right">性别：</span>
-                <input type="text" class="form-control" style=" display: inline" id="myname" placeholder="请输入姓名"
+                 <%
+                if (user.getUserPhoneNumber() == null) {
+                	%>
+                	 <input type="text" class="form-control" style=" display: inline" id="myname" placeholder="请输入性别"
+                       maxlength="14" name="userSex" rule="notNull" validatename="性别">
+                	<%
+                }
+                else {
+                	%>
+                	 <input type="text" class="form-control" style=" display: inline" id="myname" placeholder="请输入性别"
                        maxlength="14" name="userSex" rule="notNull" validatename="性别" value=<%out.print(user.getUserSex()); %>>
+                	<%
+                }
+                %>
+               
 
               <li>
                 <span></span><button type="submit" class="actSubmit lj-btn" id="nameSubmit">保存修改</button>

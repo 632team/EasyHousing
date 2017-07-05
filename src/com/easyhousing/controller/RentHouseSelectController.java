@@ -219,6 +219,9 @@ public class RentHouseSelectController {
 					String value;
 					if(strtemp.equals("address")) {
 						value = unescape(iCookie.getValue());
+						if (value.equals("不限")) {
+							value = "";
+						}
 						session.setAttribute("address", value);
 						System.err.println(value);
 					}

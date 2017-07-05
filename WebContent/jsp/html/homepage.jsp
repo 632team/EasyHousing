@@ -527,7 +527,7 @@
             </div>
             <input type="text" id="autoSearchText" placeholder="请输入位置开始找房" class="text" maxlength="20" autocomplete="off" name="content">
             <div id="autoSearchItem" style="height:285px; visibility: hidden"></div>
-            <input type="button" value onclick="indexSerch()" class="btn" >
+            <input type="button"  onclick="indexSerch()" class="btn" >
           </div>
           <div class="sh_r fr">
             <a class="a1" onclick="document.getElementById('searchForm').submit();" style="cursor:pointer;">开始找房</a>
@@ -550,32 +550,36 @@
   <div class="mf_link">
     <div class="mf_item">
       <strong>
+      <a href=${pageContext.request.contextPath}/rentHouseSelect.do>
         <div>
           <span></span>
-          <a href=${pageContext.request.contextPath}/rentHouseSelect.do>
           <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg30.png alt="找出租房" title="找出租房">
-          </a>
         </div>
         <h3>找出租房</h3>
+        </a>
         <p>舒适出租房，易购承诺真实
         <br>
           在线出租，所见即真
         </p>
       </strong>
       <strong>
+       <a href=${pageContext.request.contextPath}/buildingSelect.do>
       <div>
         <span></span>
         <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg31.png alt="找新房" title="找新房">
       </div>
       <h3>找新房</h3>
+      </a>
     </strong>
       <strong>
-        <div>
-          <span></span>
-          <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg32.png alt="地图找房" title="地图找房">
-        </div>
-        <h3>地图找房</h3>
-      </strong>
+       <a href=${pageContext.request.contextPath}/jsp/html/mapHouse.jsp>
+      <div>
+        <span></span>
+        <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg32.png alt="地图找房" title="地图找房">
+      </div>
+      <h3>地图找房</h3>
+      </a>
+    </strong>
     </div>
   </div>
   <div class="home_nh">
