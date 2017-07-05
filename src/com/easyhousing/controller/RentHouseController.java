@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.easyhousing.dao.OrderRentHouseDao;
 import com.easyhousing.model.OrderRentHouse;
 
+/**
+ * 
+ * @author 王辰辰
+ * 插入租房信息
+ */
 @Controller
 public class RentHouseController {
 	
@@ -23,6 +28,7 @@ public class RentHouseController {
 		return "rentWindow";
 	}
 	
+	//插入租房信息
 	@RequestMapping(value="sendRentHouseOrder.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String sendRentHouseOrder(@RequestParam(value ="date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date, OrderRentHouse u) {
 		u.setOrderTime(date);

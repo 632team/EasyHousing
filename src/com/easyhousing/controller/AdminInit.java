@@ -26,6 +26,12 @@ import com.easyhousing.model.RentHouseDeal;
 import com.easyhousing.model.User;
 import com.easyhousing.service.UserService;
 
+/**
+ * 
+ * @author 王辰辰
+ * 控制各个界面的跳转初始化
+ */
+
 @Controller
 public class AdminInit {
 	
@@ -50,11 +56,13 @@ public class AdminInit {
 	@Autowired
 	private BuildingDealDao buildingDealDao;
 	
+	//主页面跳转
 	@RequestMapping(value="homeinit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView homeinit(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
 		
+		//获取用户数量，租房数量，楼盘数量，租房成交数量
 		List<User> userList = userService.selectAllUser();
 		session.setAttribute("userListSize", userList.size());
 		
@@ -71,6 +79,7 @@ public class AdminInit {
 		return modelAndView;
 	}
 
+	//管理用户界面跳转
 	@RequestMapping(value="managerUserinit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerUserinit(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -83,6 +92,7 @@ public class AdminInit {
 		return modelAndView;
 	}
 	
+	//获取租房界面跳转
 	@RequestMapping(value="managerRentHouseinit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerRentHouseinit(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -95,6 +105,7 @@ public class AdminInit {
 		return modelAndView;
 	}
 	
+	//租房记录的管理跳转
 	@RequestMapping(value="managerRentHouseDealinit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerRentHouseDealinit(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -107,6 +118,7 @@ public class AdminInit {
 		return modelAndView;
 	}
 	
+	//经纪人管理跳转
 	@RequestMapping(value="managerAgentinit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerAgentlinit(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -119,6 +131,7 @@ public class AdminInit {
 		return modelAndView;
 	}
 	
+	//楼盘图片跳转
 	@RequestMapping(value="managerBuildingPicInit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerBuildingPicInit(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -131,6 +144,7 @@ public class AdminInit {
 		return modelAndView;
 	}
 	
+	//楼盘管理跳转
 	@RequestMapping(value="managerBuildinginit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerBuildingInit(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -148,6 +162,7 @@ public class AdminInit {
 		return modelAndView;
 	}
 	
+	//楼盘交易记录跳转
 	@RequestMapping(value="managerBuildingDealinit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerBuildingDealinit(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();

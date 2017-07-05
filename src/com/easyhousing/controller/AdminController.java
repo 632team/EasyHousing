@@ -25,6 +25,11 @@ import com.easyhousing.model.User;
 import com.easyhousing.service.UserService;
 import com.easyhousing.util.Tool;
 
+/**
+ * 
+ * @author 王辰辰
+ * 用户登录以及增删改查
+ */
 
 @Controller
 public class AdminController {
@@ -35,13 +40,17 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
+	//用户登录
 	@RequestMapping(value="adminLogin.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView login(Administrator u, HttpSession httpSession) {
 		ModelAndView modelAndView = new ModelAndView();
+		
+		//没有输入
 		if (u.getAdministratorName() == null && u.getAdministratorPassword() == null) {
 			modelAndView.setViewName("logIn");
 			return modelAndView;
 		}
+		//查看用户是否存在
 		Administrator adminuser = administratorDao.selectAdministrator(u);
 		if (adminuser == null) {
 			modelAndView.addObject("message", "登录失败，用户名或密码错误！");
@@ -55,10 +64,12 @@ public class AdminController {
 		return modelAndView;
 	}
 	
+	//添加用户
 	@RequestMapping(value = "adminAddUser.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView adminAddUser(HttpServletRequest request, User u) throws IllegalStateException, IOException {
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
+		//设置默认头像
 		u.setUserPhoto("http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png");
 
 		try {
@@ -106,8 +117,11 @@ public class AdminController {
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
+		
+		//设置默认头像
 		u.setUserPhoto("http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png");
 		
+		//获取更改的id
 		int updateUserId = 0;
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -138,22 +152,27 @@ public class AdminController {
 		} catch (Exception e) {
 		}
 		
+		//更新用户
 		u.setUserId(updateUserId);
 		userService.updateUser(u);
 		System.err.println("用户性别update");
 		System.err.println(u.getUserSex());
 		if (session.getAttribute("addFail") == null)
 			session.setAttribute("addFail", 0);
+		
 		List<User> userList = userService.selectAllUser();
 		session.setAttribute("userList", userList);
 		modelAndView.setViewName("SystemUser/managerUser");
 		return modelAndView;
 	}
 	
+	//删除用户
 	@RequestMapping(value = "deleteUserAjax.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public void deleteUserAjax(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
+		
+		//获取删除的id
 		int userId = 0;
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -162,6 +181,8 @@ public class AdminController {
 				userId = Integer.parseInt(value);
 			}
 		}
+		
+		//删除
 		User u = new User();
 		u.setUserId(userId);
 		userService.delete(u);
@@ -170,10 +191,13 @@ public class AdminController {
 		session.setAttribute("userList", userList);
 	}
 	
+	//批量删除
 	@RequestMapping(value = "deleteUserPartAjax.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public void deleteUserPartAjax(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
+		
+		///获取批量删除的id
 		String deletePart = "";
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -182,8 +206,12 @@ public class AdminController {
 				deletePart = value;
 			}
 		}
+		
+		//分解字符串
 		System.err.println(deletePart);
 		String[] ids = deletePart.split("\\.");
+		
+		//删除
 		User u = new User();
 		for(String iString : ids) {
 			if(iString == null) continue;

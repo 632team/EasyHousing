@@ -22,20 +22,27 @@ import com.easyhousing.model.BuildingDeal;
 import com.easyhousing.model.BuildingInfo;
 import com.easyhousing.model.RentHouse;
 
+
+/**
+ * 楼盘信息的增删改查，楼盘成交记录的增删改查
+ */
 @Controller
 public class adminBuildingController {
 	
 	@Autowired
 	private BuildingInfoDao buildingInfoDao;
 
+	//增加楼盘信息 inputAddbuildingTimeHanded获取前端传来的时间
 	@RequestMapping(value = "adminAddBuilding.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView adminAddBuilding(@RequestParam(value ="inputAddbuildingTimeHanded") @DateTimeFormat(pattern="yyyy-MM-dd") Date date,HttpServletRequest request, BuildingInfo buildingInfo) throws IllegalStateException, IOException {
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
 
+		//将时间设置进表单中
 		buildingInfo.setBuildingTimeHanded(date);
 		buildingInfoDao.insertBuildingInfo(buildingInfo);
 		
+		//重新获取楼盘列表
 		List<BuildingInfo> buildingInfoList = buildingInfoDao.selectAll();
 		session.setAttribute("buildingInfoList", buildingInfoList);
 		
@@ -43,6 +50,7 @@ public class adminBuildingController {
 		return modelAndView;
 	}
 	
+	//更新楼盘信息，inputUpdatebuildingTimeHanded获得时间
 	@RequestMapping(value="adminUpdateBuilding.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView adminUpdateBuilding(@RequestParam(value ="inputUpdatebuildingTimeHanded") @DateTimeFormat(pattern="yyyy-MM-dd") Date date,HttpServletRequest request, BuildingInfo buildingInfo) {
 		
@@ -50,8 +58,10 @@ public class adminBuildingController {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
 		
+		//设置表单时间
 		buildingInfo.setBuildingTimeHanded(date);
 		
+		//获取要改变的楼盘id
 		int updateBuildingId = 0;
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -61,9 +71,11 @@ public class adminBuildingController {
 			}
 		}
 		
+		//更改楼盘信息
 		buildingInfo.setBuildingId(updateBuildingId);
 		buildingInfoDao.updateBuildingInfo(buildingInfo);
 		
+		//重新获取楼盘信息
 		List<BuildingInfo> buildingInfoList = buildingInfoDao.selectAll();
 		session.setAttribute("buildingInfoList", buildingInfoList);
 		
@@ -71,10 +83,13 @@ public class adminBuildingController {
 		return modelAndView;
 	}
 	
+	//删除楼盘信息
 	@RequestMapping(value="deleteBuildingAjax.do", method={RequestMethod.GET,RequestMethod.POST})
 	public void deleteBuildingAjax(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
+		
+		//获取删除的楼盘id
 		int deleteBuildingId = 0;
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -84,20 +99,24 @@ public class adminBuildingController {
 			}
 		}
 		
+		//删除要删除的楼盘信息
 		BuildingInfo buildingInfo = new BuildingInfo();
 		buildingInfo.setBuildingId(deleteBuildingId);
 		buildingInfoDao.deleteBuildingInfo(buildingInfo);
 		
-		
+		//重新获取楼盘列表
 		List<BuildingInfo> buildingInfoList = buildingInfoDao.selectAll();
 		session.setAttribute("buildingInfoList", buildingInfoList);
 		
 	}
 	
+	//删除选中的楼盘信息
 	@RequestMapping(value="deleteBuildingPartAjax.do", method={RequestMethod.GET,RequestMethod.POST})
 	public void deleteBuildingPartAjax(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
+		
+		//获取批量删除前端处理的字符
 		String deleteBuildingPart = "";
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -106,11 +125,13 @@ public class adminBuildingController {
 				deleteBuildingPart = value;
 			}
 		}
+		
+		//分解获得的字符
 		System.err.println(deleteBuildingPart);
 		String[] ids = deleteBuildingPart.split("\\.");
 		
 		BuildingInfo buildingInfo = new BuildingInfo();
-		
+		//删除
 		for(String iString : ids) {
 			if(iString == null) continue;
 			if(iString == "") continue;
@@ -123,14 +144,17 @@ public class adminBuildingController {
 	@Autowired
 	private BuildingDealDao buildingDealDao;
 	
+	//添加楼盘成交信息
 	@RequestMapping(value = "adminAddBuildingDeal.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView adminAddBuildingDeal(@RequestParam(value ="addDealtime") @DateTimeFormat(pattern="yyyy-MM-dd") Date date,HttpServletRequest request, BuildingDeal buildingDeal) throws IllegalStateException, IOException {
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
 		
+		//设置表单时间
 		buildingDeal.setBuildingDealTime(date);
 		buildingDealDao.insertBuildingDeal(buildingDeal);
 		
+		//更新楼盘信息列表
 		List<BuildingDeal> buildingDealList = buildingDealDao.selectAll();
 		session.setAttribute("buildingDealList", buildingDealList);
 		
@@ -138,6 +162,7 @@ public class adminBuildingController {
 		return modelAndView;
 	}
 	
+	//更改楼盘成交信息
 	@RequestMapping(value="adminUpdateBuildingDeal.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView adminUpdateBuildingDeal(@RequestParam(value ="updateDealtime") @DateTimeFormat(pattern="yyyy-MM-dd") Date date,HttpServletRequest request, BuildingDeal buildingDeal) {
 		
@@ -147,6 +172,7 @@ public class adminBuildingController {
 		
 		buildingDeal.setBuildingDealTime(date);
 		
+		//获取更新楼盘的id
 		int updateBuildingDealId = 0;
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -155,10 +181,14 @@ public class adminBuildingController {
 				updateBuildingDealId = Integer.parseInt(value);
 			}
 		}
-		System.err.println(updateBuildingDealId);
+		
+		//System.err.println(updateBuildingDealId);
+		//更新
+		
 		buildingDeal.setBuildingDealId(updateBuildingDealId);
 		buildingDealDao.updateBuildingDeal(buildingDeal);
 		
+		//更新楼盘信息列表
 		List<BuildingDeal> buildingDealList = buildingDealDao.selectAll();
 		session.setAttribute("buildingDealList", buildingDealList);
 		
@@ -166,10 +196,13 @@ public class adminBuildingController {
 		return modelAndView;
 	}
 	
+	//删除楼盘成交信息
 	@RequestMapping(value="deleteBuildingDealAjax.do", method={RequestMethod.GET,RequestMethod.POST})
 	public void deleteBuildingDealAjax(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
+		
+		//获取删除的id
 		int delBuildingDealId = 0;
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -179,21 +212,26 @@ public class adminBuildingController {
 			}
 		}
 		
+		//删除
 		BuildingDeal buildingDeal = new BuildingDeal();
 		buildingDeal.setBuildingDealId(delBuildingDealId);
 		buildingDealDao.deleteBuildingDeal(buildingDeal);
 		
-		System.err.println(delBuildingDealId);
+		//System.err.println(delBuildingDealId);
 		
+		//更新楼盘信息列表
 		List<BuildingDeal> buildingDealList = buildingDealDao.selectAll();
 		session.setAttribute("buildingDealList", buildingDealList);
 		
 	}
 	
+	//删除批量楼盘成交信息
 	@RequestMapping(value="deleteBuildingDealPartAjax.do", method={RequestMethod.GET,RequestMethod.POST})
 	public void deleteBuildingDealPartAjax(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
+		
+		//获取删除的字符
 		String deleteBuildingDealPart = "";
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -202,11 +240,12 @@ public class adminBuildingController {
 				deleteBuildingDealPart = value;
 			}
 		}
-		System.err.println(deleteBuildingDealPart);
+		//System.err.println(deleteBuildingDealPart);
+		//分割删除id
 		String[] ids = deleteBuildingDealPart.split("\\.");
 		
 		BuildingDeal buildingDeal = new BuildingDeal();
-		
+		//删除
 		for(String iString : ids) {
 			if(iString == null) continue;
 			if(iString == "") continue;

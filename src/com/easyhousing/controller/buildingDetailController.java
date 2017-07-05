@@ -24,7 +24,11 @@ import com.easyhousing.model.Collect;
 import com.easyhousing.model.User;
 import com.easyhousing.model.UserCollectBuilding;
 import com.easyhousing.service.BuildingSearch;
-
+/**
+ * 
+ * @author 王辰辰
+ * 显示楼盘具体信息
+ */
 @Controller
 public class buildingDetailController {
 	
@@ -43,11 +47,14 @@ public class buildingDetailController {
 	@Autowired
 	private BuildingPicDao buildingPicDao;
 	
+	//显示租房具体信息
 	@RequestMapping(value="buildingDetail.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView buildingDetail(HttpServletRequest request) {
 		Cookie[] cookie = request.getCookies();
 		HttpSession session = request.getSession();
 		ModelAndView modelAndView = new ModelAndView();
+		
+		//获取显示楼盘的id
 		int buildingId = 0;
 		for(Cookie iCookie : cookie) {
 			String name = iCookie.getName();
@@ -63,7 +70,8 @@ public class buildingDetailController {
 
 		User user = (User)session.getAttribute("user");
 		boolean collectYet = false;
-
+		
+		//用户已登录，查看是否收藏
 		if(user != null) {
 			System.err.println(user.getUserId());
 			UserCollectBuilding ucb = new UserCollectBuilding();
@@ -77,11 +85,13 @@ public class buildingDetailController {
 		}
 		System.err.println(buildingId);
 
+		//设置收藏属性
 		session.setAttribute("buildingInfo", buildingInfo);
 		session.setAttribute("collectYet", collectYet);
 		
 		List<BuyHouseComment> lb = buyHouseCommentDao.selectAllByBuildingId(buildingId);
 		List<Collect> lc = new ArrayList<>();
+		//若评论，在评论表中添加记录
 		for (BuyHouseComment i : lb) {
 			Collect tmp = new Collect();
 			User u = new User();
@@ -101,10 +111,12 @@ public class buildingDetailController {
 		}
 		session.setAttribute("buildingDetailPic", buildingDetailPic);
 		
+		//刷新页面显示
 		modelAndView.setViewName("buildingDetail");
 		return modelAndView;
 	}
 	
+	//用户评论
 	@RequestMapping(value="userCommentBuilding.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String userCommentBuilding(HttpSession s, BuyHouseComment u) {
 		u.setUserCommentDate(new Date());
@@ -114,6 +126,7 @@ public class buildingDetailController {
 		return "Comment/loading";
 	}
 	
+	//用户收藏楼盘
 	@RequestMapping(value="userBuildingCollect.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView userBuildingCollect(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();

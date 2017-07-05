@@ -4,6 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * 
+ * @author 王辰辰
+ * 前期用于跳转的代码，已经不用了
+ */
+
 @Controller
 public class LinkController {
 	

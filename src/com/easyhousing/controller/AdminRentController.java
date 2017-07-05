@@ -20,6 +20,11 @@ import com.easyhousing.dao.RentHouseDealDao;
 import com.easyhousing.model.RentHouse;
 import com.easyhousing.model.RentHouseDeal;
 
+/**
+ * 
+ * @author 王辰辰
+ * 租房增删改查
+ */
 @Controller
 public class AdminRentController {
 
@@ -29,12 +34,14 @@ public class AdminRentController {
 	@Autowired
 	private RentHouseDealDao rentHouseDealDao;
 	
+	//增加租房信息
 	@RequestMapping(value="adminAddRentHouse.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView adminAddRentHouse(@RequestParam(value ="inputPublishTime1") @DateTimeFormat(pattern="yyyy-MM-dd") Date inputPublishTime,HttpServletRequest request, RentHouse rentHouse) {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
 		
+		//设置表单时间
 		rentHouse.setRentHousePublishTime(inputPublishTime);
 		System.err.println(inputPublishTime);
 		
@@ -47,6 +54,7 @@ public class AdminRentController {
 		return modelAndView;
 	}
 	
+	//更新租房
 	@RequestMapping(value="adminUpdateRentHouse.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView adminUpdateRentHouse(@RequestParam(value ="inputPublishTime") @DateTimeFormat(pattern="yyyy-MM-dd") Date inputPublishTime,HttpServletRequest request, RentHouse rentHouse) {
 		
@@ -55,8 +63,8 @@ public class AdminRentController {
 		Cookie[] cookies = request.getCookies();
 		
 		rentHouse.setRentHousePublishTime(inputPublishTime);
-		System.err.println(inputPublishTime);
-		
+		//System.err.println(inputPublishTime);
+		//获取更新id
 		int updateRentHouseId = 0;
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -65,7 +73,8 @@ public class AdminRentController {
 				updateRentHouseId = Integer.parseInt(value);
 			}
 		}
-		System.err.println(updateRentHouseId);
+		//System.err.println(updateRentHouseId);
+		//更新
 		rentHouse.setRentHouseId(updateRentHouseId);
 		rentHouseDao.updateRentHouse(rentHouse);
 		
@@ -75,7 +84,7 @@ public class AdminRentController {
 		modelAndView.setViewName("SystemUser/managerRent");
 		return modelAndView;
 	}
-	
+	//删除租房信息
 	@RequestMapping(value="deleteRentHouseAjax.do", method={RequestMethod.GET,RequestMethod.POST})
 	public void deleteRentHouseAjax(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -99,7 +108,7 @@ public class AdminRentController {
 		session.setAttribute("rentHouseList", rentHouseList);
 		
 	}
-	
+	//批量删除租房信息
 	@RequestMapping(value="deleteRentHousePartAjax.do", method={RequestMethod.GET,RequestMethod.POST})
 	public void deleteRentHousePartAjax(HttpServletRequest request) {
 		HttpSession session = request.getSession();

@@ -22,18 +22,25 @@ import com.easyhousing.model.Agent;
 import com.easyhousing.model.User;
 import com.easyhousing.util.Tool;
 
+/**
+ * 经纪人管理（增加，删除，修改，查询，批量删除）
+ */
+
 @Controller
 public class adminAgentController {
 
+	//对agent表数据库操作层
 	@Autowired
 	private AgentDao agentDao;
 	
+	//增加经纪人
 	@RequestMapping(value="adminAddAgent.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView adminAddAgent(HttpServletRequest request, Agent agent) {
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
-		agent.setPicUrl("http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png");
+		agent.setPicUrl("http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png"); //设置默认头像
 
+		//插入用户上传的图片链接地址
 		try {
 			// 得到文件
 			String path = request.getSession().getServletContext().getRealPath("upload");
@@ -57,8 +64,9 @@ public class adminAgentController {
 			
 		}
 		
-		agentDao.insertAgent(agent);
+		agentDao.insertAgent(agent);  //插入数据
 		
+		//更新显示层的经纪人列表
 		List<Agent> agentList = agentDao.selectAll();
 		session.setAttribute("agentList", agentList);
 		
@@ -66,12 +74,14 @@ public class adminAgentController {
 		return modelAndView;
 	}
 	
+	//更新经纪人
 	@RequestMapping(value="adminUpdateAgent.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView adminUpdateAgent(HttpServletRequest request, Agent agent) {
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
 		
+		//获得要更改的经纪人id
 		int updateAgentId = 0;
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -103,9 +113,11 @@ public class adminAgentController {
 			
 		}
 		
+		//更新经纪人
 		agent.setAgentId(updateAgentId);
 		agentDao.updateAgent(agent);
 		
+		//更新经纪人显示列表
 		List<Agent> agentList = agentDao.selectAll();
 		session.setAttribute("agentList", agentList);
 		
@@ -113,10 +125,13 @@ public class adminAgentController {
 		return modelAndView;
 	}
 	
+	//删除一个经纪人
 	@RequestMapping(value = "deleteAgentAjax.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public void deleteAgentAjax(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
+		
+		//获取删除的经纪人id
 		int deleteAgentId = 0;
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -126,19 +141,24 @@ public class adminAgentController {
 			}
 		}
 
+		//删除经纪人
 		Agent agent = new Agent();
 		agent.setAgentId(deleteAgentId);
 		
 		agentDao.deleteAgent(agent);
 		
+		//更新经纪人显示列表
 		List<Agent> agentList = agentDao.selectAll();
 		session.setAttribute("agentList", agentList);
 	}
 	
+	//删除选中的经纪人
 	@RequestMapping(value = "deleteAgentPartAjax.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public void deleteAgentPartAjax(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
+		
+		//获取删除经纪人id的组合字符串
 		String deleteAgentPart = "";
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
@@ -148,6 +168,8 @@ public class adminAgentController {
 			}
 		}
 		System.err.println(deleteAgentPart);
+		
+		//前端将经纪人id用","分割，这里将其分解开
 		String[] ids = deleteAgentPart.split("\\.");
 		Agent agent = new Agent();
 		for(String iString : ids) {
@@ -158,6 +180,7 @@ public class adminAgentController {
 			agentDao.deleteAgent(agent);
 		}
 		
+		//更新经纪人显示列表
 		List<Agent> agentList = agentDao.selectAll();
 		session.setAttribute("agentList", agentList);
 	}

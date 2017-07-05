@@ -24,9 +24,15 @@ import com.easyhousing.service.RentHouseSearch;
 
 import jdk.internal.dynalink.linker.LinkerServices;
 
-
+/**
+ * 
+ * @author 王辰辰
+ * 按条件搜索租房
+ */
 @Controller
 public class RentHouseSelectController {
+	
+	//对前端传的中文字符进行escape解码
 	private final static String[] hex = {  
 	        "00","01","02","03","04","05","06","07","08","09","0A","0B","0C","0D","0E","0F",  
 	        "10","11","12","13","14","15","16","17","18","19","1A","1B","1C","1D","1E","1F",  
@@ -141,6 +147,7 @@ public class RentHouseSelectController {
 	@Autowired
 	private RentHousePicDao rentHousePicDao;
 	
+	//租房显示跳转初始化
 	@RequestMapping(value="rentHouseSelect.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView rentHouseSelect(HttpServletRequest request, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -204,6 +211,7 @@ public class RentHouseSelectController {
 		return modelAndView;
 	}
 	
+	//按条件查询
 	@RequestMapping(value="rentHouseSelectAjax.do", method={RequestMethod.GET,RequestMethod.POST})
 	public void rentHouseSelectAjax(HttpServletRequest request) {
 		Cookie[] cookie = request.getCookies();
@@ -213,6 +221,7 @@ public class RentHouseSelectController {
 		}
 		else {
 			System.err.println("yyyyyy");
+			//设置价格，卧室数量，地址查询
 			for(Cookie iCookie : cookie) {
 					String strtemp = iCookie.getName();
 					
@@ -299,6 +308,7 @@ public class RentHouseSelectController {
 		System.err.println(session.getAttribute("class1"));
 	}
 	
+	//前一页显示
 	@RequestMapping(value="prePage.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView prePage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -311,6 +321,7 @@ public class RentHouseSelectController {
 		return modelAndView;
 	}
 	
+	//后一页显示
 	@RequestMapping(value="nextPage.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView nextPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();

@@ -17,6 +17,11 @@ import com.easyhousing.dao.BuildingPicDao;
 import com.easyhousing.model.BuildingInfo;
 import com.easyhousing.service.BuildingSearch;
 
+/**
+ * 
+ * @author 王辰辰
+ * 楼盘按条件查询
+ */
 @Controller
 public class BuildingSelectController {
 	
@@ -26,10 +31,12 @@ public class BuildingSelectController {
 	@Autowired
 	private BuildingPicDao buildingPicDao;
 	
+	//按条件查询楼盘，初始化跳转
 	@RequestMapping(value="buildingSelect.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView buildingSelect(HttpServletRequest request, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 		
+		//地址，最低价格，最高价格，最低卧室数量，最多卧室数量
 		String strAddress = (String)session.getAttribute("buildingAddress");
 		String strlowPrice = (String)session.getAttribute("buildingLowPrice");
 		String strhighPrice = (String)session.getAttribute("buildingHighPrice");
@@ -60,6 +67,7 @@ public class BuildingSelectController {
 		
 		List<BuildingInfo>list = buildingSearch.searchBuilding(address, lowPrice, highPrice);
 		
+		//查询结果
 		List<String> buildingPicList = new ArrayList<>();
 		for (BuildingInfo i: list) {
 			List<String> t = buildingPicDao.selectBuildingPicByBuildingId(i.getBuildingId());
@@ -71,6 +79,8 @@ public class BuildingSelectController {
 				System.err.println(t.get(0));
 			}
 		}
+		
+		//返回查询结果
 		session.setAttribute("buildingPicList", buildingPicList);
 		
 		session.setAttribute("buildingList", list);
@@ -85,7 +95,7 @@ public class BuildingSelectController {
 		return modelAndView;
 	}
 	
-	
+	//按条件查询楼盘
 	@RequestMapping(value="buildingSelectAjax.do", method={RequestMethod.GET,RequestMethod.POST})
 	public void rentHouseSelectAjax(HttpServletRequest request) {
 		Cookie[] cookie = request.getCookies();
@@ -95,6 +105,7 @@ public class BuildingSelectController {
 		}
 		else {
 			System.err.println("yyyyyy");
+			//设置属性
 			for(Cookie iCookie : cookie) {
 					String strtemp = iCookie.getName();
 					
@@ -162,6 +173,7 @@ public class BuildingSelectController {
 		System.err.println(session.getAttribute("buildingClass1"));
 	}
 	
+	//分页显示，前一页
 	@RequestMapping(value="buildingPrePage.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView prePage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -174,6 +186,7 @@ public class BuildingSelectController {
 		return modelAndView;
 	}
 	
+	//分页显示，后一页
 	@RequestMapping(value="buildingNextPage.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView nextPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -187,7 +200,7 @@ public class BuildingSelectController {
 		return modelAndView;
 	}
 	
-	
+	//对前端返回的escape编码进行解码
 	private final static String[] hex = {  
 	        "00","01","02","03","04","05","06","07","08","09","0A","0B","0C","0D","0E","0F",  
 	        "10","11","12","13","14","15","16","17","18","19","1A","1B","1C","1D","1E","1F",  

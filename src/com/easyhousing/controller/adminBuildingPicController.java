@@ -23,16 +23,23 @@ import com.easyhousing.model.RentHousePic;
 import com.easyhousing.model.User;
 import com.easyhousing.util.Tool;
 
+/**
+ * 对楼盘图片的增删改查
+ */
+
 @Controller
 public class adminBuildingPicController {
 	
 	@Autowired
 	private BuildingPicDao buildingPicDao;
 
+	//增加楼盘图片信息
 	@RequestMapping(value = "adminAddBuildingPic.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView adminAddBuildingPic(HttpServletRequest request, BuildingPic buildingPic) throws IllegalStateException, IOException {
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
+		
+		//设置默认的图片地址
 		buildingPic.setBuildingPicUrl("http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png");
 
 		// 得到文件
@@ -58,11 +65,14 @@ public class adminBuildingPicController {
 		} catch (Exception e) {
 			
 		}
-		System.err.println(buildingPic.getBuildingPicType());
-		System.err.println(buildingPic.getBuildingId());
-		System.err.println(buildingPic.getBuildingPicUrl());
+		//System.err.println(buildingPic.getBuildingPicType());
+		//System.err.println(buildingPic.getBuildingId());
+		//System.err.println(buildingPic.getBuildingPicUrl());
+		
+		//插入图片
 		buildingPicDao.insertBuildingPic(buildingPic);
 		
+		//重新获取图片列表
 		List<BuildingPic> buildingPicList = buildingPicDao.selectAll();
 		session.setAttribute("buildingPicList", buildingPicList);
 		

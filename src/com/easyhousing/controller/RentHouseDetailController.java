@@ -27,6 +27,12 @@ import com.easyhousing.service.RentHouseCollect;
 import com.easyhousing.service.RentHousePicUrlService;
 import com.easyhousing.service.RentHouseSearch;
 
+/**
+ * 
+ * @author 王辰辰
+ * 租房详情显示
+ */
+
 @Controller
 public class RentHouseDetailController {
 	
@@ -48,6 +54,7 @@ public class RentHouseDetailController {
 	@Autowired
 	private BuyHouseCommentDao buyHouseCommentDao;
 	
+	//租房初始化跳转，并3d显示图片
 	@RequestMapping(value="rentHouseDetail.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView rentHouseDetail(HttpServletRequest request) {
 		Cookie[] cookie = request.getCookies();
@@ -112,6 +119,7 @@ public class RentHouseDetailController {
 		return modelAndView;
 	}
 	
+	//用户评论租房
 	@RequestMapping(value="userCommentRentHouse.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String userCommentRentHouse(HttpSession s, RentHouseComment u) {
 		u.setUserCommentDate(new Date());
