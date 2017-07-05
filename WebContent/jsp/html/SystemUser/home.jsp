@@ -81,12 +81,12 @@
   <div class="state-overview clearfix">
     <div class="col-lg-5 col-sm-10">
       <section class="panel">
-        <a href="home.html#" title="用户数">
+        <a href=${pageContext.request.contextPath}/managerUserinit.do title="用户数">
           <div class="symbol terques">
             <i><span class="glyphicon glyphicon-user"></span></i>
           </div>
           <div class="value">
-            <h1>34522</h1>
+            <h1><%out.print((Integer)session.getAttribute("userListSize"));%></h1>
             <p>用户数</p>
           </div>
         </a>
@@ -98,7 +98,7 @@
           <i><span class="glyphicon glyphicon-th-list"></span></i>
         </div>
         <div class="value">
-          <h1>140</h1>
+          <h1><%out.print((Integer)session.getAttribute("buildingDealListSize"));%></h1>
           <p>卖掉房屋</p>
         </div>
       </section>
@@ -109,7 +109,7 @@
           <i><span class="glyphicon glyphicon-home"></span></i>
         </div>
         <div class="value">
-          <h1>345</h1>
+          <h1><%out.print((Integer)session.getAttribute("rentHouseDealListSize"));%></h1>
           <p>租房成交</p>
         </div>
       </section>
@@ -120,8 +120,8 @@
           <i><span class="glyphicon glyphicon-pencil"></span></i>
         </div>
         <div class="value">
-          <h1>34,500</h1>
-          <p>申请数</p>
+          <h1><%out.print((Integer)session.getAttribute("rentHouseListSize"));%></h1>
+          <p>租房数</p>
         </div>
       </section>
     </div>

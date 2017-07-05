@@ -22,4 +22,8 @@
 	<select id="selectAllByUserId" resultType="com.easyhousing.model.BuildingDeal">
 		select * from BuildingDeal where userId=#{0}
 	</select>
+	
+	<select id="selectAll" resultType="com.easyhousing.model.BuildingDeal">
+		select * from BuildingDeal
+	</select>
 </mapper>

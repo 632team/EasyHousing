@@ -1,31 +1,36 @@
+<%@page import="com.easyhousing.model.BuildingDeal"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+HttpSession s = request.getSession();
+List<BuildingDeal> buildingDealList = (List<BuildingDeal>)s.getAttribute("buildingDealList");
+%>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="../../css/SystemUser/style.css">
-  <link rel="stylesheet" href="css/codemirror.css">
-  <link rel="stylesheet" href="css/ace.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/typeahead-bs2.min.js"></script>
-  <script src="js/jquery.dataTables.min.js"></script>
-  <script src="js/jquery.dataTables.bootstrap.js"></script>
-  <script src="js/H-ui.js"></script>
-  <script src="js/H-ui.admin.js"></script>
-  <script src="js/layer.js"></script>
-  <link rel="stylesheet" href="css/layer.css">
-  <script src="js/laydate.js"></script>
-  <link rel="stylesheet" href="css/laydate.css">
-  <link rel="stylesheet" href="css/laydate(1).css">
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/bootstrap.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/dataTables.bootstrap.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/style.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/codemirror.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/font-awesome.min.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/bootstrap.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/typeahead-bs2.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.dataTables.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.dataTables.bootstrap.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/H-ui.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/H-ui.admin.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/layer.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/layer.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/laydate.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/laydate.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/laydate(1).css>
 
   <style>
     .dataTable th.sorting_desc:after {
@@ -34,8 +39,8 @@
       color: #307ecc;
     }
   </style>
-  <link rel="stylesheet" href="css/ace-rtl.min.css">
-  <link rel="stylesheet" href="css/ace-skins.min.css">
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace-rtl.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace-skins.min.css>
 
 
 </head>
@@ -59,7 +64,7 @@
       <div class="border clearfix" style="display: block">
                <span class="l_f">
                 <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加买房交易</a>
-                <a href="javascript:ovid()" class="btn btn-danger">批量删除</a>
+                <a class="btn btn-danger" onclick="deletePart();" href=${pageContext.request.contextPath}/managerBuildingDealinit.do>批量删除</a>
                </span>
         <!--<span class="r_f">共：<b>2345</b>条</span>-->
       </div>
@@ -106,24 +111,30 @@
             </tr>
             </thead>
             <tbody>
-
+            <%
+            for(int i = 0; i < buildingDealList.size(); i++) {
+            	BuildingDeal iBuildingDeal = buildingDealList.get(i);
+            %>
             <tr role="row" class="odd">
-              <td><label><input type="checkbox"><span class="lbl"></span></label></td>
-              <td class="sorting_1" value="1">1</td>
-              <td>02</td>
-              <td>21242</td>
-              <td>20141791</td>
-              <td>2017-07-02</td>
-              <td>32000</td>
-              <td>4800000</td>
-              <td>一室一厅</td>
+              <td><label><input type="checkbox" name="checkbox" id="<%=iBuildingDeal.getBuildingDealId()%>" value="<%=iBuildingDeal.getBuildingDealId()%>"><span class="lbl"></span></label></td>
+              <td class="sorting_1" value="1"><%=iBuildingDeal.getBuildingDealId() %></td>
+              <td><%=iBuildingDeal.getAgentId() %></td>
+              <td><%=iBuildingDeal.getBuildingId() %></td>
+              <td><%=iBuildingDeal.getUserId() %></td>
+              <td><%=iBuildingDeal.getBuildingDealTime() %></td>
+              <td><%=iBuildingDeal.getBuildingDealPerPrice() %></td>
+              <td><%=iBuildingDeal.getBuildingDealTotalPrice() %></td>
+              <td><%=iBuildingDeal.getBuildingLayout() %></td>
               <td class="td-manage">
 
-                <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
+                <a id="<%=iBuildingDeal.getBuildingDealId() %>" title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML,this.id)">编辑</a>
 
-                <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
+                <a id="<%=iBuildingDeal.getBuildingDealId() %>" title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML,this.id)">删除</a>
               </td>
             </tr>
+            <%
+            }
+            %>
             </tbody>
 
 
@@ -137,53 +148,105 @@
 
 
 <div class="add_menber" id="add_menber_style" style="display:none">
-
+  <form action=${pageContext.request.contextPath}/adminAddBuildingDeal.do id="addBuildingDeal" enctype="multipart/form-data" method="post">
   <ul class=" page-content">
     <li>
       <label class="label_name">经纪人ID：</label>
       <span class="add_name">
-          <input name="经纪人ID" type="text"  class="text_add"/>
+          <input name="agentId" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">楼盘ID：</label>
       <span class="add_name">
-          <input name="楼盘ID" type="text"  class="text_add"/>
+          <input name="buildingId" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">用户ID：</label>
       <span class="add_name">
-          <input name="用户ID" type="text"  class="text_add"/>
+          <input name="userId" type="text"  class="text_add"/>
         </span>
     </li>
 
     <li>
       <label class="label_name">交易时间：</label>
       <span class="add_name">
-        <input class="inline laydate-icon" id="start" style=" margin-left:10px;">
+        <input name="addDealtime" class="inline laydate-icon" id="start" style=" margin-left:10px;">
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
       <label class="label_name">房价(平米)：</label>
       <span class="add_name">
-          <input name="房价" type="text"  class="text_add"/>
+          <input name="buildingDealPerPrice" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">总价：</label>
       <span class="add_name">
-          <input name="总价" type="text"  class="text_add"/>
+          <input name="buildingDealTotalPrice" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">户型：</label>
       <span class="add_name">
-          <input name="户型" type="text"  class="text_add"/>
+          <input name="buildingLayout" type="text"  class="text_add"/>
         </span>
     </li>
   </ul>
+  </form>
+</div>
+
+<div class="add_menber" id="update_menber_style" style="display:none">
+  <form action=${pageContext.request.contextPath}/adminUpdateBuildingDeal.do id="updateBuildingDeal" enctype="multipart/form-data" method="post">
+  <ul class=" page-content">
+    <li>
+      <label class="label_name">经纪人ID：</label>
+      <span class="add_name">
+          <input name="agentId" type="text"  class="text_add"/>
+        </span>
+    </li>
+    <li>
+      <label class="label_name">楼盘ID：</label>
+      <span class="add_name">
+          <input name="buildingId" type="text"  class="text_add"/>
+        </span>
+    </li>
+    <li>
+      <label class="label_name">用户ID：</label>
+      <span class="add_name">
+          <input name="userId" type="text"  class="text_add"/>
+        </span>
+    </li>
+
+    <li>
+      <label class="label_name">交易时间：</label>
+      <span class="add_name">
+        <input name="updateDealtime" class="inline laydate-icon" id="start1" style=" margin-left:10px;">
+        </span>
+      <div class="prompt r_f"></div>
+    </li>
+    <li>
+      <label class="label_name">房价(平米)：</label>
+      <span class="add_name">
+          <input name="buildingDealPerPrice" type="text"  class="text_add"/>
+        </span>
+    </li>
+    <li>
+      <label class="label_name">总价：</label>
+      <span class="add_name">
+          <input name="buildingDealTotalPrice" type="text"  class="text_add"/>
+        </span>
+    </li>
+    <li>
+      <label class="label_name">户型：</label>
+      <span class="add_name">
+          <input name="buildingLayout" type="text"  class="text_add"/>
+        </span>
+    </li>
+  </ul>
+  </form>
 </div>
 
 <script>
@@ -237,7 +300,7 @@
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("#add_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -255,6 +318,7 @@
             title: '提示框',
             icon:1,
           });
+          $("#add_menber_style #addBuildingDeal").submit();
           layer.close(index);
         }
       }
@@ -284,19 +348,20 @@
     });
   }
   /*用户-编辑*/
-  function member_edit(id){
+  function member_edit(id, updateBuildingDealId){
+	setCookie("updateBuildingDealId", updateBuildingDealId, 365);
     layer.open({
       type: 1,
       title: '修改用户信息',
       maxmin: true,
       shadeClose:false, //点击遮罩关闭层
       area : ['800px' , ''],
-      content:$('#add_menber_style'),
+      content:$('#update_menber_style'),
       btn:['提交','取消'],
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("update_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -314,15 +379,20 @@
             title: '提示框',
             icon:1,
           });
+          $("#update_menber_style #updateBuildingDeal").submit();
           layer.close(index);
         }
       }
     });
   }
   /*用户-删除*/
-  function member_del(obj,id){
+  function member_del(obj,id,delBuildingDealId){
     layer.confirm('确认要删除吗？',function(index){
       $(obj).parents("tr").remove();
+      
+      setCookie("delBuildingDealId",delBuildingDealId,365);
+      transpDel();
+      
       layer.msg('已删除!',{icon:1,time:1000});
     });
   }
@@ -330,6 +400,51 @@
     elem: '#start',
     event: 'focus'
   });
+  laydate({
+    elem: '#start1',
+    event: 'focus' 
+  });
+  
+  
+  function setCookie(c_name, value, expiredays) {
+		var exdate = new Date()
+		exdate.setDate(exdate.getDate() + expiredays)
+		document.cookie = c_name
+				+ "="
+				+ escape(value)
+				+ ((expiredays == null) ? "" : ";expires="
+						+ exdate.toGMTString())
+	}
+  
+  function transpDel() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/deleteBuildingDealAjax.do"
+		})
+	}
+
+function transpDelPart() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/deleteBuildingDealPartAjax.do"
+		})
+	}
+
+	function deletePart() {
+		var chckBox = document.getElementsByName("checkbox");
+		var num = chckBox.length;
+		var ids = "";
+		for (var index = 0; index < num; index++) {
+			if (chckBox[index].checked) {
+				ids += chckBox[index].value + ".";
+			}
+		}
+		alert(ids);
+		setCookie("deleteBuildingDealPart", ids, 365);
+		transpDelPart();
+	}
 </script>
 
 </body>

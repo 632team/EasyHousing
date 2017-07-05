@@ -11,4 +11,5 @@ public interface BuildingDealDao {
 	public int updateBuildingDeal(BuildingDeal u);
 	public BuildingDeal selectBuildingDeal(BuildingDeal u);
 	public List<BuildingDeal> selectAllByUserId(int id);
+	public List<BuildingDeal> selectAll();
 }

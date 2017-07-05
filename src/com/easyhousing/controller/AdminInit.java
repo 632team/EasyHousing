@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.easyhousing.dao.AgentDao;
+import com.easyhousing.dao.BuildingDealDao;
 import com.easyhousing.dao.BuildingInfoDao;
 import com.easyhousing.dao.BuildingPicDao;
 import com.easyhousing.dao.RentHouseDao;
 import com.easyhousing.dao.RentHouseDealDao;
 import com.easyhousing.model.Agent;
+import com.easyhousing.model.BuildingDeal;
 import com.easyhousing.model.BuildingInfo;
 import com.easyhousing.model.BuildingPic;
 import com.easyhousing.model.RentHouse;
@@ -44,6 +46,30 @@ public class AdminInit {
 	
 	@Autowired
 	private BuildingInfoDao buildingInfoDao;
+	
+	@Autowired
+	private BuildingDealDao buildingDealDao;
+	
+	@RequestMapping(value="homeinit.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView homeinit(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		List<User> userList = userService.selectAllUser();
+		session.setAttribute("userListSize", userList.size());
+		
+		List<BuildingDeal> buildingDealList = buildingDealDao.selectAll();
+		session.setAttribute("buildingDealListSize", buildingDealList.size());
+		
+		List<RentHouseDeal> rentHouseDealList = rentHouseDealDao.selectAll();
+		session.setAttribute("rentHouseDealListSize", rentHouseDealList.size());
+		
+		List<RentHouse> rentHouseList = rentHouseDao.selectAllRentHouse();
+		session.setAttribute("rentHouseListSize", rentHouseList.size());
+		
+		modelAndView.setViewName("SystemUser/home");
+		return modelAndView;
+	}
 
 	@RequestMapping(value="managerUserinit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerUserinit(HttpServletRequest request) {
@@ -119,6 +145,18 @@ public class AdminInit {
 		}
 		
 		modelAndView.setViewName("SystemUser/managerBuilding");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="managerBuildingDealinit.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView managerBuildingDealinit(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		List<BuildingDeal> buildingDealList = buildingDealDao.selectAll();
+		session.setAttribute("buildingDealList", buildingDealList);
+		
+		modelAndView.setViewName("SystemUser/managerBuildingHistory");
 		return modelAndView;
 	}
 }

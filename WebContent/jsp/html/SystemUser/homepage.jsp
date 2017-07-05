@@ -183,7 +183,7 @@
       </div><!-- #sidebar-shortcuts -->
       <ul class="nav nav-list" id="nav_list" style="height: 440px;text-align: right">
         <li class="home">
-          <a href="javascript:void(0)"  name=${pageContext.request.contextPath}/jsp/html/SystemUser/home.jsp class="iframeurl" title="">
+          <a href="javascript:void(0)"  name=${pageContext.request.contextPath}/homeinit.do class="iframeurl" title="">
             <span class="menu-text"> 系统首页 </span>
           </a>
         </li>
@@ -193,9 +193,6 @@
           <ul class="submenu" id="Sort_link_1">
             <li class="home" style="height: 41.3333px;">
               <a href="#" title="用户管理" name=${pageContext.request.contextPath}/managerUserinit.do class="iframeurl" style="text-align: center">用户管理</a>
-            </li>
-            <li class="home" style="height: 41.3333px;">
-              <a href="#" title="用户统计" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerCalUser.jsp class="iframeurl" style="text-align: center">用户统计</a>
             </li>
           </ul>
         </li>
@@ -223,7 +220,7 @@
             <li class="home" style="height: 41.3333px;">
               <a href="#" title="楼盘管理" class="iframeurl" name=${pageContext.request.contextPath}/managerBuildinginit.do style="text-align: center">楼盘管理</a>
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘交易" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingHistory.jsp class="iframeurl" style="text-align: center">买房记录</a>
+              <a href="#" title="楼盘交易" name=${pageContext.request.contextPath}/managerBuildingDealinit.do class="iframeurl" style="text-align: center">买房记录</a>
           </ul>
         </li>
       </ul>
@@ -251,7 +248,7 @@
         <ul class="breadcrumb">
           <li>
             <i class="icon-home home-icon"></i>
-            <a href=${pageContext.request.contextPath}/jsp/html/SystemUser/home.jsp>首页</a>
+            <a href=${pageContext.request.contextPath}/homeinit.do>首页</a>
           </li>
           <li class="active"><span class="Current_page iframeurl"></span></li>
           <li class="active" id="parentIframe"><span class="parentIframe iframeurl"></span></li>
@@ -262,7 +259,7 @@
 
 
       <iframe id="iframe" style="border: 0px; width: 90%; background-color: rgb(255, 255, 255); height: 473px; "
-              name="iframe" frameborder="0" src=${pageContext.request.contextPath}/jsp/html/SystemUser/home.jsp></iframe>
+              name="iframe" frameborder="0" src=${pageContext.request.contextPath}/homeinit.do></iframe>
       <!--<iframe id="managerUser" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
               <!--name="iframe" frameborder="0" src="./managerUser.html"></iframe>-->
       <!--<iframe id="managerRent" style="border: 0px; width: 100%; background-color: rgb(255, 255, 255); height: 473px; "-->
