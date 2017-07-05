@@ -693,17 +693,16 @@
             			%>
             			<li style="width: 750px">
                         <div class="list" style="display: inline">
-                          <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+                          <div class="pic-panel"><a target="_blank" href="">
                             <img
-                              data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-                              src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+                              data-original=<%=tmp.picUrl %>
+                              src=<%=tmp.picUrl %>
                               class="lj-lazy"
-                              onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
                               style="display: inline;"> </a>
                           </div>
                           <div class="info-panel" style="float: left">
                             <h2><a target="_blank"
-                                   href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> <%=tmp.name %> </a>
+                                   href=""> <%=tmp.name %> </a>
                                    <a id=<%=tmp.houseId %> onclick="click2(this.id);" href=${pageContext.request.contextPath}/userCancelBuildingCollect.do>
                                   <button type="button" class="btn btn-danger" style="float: right">取消关注</button></a>
                             </h2>
@@ -745,16 +744,15 @@
             			%>
             			 <li style="width: 750px">
 		                <div class="list" style="display: inline">
-		                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+		                  <div class="pic-panel"><a target="_blank" href="">
 		                    <img
-		                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-		                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+		                      data-original=<%=i.picUrl %>
+		                      src=<%=i.picUrl %>
 		                      class="lj-lazy"
-		                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
 		                      style="display: inline;"> </a></div>
 		                   <div class="info-panel" style="float: left">
 		                    <h2><a target="_blank"
-		                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"><%=i.name %> </a>
+		                           href=""><%=i.name %> </a>
 		                           <a id=<%=i.houseId%> onclick="click(this.id);" href=${pageContext.request.contextPath}/userCancelRentCollect.do>
 		                           <button type="button" class="btn btn-danger" style="float: right" >
 		                                                取消关注
@@ -762,7 +760,7 @@
 		                           </a>
 		                    </h2>
 		                    <div class="col-1">
-		                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank"><%=i.province %></a>- <%=i.region %>
+		                      <div class="con"><a href="" target="_blank"><%=i.province %></a>- <%=i.region %>
 		                      </div>
 		                      <div class="other">
 		                        <div class="con"> <%=i.room %>居</div>

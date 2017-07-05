@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.easyhousing.dao.BuildingInfoDao;
+import com.easyhousing.dao.BuildingPicDao;
 import com.easyhousing.dao.BuyHouseCommentDao;
 import com.easyhousing.dao.RentHouseCommentDao;
 import com.easyhousing.dao.RentHouseDao;
+import com.easyhousing.dao.RentHousePicDao;
 import com.easyhousing.model.BuildingInfo;
 import com.easyhousing.model.BuyHouseComment;
 import com.easyhousing.model.Collect;
@@ -25,11 +27,15 @@ public class CommentServiceImpl implements CommentService {
 	private RentHouseCommentDao rentHouseCommentDao;
 	@Autowired
 	private RentHouseDao rentHouseDao;
+	@Autowired
+	RentHousePicDao rentHousePicDao;
 	
 	@Autowired
 	private BuyHouseCommentDao buyHouseCommentDao;
 	@Autowired
 	private BuildingInfoDao buildingInfoDao;
+	@Autowired
+	BuildingPicDao buildingPicDao;
 
 	@Override
 	public List<Collect> selectAllRentHouseCommentByUserId(User u) {
@@ -48,6 +54,10 @@ public class CommentServiceImpl implements CommentService {
 			c.houseId = rentHouse.getRentHouseId();
 			c.price = rentHouse.getRentHousePrice();
 			c.room = rentHouse.getRentHouseRoom();
+			List<String> lp = rentHousePicDao.selectRentHousePicByRentHouseId(c.houseId);
+			if (lp.size() != 0)
+				c.picUrl = lp.get(0);
+			else c.picUrl = "";
 			
 			ret.add(c);
 		}
@@ -72,6 +82,10 @@ public class CommentServiceImpl implements CommentService {
 			c.name = bi.getBuildingName();
 			c.houseAddress = bi.getBuildingAddress();
 			c.price = bi.getBuildingReferencePrice();
+			List<String> lp = buildingPicDao.selectBuildingPicByBuildingId(c.houseId);
+			if (lp.size() != 0)
+				c.picUrl = lp.get(0);
+			else c.picUrl = "";
 			
 			ret.add(c);
 		}

@@ -813,12 +813,11 @@
            			%>
            			<li style="width: 750px" style="display: block">
 	                <div class="list" style="display: block">
-	                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+	                  <div class="pic-panel"><a target="_blank" href="">
 	                    <img
-	                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-	                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+	                      data-original=<%=c.picUrl %>
+	                      src=<%=c.picUrl %>
 	                      class="lj-lazy"
-	                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
 	                      style="display: inline;"> </a>
 	                  <br><br>
 	
@@ -835,7 +834,7 @@
 	                  </div>
 	                  <div class="info-panel" style="float: left">
 	                    <h2><a target="_blank"
-	                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"><%=c.name %> </a>
+	                           href=""><%=c.name %> </a>
 	                       <form method="post" action=${pageContext.request.contextPath}/userCancelBuildingComment.do>
 	                       <input type="hidden" name="buyHouseCommentId" value="<%=c.commentId %>"></input>
 	                      <button type="submit" class="btn btn-danger" style="float: right">删除评论</button>
@@ -843,7 +842,7 @@
 	                    </h2>
 	
 	                    <div class="col-1">
-	                      <div class="con"><a href="http://sh.fang.lianjia.com/jiading" target="_blank"><%=c.houseAddress %></a>-<%=c.decoration %>
+	                      <div class="con"><a href="" target="_blank"><%=c.houseAddress %></a>-<%=c.decoration %>
 	                      </div>
 	                      <div class="other">
 	                        <div class="con"> <%=c.room %>居</div>
@@ -877,12 +876,11 @@
             		%>
             		 <li style="width: 750px" style="display: block">
 	                <div class="list" style="display: block">
-	                  <div class="pic-panel"><a target="_blank" href="http://sh.fang.lianjia.com/detail/shanghaivillabs">
+	                  <div class="pic-panel"><a target="_blank" href="">
 	                    <img
-	                      data-original="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
-	                      src="http://cdn1.dooioo.com/fetch/vp/yishou/ptgi/300x225/20160714/f4bfb6bd-ce65-4fd9-bcf3-19357581705f.jpg"
+	                      data-original=<%=c.picUrl %>
+	                      src=<%=c.picUrl %>
 	                      class="lj-lazy"
-	                      onerror="this.src='http://user.sh.lianjia.com/static/img/default_block.png'; this.onerror=null;"
 	                      style="display: inline;"> </a>
 	                    <br><br>
 	
@@ -900,7 +898,7 @@
 	
 	                  <div class="info-panel" style="float: left">
 	                    <h2><a target="_blank"
-	                           href="http://sh.fang.lianjia.com/detail/shanghaivillabs"><%=c.name %> </a>
+	                           href=""><%=c.name %> </a>
 	                      <form method="post" action=${pageContext.request.contextPath}/userCancelRentComment.do>
 	                       <input type="hidden" name="rentHouseCommentId" value="<%=c.commentId %>"></input>
 	                      <button type="submit" class="btn btn-danger" style="float: right">删除评论</button>

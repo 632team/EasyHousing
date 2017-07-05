@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.easyhousing.dao.BuildingInfoDao;
+import com.easyhousing.dao.BuildingPicDao;
 import com.easyhousing.dao.RentHouseDao;
+import com.easyhousing.dao.RentHousePicDao;
 import com.easyhousing.dao.UserCollectBuildingDao;
 import com.easyhousing.dao.UserCollectRentHouseDao;
 import com.easyhousing.model.BuildingInfo;
@@ -25,11 +27,15 @@ public class UserCollectServiceImpl implements UserCollectService {
 	UserCollectRentHouseDao userCollectRentHouseDao;
 	@Autowired
 	RentHouseDao rentHouseDao;
+	@Autowired
+	RentHousePicDao rentHousePicDao;
 	
 	@Autowired
 	UserCollectBuildingDao userCollectBuildingDao;
 	@Autowired
 	BuildingInfoDao buildingInfoDao;
+	@Autowired
+	BuildingPicDao buildingPicDao;
 
 	@Override
 	public List<Collect> selectUserCollectRentHouse(User u) {
@@ -46,6 +52,10 @@ public class UserCollectServiceImpl implements UserCollectService {
 			c.houseId = rentHouse.getRentHouseId();
 			c.price = rentHouse.getRentHousePrice();
 			c.room = rentHouse.getRentHouseRoom();
+			List<String> lp = rentHousePicDao.selectRentHousePicByRentHouseId(c.houseId);
+			if (lp.size() != 0)
+				c.picUrl = lp.get(0);
+			else c.picUrl = "";
 			ret.add(c);
 		}
 		return ret;
@@ -69,7 +79,10 @@ public class UserCollectServiceImpl implements UserCollectService {
 			c.houseAddress = bi.getBuildingAddress();
 			c.price = bi.getBuildingReferencePrice();
 			c.houseId = bi.getBuildingId();
-			
+			List<String> lp = buildingPicDao.selectBuildingPicByBuildingId(c.houseId);
+			if (lp.size() != 0)
+				c.picUrl = lp.get(0);
+			else c.picUrl = "";
 			ret.add(c);
 		}
 		return ret;
