@@ -36,7 +36,8 @@ public class UserCollectServiceImpl implements UserCollectService {
 	BuildingInfoDao buildingInfoDao;
 	@Autowired
 	BuildingPicDao buildingPicDao;
-
+	
+	// Collect用于将相关ID得到的信息记录下来用于后期页面展示
 	@Override
 	public List<Collect> selectUserCollectRentHouse(User u) {
 		UserCollectRentHouse r = new UserCollectRentHouse();
@@ -60,7 +61,8 @@ public class UserCollectServiceImpl implements UserCollectService {
 		}
 		return ret;
 	}
-
+	
+	// Collect用于将相关ID得到的信息记录下来用于后期页面展示
 	@Override
 	public List<Collect> selectUserCollectBuilding(User u) {
 		UserCollectBuilding b = new UserCollectBuilding();

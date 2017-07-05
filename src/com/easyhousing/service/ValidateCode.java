@@ -3,30 +3,25 @@ package com.easyhousing.service;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
+/**
+ * éªŒè¯ç æ‰€éœ€æœåŠ¡
+ */
+
 public interface ValidateCode {
 	
 	 public String generateTextCode();
 	 /**
-	  * ÒÑÓĞÑéÖ¤Âë£¬Éú³ÉÑéÖ¤ÂëÍ¼Æ¬
-	  * 
-	  * @param textCode
-	  *            ÎÄ±¾ÑéÖ¤Âë
-	  * @param width
-	  *            Í¼Æ¬¿í¶È
-	  * @param height
-	  *            Í¼Æ¬¸ß¶È
-	  * @param interLine
-	  *            Í¼Æ¬ÖĞ¸ÉÈÅÏßµÄÌõÊı
-	  * @param randomLocation
-	  *            Ã¿¸ö×Ö·ûµÄ¸ßµÍÎ»ÖÃÊÇ·ñËæ»ú
-	  * @param backColor
-	  *            Í¼Æ¬ÑÕÉ«£¬ÈôÎªnull£¬Ôò²ÉÓÃËæ»úÑÕÉ«
-	  * @param foreColor
-	  *            ×ÖÌåÑÕÉ«£¬ÈôÎªnull£¬Ôò²ÉÓÃËæ»úÑÕÉ«
-	  * @param lineColor
-	  *            ¸ÉÈÅÏßÑÕÉ«£¬ÈôÎªnull£¬Ôò²ÉÓÃËæ»úÑÕÉ«
-	  * @return Í¼Æ¬»º´æ¶ÔÏó
-	 */
+     * å·²æœ‰éªŒè¯ç ,ç”ŸæˆéªŒè¯ç å›¾ç‰‡
+     * @param textCode       æ–‡æœ¬éªŒè¯ç 
+     * @param width          å›¾ç‰‡å®½åº¦(æ³¨æ„æ­¤å®½åº¦è‹¥è¿‡å°,å®¹æ˜“é€ æˆéªŒè¯ç æ–‡æœ¬æ˜¾ç¤ºä¸å…¨,å¦‚4ä¸ªå­—ç¬¦çš„æ–‡æœ¬å¯ä½¿ç”¨85åˆ°90çš„å®½åº¦)
+     * @param height         å›¾ç‰‡é«˜åº¦
+     * @param interLine      å›¾ç‰‡ä¸­å¹²æ‰°çº¿çš„æ¡æ•°
+     * @param randomLocation æ¯ä¸ªå­—ç¬¦çš„é«˜ä½ä½ç½®æ˜¯å¦éšæœº
+     * @param backColor      å›¾ç‰‡é¢œè‰²,è‹¥ä¸ºnullåˆ™è¡¨ç¤ºé‡‡ç”¨éšæœºé¢œè‰²
+     * @param foreColor      å­—ä½“é¢œè‰²,è‹¥ä¸ºnullåˆ™è¡¨ç¤ºé‡‡ç”¨éšæœºé¢œè‰²
+     * @param lineColor      å¹²æ‰°çº¿é¢œè‰²,è‹¥ä¸ºnullåˆ™è¡¨ç¤ºé‡‡ç”¨éšæœºé¢œè‰²
+     * @return å›¾ç‰‡ç¼“å­˜å¯¹è±¡
+     */ 
 	 public BufferedImage generateImageCode(String textCode, int width, int height, int interLine,
 	            boolean randomLocation, Color backColor, Color foreColor, Color lineColor);
 	 

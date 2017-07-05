@@ -45,7 +45,9 @@ import com.easyhousing.service.RentHouseCollect;
 import com.easyhousing.service.UserCollectService;
 import com.easyhousing.service.UserService;
 import com.easyhousing.util.Tool;
-
+/**
+ * 个人中心、登录、注册控制
+ */
 @Controller
 public class UserController {
 	
@@ -79,9 +81,11 @@ public class UserController {
 	@Autowired
 	private RentHouseCollect rentHouseCollect;
 	
+	// 登录处理
 	@RequestMapping(value="login.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView login(User u, HttpSession httpSession) {
 		ModelAndView modelAndView = new ModelAndView();
+		// 登录校验，提示相关信息
 		if (u.getUsername() == null && u.getUserPassword() == null) {
 			modelAndView.setViewName("logIn");
 			return modelAndView;
@@ -99,6 +103,7 @@ public class UserController {
 		return modelAndView;
 	}
 	
+	// 注册处理
 	@RequestMapping(value = "register.do", method={RequestMethod.GET,RequestMethod.POST}, produces = "text/html; charset=utf-8")
     public ModelAndView register(HttpServletRequest request, Register u) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -113,6 +118,7 @@ public class UserController {
 		modelAndView.addObject("registerValidateCode", u.getRegisterValidateCode());
 		
 		String correctValidateCode = (String)request.getSession().getAttribute("validateCode");
+		// 注册相关校验
 		if(!correctValidateCode.equals(u.getRegisterValidateCode())) {
 			modelAndView.addObject("failuremessage", "验证码错误！");
 			modelAndView.setViewName("register");
@@ -153,7 +159,7 @@ public class UserController {
 		User nowu = new User();
 		nowu.setUsername(u.getUsername());
 		nowu.setUserPassword(u.getUserPassword());
-		nowu.setUserPhoto("http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png");
+		nowu.setUserPhoto("http://os8z6i0zb.bkt.clouddn.com/defaultPhoto.png"); // 初始默认用户头像为默认头像
 		
 		User user = userService.login(nowu);
 		if (user == null) {
@@ -169,17 +175,18 @@ public class UserController {
 		}
     }
 	
+	// 用户中心处理，预先获得所有数据，使得后期页面只需要使用链接跳转，加快速度，优化体验
 	@RequestMapping(value="userCenter.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String userCenter(HttpSession s) {
 		User user = (User) s.getAttribute("user");
 		
-		// 我的收藏
+		// 获取我的收藏列表
 		List<Collect> userCollectBuilding = userCollectService.selectUserCollectBuilding(user);
 		List<Collect> userCollectRentHouse = userCollectService.selectUserCollectRentHouse(user);
 		s.setAttribute("userCollectBuilding", userCollectBuilding);
 		s.setAttribute("userCollectRentHouse", userCollectRentHouse);
 		
-		// 我的房子
+		// 获取我的房子列表
 		List<RentHouse_Characteristics> rentHouse_Characteristics = rentHouse_CharacteristicsDao.selectAllByUserId(user.getUserId());
 		List<Application> rentHouseApplication = new ArrayList<>();
 		for (RentHouse_Characteristics i: rentHouse_Characteristics) {
@@ -197,19 +204,19 @@ public class UserController {
 		}
 		s.setAttribute("rentHouseApplication", rentHouseApplication);
 		
-		// 我的评论
+		// 获取我的评论列表
 		List<Collect> rentHouseComment = commentService.selectAllRentHouseCommentByUserId(user);
 		List<Collect> buyHouseComment = commentService.selectAllBuildingCommentByUserId(user);
 		s.setAttribute("rentHouseComment", rentHouseComment);
 		s.setAttribute("buyHouseComment", buyHouseComment);
 		
-		// 我的申请
+		// 我的申请（后期发现这个功能不需要，只需线下联系即可）
 		// List<Order> orderBuilding = orderService.selectAllBuildingByUserId(user);
 //		List<Order> orderRentHouse = orderService.selectAllRentHouseByUserId(user);
 //		s.setAttribute("orderBuilding", orderBuilding);
 //		s.setAttribute("orderRentHouse", orderRentHouse);
 		
-		// 成交记录
+		// 获取我的成交记录列表
 		List<Deal> buildingDeal = dealService.selectAllBuildingDeal(user);
 		List<Deal> rentHouseDeal = dealService.selectAllRentHouseDeal(user);
 		s.setAttribute("buildingDeal", buildingDeal);
@@ -218,6 +225,7 @@ public class UserController {
 		return "/MyHome/userCenter";
 	}
 	
+	// 委托房屋发布模块
 	@RequestMapping(value="sendRentHouse.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView sendRentHouse(HttpServletRequest request, RentHouse u) throws IllegalStateException, IOException {
 		HttpSession s = request.getSession();
@@ -245,7 +253,7 @@ public class UserController {
 			lap.add(in);
 			s.setAttribute("rentHouseApplication", lap);
 			
-			//得到文件
+			// 上传租房图片
 			String path = request.getSession().getServletContext().getRealPath("upload");  
 			MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
 			Iterator iter=multiRequest.getFileNames(); 
@@ -262,9 +270,11 @@ public class UserController {
 		        String filePath = path + "\\" + fileName;
 	        	System.err.println(filePath);
 	        	String name = new Date().toInstant().toString();
-	        	new Tool().upload(filePath, name);
+	        	// 使用Date作为名字得以唯一确定图片。因为七牛云删除图片再上传有问题，暂且这么解决
+	        	new Tool().upload(filePath, name); // 上传到七牛云
 	        	
 	        	RentHousePic rhp = new RentHousePic();
+	        	// 我的七牛云默认地址前缀
 	        	rhp.setPicUrl(String.valueOf("http://os8z6i0zb.bkt.clouddn.com/" + name));
 	        	rhp.setInsertTime(new Date());
 	        	rhp.setRentHouseId(u.getRentHouseId());
@@ -276,6 +286,7 @@ public class UserController {
 		return modelAndView;
 	}
 	
+	// 修改个人信息
 	@RequestMapping(value="changeInfo.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView changeInfo(HttpSession s, User u) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -299,6 +310,7 @@ public class UserController {
 		return modelAndView;
 	}
 	
+	// 密码修改
 	@RequestMapping(value="changePwd.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView changePwd(HttpSession s, User u) { // 使用User u的name作为密码，username作为新密码，useremail作为确认新密码
 		ModelAndView modelAndView = new ModelAndView();
@@ -322,6 +334,7 @@ public class UserController {
 		return modelAndView;
 	}
 	
+	// 修改头像
 	@RequestMapping(value="changePhoto.do", method={RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public ModelAndView changePhoto(HttpServletRequest request) throws IllegalStateException, IOException {
@@ -358,18 +371,20 @@ public class UserController {
 		return modelAndView;
 	}
 	
-	
+	// 注销登录
 	@RequestMapping(value="logout.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String logout(HttpSession s) {
-		s.removeAttribute("user");
+		s.removeAttribute("user"); // 注销session中的用户属性
 		return "homepage";
 	}
 	
+	// 取消租房收藏
 	@RequestMapping(value="userCancelRentCollect.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String userCancelRentCollect(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
 		int rentHouseId = 0;
+		// 得到cookies中的对应id来删除
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
 			String value = iCookie.getValue();
@@ -387,11 +402,13 @@ public class UserController {
 		return "/MyHome/userCenter";
 	}
 	
+	// 取消楼盘收藏
 	@RequestMapping(value="userCancelBuildingCollect.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String userCancelBuildingCollect(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Cookie[] cookies = request.getCookies();
 		int buildingId = 0;
+		// 得到cookies中的对应id来删除
 		for(Cookie iCookie : cookies) {
 			String name = iCookie.getName();
 			String value = iCookie.getValue();
@@ -412,6 +429,7 @@ public class UserController {
 		return "/MyHome/userCenter";
 	}
 	
+	// 楼盘详情页面的取消收藏
 	@RequestMapping(value="userCancelBuildingCollectDetail.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String userCancelBuildingCollectDetail(HttpServletRequest request) {
 		HttpSession s = request.getSession();
@@ -430,6 +448,7 @@ public class UserController {
 	@Autowired
 	private RentHouseCommentDao rentHouseCommentDao;
 	
+	// 删除租房评论
 	@RequestMapping(value="userCancelRentComment.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String userCancelRentComment(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -451,6 +470,7 @@ public class UserController {
 	@Autowired
 	private BuyHouseCommentDao buyHouseCommentDao;
 	
+	// 删除新房评论
 	@RequestMapping(value="userCancelBuildingComment.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String userCancelBuildingComment(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -465,10 +485,11 @@ public class UserController {
 		u.setBuyHouseCommentId(buyHouseCommentId);
 		buyHouseCommentDao.deleteBuyHouseComment(u);
 		
+		// 删除后重新获得新房评论列表
 		List<Collect> userCollectBuilding = userCollectService.selectUserCollectBuilding(user);
 		session.setAttribute("userCollectBuilding", userCollectBuilding);
 		
-		// 我的评论
+		// 删除后重新获得租房评论列表
 		List<Collect> buyHouseComment = commentService.selectAllBuildingCommentByUserId(user);
 		session.setAttribute("buyHouseComment", buyHouseComment);
 		

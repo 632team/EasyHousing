@@ -24,6 +24,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	RentHouseDao rentHouseDao;
 	
+	// Order记录网页所需展示的信息
 	@Override
 	public List<Order> selectAllBuildingByUserId(User u) {
 		OrderBuilding o = new OrderBuilding();
@@ -52,7 +53,8 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return res;
 	}
-
+	
+	// Order记录网页所需展示的信息
 	@Override
 	public List<Order> selectAllRentHouseByUserId(User u) {
 		OrderRentHouse o = new OrderRentHouse();

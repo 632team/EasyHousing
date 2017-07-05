@@ -19,7 +19,7 @@ import java.util.Properties;
 /**
  * 工具类
  * 1.发送密码到指定邮箱，入口：sendPassword(String receiveMailAccount, String password)
- * 2.上传图片到七牛云：upload(String FilePath, String newPhotoName) !newPhotoName必须添加后缀!
+ * 2.上传图片到七牛云：upload(String FilePath, String newPhotoName) !newPhotoName可以不加数据类型后缀，随意!
  */
 public class Tool {
 

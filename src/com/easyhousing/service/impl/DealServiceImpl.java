@@ -35,7 +35,8 @@ public class DealServiceImpl implements DealService {
 	
 	@Autowired
 	private AgentDao agentDao;
-
+	
+	// Deal记录各种id对应的信息，用于后期的网页显示
 	@Override
 	public List<Deal> selectAllBuildingDeal(User u) {
 		List<BuildingDeal> li = buildingDealDao.selectAllByUserId(u.getUserId());
@@ -62,7 +63,8 @@ public class DealServiceImpl implements DealService {
 		}
 		return ret;
 	}
-
+	
+	// Deal记录各种id对应的信息，用于后期的网页显示
 	@Override
 	public List<Deal> selectAllRentHouseDeal(User u) {
 		List<RentHouseDeal> li = rentHouseDealDao.selectAllByUserId(u.getUserId());

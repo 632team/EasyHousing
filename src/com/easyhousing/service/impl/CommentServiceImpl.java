@@ -36,7 +36,8 @@ public class CommentServiceImpl implements CommentService {
 	private BuildingInfoDao buildingInfoDao;
 	@Autowired
 	BuildingPicDao buildingPicDao;
-
+	
+	// Collect用于将对应ID对应的文字信息记录下来，便于网页的显示
 	@Override
 	public List<Collect> selectAllRentHouseCommentByUserId(User u) {
 		List<RentHouseComment> li = rentHouseCommentDao.selectAllByUserId(u.getUserId());
@@ -63,7 +64,8 @@ public class CommentServiceImpl implements CommentService {
 		}
 		return ret;
 	}
-
+	
+	// Collect用于将对应ID对应的文字信息记录下来，便于网页的显示
 	@Override
 	public List<Collect> selectAllBuildingCommentByUserId(User u) {
 		List<BuyHouseComment> li = buyHouseCommentDao.selectAllByUserId(u.getUserId());

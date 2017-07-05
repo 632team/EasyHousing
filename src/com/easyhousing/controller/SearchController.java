@@ -17,7 +17,9 @@ import com.easyhousing.model.BuildingInfo;
 import com.easyhousing.model.RentHouse;
 import com.easyhousing.service.BuildingSearch;
 import com.easyhousing.service.RentHouseSearch;
-
+/**
+ * 搜索框控制
+ */
 @Controller
 public class SearchController {
 	
@@ -33,19 +35,21 @@ public class SearchController {
 	@Autowired
 	private RentHousePicDao rentHousePicDao;
 	
+	// 首页、租房、新房以及详情页面的搜索框控制
 	@RequestMapping(value="globalSearch.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String search(HttpServletRequest request) {
-		String tag = request.getParameter("which");
-		String content = request.getParameter("content");
+		String tag = request.getParameter("which"); // 得到搜索标签，是租房还是新房
+		String content = request.getParameter("content"); // 得到搜索内容
 		HttpSession session = request.getSession();
 		
 		if (tag.equals("新房")) {
 			session.setAttribute("buildingAddress", content);
-			String strlowPrice = (String)session.getAttribute("buildingLowPrice");
-			String strhighPrice = (String)session.getAttribute("buildingHighPrice");
-			String strclass1 = (String)session.getAttribute("buildingClass1");
-			String strclass2 = (String)session.getAttribute("buildingClass2");
+			String strlowPrice = (String)session.getAttribute("buildingLowPrice"); // 最低价
+			String strhighPrice = (String)session.getAttribute("buildingHighPrice"); // 最高价
+			String strclass1 = (String)session.getAttribute("buildingClass1"); // 搜索类别，class1对应区域选择处
+			String strclass2 = (String)session.getAttribute("buildingClass2"); // 搜索类别：class2对应价格点击区域
 			
+			// 非空判定
 			if(strlowPrice == null) {
 				session.setAttribute("buildingLowPrice", "0");
 			}
@@ -54,12 +58,12 @@ public class SearchController {
 			}
 
 			if(strclass1 == null) {
-				session.setAttribute("buildingClass1", "0");
+				session.setAttribute("buildingClass1", "0"); // 0对应页面的“不限”区域
 			}
 			if(strclass2 == null) {
-				session.setAttribute("buildingClass2", "11");
+				session.setAttribute("buildingClass2", "11"); // 11对应价格的“不限”区域
 			}
-
+			
 			String address = (String)session.getAttribute("buildingAddress");
 			int lowPrice = Integer.parseInt((String)session.getAttribute("buildingLowPrice"));
 			int highPrice = Integer.parseInt((String)session.getAttribute("buildingHighPrice"));
@@ -67,6 +71,7 @@ public class SearchController {
 			List<BuildingInfo>list = buildingSearch.searchBuilding(address, lowPrice, highPrice);
 			
 			List<String> buildingPicList = new ArrayList<>();
+			// 获取每个房屋对应的第一个图片作为显示
 			for (BuildingInfo i: list) {
 				List<String> t = buildingPicDao.selectBuildingPicByBuildingId(i.getBuildingId());
 				if (t.size() == 0) {
@@ -80,8 +85,8 @@ public class SearchController {
 			session.setAttribute("buildingPicList", buildingPicList);
 			
 			session.setAttribute("buildingList", list);
-			session.setAttribute("buildingSt", 0);
-			session.setAttribute("buildingListSize", list.size());
+			session.setAttribute("buildingSt", 0); // 房屋的遍历开始下标，用于分页
+			session.setAttribute("buildingListSize", list.size()); // 房屋个数，用于分页结尾标记
 			for(BuildingInfo i : list) {
 				System.err.println(i.getBuildingAddress());
 				System.err.println(list.size());
@@ -97,7 +102,7 @@ public class SearchController {
 		String strhighRoomNum = (String)session.getAttribute("highRoomNum");
 		String strclass1 = (String)session.getAttribute("class1");
 		String strclass2 = (String)session.getAttribute("class2");
-		String strclass3 = (String)session.getAttribute("class3");
+		String strclass3 = (String)session.getAttribute("class3"); // 对应选择居室个数区域
 
 		if(strlowPrice == null) {
 			session.setAttribute("lowPrice", "0");
@@ -118,7 +123,7 @@ public class SearchController {
 			session.setAttribute("class2", "11");
 		}
 		if(strclass3 == null) {
-			session.setAttribute("class3", "21");
+			session.setAttribute("class3", "21"); // 21为居室数量“不限”
 		}
 		String address = (String)session.getAttribute("address");
 		int lowPrice = Integer.parseInt((String)session.getAttribute("lowPrice"));
@@ -127,6 +132,7 @@ public class SearchController {
 		int highRoomNum = Integer.parseInt((String)session.getAttribute("highRoomNum"));
 		List<RentHouse>list = rentHouseSearch.searchRentHouse(address, lowPrice, highPrice, lowRoomNum, highRoomNum);
 		
+		// 获取每个房屋对应的第一个图片作为显示
 		List<String> rentHousePicList = new ArrayList<>();
 		for (RentHouse i : list) {
 			List<String> t = rentHousePicDao.selectRentHousePicByRentHouseId(i.getRentHouseId());
@@ -138,8 +144,8 @@ public class SearchController {
 		session.setAttribute("rentHousePicList", rentHousePicList);
 		
 		session.setAttribute("list", list);
-		session.setAttribute("st", 0);
-		session.setAttribute("listSize", list.size());
+		session.setAttribute("st", 0); // 房屋的遍历开始下标，用于分页
+		session.setAttribute("listSize", list.size()); // 房屋个数，用于分页结尾标记
 		for(RentHouse i : list) {
 			System.err.println(i.getRentHouseAddress());
 			System.err.println(list.size());
@@ -148,6 +154,7 @@ public class SearchController {
 		return "rentWindow";
 	}
 	
+	// 地图搜索模块
 	@RequestMapping(value="mapSearch.do", method={RequestMethod.GET,RequestMethod.POST})
 	public String mapSearch(HttpServletRequest request) {
 		String tag = request.getParameter("which");
@@ -156,11 +163,12 @@ public class SearchController {
 		
 		if (tag.equals("新房")) {
 			session.setAttribute("buildingAddress", content);
-			String strlowPrice = (String)session.getAttribute("buildingLowPrice");
-			String strhighPrice = (String)session.getAttribute("buildingHighPrice");
-			String strclass1 = (String)session.getAttribute("buildingClass1");
-			String strclass2 = (String)session.getAttribute("buildingClass2");
+			String strlowPrice = (String)session.getAttribute("buildingLowPrice"); // 最低价
+			String strhighPrice = (String)session.getAttribute("buildingHighPrice"); // 最高价
+			String strclass1 = (String)session.getAttribute("buildingClass1"); // 搜索类别，class1对应区域选择处
+			String strclass2 = (String)session.getAttribute("buildingClass2"); // 搜索类别：class2对应价格点击区域
 			
+			// 非空判定
 			if(strlowPrice == null) {
 				session.setAttribute("buildingLowPrice", "0");
 			}
@@ -169,12 +177,12 @@ public class SearchController {
 			}
 
 			if(strclass1 == null) {
-				session.setAttribute("buildingClass1", "0");
+				session.setAttribute("buildingClass1", "0"); // 0对应页面的“不限”区域
 			}
 			if(strclass2 == null) {
-				session.setAttribute("buildingClass2", "11");
+				session.setAttribute("buildingClass2", "11"); // 11对应价格的“不限”区域
 			}
-
+			
 			String address = (String)session.getAttribute("buildingAddress");
 			int lowPrice = Integer.parseInt((String)session.getAttribute("buildingLowPrice"));
 			int highPrice = Integer.parseInt((String)session.getAttribute("buildingHighPrice"));
@@ -182,6 +190,7 @@ public class SearchController {
 			List<BuildingInfo>list = buildingSearch.searchBuilding(address, lowPrice, highPrice);
 			
 			List<String> buildingPicList = new ArrayList<>();
+			// 获取每个房屋对应的第一个图片作为显示
 			for (BuildingInfo i: list) {
 				List<String> t = buildingPicDao.selectBuildingPicByBuildingId(i.getBuildingId());
 				if (t.size() == 0) {
@@ -195,8 +204,8 @@ public class SearchController {
 			session.setAttribute("buildingPicList", buildingPicList);
 			
 			session.setAttribute("buildingList", list);
-			session.setAttribute("buildingSt", 0);
-			session.setAttribute("buildingListSize", list.size());
+			session.setAttribute("buildingSt", 0); // 房屋的遍历开始下标，用于分页
+			session.setAttribute("buildingListSize", list.size()); // 房屋个数，用于分页结尾标记
 			for(BuildingInfo i : list) {
 				System.err.println(i.getBuildingAddress());
 				System.err.println(list.size());
@@ -214,7 +223,7 @@ public class SearchController {
 		String strhighRoomNum = (String)session.getAttribute("highRoomNum");
 		String strclass1 = (String)session.getAttribute("class1");
 		String strclass2 = (String)session.getAttribute("class2");
-		String strclass3 = (String)session.getAttribute("class3");
+		String strclass3 = (String)session.getAttribute("class3"); // 对应选择居室个数区域
 
 		if(strlowPrice == null) {
 			session.setAttribute("lowPrice", "0");
@@ -235,7 +244,7 @@ public class SearchController {
 			session.setAttribute("class2", "11");
 		}
 		if(strclass3 == null) {
-			session.setAttribute("class3", "21");
+			session.setAttribute("class3", "21"); // 21为居室数量“不限”
 		}
 		String address = (String)session.getAttribute("address");
 		int lowPrice = Integer.parseInt((String)session.getAttribute("lowPrice"));
@@ -244,6 +253,7 @@ public class SearchController {
 		int highRoomNum = Integer.parseInt((String)session.getAttribute("highRoomNum"));
 		List<RentHouse>list = rentHouseSearch.searchRentHouse(address, lowPrice, highPrice, lowRoomNum, highRoomNum);
 		
+		// 获取每个房屋对应的第一个图片作为显示
 		List<String> rentHousePicList = new ArrayList<>();
 		for (RentHouse i : list) {
 			List<String> t = rentHousePicDao.selectRentHousePicByRentHouseId(i.getRentHouseId());
@@ -255,8 +265,8 @@ public class SearchController {
 		session.setAttribute("rentHousePicList", rentHousePicList);
 		
 		session.setAttribute("list", list);
-		session.setAttribute("st", 0);
-		session.setAttribute("listSize", list.size());
+		session.setAttribute("st", 0); // 房屋的遍历开始下标，用于分页
+		session.setAttribute("listSize", list.size()); // 房屋个数，用于分页结尾标记
 		for(RentHouse i : list) {
 			System.err.println(i.getRentHouseAddress());
 			System.err.println(list.size());

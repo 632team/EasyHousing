@@ -37,15 +37,16 @@ public class ValidateCodeImpl implements ValidateCode{
 	@Override
 	public BufferedImage generateImageCode(String textCode, int width, int height, int interLine,
 			boolean randomLocation, Color backColor, Color foreColor, Color lineColor) {
-		
+		//åˆ›å»ºå†…å­˜å›¾åƒ
 		BufferedImage bim = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		//è·å–å›¾å½¢ä¸Šä¸‹æ–‡ 
 		Graphics g = bim.getGraphics();
 
-		// »­±³¾°Í¼
+		//ç”»èƒŒæ™¯å›¾
 		g.setColor(backColor == null ? getRandomColor() : backColor);
 		g.fillRect(0, 0, width, height);
 
-		// »­¸ÉÈÅÏß
+		//ç”»å¹²æ‰°çº¿ 
 		Random r = new Random();
 		int x = 0, y = 0, x1 = width, y1 = 0;
 		for (int i = 0; i < interLine; i++) {
@@ -55,21 +56,21 @@ public class ValidateCodeImpl implements ValidateCode{
 			g.drawLine(x, y, x1, y1);
 		}
 
-		// Ğ´ÑéÖ¤Âë
+		// Ğ´ï¿½ï¿½Ö¤ï¿½ï¿½
 
 		// g.setColor(getRandomColor());
 		// g.setColor(isSimpleColor?Color.BLACK:Color.WHITE);
 
-		// ×ÖÌå´óĞ¡ÎªÍ¼Æ¬¸ß¶ÈµÄ80%
+		//å­—ä½“å¤§å°ä¸ºå›¾ç‰‡é«˜åº¦çš„80% 
 		int fsize = (int) (height * 0.8);
 		int fx = height - fsize;
 		int fy = fsize;
 
 		g.setFont(new Font("Default", Font.PLAIN, fsize));
 
-		// Ğ´ÑéÖ¤Âë×Ö·û
+		//å†™éªŒè¯ç å­—ç¬¦ 
 		for (int i = 0; i < textCode.length(); i++) {
-			fy = randomLocation ? (int) ((Math.random() * 0.3 + 0.6) * height) : fy;// Ã¿¸ö×Ö·û¸ßµÍÊÇ·ñËæ»ú
+			fy = randomLocation ? (int) ((Math.random() * 0.3 + 0.6) * height) : fy;// Ã¿ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ßµï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 			g.setColor(foreColor == null ? getRandomColor() : foreColor);
 			g.drawString(textCode.charAt(i) + "", fx, fy);
 			fx += fsize * 0.9;
