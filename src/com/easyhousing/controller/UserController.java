@@ -20,18 +20,24 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.easyhousing.dao.BuyHouseCommentDao;
+import com.easyhousing.dao.RentHouseCommentDao;
 import com.easyhousing.dao.RentHouseDao;
 import com.easyhousing.dao.RentHousePicDao;
 import com.easyhousing.dao.RentHouse_CharacteristicsDao;
+import com.easyhousing.dao.UserCollectBuildingDao;
 import com.easyhousing.model.Application;
+import com.easyhousing.model.BuyHouseComment;
 import com.easyhousing.model.Collect;
 import com.easyhousing.model.Deal;
 import com.easyhousing.model.Order;
 import com.easyhousing.model.Register;
 import com.easyhousing.model.RentHouse;
+import com.easyhousing.model.RentHouseComment;
 import com.easyhousing.model.RentHousePic;
 import com.easyhousing.model.RentHouse_Characteristics;
 import com.easyhousing.model.User;
+import com.easyhousing.model.UserCollectBuilding;
 import com.easyhousing.service.CommentService;
 import com.easyhousing.service.DealService;
 import com.easyhousing.service.OrderService;
@@ -45,6 +51,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserCollectBuildingDao userCollectBuildingDao;
 	
 	@Autowired
 	private UserCollectService userCollectService;
@@ -195,10 +204,10 @@ public class UserController {
 		s.setAttribute("buyHouseComment", buyHouseComment);
 		
 		// 我的申请
-		List<Order> orderBuilding = orderService.selectAllBuildingByUserId(user);
-		List<Order> orderRentHouse = orderService.selectAllRentHouseByUserId(user);
-		s.setAttribute("orderBuilding", orderBuilding);
-		s.setAttribute("orderRentHouse", orderRentHouse);
+		// List<Order> orderBuilding = orderService.selectAllBuildingByUserId(user);
+//		List<Order> orderRentHouse = orderService.selectAllRentHouseByUserId(user);
+//		s.setAttribute("orderBuilding", orderBuilding);
+//		s.setAttribute("orderRentHouse", orderRentHouse);
 		
 		// 成交记录
 		List<Deal> buildingDeal = dealService.selectAllBuildingDeal(user);
@@ -374,6 +383,94 @@ public class UserController {
 		
 		List<Collect> userCollectRentHouse = userCollectService.selectUserCollectRentHouse(user);
 		session.setAttribute("userCollectRentHouse", userCollectRentHouse);
+		
+		return "/MyHome/userCenter";
+	}
+	
+	@RequestMapping(value="userCancelBuildingCollect.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String userCancelBuildingCollect(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Cookie[] cookies = request.getCookies();
+		int buildingId = 0;
+		for(Cookie iCookie : cookies) {
+			String name = iCookie.getName();
+			String value = iCookie.getValue();
+			if(name.equals("buildingId")) {
+				buildingId = Integer.parseInt(value);
+			}
+		}
+		User user = (User)session.getAttribute("user");
+		int userId = user.getUserId();
+		UserCollectBuilding ucb = new UserCollectBuilding();
+		ucb.setUserId(userId);
+		ucb.setBuildingId(buildingId);
+		userCollectBuildingDao.deleteUserCollectBuilding(ucb);
+		
+		List<Collect> userCollectBuilding = userCollectService.selectUserCollectBuilding(user);
+		session.setAttribute("userCollectBuilding", userCollectBuilding);
+		
+		return "/MyHome/userCenter";
+	}
+	
+	@RequestMapping(value="userCancelBuildingCollectDetail.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String userCancelBuildingCollectDetail(HttpServletRequest request) {
+		HttpSession s = request.getSession();
+		
+		User user = (User)s.getAttribute("user");
+		int userId = user.getUserId();
+		UserCollectBuilding ucb = new UserCollectBuilding();
+		ucb.setUserId(userId);
+		ucb.setBuildingId((Integer)s.getAttribute("buildingId"));
+		userCollectBuildingDao.deleteUserCollectBuilding(ucb);
+		s.setAttribute("collectYet", false);
+		
+		return "buildingDetail";
+	}
+	
+	@Autowired
+	private RentHouseCommentDao rentHouseCommentDao;
+	
+	@RequestMapping(value="userCancelRentComment.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String userCancelRentComment(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		int rentHouseCommentId = Integer.parseInt(request.getParameter("rentHouseCommentId"));
+
+		User user = (User)session.getAttribute("user");
+		RentHouseComment u = new RentHouseComment();
+		u.setRentHouseCommentId(rentHouseCommentId);
+		rentHouseCommentDao.deleteRentHouseComment(u);
+		
+		// 我的评论
+		List<Collect> rentHouseComment = commentService.selectAllRentHouseCommentByUserId(user);
+		session.setAttribute("rentHouseComment", rentHouseComment);
+		
+		return "/MyHome/userCenter";
+	}
+	
+	@Autowired
+	private BuyHouseCommentDao buyHouseCommentDao;
+	
+	@RequestMapping(value="userCancelBuildingComment.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String userCancelBuildingComment(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		int buyHouseCommentId = Integer.parseInt(request.getParameter("buyHouseCommentId"));
+		
+		//System.err.println(buyHouseCommentId);
+		
+		User user = (User)session.getAttribute("user");
+		
+		BuyHouseComment u = new BuyHouseComment();
+		u.setBuyHouseCommentId(buyHouseCommentId);
+		buyHouseCommentDao.deleteBuyHouseComment(u);
+		
+		List<Collect> userCollectBuilding = userCollectService.selectUserCollectBuilding(user);
+		session.setAttribute("userCollectBuilding", userCollectBuilding);
+		
+		// 我的评论
+		List<Collect> buyHouseComment = commentService.selectAllBuildingCommentByUserId(user);
+		session.setAttribute("buyHouseComment", buyHouseComment);
 		
 		return "/MyHome/userCenter";
 	}

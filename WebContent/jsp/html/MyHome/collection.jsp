@@ -602,6 +602,9 @@
   		function click(id) {
   			setCookie("rentHouseId", id, 365);
   		}
+  		function click2(id) {
+  			setCookie("buildingId", id, 365);
+  		}
   
   </script>
 </head>
@@ -664,7 +667,7 @@
           <li role="presentation" class="active"><a href=${pageContext.request.contextPath}/jsp/html/MyHome/collection.jsp>我的收藏</a></li>
           <li role="presentation"><a href=${pageContext.request.contextPath}/jsp/html/MyHome/myHouse.jsp>我的房子</a></li>
           <li role="presentation"><a href=${pageContext.request.contextPath}/jsp/html/MyHome/comment.jsp>我的评论</a></li>
-          <li role="presentation"><a href=${pageContext.request.contextPath}/jsp/html/MyHome/application.jsp>我的申请</a></li>
+          <!--<li role="presentation"><a href=${pageContext.request.contextPath}/jsp/html/MyHome/application.jsp>我的申请</a></li>-->
           <li role="presentation"><a href=${pageContext.request.contextPath}/jsp/html/MyHome/dealHistory.jsp>成交记录</a></li>
         </ul>
       </div>
@@ -701,7 +704,8 @@
                           <div class="info-panel" style="float: left">
                             <h2><a target="_blank"
                                    href="http://sh.fang.lianjia.com/detail/shanghaivillabs"> <%=tmp.name %> </a>
-                                  <button type="button" class="btn btn-danger" style="float: right">取消关注</button>
+                                   <a id=<%=tmp.houseId %> onclick="click2(this.id);" href=${pageContext.request.contextPath}/userCancelBuildingCollect.do>
+                                  <button type="button" class="btn btn-danger" style="float: right">取消关注</button></a>
                             </h2>
 
                             <div class="col-1">
@@ -721,7 +725,6 @@
                               class="num"><%=tmp.price %></span></span> <span class="price-pre"> 万元起</span></div>
                           </div>
                         </div>
-                        <a class="del-fav actDelFollow" index="349" style="display: none;">取消关注</a>
                         </li>
                     <%
             		}
@@ -775,7 +778,7 @@
 		                      class="num"><%=i.price %></span>	                        </span> <span class="price-pre"> 元/月</span></div>
 		                  </div>
 		                </div>
-		                <a class="del-fav actDelFollow" index="349" style="display: none;">取消关注</a></li>
+		                </li>
             			<%
             		}
             	}

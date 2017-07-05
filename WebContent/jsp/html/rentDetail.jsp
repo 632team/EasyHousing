@@ -1032,7 +1032,7 @@
   top: 0;
   left: 0;
   z-index: 1;
-  background: url(${pageContext.request.contextPath}/jsp/${pageContext.request.contextPath}/jsp/img/detail/loading.gif) center no-repeat;
+  background: url(${pageContext.request.contextPath}/jsp/img/detail/loading.gif) center no-repeat;
   }
   .overview .content {
   display: inline-block;
@@ -1082,7 +1082,7 @@
   position: absolute;
   right: -25px;
   top: -31px;
-  background: url(${pageContext.request.contextPath}/jsp/${pageContext.request.contextPath}/jsp/img/detail/isRemove.png) no-repeat;
+  background: url(${pageContext.request.contextPath}/jsp/img/detail/isRemove.png) no-repeat;
   }
   .zf-content .zf-room p.lf {
   float: left;
@@ -1251,7 +1251,7 @@
       <div class="container">
         <div class="fl l-txt">
           <i class="icon"></i>&nbsp;
-          <a href=${pageContext.request.contextPath}/rentHouse.do>易购房</a>
+          <a href=${pageContext.request.contextPath}/rentHouseSelect.do>易购房</a>
           <!-- <span class="stp">&nbsp;&gt;&nbsp;</span>
           <a href="https://cq.lianjia.com/zufang/">重庆租房</a>
           <span class="stp">&nbsp;&gt;&nbsp;</span>

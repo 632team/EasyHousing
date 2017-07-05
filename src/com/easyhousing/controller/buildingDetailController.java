@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.easyhousing.dao.BuildingPicDao;
 import com.easyhousing.dao.BuyHouseCommentDao;
+import com.easyhousing.dao.UserCollectBuildingDao;
 import com.easyhousing.dao.UserDao;
 import com.easyhousing.model.BuildingInfo;
 import com.easyhousing.model.BuyHouseComment;
 import com.easyhousing.model.Collect;
 import com.easyhousing.model.User;
+import com.easyhousing.model.UserCollectBuilding;
 import com.easyhousing.service.BuildingSearch;
 
 @Controller
@@ -33,6 +36,12 @@ public class buildingDetailController {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private UserCollectBuildingDao userCollectBuildingDao;
+	
+	@Autowired
+	private BuildingPicDao buildingPicDao;
 	
 	@RequestMapping(value="buildingDetail.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView buildingDetail(HttpServletRequest request) {
@@ -53,12 +62,23 @@ public class buildingDetailController {
 		
 
 		User user = (User)session.getAttribute("user");
+		boolean collectYet = false;
 
-		if(user != null)
+		if(user != null) {
 			System.err.println(user.getUserId());
+			UserCollectBuilding ucb = new UserCollectBuilding();
+			ucb.setUserId(user.getUserId());
+			for (UserCollectBuilding i : userCollectBuildingDao.selectAllByUserId(ucb)) {
+				if (i.getBuildingId() == buildingId) {
+					collectYet = true;
+					break;
+				}
+			}
+		}
 		System.err.println(buildingId);
 
 		session.setAttribute("buildingInfo", buildingInfo);
+		session.setAttribute("collectYet", collectYet);
 		
 		List<BuyHouseComment> lb = buyHouseCommentDao.selectAllByBuildingId(buildingId);
 		List<Collect> lc = new ArrayList<>();
@@ -74,6 +94,13 @@ public class buildingDetailController {
 		}
 		session.setAttribute("buildingUserComments", lc);
 		
+		List<String> t = buildingPicDao.selectBuildingPicByBuildingId(buildingId);
+		String buildingDetailPic = "";
+		if (t.size() != 0) {
+			buildingDetailPic = t.get(0);
+		}
+		session.setAttribute("buildingDetailPic", buildingDetailPic);
+		
 		modelAndView.setViewName("buildingDetail");
 		return modelAndView;
 	}
@@ -85,5 +112,24 @@ public class buildingDetailController {
 	    u.setBuildingId(((BuildingInfo)s.getAttribute("buildingInfo")).getBuildingId());
 		buyHouseCommentDao.insertBuyHouseComment(u);
 		return "Comment/loading";
+	}
+	
+	@RequestMapping(value="userBuildingCollect.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView userBuildingCollect(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession s = request.getSession();
+		int bid = (Integer)s.getAttribute("buildingId");
+		int uid = ((User)s.getAttribute("user")).getUserId();
+		
+		UserCollectBuilding ucb = new UserCollectBuilding();
+		ucb.setBuildingId(bid);
+		ucb.setUserId(uid);
+		ucb.setCollectTime(new Date());
+		
+		userCollectBuildingDao.insertUserCollectBuilding(ucb);
+		s.setAttribute("collectYet", true);
+		
+		modelAndView.setViewName("buildingDetail");
+		return modelAndView;
 	}
 }

@@ -68,6 +68,7 @@ public class UserCollectServiceImpl implements UserCollectService {
 			c.name = bi.getBuildingName();
 			c.houseAddress = bi.getBuildingAddress();
 			c.price = bi.getBuildingReferencePrice();
+			c.houseId = bi.getBuildingId();
 			
 			ret.add(c);
 		}

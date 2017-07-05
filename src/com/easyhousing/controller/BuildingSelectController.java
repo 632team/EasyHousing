@@ -66,7 +66,10 @@ public class BuildingSelectController {
 			if (t.size() == 0) {
 				buildingPicList.add("");
 			}
-			else buildingPicList.add(t.get(0));
+			else {
+				buildingPicList.add(t.get(0));
+				System.err.println(t.get(0));
+			}
 		}
 		session.setAttribute("buildingPicList", buildingPicList);
 		
