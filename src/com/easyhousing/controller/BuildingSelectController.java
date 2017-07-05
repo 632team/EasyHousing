@@ -101,6 +101,9 @@ public class BuildingSelectController {
 					String value;
 					if(strtemp.equals("buildingAddress")) {
 						value = unescape(iCookie.getValue());
+						if (value.equals("不限")) {
+							value = "";
+						}
 						session.setAttribute("buildingAddress", value);
 						System.err.println(value);
 					}

@@ -855,7 +855,7 @@
           </div>
           </form>
           <div class="subsh_r fr">
-            <a href="#" class="al">
+            <a href=${pageContext.request.contextPath}/jsp/html/mapHouse.jsp class="al">
               <span>
                 <b>地图找房</b>
                 <i>地图</i>
@@ -890,7 +890,7 @@
             	  out.print("mt on");
               else
             	  out.print("qy");
-              %>" id="0" onclick="clickArea1(this.id, '重庆');"> 不限 </a>
+              %>" id="0" onclick="clickArea1(this.id, '不限');"> 不限 </a>
               <a class="
               <%
               if(strtemp.equals("1"))
