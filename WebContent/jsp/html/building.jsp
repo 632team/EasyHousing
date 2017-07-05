@@ -759,11 +759,12 @@ List<BuildingInfo> list = (List<BuildingInfo>)s.getAttribute("buildingList");
         temp.style.display = "none";
       }
       $(function(){
-        $("#serchar .sel").click(function(){
-//          var temp = document.getElementById("searchName");
+    	  $("ul .sel").click(function(){
+        	var temp = document.getElementById("keyword");
+            temp.value = $(this).text();
 //          temp.innerHTML = $(this).text();
          // alert( $("span#searchName").html());
-          $("span#searchName").text($(this).text());
+          $("#searchName").text($(this).text());
         });
       });
     </script>
@@ -826,22 +827,24 @@ List<BuildingInfo> list = (List<BuildingInfo>)s.getAttribute("buildingList");
   <div class="wsrrent">
     <div class="container">
       <div class="subsh subsher">
-        <div class="subsh_l fl">
-          <div class="sd_sel fl">
-            <span id="searchName" onclick="showall()">新房</span>
+       <form action=${pageContext.request.contextPath}/globalSearch.do method="post" id="searchForm">
+          <div class="subsh_l fl">
+            <div class="sd_sel fl">
+            <input hidden=true id="keyword" value="新房" name="which"></input>
+              <span id="searchName" onclick="showall()">新房</span>
 				<ul id="serchar" onmouseleave="hideall()">
-					<!-- <li class="sel">二手房</li> -->
 					<li class="sel">新房</li>
 					<li class="sel">租房</li>
 				</ul>
+            </div>
+            <input type="text" name="content" placeholder="请输入小区、地铁、区域开始找房" class="text" id="autoSearchText" maxlength="20" autocomplete="off">
+            <div id="autoSearchItem" style="height: 285px; visibility: hidden;">
+              <ul class="menu_v"></ul>
+            </div>
+            <input type="button" value class="submit" id="btnSearch" onclick="document.getElementById('searchForm').submit();">
+            <input type="hidden" value="1" id="pageIndex">
           </div>
-          <input type="text" placeholder="请输入小区、地铁、区域开始找房" class="text" id="autoSearchText" maxlength="20" autocomplete="off">
-          <div id="autoSearchItem" style="height: 285px; visibility: hidden;">
-            <ul class="menu_v"></ul>
-          </div>
-          <input type="button" value class="submit" id="btnSearch" onclick="indexSerch()">
-          <input type="hidden" value="1" id="pageIndex">
-        </div>
+          </form>
         <div class="subsh_r fr">
           <a href="#" class="al">
               <span>

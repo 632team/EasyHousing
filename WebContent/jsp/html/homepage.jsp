@@ -525,13 +525,12 @@
 					<li class="sel">租房</li>
 				</ul>
             </div>
-            <input type="text" id="autoSearchText" placeholder="请输入位置开始找房" class="text" maxlength="20" autocomplete="off">
-            <div id="autoSearchItem" style="height:285px; visibility: hidden">
-            </div>
-            <input type="button" value onclick="indexSerch()" class="btn">
+            <input type="text" id="autoSearchText" placeholder="请输入位置开始找房" class="text" maxlength="20" autocomplete="off" name="content">
+            <div id="autoSearchItem" style="height:285px; visibility: hidden"></div>
+            <input type="button" value onclick="indexSerch()" class="btn" >
           </div>
           <div class="sh_r fr">
-            <a class="a1" onclick="document.getElementById('searchForm').submit();">开始找房</a>
+            <a class="a1" onclick="document.getElementById('searchForm').submit();" style="cursor:pointer;">开始找房</a>
           </div>
         </div>
       </div>

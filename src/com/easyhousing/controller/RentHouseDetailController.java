@@ -66,6 +66,13 @@ public class RentHouseDetailController {
 		System.err.println(rentHouse.getRentHouseId());
 		
 		List<String> rentHousePicList = rentHousePicUrlService.searchRentHousePicByRentHouseId(rentHouseId);
+		if (rentHousePicList != null && rentHousePicList.size() != 0) {
+			session.setAttribute("rentHousePic", rentHousePicList.get(0));
+		}
+		else {
+			session.setAttribute("rentHousePic", "");
+		}
+		
 		if(rentHousePicList == null) {
 			System.err.println("ctbb");
 		}
