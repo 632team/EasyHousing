@@ -1,31 +1,36 @@
+<%@page import="com.easyhousing.model.BuildingInfo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+HttpSession s = request.getSession();
+List<BuildingInfo> buildingInfoList = (List<BuildingInfo>)s.getAttribute("buildingInfoList"); 
+%>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="../../css/SystemUser/style.css">
-  <link rel="stylesheet" href="css/codemirror.css">
-  <link rel="stylesheet" href="css/ace.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/typeahead-bs2.min.js"></script>
-  <script src="js/jquery.dataTables.min.js"></script>
-  <script src="js/jquery.dataTables.bootstrap.js"></script>
-  <script src="js/H-ui.js"></script>
-  <script src="js/H-ui.admin.js"></script>
-  <script src="js/layer.js"></script>
-  <link rel="stylesheet" href="css/layer.css">
-  <script src="js/laydate.js"></script>
-  <link rel="stylesheet" href="css/laydate.css">
-  <link rel="stylesheet" href="css/laydate(1).css">
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/bootstrap.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/dataTables.bootstrap.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/style.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/codemirror.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/font-awesome.min.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/bootstrap.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/typeahead-bs2.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.dataTables.min.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/jquery.dataTables.bootstrap.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/H-ui.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/H-ui.admin.js></script>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/layer.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/layer.css>
+  <script src=${pageContext.request.contextPath}/jsp/html/SystemUser/js/laydate.js></script>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/laydate.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/laydate(1).css>
 
   <style>
     .dataTable th.sorting_desc:after {
@@ -34,8 +39,8 @@
       color: #307ecc;
     }
   </style>
-  <link rel="stylesheet" href="css/ace-rtl.min.css">
-  <link rel="stylesheet" href="css/ace-skins.min.css">
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace-rtl.min.css>
+  <link rel="stylesheet" href=${pageContext.request.contextPath}/jsp/html/SystemUser/css/ace-skins.min.css>
 
 
 </head>
@@ -60,7 +65,7 @@
         <div class="border clearfix" style="display: block">
                <span class="l_f">
                 <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加楼盘</a>
-                <a href="javascript:ovid()" class="btn btn-danger">批量删除</a>
+                <a class="btn btn-danger" onclick="deletePart();" href=${pageContext.request.contextPath}/managerBuildinginit.do>批量删除</a>
                </span>
           <span class="r_f">共：<b>2345</b>条</span>
         </div>
@@ -95,9 +100,6 @@
                     aria-label="装修" style="width: 100px;">装修情况
                 </th>
                 <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
-                    aria-label="小区" style="width: 100px;">小区
-                </th>
-                <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
                     aria-label="参考价" style="width: 100px;">参考价
                 </th>
                 <th width="120" tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
@@ -114,26 +116,33 @@
 
               </thead>
               <tbody>
+              <%
+              for(int i = 0; i < buildingInfoList.size(); i++) {
+            	  BuildingInfo ibuildingInfo = buildingInfoList.get(i); 
+              %>
               <tr role="row" class="odd">
-                <td><label><input type="checkbox"><span class="lbl"></span></label></td>
-                <td class="sorting_1" value="5">1</td>
+                <td><label><input type="checkbox" name="checkbox" id="<%=ibuildingInfo.getBuildingId()%>" value="<%=ibuildingInfo.getBuildingId()%>"><span class="lbl"></span></label></td>
+                <td class="sorting_1" value="5"><%=ibuildingInfo.getBuildingId() %></td>
                 <!--<td><u style="cursor:pointer" class="text-primary">20141791</u></td>-->
-                <td>国贸天悦佘山（二期）</td>
-                <td>[松江佘山]沉塔路勋业路交汇处</td>
-                <td>75</td>
-                <td>140</td>
-                <td>精装</td>
-                <td>佘北家园悦山庭</td>
-                <td>3000000</td>
-                <td>在售</td>
-                <td>2017-08-01</td>
+                <td><%=ibuildingInfo.getBuildingName() %></td>
+                <td><%=ibuildingInfo.getBuildingAddress() %></td>
+                <td><%=ibuildingInfo.getBuildingMinArea() %></td>
+                <td><%=ibuildingInfo.getBuildingMaxArea() %></td>
+                <td><%=ibuildingInfo.getBuildingDecoration() %></td>
+                
+                <td><%=ibuildingInfo.getBuildingReferencePrice() %></td>
+                <td><%=ibuildingInfo.getBuildingSaleState() %></td>
+                <td><%=ibuildingInfo.getBuildingTimeHanded() %></td>
                 <td class="td-manage">
 
-                  <a title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML  )">编辑</a>
+                  <a id="<%=ibuildingInfo.getBuildingId() %>" title="编辑" href="javascript:;" class="btn btn-xs btn-info" onclick="member_edit(this.parentNode.parentNode.cells[1].innerHTML,this.id)">编辑</a>
 
-                  <a title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
+                  <a id="<%=ibuildingInfo.getBuildingId() %>" title="删除" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML,this.id)">删除</a>
                 </td>
               </tr>
+              <%
+              }
+              %>
               </tbody>
 
 
@@ -152,69 +161,125 @@
   }
 </style>
 <div class="add_menber" id="add_menber_style" style="display:none">
-
+  <form action=${pageContext.request.contextPath}/adminAddBuilding.do id="addBuilding" enctype="multipart/form-data" method="post">
   <ul class=" page-content">
 
     <li>
       <label class="label_name">楼盘名称：</label>
       <span class="add_name">
-          <input name="楼盘名称" type="text"  class="text_add"/>
+          <input name="buildingName" type="text"  class="text_add"/>
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
       <label class="label_name">最小面积：</label>
       <span class="add_name">
-       <input name="最小面积" type="text"  class="text_add" />
+       <input name="buildingMinArea" type="text"  class="text_add" />
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
       <label class="label_name">最大面积：</label>
       <span class="add_name">
-          <input name="最大面积" type="text"  class="text_add" />
+          <input name="buildingMaxArea" type="text"  class="text_add" />
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
       <label class="label_name">装修情况：</label>
       <span class="add_name">
-          <input name="装修情况" type="text"  class="text_add"/>
-        </span>
-    </li>
-    <li>
-      <label class="label_name">小区：</label>
-      <span class="add_name">
-          <input name="小区" type="text"  class="text_add"/>
+          <input name="buildingDecoration" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">参考价：</label>
       <span class="add_name">
-          <input name="参考价" type="text"  class="text_add"/>
+          <input name="buildingReferencePrice" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">售卖情况：</label>
       <span class="add_name">
-          <input name="售卖情况" type="text"  class="text_add"/>
+          <input name="buildingSaleState" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">交房时间：</label>
       <span class="add_name">
-         <input class="inline laydate-icon" id="start" style=" margin-left:10px;" name="交房时间">
+         <input name="inputAddbuildingTimeHanded" class="inline laydate-icon" id="start" style=" margin-left:10px;" name="交房时间">
         </span>
     </li>
     <li class="adderss">
       <label class="label_name">地址：</label>
       <span class="add_name">
-          <input name="地址" type="text"  class="text_add" style="width: 350px"/>
+          <input name="buildingAddress" type="text"  class="text_add" style="width: 350px"/>
         </span>
       <div class="prompt r_f"></div>
     </li>
 
   </ul>
+  </form>
+</div>
+
+<div class="add_menber" id="update_menber_style" style="display:none">
+  <form action=${pageContext.request.contextPath}/adminUpdateBuilding.do id="updateBuilding" enctype="multipart/form-data" method="post">
+  <ul class=" page-content">
+
+    <li>
+      <label class="label_name">楼盘名称：</label>
+      <span class="add_name">
+          <input name="buildingName" type="text"  class="text_add"/>
+        </span>
+      <div class="prompt r_f"></div>
+    </li>
+    <li>
+      <label class="label_name">最小面积：</label>
+      <span class="add_name">
+       <input name="buildingMinArea" type="text"  class="text_add" />
+        </span>
+      <div class="prompt r_f"></div>
+    </li>
+    <li>
+      <label class="label_name">最大面积：</label>
+      <span class="add_name">
+          <input name="buildingMaxArea" type="text"  class="text_add" />
+        </span>
+      <div class="prompt r_f"></div>
+    </li>
+    <li>
+      <label class="label_name">装修情况：</label>
+      <span class="add_name">
+          <input name="buildingDecoration" type="text"  class="text_add"/>
+        </span>
+    </li>
+    <li>
+      <label class="label_name">参考价：</label>
+      <span class="add_name">
+          <input name="buildingReferencePrice" type="text"  class="text_add"/>
+        </span>
+    </li>
+    <li>
+      <label class="label_name">售卖情况：</label>
+      <span class="add_name">
+          <input name="buildingSaleState" type="text"  class="text_add"/>
+        </span>
+    </li>
+    <li>
+      <label class="label_name">交房时间：</label>
+      <span class="add_name">
+         <input name="inputUpdatebuildingTimeHanded" class="inline laydate-icon" id="start1" style=" margin-left:10px;" name="交房时间">
+        </span>
+    </li>
+    <li class="adderss">
+      <label class="label_name">地址：</label>
+      <span class="add_name">
+          <input name="buildingAddress" type="text"  class="text_add" style="width: 350px"/>
+        </span>
+      <div class="prompt r_f"></div>
+    </li>
+
+  </ul>
+  </form>
 </div>
 
 <script>
@@ -268,7 +333,7 @@
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("#add_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="" )
           {
 
@@ -286,6 +351,7 @@
             title: '提示框',
             icon:1,
           });
+          $("#add_menber_style #addBuilding").submit();
           layer.close(index);
         }
       }
@@ -315,19 +381,20 @@
     });
   }
   /*用户-编辑*/
-  function member_edit(id){
+  function member_edit(id, updateBuildingId){
+	setCookie("updateBuildingId", updateBuildingId, 365);
     layer.open({
       type: 1,
       title: '修改用户信息',
       maxmin: true,
       shadeClose:false, //点击遮罩关闭层
       area : ['800px' , ''],
-      content:$('#add_menber_style'),
+      content:$('#update_menber_style'),
       btn:['提交','取消'],
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("#update_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="")
           {
 
@@ -345,15 +412,20 @@
             title: '提示框',
             icon:1,
           });
+          $("#update_menber_style #updateBuilding").submit();
           layer.close(index);
         }
       }
     });
   }
   /*用户-删除*/
-  function member_del(obj,id){
+  function member_del(obj,id,deleteBuildingId){
     layer.confirm('确认要删除吗？',function(index){
       $(obj).parents("tr").remove();
+      
+      setCookie("deleteBuildingId",deleteBuildingId,365);
+      transpDel();
+      
       layer.msg('已删除!',{icon:1,time:1000});
     });
   }
@@ -361,6 +433,52 @@
     elem: '#start',
     event: 'focus'
   });
+  
+  laydate({
+	elem: '#start1',
+	event: 'focus'
+  });
+  
+  function setCookie(c_name, value, expiredays) {
+		var exdate = new Date()
+		exdate.setDate(exdate.getDate() + expiredays)
+		document.cookie = c_name
+				+ "="
+				+ escape(value)
+				+ ((expiredays == null) ? "" : ";expires="
+						+ exdate.toGMTString())
+	}
+
+function transpDel() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/deleteBuildingAjax.do"
+		})
+	}
+
+function transpDelPart() {
+		$.ajax({
+			type : "GET",
+			async : false,
+			url : "${pageContext.request.contextPath}/deleteBuildingPartAjax.do"
+		})
+	}
+
+	function deletePart() {
+		var chckBox = document.getElementsByName("checkbox");
+		var num = chckBox.length;
+		var ids = "";
+		for (var index = 0; index < num; index++) {
+			if (chckBox[index].checked) {
+				ids += chckBox[index].value + ".";
+			}
+		}
+		alert(ids);
+		setCookie("deleteBuildingPart", ids, 365);
+		transpDelPart();
+	}
+  
 </script>
 
 </body>

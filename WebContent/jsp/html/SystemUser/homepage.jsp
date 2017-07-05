@@ -221,54 +221,9 @@
           <a href="#" class="dropdown-toggle" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuilding.jsp><span class="menu-text"> 楼盘管理 </span></a>
           <ul class="submenu" id="Sort_link_5">
             <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘管理" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuilding.jsp style="text-align: center">楼盘管理</a>
-            </li>
-            <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘图片" class="iframeurl" name=${pageContext.request.contextPath}/managerBuildingPicInit.do style="text-align: center">楼盘图片</a>
-            </li>
+              <a href="#" title="楼盘管理" class="iframeurl" name=${pageContext.request.contextPath}/managerBuildinginit.do style="text-align: center">楼盘管理</a>
             <li class="home" style="height: 41.3333px;">
               <a href="#" title="楼盘交易" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingHistory.jsp class="iframeurl" style="text-align: center">买房记录</a>
-            </li>
-            <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘评论" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingComment.jsp class="iframeurl" style="text-align: center">楼盘评论</a>
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="#" class="dropdown-toggle" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerPic.jsp><span class="menu-text"> 图片 </span></a>
-          <ul class="submenu" id="Sort_link_3">
-            <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘图片" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingPic.jsp style="text-align: center">楼盘图片</a>
-            </li>
-            <li class="home" style="height: 41.3333px;">
-              <a href="#" title="租房图片" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerRentPic.jsp class="iframeurl" style="text-align: center">租房图片</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" class="dropdown-toggle"><span class="menu-text"> 交易记录 </span></a>
-          <ul class="submenu" id="Sort_link_4">
-            <li class="home" style="height: 41.3333px;">
-              <a href="#" title="卖房记录" class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingHistory.jsp style="text-align: center">买房记录</a>
-            </li>
-            <li class="home" style="height: 41.3333px;">
-              <a href="#" title="租房记录" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerRentHistory.jsp class="iframeurl" style="text-align: center">租房记录</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a  class="iframeurl" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerApplicant.jsp><span class="menu-text"> 申请处理 </span></a>
-        </li>
-        <li>
-          <a  class="dropdown-toggle" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerComment.jsp><span class="menu-text"> 评论管理 </span></a>
-          <ul class="submenu" id="Sort_link_6">
-            <li class="home" style="height: 41.3333px;">
-              <a href="#" title="楼盘评论" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerBuildingComment.jsp class="iframeurl" style="text-align: center">楼盘评论</a>
-            </li>
-            <li class="home" style="height: 41.3333px;">
-              <a href="#" title="租房评论" name=${pageContext.request.contextPath}/jsp/html/SystemUser/managerRentComment.jsp class="iframeurl" style="text-align: center">租房评论</a>
-            </li>
           </ul>
         </li>
       </ul>

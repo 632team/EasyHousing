@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.easyhousing.dao.AgentDao;
+import com.easyhousing.dao.BuildingInfoDao;
 import com.easyhousing.dao.BuildingPicDao;
 import com.easyhousing.dao.RentHouseDao;
 import com.easyhousing.dao.RentHouseDealDao;
 import com.easyhousing.model.Agent;
+import com.easyhousing.model.BuildingInfo;
 import com.easyhousing.model.BuildingPic;
 import com.easyhousing.model.RentHouse;
 import com.easyhousing.model.RentHouseDeal;
@@ -39,6 +41,9 @@ public class AdminInit {
 	
 	@Autowired
 	private BuildingPicDao buildingPicDao;
+	
+	@Autowired
+	private BuildingInfoDao buildingInfoDao;
 
 	@RequestMapping(value="managerUserinit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerUserinit(HttpServletRequest request) {
@@ -87,6 +92,7 @@ public class AdminInit {
 		modelAndView.setViewName("SystemUser/managerAgent");
 		return modelAndView;
 	}
+	
 	@RequestMapping(value="managerBuildingPicInit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerBuildingPicInit(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -96,6 +102,23 @@ public class AdminInit {
 		session.setAttribute("buildingPicList", buildingPicList);
 		
 		modelAndView.setViewName("SystemUser/managerBuildingPic");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="managerBuildinginit.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView managerBuildingInit(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		List<BuildingInfo> buildingInfoList = buildingInfoDao.selectAll();
+		session.setAttribute("buildingInfoList", buildingInfoList);
+		System.err.println("ctbb1");
+		for(BuildingInfo iBuildingInfo : buildingInfoList) {
+			System.err.println("ctbb");
+			System.err.println(iBuildingInfo.getBuildingAddress());
+		}
+		
+		modelAndView.setViewName("SystemUser/managerBuilding");
 		return modelAndView;
 	}
 }

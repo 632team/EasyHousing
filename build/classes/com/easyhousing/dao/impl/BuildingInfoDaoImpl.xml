@@ -34,4 +34,8 @@
 			AND buildingReferencePrice>=#{1} AND #{2}>=buildingReferencePrice
 	</select>
 	
+	<select id="selectAll" resultType="com.easyhousing.model.BuildingInfo">
+		SELECT * FROM BuildingInfo
+	</select>
+	
 </mapper>

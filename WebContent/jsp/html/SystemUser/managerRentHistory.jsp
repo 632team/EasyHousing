@@ -195,19 +195,19 @@ List<RentHouseDeal> rentHouseDealList = (List<RentHouseDeal>)s.getAttribute("ren
     <li>
       <label class="label_name">经纪人ID：</label>
       <span class="add_name">
-          <input name="经纪人ID" type="text"  class="text_add"/>
+          <input name="agentId" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">租房编号：</label>
       <span class="add_name">
-          <input name="租房编号" type="text"  class="text_add"/>
+          <input name="rentHouseId" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">用户ID：</label>
       <span class="add_name">
-          <input name="用户ID" type="text"  class="text_add"/>
+          <input name="userId" type="text"  class="text_add"/>
         </span>
     </li>
 
@@ -221,13 +221,13 @@ List<RentHouseDeal> rentHouseDealList = (List<RentHouseDeal>)s.getAttribute("ren
     <li>
       <label class="label_name">租期：</label>
       <span class="add_name">
-          <input name="租期" type="text"  class="text_add"/>
+          <input name="rentHouseDay" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">租金(月)：</label>
       <span class="add_name">
-          <input name="租金" type="text"  class="text_add"/>
+          <input name="rentPrice" type="text"  class="text_add"/>
         </span>
     </li>
   </ul>

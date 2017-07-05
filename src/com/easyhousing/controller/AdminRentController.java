@@ -29,6 +29,24 @@ public class AdminRentController {
 	@Autowired
 	private RentHouseDealDao rentHouseDealDao;
 	
+	@RequestMapping(value="adminAddRentHouse.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView adminAddRentHouse(@RequestParam(value ="inputPublishTime1") @DateTimeFormat(pattern="yyyy-MM-dd") Date inputPublishTime,HttpServletRequest request, RentHouse rentHouse) {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		rentHouse.setRentHousePublishTime(inputPublishTime);
+		System.err.println(inputPublishTime);
+		
+		rentHouseDao.insertRentHouse(rentHouse);
+		
+		List<RentHouse> rentHouseList = rentHouseDao.selectAllRentHouse();
+		session.setAttribute("rentHouseList", rentHouseList);
+		
+		modelAndView.setViewName("SystemUser/managerRent");
+		return modelAndView;
+	}
+	
 	@RequestMapping(value="adminUpdateRentHouse.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView adminUpdateRentHouse(@RequestParam(value ="inputPublishTime") @DateTimeFormat(pattern="yyyy-MM-dd") Date inputPublishTime,HttpServletRequest request, RentHouse rentHouse) {
 		
@@ -129,7 +147,7 @@ public class AdminRentController {
 	}
 	
 	@RequestMapping(value="adminUpdateRentHouseDeal.do", method={RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView adminUpdateRentHouseDeal(HttpServletRequest request, RentHouseDeal rentHouseDeal) {
+	public ModelAndView adminUpdateRentHouseDeal(@RequestParam(value ="inputUpdateTime") @DateTimeFormat(pattern="yyyy-MM-dd") Date date,HttpServletRequest request, RentHouseDeal rentHouseDeal) {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		HttpSession session = request.getSession();
@@ -144,7 +162,8 @@ public class AdminRentController {
 			}
 		}
 		System.err.println(updateRentId);
-		rentHouseDeal.setRentHouseId(updateRentId);
+		rentHouseDeal.setRentId(updateRentId);
+		rentHouseDeal.setRentTime(date);
 		rentHouseDealDao.updateRentHouseDeal(rentHouseDeal);
 		
 		List<RentHouseDeal> rentHouseDealList = rentHouseDealDao.selectAll();

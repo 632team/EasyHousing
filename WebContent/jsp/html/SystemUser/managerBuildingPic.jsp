@@ -164,7 +164,7 @@ List<BuildingPic> buildingPicList = (List<BuildingPic>)s.getAttribute("buildingP
     <li>
       <label class="label_name">上传图片：</label>
       <span class="add_name">
-           <input type="file" name="buildingPic/url" multiple="multiple"  style="display: inline-block" />
+           <input type="file" name="img" multiple="multiple"  style="display: inline-block" />
         </span>
       <div class="prompt r_f"></div>
     </li>

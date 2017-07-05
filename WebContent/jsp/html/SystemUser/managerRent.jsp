@@ -164,34 +164,34 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
   }
 </style>
 <div class="add_menber" id="add_menber_style" style="display:none">
-
+  <form action=${pageContext.request.contextPath}/adminAddRentHouse.do id="addRentHouse" enctype="multipart/form-data" method="post">
   <ul class=" page-content">
 
     <li>
       <label class="label_name">社区ID：</label>
       <span class="add_name">
-          <input name="社区ID" type="text"  class="text_add"/>
+          <input name="communityId" type="text"  class="text_add"/>
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
       <label class="label_name">上架时间：</label>
       <span class="add_name">
-        <input class="inline laydate-icon" id="start" style=" margin-left:10px;">
+        <input name="inputPublishTime1" class="inline laydate-icon" id="start" style=" margin-left:10px;">
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
       <label class="label_name">面积：</label>
       <span class="add_name">
-          <input name="面积" type="text"  class="text_add" />
+          <input name="rentHouseArea" type="text"  class="text_add" />
         </span>
       <div class="prompt r_f"></div>
     </li>
     <li>
       <label class="label_name">楼层：</label>
       <span class="add_name">
-          <input name="楼层" type="text"  class="text_add"/>
+          <input name="rentHouseFloor" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
@@ -203,30 +203,31 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
     <li>
       <label class="label_name">交通：</label>
       <span class="add_name">
-          <input name="交通" type="text"  class="text_add"/>
+          <input name="rentHouseSubway" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">朝向：</label>
       <span class="add_name">
-          <input name="朝向" type="text"  class="text_add"/>
+          <input name="rentHouseToward" type="text"  class="text_add"/>
         </span>
     </li>
     <li>
       <label class="label_name">租金：</label>
       <span class="add_name">
-          <input name="租金" type="text"  class="text_add"/>
+          <input name="rentHousePrice" type="text"  class="text_add"/>
         </span>
     </li>
     <li class="adderss">
       <label class="label_name">地址：</label>
       <span class="add_name">
-          <input name="地址" type="text"  class="text_add" style="width: 350px"/>
+          <input name="rentHouseAdress" type="text"  class="text_add" style="width: 350px"/>
         </span>
       <div class="prompt r_f"></div>
     </li>
 
-  </ul>
+  </ul>'
+  </form>
 </div>
 
 <div class="add_menber" id="update_menber_style" style="display:none">
@@ -356,7 +357,7 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
       yes:function(index,layero){
         var num=0;
         var str="";
-        $(".add_menber input[type$='text']").each(function(n){
+        $("#add_menber_style input[type$='text']").each(function(n){
           if($(this).val()=="" )
           {
 
@@ -374,6 +375,7 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
             title: '提示框',
             icon:1,
           });
+          $("#add_menber_style #addRentHouse").submit();
           layer.close(index);
         }
       }
