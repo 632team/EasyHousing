@@ -258,6 +258,7 @@ public class UserController {
 				in.room = tt.getRentHouseRoom();
 				in.toilet = tt.getRentHouseToilet();
 				in.price = tt.getRentHousePrice();
+				in.check = tt.getRentHouseCheck();
 				rentHouseApplication.add(in);
 			}
 			s.setAttribute("rentHouseApplication", rentHouseApplication);
