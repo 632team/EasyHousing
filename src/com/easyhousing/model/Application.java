@@ -11,4 +11,5 @@ public class Application {
 	public int price;
 	public String phone;
 	public int houseId;
+	public int check;
 }

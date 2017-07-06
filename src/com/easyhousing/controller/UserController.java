@@ -45,6 +45,7 @@ import com.easyhousing.service.RentHouseCollect;
 import com.easyhousing.service.UserCollectService;
 import com.easyhousing.service.UserService;
 import com.easyhousing.util.Tool;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
 /**
  * 个人中心、登录、注册控制
  */
@@ -200,6 +201,7 @@ public class UserController {
 			in.room = tmp.getRentHouseRoom();
 			in.toilet = tmp.getRentHouseToilet();
 			in.price = tmp.getRentHousePrice();
+			in.check = tmp.getRentHouseCheck();
 			rentHouseApplication.add(in);
 		}
 		s.setAttribute("rentHouseApplication", rentHouseApplication);
@@ -235,6 +237,8 @@ public class UserController {
 		modelAndView.addObject("rentMessage", "委托成功。");
 		try {
 			u.setRentHousePublishTime(new Date());
+			u.setRentHouseAddress(u.getRentHouseProvince()+"市"+u.getRentHouseRegion()+u.getCommunityName()+u.getRentHouseUnitNumber());
+			u.setRentHouseCheck(0);
 			rentHouseDao.insertRentHouse(u);
 			RentHouse_Characteristics tmp = new RentHouse_Characteristics();
 			tmp.setCharacteristicsId(((User)s.getAttribute("user")).getUserId());

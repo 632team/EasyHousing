@@ -1059,11 +1059,10 @@
 
             <li style="display: block">
               <nobr>
+                <label style="text-align:right; width:150px">省市：</label>
+                <input type="text" class="form-control" style=" display: inline;width: 200px" id="rentHouseProvince" placeholder="请输入所在省市" name="rentHouseProvince">
                 <label style="text-align:right; width:150px">区域：</label>
-                <input type="text" class="form-control" style=" display: inline;width: 200px" id="rentHouseProvince" placeholder="请输入所在区域" name="rentHouseRegion">
-                <label style="text-align:right; width:150px">小区：</label>
-                <input type="text" class="form-control" style=" display: inline;width:150px" id="communityName" placeholder="请输入小区"
-                       maxlength="14" name="communityName" rule="notNull" validatename="小区">
+                <input type="text" class="form-control" style=" display: inline;width: 200px" id="rentHouseRegion" placeholder="请输入所在区域" name="rentHouseRegion">
               </nobr>
             </li>
 
@@ -1073,31 +1072,38 @@
                 <label style="text-align:right; width:150px">租金：</label>
                 <input type="text" class="form-control" style=" display: inline; width:200px" id="rentHousePrice" placeholder="xx元/月"  rule="notNull" validatename="租金" name="rentHousePrice">
                 <label style="text-align:right; width:150px">面积：</label>
-                <input type="text" class="form-control" style=" display: inline; width:150px" id="	rentHouseArea" placeholder="请输入面积" rule="notNull" validatename="地址" name="rentHouseArea">
+                <input type="text" class="form-control" style=" display: inline; width:150px" id="rentHouseArea" placeholder="请输入面积" rule="notNull" validatename="地址" name="rentHouseArea">
               </nobr>
             </li>
             <li style="display: block">
               <nobr>
                 <label style="text-align:right; width:150px">地址：</label>
-                <input type="text" class="form-control" style=" display: inline; width:200px" id="	rentHouseUnitNumber" placeholder="楼栋号-单元号-门牌号" rule="notNull" name="rentHouseAddress">
+                <input type="text" class="form-control" style=" display: inline; width:200px" id="rentHouseUnitNumber" placeholder="楼栋号-单元号-门牌号" rule="notNull" name="rentHouseUnitNumber">
                 <label style="text-align:right; width:150px">地铁：</label>
-                <input type="text" class="form-control" style=" display: inline; width:150px" id="	rentHouseSubway" placeholder="请输入地铁" name="rentHouseSubway">
+                <input type="text" class="form-control" style=" display: inline; width:150px" id="rentHouseSubway" placeholder="请输入地铁" name="rentHouseSubway">
               </nobr>
             </li>
             <li style="display: block">
               <nobr>
                 <label style="text-align:right; width:150px">朝向：</label>
-                <input type="text" class="form-control" style=" display: inline; width:200px" id="	rentHouseToward" placeholder="请输入朝向" rule="notNull" name="rentHouseToward">
+                <input type="text" class="form-control" style=" display: inline; width:200px" id="rentHouseToward" placeholder="请输入朝向" rule="notNull" name="rentHouseToward">
                 <label style="text-align:right; width:150px">楼层：</label>
-                <input type="text" class="form-control" style=" display: inline; width:150px" id="	rentHouseFloor" placeholder="请输入楼层" name="	rentHouseFloor">
+                <input type="text" class="form-control" style=" display: inline; width:150px" id="rentHouseFloor" placeholder="请输入楼层" name="rentHouseFloor">
               </nobr>
             </li>
             <li style="display: block">
               <nobr>
                 <label style="text-align:right; width:150px">房型：</label>
-                <input type="text" class="form-control" style=" display: inline; width:100px" id="	rentHouseRoom" placeholder="几室" name="rentHouseRoom">
-                <input type="text" class="form-control" style=" display: inline; width:100px" id="	rentHouseHall" placeholder="几厅" name="rentHouseHall">
-                <input type="text" class="form-control" style=" display: inline; width:100px" id="	rentHouseToilet" placeholder="几厕" name="rentHouseToilet">
+                <input type="text" class="form-control" style=" display: inline; width:100px" id="rentHouseRoom" placeholder="几室" name="rentHouseRoom">
+                <input type="text" class="form-control" style=" display: inline; width:100px" id="rentHouseHall" placeholder="几厅" name="rentHouseHall">
+                <input type="text" class="form-control" style=" display: inline; width:100px" id="rentHouseToilet" placeholder="几厕" name="rentHouseToilet">
+              </nobr>
+            </li>
+            <li style="display: block">
+              <nobr>
+                <label style="text-align:right; width:150px">小区：</label>
+                <input type="text" class="form-control" style=" display: inline;width:150px" id="communityName" placeholder="请输入小区"
+                       maxlength="14" name="communityName" rule="notNull" validatename="小区">
               </nobr>
             </li>
             <li style="display: block">
@@ -1153,6 +1159,9 @@
                     <th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
                         aria-label="联系方式" style="width: 150px;">联系方式
                     </th>
+                    <th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
+                        aria-label="审核情况" style="width: 150px;">审核情况
+                    </th>
 
                     <!--<th  tabindex="0" aria-controls="sample-table" rowspan="1" colspan="1"
                         aria-label="操作" style="width: 150px;">操作
@@ -1172,6 +1181,16 @@
 	                    <td><%=a.room %>室<%=a.hall %>厅<%=a.toilet %>厕</td>
 	                    <td><%=a.price %></td>
 	                    <td><%=a.phone %></td>
+	                    <td>
+	                    <%
+	                    if(a.check == 0)
+	                    	out.print("正在审核");
+	                    else if(a.check == 1)
+	                    	out.print("审核通过");
+	                    else if(a.check == 2)
+	                    	out.print("审核未通过");
+	                    %>
+	                    </td>
 	                    <!--<td class="td-manage">
 	                      <a id="<% //a.houseId %>" href="javascript:;" class="btn btn-xs btn-warning" onclick="member_del(this, this.parentNode.parentNode.cells[1].innerHTML )">删除</a>
 	                    </td>-->

@@ -5,7 +5,9 @@
 		<selectKey  keyProperty="rentHouseId" resultType="Integer" order="AFTER">
 		  	select last_insert_id() AS rentHouseId
 		</selectKey>
-		INSERT INTO RentHouse(communityId, rentHouseAddress, rentHouseArea, rentHouseBuildTime, rentHouseFloor, rentHouseFloorAttribute, rentHouseHall, rentHouseRoom, rentHouseSubway, rentHouseToilet, rentHouseToward, rentHousePrice, rentHousePublishTime) VALUES(#{communityId}, #{rentHouseAddress}, #{rentHouseArea}, #{rentHouseBuildTime}, #{rentHouseFloor}, #{rentHouseFloorAttribute}, #{rentHouseHall}, #{rentHouseRoom}, #{rentHouseSubway}, #{rentHouseToilet}, #{rentHouseToward}, #{rentHousePrice}, #{rentHousePublishTime})
+		INSERT INTO RentHouse(communityId, rentHouseAddress, rentHouseArea, rentHouseBuildTime, rentHouseFloor, rentHouseFloorAttribute, rentHouseHall, rentHouseRoom, rentHouseSubway, 
+		rentHouseToilet, rentHouseToward, rentHousePrice, rentHouseProvince,rentHouseRegion,rentHouseAllFloor,communityName,rentHouseUnitNumber,rentHousePublishTime,rentHouseCheck) 
+		VALUES(#{communityId}, #{rentHouseAddress}, #{rentHouseArea}, #{rentHouseBuildTime}, #{rentHouseFloor}, #{rentHouseFloorAttribute}, #{rentHouseHall}, #{rentHouseRoom}, #{rentHouseSubway}, #{rentHouseToilet}, #{rentHouseToward}, #{rentHousePrice}, #{rentHouseProvince},#{rentHouseRegion},#{rentHouseAllFloor},#{communityName},#{rentHouseUnitNumber},#{rentHousePublishTime},#{rentHouseCheck})
 	</insert>
 	
 	<delete id="deleteRentHouse" parameterType="com.easyhousing.model.RentHouse">
@@ -13,7 +15,11 @@
 	</delete>
 	
 	<update id="updateRentHouse" parameterType="com.easyhousing.model.RentHouse">
-		UPDATE `RentHouse` SET `communityId`=#{communityId},`rentHouseAddress`=#{rentHouseAddress},`rentHouseArea`=#{rentHouseArea},`rentHouseFloor`=#{rentHouseFloor},`rentHouseFloorAttribute`=#{rentHouseFloorAttribute},`rentHouseHall`=#{rentHouseHall}, `rentHouseRoom`=#{rentHouseRoom}, `rentHouseSubway`=#{rentHouseSubway}, `rentHouseToilet`=#{rentHouseToilet}, `rentHouseToward`=#{rentHouseToward}, `rentHousePrice`=#{rentHousePrice} WHERE rentHouseId=#{rentHouseId}
+		UPDATE `RentHouse` SET `communityId`=#{communityId},`rentHouseAddress`=#{rentHouseAddress},`rentHouseArea`=#{rentHouseArea},`rentHouseBuildTime`=#{rentHouseBuildTime},
+		`rentHouseFloor`=#{rentHouseFloor},`rentHouseFloorAttribute`=#{rentHouseFloorAttribute},`rentHouseHall`=#{rentHouseHall}, `rentHouseRoom`=#{rentHouseRoom}, `rentHouseSubway`=#{rentHouseSubway}, 
+		`rentHouseToilet`=#{rentHouseToilet}, `rentHouseToward`=#{rentHouseToward}, `rentHousePrice`=#{rentHousePrice},`rentHouseProvince`=#{rentHouseProvince},
+		`rentHouseRegion`=#{rentHouseRegion},`rentHouseAllFloor`=#{rentHouseAllFloor},`communityName`=#{communityName},`rentHouseUnitNumber`=#{rentHouseUnitNumber},
+		`rentHousePublishTime`=#{rentHousePublishTime},`rentHouseCheck`=#{rentHouseCheck} WHERE rentHouseId=#{rentHouseId}
 	</update>
 	
 	<select id="selectRentHouse" resultType="com.easyhousing.model.RentHouse">

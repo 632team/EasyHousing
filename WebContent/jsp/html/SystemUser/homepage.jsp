@@ -223,6 +223,11 @@
               <a href="#" title="楼盘交易" name=${pageContext.request.contextPath}/managerBuildingDealinit.do class="iframeurl" style="text-align: center">买房记录</a>
           </ul>
         </li>
+        
+        <li>
+          <a href="#" class="iframeurl" name=${pageContext.request.contextPath}/managerCheckRentHouseinit.do><span class="menu-text"> 审核租房 </span></a>
+        </li>
+        
       </ul>
 
 

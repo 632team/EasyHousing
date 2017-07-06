@@ -105,6 +105,18 @@ public class AdminInit {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="managerCheckRentHouseinit.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView managerCheckRentHouseinit(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		List<RentHouse> rentHouseList = rentHouseDao.selectAllRentHouse();
+		session.setAttribute("rentHouseList", rentHouseList);
+		
+		modelAndView.setViewName("SystemUser/managerCheck");
+		return modelAndView;
+	}
+	
 	//租房记录的管理跳转
 	@RequestMapping(value="managerRentHouseDealinit.do", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView managerRentHouseDealinit(HttpServletRequest request) {

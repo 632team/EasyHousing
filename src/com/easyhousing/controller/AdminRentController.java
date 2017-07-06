@@ -231,4 +231,50 @@ public class AdminRentController {
 			rentHouseDealDao.deleteRentHouseDeal(rentHouseDeal);
 		}
 	}
+	
+	@RequestMapping(value="okRentHouseAjax.do", method={RequestMethod.GET,RequestMethod.POST})
+	public void okRentHouseAjax(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Cookie[] cookies = request.getCookies();
+		int okRentHouseId = 0;
+		for(Cookie iCookie : cookies) {
+			String name = iCookie.getName();
+			String value = iCookie.getValue();
+			if(name.equals("okRentHouseId")) {
+				okRentHouseId = Integer.parseInt(value);
+			}
+		}
+		
+		RentHouse rentHouse = rentHouseDao.selectRentHouseById(okRentHouseId);
+		rentHouse.setRentHouseCheck(1);
+		rentHouseDao.updateRentHouse(rentHouse);
+		
+		
+		List<RentHouse> rentHouseList = rentHouseDao.selectAllRentHouse();
+		session.setAttribute("rentHouseList", rentHouseList);
+		
+	}
+	
+	@RequestMapping(value="noRentHouseAjax.do", method={RequestMethod.GET,RequestMethod.POST})
+	public void noRentHouseAjax(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Cookie[] cookies = request.getCookies();
+		int noRentHouseId = 0;
+		for(Cookie iCookie : cookies) {
+			String name = iCookie.getName();
+			String value = iCookie.getValue();
+			if(name.equals("noRentHouseId")) {
+				noRentHouseId = Integer.parseInt(value);
+			}
+		}
+		
+		RentHouse rentHouse = rentHouseDao.selectRentHouseById(noRentHouseId);
+		rentHouse.setRentHouseCheck(2);
+		rentHouseDao.updateRentHouse(rentHouse);
+		
+		
+		List<RentHouse> rentHouseList = rentHouseDao.selectAllRentHouse();
+		session.setAttribute("rentHouseList", rentHouseList);
+		
+	}
 }

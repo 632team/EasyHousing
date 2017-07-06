@@ -1100,6 +1100,8 @@
       	List<String> picUrl = (List<String>)s.getAttribute("rentHousePicList");
       	for(int iter = st; iter < ed; iter++) {
       		RentHouse i = list.get(iter);
+      		int icheck = i.getRentHouseCheck();
+      		if(icheck != 1) continue;
       	%>
       	<li>
           <a onclick="clickArea4('<% out.print(list.get(iter).getRentHouseId()); %>');" href=${pageContext.request.contextPath}/rentHouseDetail.do class="data_link" target="_blank"></a>
