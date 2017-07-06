@@ -67,7 +67,7 @@ List<BuildingInfo> buildingInfoList = (List<BuildingInfo>)s.getAttribute("buildi
                 <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加楼盘</a>
                 <a class="btn btn-danger" onclick="deletePart();" href=${pageContext.request.contextPath}/managerBuildinginit.do>批量删除</a>
                </span>
-          <span class="r_f">共：<b>2345</b>条</span>
+          <span class="r_f">共：<b><%=buildingInfoList.size() %></b>条</span>
         </div>
 
         <div class="table_menu_list">

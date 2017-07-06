@@ -230,6 +230,7 @@ public class UserController {
 	public ModelAndView sendRentHouse(HttpServletRequest request, RentHouse u) throws IllegalStateException, IOException {
 		HttpSession s = request.getSession();
 		ModelAndView modelAndView = new ModelAndView();
+		User user = (User) s.getAttribute("user");
 		modelAndView.setViewName("/MyHome/myHouse");
 		modelAndView.addObject("rentMessage", "委托成功。");
 		try {
@@ -239,20 +240,28 @@ public class UserController {
 			tmp.setCharacteristicsId(((User)s.getAttribute("user")).getUserId());
 			tmp.setRentHouseId(u.getRentHouseId());
 			rentHouse_CharacteristicsDao.insertRentHouse_Characteristics(tmp);
-			
-			Application in = new Application();
-			List<Application> lap = (List<Application>)s.getAttribute("rentHouseApplication");
-			in.date = u.getRentHousePublishTime();
-			in.address = u.getRentHouseAddress();
-			in.houseId = tmp.getRentHouseId();
-			in.phone = ((User)s.getAttribute("user")).getUserPhoneNumber();
-			in.hall = u.getRentHouseHall();
-			in.room = u.getRentHouseRoom();
-			in.toilet = u.getRentHouseToilet();
-			in.price = u.getRentHousePrice();
-			lap.add(in);
-			s.setAttribute("rentHouseApplication", lap);
-			
+
+			List<RentHouse_Characteristics> rentHouse_Characteristics = rentHouse_CharacteristicsDao.selectAllByUserId(user.getUserId());
+			List<Application> rentHouseApplication = new ArrayList<>();
+			for (RentHouse_Characteristics i: rentHouse_Characteristics) {
+				RentHouse tt = rentHouseDao.selectRentHouseById(i.getRentHouseId());
+				Application in = new Application();
+				in.date = tt.getRentHousePublishTime();
+				in.address = tt.getRentHouseAddress();
+				in.houseId = tt.getRentHouseId();
+				in.phone = user.getUserPhoneNumber();
+				in.hall = tt.getRentHouseHall();
+				in.room = tt.getRentHouseRoom();
+				in.toilet = tt.getRentHouseToilet();
+				in.price = tt.getRentHousePrice();
+				rentHouseApplication.add(in);
+			}
+			s.setAttribute("rentHouseApplication", rentHouseApplication);
+		} catch (Exception e) {
+			modelAndView.addObject("rentMessage", "委托失败。");
+		}
+		
+		try {
 			// 上传租房图片
 			String path = request.getSession().getServletContext().getRealPath("upload");  
 			MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
@@ -281,8 +290,9 @@ public class UserController {
 	        	rentHousePicDao.insertRentHousePic(rhp);
 			}
 		} catch (Exception e) {
-			modelAndView.addObject("rentMessage", "委托失败。");
+			// 图片可以没有
 		}
+		
 		return modelAndView;
 	}
 	

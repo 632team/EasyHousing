@@ -67,7 +67,7 @@ List<RentHouse> rentHouseList = (List<RentHouse>)session.getAttribute("rentHouse
                 <a href="javascript:ovid()" id="member_add" class="btn btn-warning">添加租房</a>
                 <a class="btn btn-danger" onclick="deletePart();" href=${pageContext.request.contextPath}/managerRentHouseinit.do>批量删除</a>
                </span>
-          <span class="r_f">共：<b>2345</b>条</span>
+          <span class="r_f">共：<b><%=rentHouseList.size() %></b>条</span>
         </div>
 
         <div class="table_menu_list">
