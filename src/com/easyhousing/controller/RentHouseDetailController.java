@@ -129,4 +129,60 @@ public class RentHouseDetailController {
 		return "Comment/loading";
 	}
 	
+	// 地图找房跳转
+	@RequestMapping(value="mapRentHouseDetail.do", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView mapRentHouseDetail(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		int rentHouseId = Integer.parseInt(request.getParameter("rentHouseId"));
+		HttpSession session = request.getSession();
+		RentHouse rentHouse = rentHouseSearch.searchRentHouseById(rentHouseId);
+		session.setAttribute("rentHouseId", rentHouseId);
+		System.err.println(rentHouse.getRentHouseId());
+		
+		List<String> rentHousePicList = rentHousePicUrlService.searchRentHousePicByRentHouseId(rentHouseId);
+		if (rentHousePicList != null && rentHousePicList.size() != 0) {
+			session.setAttribute("rentHousePic", rentHousePicList.get(0));
+		}
+		else {
+			session.setAttribute("rentHousePic", "");
+		}
+		
+		if(rentHousePicList == null) {
+			System.err.println("ctbb");
+		}
+		else {
+			System.err.println("????");
+			for(String iString : rentHousePicList) {
+				System.err.println(iString);
+			}
+		}
+		User user = (User)session.getAttribute("user");
+		int haveRent =  0;
+		if(user != null)
+			haveRent = rentHouseCollect.selectByUserIdRentHouseId(user.getUserId(), rentHouseId);
+		if(user != null)
+			System.err.println(user.getUserId());
+		System.err.println(rentHouseId);
+		System.err.println(haveRent);
+		session.setAttribute("haveRent", haveRent);
+		session.setAttribute("rentHouse", rentHouse);
+		session.setAttribute("rentHousePicList", rentHousePicList);
+		
+		List<RentHouseComment> lr = rentHouseCommentDao.selectAllByRentHouseId(rentHouseId);
+		List<Collect> lc = new ArrayList<>();
+		for (RentHouseComment i : lr) {
+			Collect tmp = new Collect();
+			User u = new User();
+			u.setUserId(i.getUserId());
+			tmp.name = userDao.selectUserByUserId(u).getName();
+			tmp.comment = i.getUserComment();
+			tmp.picUrl = userDao.selectUserByUserId(u).getUserPhoto();
+			tmp.decoration = i.getUserCommentDate().toString();
+			lc.add(tmp);
+		}
+		session.setAttribute("rentHouseUserComments", lc);
+		
+		modelAndView.setViewName("rentDetail");
+		return modelAndView;
+	}
 }

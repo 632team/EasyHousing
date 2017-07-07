@@ -572,7 +572,7 @@
       </a>
     </strong>
       <strong>
-       <a href=${pageContext.request.contextPath}/jsp/html/mapHouse.jsp>
+       <a href=${pageContext.request.contextPath}/mapSearch.do>
       <div>
         <span></span>
         <img src=${pageContext.request.contextPath}/jsp/images/homepage/djimg32.png alt="地图找房" title="地图找房">

@@ -1,25 +1,113 @@
-<%@page import="com.easyhousing.model.RentHouse"%>
-<%@page import="java.util.*"%>
-<%@page import="java.lang.Math"%>
-<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="com.easyhousing.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-  <%
-  HttpSession s = request.getSession(); 
-  String strtemp;
-  SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-  %>
-  
-    <meta charset="UTF-8">
-    <title>地图找房</title>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IzuDNWzXS4qfBqXxSEMsISl6Pc1Ga8Kr"></script>
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<%
+HttpSession s = request.getSession(); 
+List<BuildingInfo> mapBuildingList = (List<BuildingInfo>)s.getAttribute("mapBuildingList");
+List<String> mapBuildingPicList = (List<String>)s.getAttribute("mapBuildingPicList");
+List<RentHouse> mapRentHouseList = (List<RentHouse>)s.getAttribute("mapRentHouseList");
+List<String> mapRentHousePicList = (List<String>)s.getAttribute("mapRentHousePicList");
+
+for (int i = 0; i < mapBuildingList.size(); ++i) {
+	BuildingInfo tmp = mapBuildingList.get(i);
+	%>
+	<li style="display:none">
+	<input hidden=true name="bPicUrl" id="bPicUrl<%=i %>" value="<%=mapBuildingPicList.get(i) %>"></input>
+	<input hidden=true name="bName" id="bName<%=i %>" value="<%=tmp.getBuildingName() %>"></input>
+	<input hidden=true name="bAddress" id="bAddress<%=i %>" value="<%=tmp.getBuildingAddress() %>"></input>
+	<input hidden=true name="bId" id="bId<%=i %>" value="<%=tmp.getBuildingId() %>"></input>
+	<input hidden=true name="bPrice" id="bPrice<%=i %>" value="<%=tmp.getBuildingReferencePrice() %>"></input>
+	</li>
+	<!-- =================================================================================== -->
+	<%
+}
+%>
+<!-- ==============================以下为租房====================================== -->
+<ul id="rentData">
+<%
+for (int i = 0; i < mapRentHouseList.size(); ++i) {
+	RentHouse tmp = mapRentHouseList.get(i);
+	%>
+	<li style="display:none">
+	<input hidden=true name="rPicUrl" id="rPicUrl<%=i %>" value="<%=mapRentHousePicList.get(i) %>"></input>
+	<input hidden=true name="rName" id="rName<%=i %>" value="<%=tmp.getRentHouseAddress() %>"></input>
+	<input hidden=true name="rAddress" id="rAddress<%=i %>" value="<%=tmp.getRentHouseAddress() %>"></input>
+	<input hidden=true name="rId" id="rId<%=i %>" value="<%=tmp.getRentHouseId() %>"></input>
+	<input hidden=true name="rPrice" id="rPrice<%=i %>" value="<%=tmp.getRentHousePrice() %>"></input>
+	</li>
+	<!-- =================================================================================== -->
+	<%
+}
+
+%>
+</ul>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        body, html{width: 100%;height: 100%; margin:0;font-family:"微软雅黑";}
+        #l-map{height:300px;width:100%;}
+        #r-result{width:100%;}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=L6hYTtxR11fz8xGIFvPcww3EfwKNL2vl"></script>
+    <title>Easyhousing地图搜房</title>
+    <style>
+        .gotoIndex {
+            position: absolute;
+            color: #6C707A;
+            font-size: 14px;
+            right: 19px;
+            text-decoration: none;
+        }
+
+        .login-body {
+            background: url(${pageContext.request.contextPath}/jsp/images/login/bg-pixiu.png) no-repeat;
+            background-size: 100% 100%;
+            width: 383px;
+            height: 383px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-radius: 30px;
+        }
+
+        .login-wrap {
+
+            background: url(${pageContext.request.contextPath}/jsp/images/register/bg.jpg);
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-size: cover;
+            background-position: center center;
+            min-width: 1280px;
+            background-repeat: no-repeat;
+        }
+
+        .fa {
+            display: inline-block;
+            top: 27px;
+            left: 6px;
+            position: relative;
+            color: #ccc;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding-left: 26px;
+        }
+
+        .checkbox {
+            padding-left: 21px;
+        }
+    </style>
   <style>
     body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
       margin: 0;
@@ -99,7 +187,7 @@
       font-size: 12px;
       font-weight: bold;
       margin-top: -7px;
-      margin-right: -5px;
+      margin-right: 50px;
     }
     /*搜索框大小CSS*/
     .listhead .header .nav span {
@@ -164,6 +252,7 @@
       position: relative;
       margin-right: 5px;
     }
+
     .subsh_l .sd_sel span {
       width: 50px;
       padding-right: 8px;
@@ -262,6 +351,14 @@
       font-weight: bold;
       overflow: hidden;
     }
+    .subsh_r {
+      width: 158px;
+      height: 35px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      overflow: hidden;
+    }
     .fr {
       float: right;
     }
@@ -269,7 +366,6 @@
       width: 85px;
       height: 31px;
       line-height: 31px;
-
       /*border: 2px solid #ddd;*/
       /*border-right: none;*/
       /*border-top-left-radius: 5px;
@@ -294,7 +390,6 @@
       padding-left: 15px;
       background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/djimg25.png) no-repeat left center;
 
-
     }
     .subsh_r a span {
       display: inline-block;
@@ -309,442 +404,46 @@
 
 
     }
-    i, em {
-      font-style: normal;
-    }
-    .bodywhitew {
-      width: 1220px;
-      margin-bottom: 10px;
-    }
-    .container {
-      width: 1200px;
-      margin: auto;
-    }
-    .current {
-      width: 1205px;
-      /*margin: auto;*/
-      margin-left: 30px;
-      font-size: 14px;
-      height: 32px;
-      line-height: 32px;
-      color: #666;
-      padding-left: 15px;
-      background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/djimg25.png) no-repeat left center;
-      overflow: hidden;
-    }
-    .current a {
-      color: #666;
-    }
-    .nv_list {
-      position: relative;
-    }
-    .nv_list .nvtit {
-      width: 1020px;
-      height: 40px;
-      border-bottom: 1px solid #ddd;
-      overflow: hidden;
-      background: #fff;
-    }
-    ol, ul, li {
-      list-style: none;
-    }
-    .nv_list .nvtit li.active {
-      color: #c00000;
-    }
-    .nv_list .nvtit li {
-      height: 40px;
-      line-height: 40px;
-      padding: 0 15px;
-      float: left;
-      font-size: 16px;
-      color: #666;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .nv_list .nvtit li.active span {
-      background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/ppimg15-1.png) no-repeat center center;
-      display: none;
-    }
-    .nv_list .nvtit li span {
-      width: 14px;
-      height: 40px;
-      vertical-align: middle;
-      display: inline-block;
-      background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/ppimg15.png) no-repeat center center;
-      margin-left: 2px;
-      font-size: 0;
-    }
-    .nv_menu {
-      border-top: none;
-      display: none;
-      background: #fff;
-      margin-left: 30px;
-      margin-right: 20px;
-
-    }
-    .nv_menu ul {
-      padding: 10px 20px 0 20px;
-
-    }
-    .nv_menu li {
-      padding: 6px 0;
-      font-size: 14px;
-      line-height: 24px;
-    }
-    .nv_menu li strong {
-      font-weight: bold;
-    }
-    .nv_menu li .on {
-      color: #C00000;
-      font-weight: bold;
-    }
-    .nv_menu li a {
-      display: inline-block;
-      cursor: pointer;
-      margin-right: 20px;
-    }
-    a {
-      text-decoration: none;
-      color: #333;
-      outline: none;
-    }
-    .nv_menu li .ipt1 {
-      width: 40px;
-      height: 18px;
-      border: 1px solid #ccc;
-      text-align: center;
-      margin-right: 3px;
-    }
-    input[type="text"], input[type="passwrod"] {
-      outline: none;
-    }
-    .list_tit {
-      width: 100%;
-      height: 35px;
-      line-height: 35px;
-      font-size: 14px;
-      margin-top: 10px;
-      border-bottom: 1px solid #ccc;
-      overflow: hidden;
-    }
-    .list_tit .cenl {
-      width: 500px;
-      height: 35px;
-      overflow: hidden;
-      margin-left: 30px;
-    }
-    .fl {
-      float: left;
-    }
-    .list_tit .cenl strong {
-      color: #c00000;
-      font-weight: bold;
-    }
-    i, em {
-      font-style: normal;
-    }
-    .list_tit .cenr {
-      width: 600px;
-      height: 35px;
-      text-align: right;
-      overflow: hidden;
-      margin-right: 20px;
-    }
-    .fr {
-      float: right;
-    }
-    .list_tit a.first {
-      margin: 0;
-    }
-    .list_tit .active {
-      font-weight: bold;
-      color: #c00000;
-    }
-    .list_tit a {
-      margin-left: 10px;
-    }
-    a {
-      text-decoration: none;
-      color: #333;
-      outline: none;
-    }
-    .list_tit .hovs {
-      background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/djimg80.png) no-repeat right center;
-    }
-    .list_tit .hovs, .list_tit .hovx {
-      padding-right: 10px;
-    }
-    .list_tit a {
-      margin-left: 10px;
-    }
-    a {
-      text-decoration: none;
-      color: #333;
-      outline: none;
-    }
-    .list_tit .hovx {
-      background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/djimg81.png) no-repeat right center;
-    }
-    .list_tit .hovs, .list_tit .hovx {
-      padding-right: 10px;
-    }
-    .list_tit a {
-      margin-left: 10px;
-    }
-    a {
-      text-decoration: none;
-      color: #333;
-      outline: none;
-    }
-    ol, ul, li {
-      list-style: none;
-    }
-    ul, menu, dir {
-      display: block;
-      list-style-type: disc;
-      -webkit-margin-before: 1em;
-      -webkit-margin-after: 1em;
-      -webkit-margin-start: 0px;
-      -webkit-margin-end: 0px;
-
-      margin-left: 30px;
-      margin-right: 20px;
-
-
-    }
-    .mor_list li {
-      height: 190px;
-      padding: 20px 10px 20px 195px;
-      background: #fff;
-      border-bottom: 1px solid #eee;
-      overflow: hidden;
-      cursor: pointer;
-      position: relative;
-
-    }
-    .data_link {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 200;
-      display: block;
-
-    }
-    a {
-      text-decoration: none;
-      color: #333;
-      outline: none;
-    }
-    .mor_list li .mor_img {
-      width: 185px;
-      height: 150px;
-      overflow: hidden;
-      background: #ccc;
-      position: absolute;
-      top: 20px;
-      left: 10px;
-      z-index: 1;
-      font-size: 14px;
-      font-weight: bold;
-    }
-    a {
-      text-decoration: none;
-      color: #333;
-      outline: none;
-    }
-    .mor_list li .mor_img img {
-      width: 100%;
-      height: 100%;
-    }
-    fieldset, img {
-      border: 0;
-    }
-    .mor_list li .mor_txt {
-      width: 100%;
-      height: 150px;
-      margin-left: 10px;
-      position: relative;
-      left:50px;
-    }
-    .mor_list li .mor_txt h3 {
-      font-family: "Hiragino Sans GB", 微软雅黑, "Microsoft YaHei", SimHei, Tahoma, 宋体b8b体, SimSun, sans-serif;
-      color: rgb(51, 51, 51);
-      font-size: 20px;
-      font-weight: 700;
-      vertical-align: middle;
-    }
-    .mor_list li .mor_txt .dot {
-      width: 100%;
-      height: 48px;
-    }
-    .mor_list li .mor_txt p {
-      width: 100%;
-      height: 24px;
-      margin-top: 10px;
-      line-height: 24px;
-      font-size: 14px;
-      color: #666;
-      overflow: hidden;
-    }
-    .mor_list li .mor_txt .dor {
-      height: 24px;
-      padding-left: 15px;
-      background: url(${pageContext.request.contextPath}/jsp/images/rentWindow/djimg25.png) no-repeat left center;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-    p {
-      display: block;
-      -webkit-margin-before: 1em;
-      -webkit-margin-after: 1em;
-      -webkit-margin-start: 0px;
-      -webkit-margin-end: 0px;
-    }
-    .mor_list li .mor_txt a {
-      height: 22px;
-      line-height: 22px;
-      display: block;
-      float: left;
-      margin-right: 5px;
-      border: 1px solid;
-      padding: 0 5px;
-      cursor: default;
-
-    }
-    .bq_cor_1, .bq_cor_11, .bq_cor_21, .bq_cor_31, .bq_cor_41, .bq_cor_51, .bq_cor_61, .bq_cor_71, .bq_cor_81, .bq_cor_91, .bq_cor_101, .bq_cor_111, .bq_cor_121, .bq_cor_131, .bq_cor_141, .bq_cor_151, .bq_cor_161, .bq_cor_171, .bq_cor_181, .bq_cor_191 {
-      color: #ff943e;
-      border-color: #ff943e;
-    }
-    .bq_cor_2, .bq_cor_12, .bq_cor_22, .bq_cor_32, .bq_cor_42, .bq_cor_52, .bq_cor_62, .bq_cor_72, .bq_cor_82, .bq_cor_92, .bq_cor_102, .bq_cor_112, .bq_cor_122, .bq_cor_132, .bq_cor_142, .bq_cor_152, .bq_cor_162, .bq_cor_172, .bq_cor_182, .bq_cor_192 {
-      color: #9a89b9;
-      border-color: #9a89b9;
-    }
-    .bq_cor_3, .bq_cor_13, .bq_cor_23, .bq_cor_33, .bq_cor_43, .bq_cor_53, .bq_cor_63, .bq_cor_73, .bq_cor_83, .bq_cor_93, .bq_cor_103, .bq_cor_113, .bq_cor_123, .bq_cor_133, .bq_cor_143, .bq_cor_153, .bq_cor_163, .bq_cor_173, .bq_cor_183, .bq_cor_193 {
-      color: #47a8d9;
-      border-color: #47a8d9;
-    }
-    a {
-      text-decoration: none;
-      color: #333;
-      outline: none;
-    }
-    .mor_list li .mor_tip:last-child {
-      right: 0;
-    }
-    .mor_list li .mor_w {
-      width: 240px;
-    }
-
-    .mor_list li .mor_tip p {
-      height: 30px;
-      line-height: 30px;
-      color:#003300;
-      font-size: 16px;
-    }
-    .mor_list li .mor_tip strong {
-
-      color: #f15044;
-      font-size: 30px;
-
-      font-family: "Tahoma";
-      vertical-align: -2px;
-    }
-    .mor_list li .mor_tip:last-child {
-      right: 0;
-    }
-    .mor_list li .mor_w {
-      width: 240px;
-    }
-    .mor_list li .mor_tip {
-      width: 180px;
-      text-align: center;
-      font-size: 14px;
-      line-height: 18px;
-      overflow: hidden;
-      position: absolute;
-      top: 65px;
-      right: 170px;
-      z-index: 1;
-      margin-right: 40px;
-    }
-
-    #pagination {
-      width: 1120px;
-      font-size: 16px;
-      text-align: center;
-      padding: 10px 0;
-      clear: both;
-      background: #fff;
-      overflow: hidden;
-      margin-left: 30px;
-
-    }
-    .pagination .sel.next, .pagination .sel.prev {
-      color: #333;
-      border-color: #666;
-
-
-    }
-    .pagination .sel {
-      color: #c00000;
-      border-color: #c00000;
-
-    }
-    .pagination a, .pagination span {
-      min-width: 16px;
-      height: 32px;
-      line-height: 32px;
-      border: 1px solid #666;
-      text-align: center;
-      margin: 5px 2px;
-      padding: 0 8px;
-      display: inline-block;
-      vertical-align: top;
-      cursor: pointer;
-    }
-    * {
-      font-family: "Microsoft YaHei",Helvetica,sans-serif;
-      font-family: "宋体", Helvetica, Arial, sans-serif;
-      word-break: break-all;
-    }
   </style>
-  
-    <script type="text/javascript">
-      function showall(){
-        var temp = document.getElementById("serchar");
-        temp.style.display = "block";
+  <script type="text/javascript">
+      function getPoint(address) {
+
+
+        var myGeo = new BMap.Geocoder();
+        myGeo.getPoint(address, function(point){
+          if (point) {
+//            map.centerAndZoom(point, 16);
+            map.addOverlay(new BMap.Marker(point));
+            console.log(point);
+            return point;
+          }else{
+//            return
+//            alert("您选择地址没有解析到结果!");
+          }
+        }, "北京市");
       }
-      function hideall(){
-        var temp = document.getElementById("serchar");
-        temp.style.display = "none";
-      }
-      $(function(){
-        $("ul .sel").click(function(){
-        	var temp = document.getElementById("keyword");
-            temp.value = $(this).text();
-          $("span#searchName").text($(this).text());
-        });
-      });
-    </script>
-    
-    
+  function myload(){
+
+  }
+
+  </script>
+
 </head>
 <body>
-  <div class="fotpof">
-    <div class="pofcons pofsoll pofcont">
-      <span></span>
-      <div>
-      </div>
+
+<div class="fotpof">
+  <div class="pofcons pofsoll pofcont">
+    <span></span>
+    <div>
     </div>
-    <div class="headerbg listhead">
-      <div class="header">
-        <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp>
-          <img src=${pageContext.request.contextPath}/jsp/images/rentWindow/logo1.png class="logo" >
-        </a>
-        <div class="nav1 navml">
-        <span>
+  </div>
+  <div class="headerbg listhead">
+    <div class="header">
+      <a href="#">
+        <img src="${pageContext.request.contextPath}/jsp/images/rentWindow/logo1.png" class="logo" >
+      </a>
+      <div class="nav1 navml">
+           <span>
               <%
               if (s.getAttribute("user") == null) {
             	  out.println("<a href=/EasyHousing/jsp/html/logIn.jsp class=\"href\">登录</a>");
@@ -766,7 +465,7 @@
           	%>
           </span>
 	  </div>
-	        <div class="nav navml">
+      <div class="nav navml">
 	          <span>
 	            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">首页</a>&nbsp&nbsp&nbsp
 	          </span>
@@ -774,59 +473,320 @@
 	            <a href=${pageContext.request.contextPath}/jsp/html/homepage.jsp class="href">二手房</a>&nbsp&nbsp&nbsp
 	          </span>
 	          <span>
-	            <a href=${pageContext.request.contextPath}/buildingSelect.do class="href">新房</a>&nbsp&nbsp&nbsp
+	            <a href=${pageContext.request.contextPath}/buildingSelect.do class="href" style="color: #8fcafe">新房</a>&nbsp&nbsp&nbsp
 	          </span>
 	          <span>
 	            <a href=${pageContext.request.contextPath}/rentHouseSelect.do class="href">租房</a>
 	          </span>
-	
-	        </div>
-	      </div>
-	    </div>
-    <div class="wsrrent">
-      <div class="container">
-        <div class="subsh subsher">
-         <form action=${pageContext.request.contextPath}/mapSearch.do method="post" id="searchForm">
-          <div class="subsh_l fl">
-            <div class="sd_sel fl">
-            <input hidden=true id="keyword" value="新房" name="which"></input>
-              <span id="searchName" onclick="showall()">新房</span>
-				<ul id="serchar" onmouseleave="hideall()">
-					<li class="sel">新房</li>
-					<li class="sel">租房</li>
-				</ul>
-            </div>
-            <input type="text" name="content" placeholder="请输入小区、地铁、区域开始找房" class="text" id="autoSearchText" maxlength="20" autocomplete="off">
-            <div id="autoSearchItem" style="height: 285px; visibility: hidden;">
-              <ul class="menu_v"></ul>
-            </div>
-            <input type="button" value class="submit" id="btnSearch" onclick="document.getElementById('searchForm').submit();">
-            <input type="hidden" value="1" id="pageIndex">
-          </div>
-          </form>
-          <div class="subsh_r fr">
-            <!--<a href="#" class="al">-->
-                <!--<span>-->
-                  <!--<b>地图找房</b>-->
-                  <!--<i>地图</i>-->
-                <!--</span>-->
-            <!--</a>-->
-          </div>
-        </div>
+
       </div>
     </div>
+
+
   </div>
-  <div  id="allmap" style="width:100%;height:1000px;">
-  </div>
+
+</div>
+        <div id="headsearch" style="display: inline-block">
+                <input type="text" id="search" placeholder="请输入区域或板块开始找房" style=" width:450px;height: 35px;margin-left:100px" >
+                <button type="button" class="form-control" style="display: inline-block;width: 70px" onclick="searchMap()">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+        </div>
+        <!--<div class="map-contain" style="margin-top: 0px;">-->
+
+            <div id="l-map" style="display: inline-block; width: 100%; height: 100%;margin:5px 5px 5px 5px">
+
+
+            <!--</div>-->
+        </div>
 </body>
 </html>
 <script type="text/javascript">
-  // 百度地图API功能
-  var map = new BMap.Map("allmap");    // 创建Map实例
-  map.centerAndZoom(new BMap.Point(106.33,29.34), 12);  // 初始化地图,设置中心点坐标和地图级别
-  map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
-  map.addControl(new BMap.NavigationControl({enableGeolocation:true}));
-  map.addControl(new BMap.OverviewMapControl());
-  map.setCurrentCity("重庆");          // 设置地图显示的城市 此项是必须设置的
-  map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+  var mypoint = new BMap.Point(29.587884, 106.440644);
+
+  $('#search').bind('input propertychange', function() {searchMap();});
+  var mydata  = [];
+  var myGeo = new BMap.Geocoder();
+  var adds    = [];
+  var points  = [];
+  var index = 0;
+  function bdGEO(){
+    var add = adds[index];
+    geocodeSearch(add);
+    index++;
+  }
+
+  function geocodeSearch(add){
+    if(index < adds.length){
+        setTimeout(bdGEO,400);
+    }
+    myGeo.getPoint(add, function(point) {
+      if (point) {
+        var newpoint = new BMap.Point(point.lng, point.lat);
+        points.push(point);
+      } else {
+          points.push(point);
+      }
+    },"重庆市");
+
+  }
+  function  initdata() {
+      var len =  $("#rentData li").length;
+      $("#rentData li").each(function(){
+          var address = $(this).find("input[name='rAddress']").val();
+          adds.push(address);
+      });
+      index = 0;
+      bdGEO();
+      console.log(adds);
+      console.log(points);
+      setTimeout(getdata,20000);
+      //getdata();
+  }
+  function getdata() {
+      var len =  $("#rentData li").length;
+      console.log(len);
+      var i = 0;
+      $("#rentData li").each(function(){
+            var obj={};
+            var url = $(this).find("input[name='rPicUrl']").val();
+            var name = $(this).find("input[name='rName']").val();
+            var address = $(this).find("input[name='rAddress']").val();
+            var id = $(this).find("input[name='rId']").val();
+            var price = $(this).find("input[name='rPrice']").val();
+
+            obj['id']=id;
+            obj['imgsrc']=url;
+            obj['title']=name;
+            obj['content']=address;
+            obj['isOpen'] = 0;
+            obj['icon'] = "http://api.map.baidu.com/images/markers.png";
+            obj['point'] = points[i];
+            obj['price'] = price;
+            i++;
+            console.log("obj point");
+            console.log(obj['point']);
+            if(obj['point']) mydata.push(obj);
+      });
+      console.log("mydata");
+      console.log(mydata);
+  }
+  initdata();
+	var BASEDATA = [
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"奥亚酒店",content:"北苑路169号",point:"116.422792|40.009471",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"珀丽酒店",content:"将台西路8号",point:"116.484289|39.97936",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"贵国酒店",content:"左家庄1号",point:"116.454494|39.964011",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"科通酒店",content:"民族园路8号院2号楼",point:"116.394601|39.987925",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"将台酒店",content:"酒仙桥路甲12号",point:"116.496024|39.976864",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"成宏酒店",content:"北四环东路惠新东桥西北侧",point:"116.429445|39.995392",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"华商酒店",content:"延静西里2号",point:"116.488962|39.921939",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"标华酒店",content:"北京市 朝阳区红庙路柴家湾1号",point:"116.489284|39.92104",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"万程酒店",content:"天坛路89号",point:"116.411762|39.89457",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"黎昌酒店",content:"永定门外彭庄乙58号",point:"116.393532|39.876272",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"北京图书馆",content:"北京市海淀区白石桥路39号",point:"116.329593|39.952398",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"海淀图书馆",content:"丹棱街16西门",point:"116.315551|39.984388",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"北京图书馆",content:"北京市西城区文津街附近",point:"116.391713|39.929007",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"首都图书馆",content:"东三环南路88号",point:"116.469899|39.87684",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"国家图书馆",content:"中关村南大街33号",point:"116.331292|39.949031",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"崇文区图书馆",content:"北京市崇文区花市大街113号（乐天玛特超市旁）的敕建火德真君庙内",point:"116.427671|39.903568",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"朝阳区图书馆",content:"北京市朝阳区朝外小庄金台里17号",point:"116.47766|39.922295",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"宣武区图书馆",content:"教子胡同8号",point:"116.374561|39.894302",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"东城区图书馆",content:"交道口东大街85号",point:"116.41927|39.9474",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"},
+        {id:"",imgsrc:"http://os8z6i0zb.bkt.clouddn.com/1.jpg",title:"西城区图书馆",content:"北京市西城区后广平胡同26号",point:"116.368099|39.942332",isOpen:0,icon:"http://api.map.baidu.com/images/markers.png"}
+     ]
+    function searchMap() {
+
+      search();
+    }
+
+
+	function initMap(){
+		window.map = new BMap.Map("l-map");
+		map.centerAndZoom(new BMap.Point(106.440644, 29.587884),12);
+		map.enableScrollWheelZoom();
+		map.addControl(new BMap.NavigationControl());
+		//创建自定义搜索类
+		window.searchClass = new SearchClass();
+		searchClass.setData(mydata);
+		reset();
+	}
+
+	//搜索方法 param{searchTypeRadio_name：搜索radio的名字,keyword_name:搜索文本框的id}
+	function search(){
+
+
+    var txt = $("#search").val();
+    console.log("txt");
+    console.log(txt);
+    var dd = searchClass.search({k:"title",d:txt,t:"more",s:"!all"});
+    addMarker(dd);//向地图中添加marker
+	}
+	//重置返回所有结果
+	window.reset = function(){
+		//s:{''只返回找到的结果|all返回所有的}
+		var dd = searchClass.search({k:"title",d:"显示全部",t:"single",s:"all"});
+    addMarker(dd);//向地图中添加marker
+	}
+
+	//创建marker
+	window.addMarker = function (data){
+		map.clearOverlays();
+		var len = Math.min(10, data.length);
+		len = data.length;
+		console.log("addData");
+		console.log(data);
+		for(var i=0;i<data.length;++i){
+			var json = data[i];
+			//var p0 = json.point.split("|")[0];
+			//var p1 = json.point.split("|")[1];
+			var point = new BMap.Point(data[i].point.lng,data[i].point.lat);
+			var iconImg = new BMap.Icon(json.icon, new BMap.Size(22, 22), new BMap.Size(22*11, 25*11));
+			var marker = new BMap.Marker(point,{icon:iconImg});
+			var iw = createInfoWindow(i);
+
+			var label = new BMap.Label(json.title,{"offset":new BMap.Size(22, 22)});
+			marker.setLabel(label);
+			map.addOverlay(marker);
+			label.setStyle({
+						borderColor:"#808080",
+						color:"#333",
+						cursor:"pointer"
+			});
+
+			(function(){
+				var _json = json;
+				var _iw = createInfoWindow(_json);
+
+				var _marker = marker;
+				_marker.addEventListener("click",function(){
+					this.openInfoWindow(_iw);
+				   });
+				   _iw.addEventListener("open",function(){
+					_marker.getLabel().hide();
+				   })
+				   _iw.addEventListener("close",function(){
+					_marker.getLabel().show();
+				   })
+				label.addEventListener("click",function(){
+					_marker.openInfoWindow(_iw);
+				   })
+				if(!!json.isOpen){
+				 label.hide();
+				 _marker.openInfoWindow(_iw);
+				}
+				})()
+			}
+		}
+
+  function createInfoWindow2(json){
+    var iw = new BMap.InfoWindow("" +
+      "<li style='margin: 2px 0px; padding: 0px 5px 5px 0px; cursor: pointer; overflow: hidden; line-height: 17px;'>"+
+      "<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b>"+
+      "<a target='_blank' href=" + json.actsrc +
+      " style='margin-left:5px;font-size:12px;color:#3d6dcc;font-weight:normal;text-decoration:none;'></a>"+
+      "</li>"
+    );
+
+//      var iw = new BMap.InfoWindow("<li><b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div></li>");
+    return iw;
+  }
+		function createInfoWindow(json){
+        var actsrc="http://www.baidu.com";
+			var iw = new BMap.InfoWindow("" +
+	  "<form action=${pageContext.request.contextPath}/mapRentHouseDetail.do method='post'>" +
+      "<li style=\'margin: 2px 0px; padding: 0px 5px 5px 0px; cursor: pointer; overflow: hidden; line-height: 17px;\'>"+
+        "    <div style=\'width: 300px; height: 80px; display: inline-block\'>"+
+        "        <div style=\'zoom: 1; overflow: hidden; padding: 0px 5px; background-color: rgb(240, 240, 240);\'>"+
+        "            <div style=\'line-height:20px;font-size:12px;\'><span style=\'color:#00c;\'>"+ json.title+ "</span>" +
+        "             <input hidden=true name='rentHouseId' value='" + json.id + "'></input>" +
+        "             <button type='submit' target=\'_blank\' href="+actsrc +" style=\'margin-left:5px;font-size:12px;color:#3d6dcc;font-weight:normal;text-decoration:none;\'>详情»</button>"+
+        "            </div>"+
+        "        </div>"+
+        "    </div>"+
+        "    <div style=\'height: 80px; width: 100px; display: inline-block\' >"+
+        "        <img src= "+json.imgsrc +" style=\'width: auto; height: 80px\'>"+
+        "    </div>"+
+        "</li>" +
+        "</form>"
+   );
+
+
+//      var iw = new BMap.InfoWindow("<li><b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div></li>");
+      return iw;
+		}
+		//创建一个Icon
+		function createIcon(json){
+			var icon = new BMap.Icon("http://api.map.baidu.com/images/markers.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowAnchor:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+			return icon;
+		}
+
+		function SearchClass(data){
+			this.datas = data;
+		}
+		// rule = {k:"title",d:"酒店",s:"all",t:"single"}=>t{single:(key=?),more:(key like[%?%])}//t:{single|more},s{all|!all}
+		// rule = {k:"名字",d:"搜索关键字",t:{single名字精确查找|more名字模糊匹配查找},s{''只返回找到的结果|all返回所有的}
+		SearchClass.prototype.search = function(rule){
+		    console.log("rule");
+		    console.log(rule);
+			if(this.datas == null){alert("数据不存在!");return false;}
+			if(this.trim(rule) == "" || this.trim(rule.d) == "" || this.trim(rule.k) == "" || this.trim(rule.t) == ""){
+//			    alert("请指定要搜索内容!");
+        console.log("null input");
+			    return false;
+			}
+			var reval = [];
+			var datas = this.datas;
+			var len = datas.length;
+			console.log("len");
+      console.log(datas);
+			var me = this;
+			var ruleReg = new RegExp(this.trim(rule.d));
+			var hasOpen = false;
+
+			var addData = function(data,isOpen){
+				// 第一条数据打开信息窗口
+				if(isOpen && !hasOpen){
+					hasOpen = true;
+					data.isOpen = 1;
+				}else{
+					data.isOpen = 0;
+				}
+				reval.push(data);
+			}
+			var getData = function(data,key){
+				var ks = me.trim(key).split(/\./);
+				var i = null,s = "data";
+				if(ks.length == 0){
+					return data;
+				}else{
+					for(var i = 0; i < ks.length; i++){
+						s += '["' + ks[i] + '"]';
+					}
+					return eval(s);
+				}
+			}
+			var tmp = Math.min(10, len);
+			for(var cnt = 0; cnt < len; cnt++){
+				var data = datas[cnt];
+				var d = getData(data,rule.k);
+
+				if(rule.t == "single" && rule.d == d){
+					addData(data,true);
+				}else if(rule.t != "single" && ruleReg.test(d)){
+					addData(data,true);
+				}else if(rule.s == "all"){
+					addData(data,false);
+				}
+			}
+			return reval;
+		}
+		SearchClass.prototype.setData = function(data){
+			this.datas = data;
+		}
+		SearchClass.prototype.trim = function(str){
+			if(str == null){str = "";}else{ str = str.toString();}
+			return str.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+$)/g, "");
+		}
+
+		initMap();//创建和初始化地图
 </script>

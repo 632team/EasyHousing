@@ -1432,7 +1432,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
           </div>
           </form>
         <div class="subsh_r fr">
-          <a href=${pageContext.request.contextPath}/jsp/html/mapHouse.jsp class="al">
+          <a href=${pageContext.request.contextPath}/mapSearch.do class="al">
               <span>
                 <b>地图找房</b>
                 <i>地图</i>
